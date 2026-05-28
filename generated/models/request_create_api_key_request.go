@@ -24,6 +24,7 @@ type RequestCreateAPIKeyRequest struct {
 
 	// name
 	// Required: true
+	// Max Length: 200
 	Name *string `json:"name"`
 
 	// org username
@@ -47,6 +48,10 @@ func (m *RequestCreateAPIKeyRequest) Validate(formats strfmt.Registry) error {
 func (m *RequestCreateAPIKeyRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("name", "body", *m.Name, 200); err != nil {
 		return err
 	}
 

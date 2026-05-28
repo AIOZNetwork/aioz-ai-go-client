@@ -15,7 +15,7 @@ import (
 type ResponseDistributeTaskResponse struct {
 
 	// data
-	Data string `json:"data,omitempty"`
+	Data *ResponseDistributeTaskData `json:"data,omitempty"`
 
 	// message
 	Message string `json:"message,omitempty"`

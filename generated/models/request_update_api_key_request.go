@@ -5,8 +5,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // RequestUpdateAPIKeyRequest request update Api key request
@@ -21,6 +23,7 @@ type RequestUpdateAPIKeyRequest struct {
 	Description string `json:"description,omitempty"`
 
 	// name
+	// Max Length: 200
 	Name string `json:"name,omitempty"`
 
 	// org username
@@ -29,6 +32,27 @@ type RequestUpdateAPIKeyRequest struct {
 
 // Validate validates this request update Api key request
 func (m *RequestUpdateAPIKeyRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *RequestUpdateAPIKeyRequest) validateName(formats strfmt.Registry) error {
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("name", "body", m.Name, 200); err != nil {
+		return err
+	}
+
 	return nil
 }
 
