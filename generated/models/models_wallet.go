@@ -15,16 +15,16 @@ import (
 type ModelsWallet struct {
 
 	// balance
-	Balance float64 `json:"balance,omitempty"`
+	Balance string `json:"balance,omitempty"`
 
 	// debt
-	Debt float64 `json:"debt,omitempty"`
+	Debt string `json:"debt,omitempty"`
 
 	// earnings
-	Earnings float64 `json:"earnings,omitempty"`
+	Earnings string `json:"earnings,omitempty"`
 
 	// free balance
-	FreeBalance float64 `json:"free_balance,omitempty"`
+	FreeBalance string `json:"free_balance,omitempty"`
 }
 
 // Validate validates this models wallet

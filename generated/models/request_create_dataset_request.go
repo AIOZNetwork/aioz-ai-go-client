@@ -21,10 +21,12 @@ type RequestCreateDatasetRequest struct {
 	AuthorID *string `json:"author_id,omitempty"`
 
 	// cover
-	Cover string `json:"cover,omitempty"`
+	// Required: true
+	Cover *string `json:"cover"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	// Required: true
+	Description *string `json:"description"`
 
 	// language
 	// Example: ["en","vi"]
@@ -56,7 +58,8 @@ type RequestCreateDatasetRequest struct {
 	TaskCategories []string `json:"task_categories"`
 
 	// thumbnail
-	Thumbnail string `json:"thumbnail,omitempty"`
+	// Required: true
+	Thumbnail *string `json:"thumbnail"`
 
 	// visibility
 	// Required: true
@@ -68,11 +71,23 @@ type RequestCreateDatasetRequest struct {
 func (m *RequestCreateDatasetRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCover(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLicense(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateThumbnail(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -83,6 +98,24 @@ func (m *RequestCreateDatasetRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *RequestCreateDatasetRequest) validateCover(formats strfmt.Registry) error {
+
+	if err := validate.Required("cover", "body", m.Cover); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateDatasetRequest) validateDescription(formats strfmt.Registry) error {
+
+	if err := validate.Required("description", "body", m.Description); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -98,6 +131,15 @@ func (m *RequestCreateDatasetRequest) validateLicense(formats strfmt.Registry) e
 func (m *RequestCreateDatasetRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateDatasetRequest) validateThumbnail(formats strfmt.Registry) error {
+
+	if err := validate.Required("thumbnail", "body", m.Thumbnail); err != nil {
 		return err
 	}
 

@@ -4,7 +4,10 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
+	"strconv"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -14,23 +17,100 @@ import (
 // swagger:model response.GetUserUploadsData
 type ResponseGetUserUploadsData struct {
 
-	// count
-	Count int64 `json:"count,omitempty"`
+	// files
+	Files []*ResponseObjectInfo `json:"files"`
 
-	// storage
-	Storage int64 `json:"storage,omitempty"`
+	// total
+	Total int64 `json:"total,omitempty"`
 
-	// urls
-	Urls []string `json:"urls"`
+	// total pages
+	TotalPages int64 `json:"total_pages,omitempty"`
 }
 
 // Validate validates this response get user uploads data
 func (m *ResponseGetUserUploadsData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateFiles(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this response get user uploads data based on context it is used
+func (m *ResponseGetUserUploadsData) validateFiles(formats strfmt.Registry) error {
+	if swag.IsZero(m.Files) { // not required
+		return nil
+	}
+
+	for i := 0; i < len(m.Files); i++ {
+		if swag.IsZero(m.Files[i]) { // not required
+			continue
+		}
+
+		if m.Files[i] != nil {
+			if err := m.Files[i].Validate(formats); err != nil {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
+					return ve.ValidateName("files" + "." + strconv.Itoa(i))
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
+					return ce.ValidateName("files" + "." + strconv.Itoa(i))
+				}
+
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this response get user uploads data based on the context it is used
 func (m *ResponseGetUserUploadsData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateFiles(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ResponseGetUserUploadsData) contextValidateFiles(ctx context.Context, formats strfmt.Registry) error {
+
+	for i := 0; i < len(m.Files); i++ {
+
+		if m.Files[i] != nil {
+
+			if swag.IsZero(m.Files[i]) { // not required
+				return nil
+			}
+
+			if err := m.Files[i].ContextValidate(ctx, formats); err != nil {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
+					return ve.ValidateName("files" + "." + strconv.Itoa(i))
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
+					return ce.ValidateName("files" + "." + strconv.Itoa(i))
+				}
+
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

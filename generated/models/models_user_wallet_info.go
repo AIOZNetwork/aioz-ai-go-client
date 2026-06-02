@@ -15,7 +15,7 @@ import (
 type ModelsUserWalletInfo struct {
 
 	// balance
-	Balance float64 `json:"balance,omitempty"`
+	Balance string `json:"balance,omitempty"`
 
 	// blocked
 	Blocked bool `json:"blocked,omitempty"`
@@ -27,10 +27,10 @@ type ModelsUserWalletInfo struct {
 	CreatedAt string `json:"created_at,omitempty"`
 
 	// debt
-	Debt float64 `json:"debt,omitempty"`
+	Debt string `json:"debt,omitempty"`
 
 	// earnings
-	Earnings float64 `json:"earnings,omitempty"`
+	Earnings string `json:"earnings,omitempty"`
 
 	// email
 	Email string `json:"email,omitempty"`
@@ -39,7 +39,7 @@ type ModelsUserWalletInfo struct {
 	FirstUsageAt string `json:"first_usage_at,omitempty"`
 
 	// free balance
-	FreeBalance float64 `json:"free_balance,omitempty"`
+	FreeBalance string `json:"free_balance,omitempty"`
 
 	// id
 	ID string `json:"id,omitempty"`

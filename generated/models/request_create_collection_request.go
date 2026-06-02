@@ -18,10 +18,12 @@ import (
 type RequestCreateCollectionRequest struct {
 
 	// description
-	Description string `json:"description,omitempty"`
+	// Required: true
+	Description *string `json:"description"`
 
 	// name
-	Name string `json:"name,omitempty"`
+	// Required: true
+	Name *string `json:"name"`
 
 	// thumbnail
 	Thumbnail string `json:"thumbnail,omitempty"`
@@ -36,6 +38,14 @@ type RequestCreateCollectionRequest struct {
 func (m *RequestCreateCollectionRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateVisibility(formats); err != nil {
 		res = append(res, err)
 	}
@@ -43,6 +53,24 @@ func (m *RequestCreateCollectionRequest) Validate(formats strfmt.Registry) error
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *RequestCreateCollectionRequest) validateDescription(formats strfmt.Registry) error {
+
+	if err := validate.Required("description", "body", m.Description); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateCollectionRequest) validateName(formats strfmt.Registry) error {
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
 	return nil
 }
 

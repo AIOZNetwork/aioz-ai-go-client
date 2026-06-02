@@ -4,9 +4,12 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // ResponseGetUserUploadStatisticsData response get user upload statistics data
@@ -14,23 +17,86 @@ import (
 // swagger:model response.GetUserUploadStatisticsData
 type ResponseGetUserUploadStatisticsData struct {
 
-	// count
-	Count int64 `json:"count,omitempty"`
-
 	// folders
-	Folders any `json:"folders,omitempty"`
+	Folders map[string]ResponseStorageStatistics `json:"folders,omitempty"`
 
-	// storage
-	Storage int64 `json:"storage,omitempty"`
+	// total files
+	TotalFiles int64 `json:"total_files,omitempty"`
+
+	// total size
+	TotalSize int64 `json:"total_size,omitempty"`
 }
 
 // Validate validates this response get user upload statistics data
 func (m *ResponseGetUserUploadStatisticsData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateFolders(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this response get user upload statistics data based on context it is used
+func (m *ResponseGetUserUploadStatisticsData) validateFolders(formats strfmt.Registry) error {
+	if swag.IsZero(m.Folders) { // not required
+		return nil
+	}
+
+	for k := range m.Folders {
+
+		if err := validate.Required("folders"+"."+k, "body", m.Folders[k]); err != nil {
+			return err
+		}
+		if val, ok := m.Folders[k]; ok {
+			if err := val.Validate(formats); err != nil {
+				ve := new(errors.Validation)
+				if stderrors.As(err, &ve) {
+					return ve.ValidateName("folders" + "." + k)
+				}
+				ce := new(errors.CompositeError)
+				if stderrors.As(err, &ce) {
+					return ce.ValidateName("folders" + "." + k)
+				}
+
+				return err
+			}
+		}
+
+	}
+
+	return nil
+}
+
+// ContextValidate validate this response get user upload statistics data based on the context it is used
 func (m *ResponseGetUserUploadStatisticsData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateFolders(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ResponseGetUserUploadStatisticsData) contextValidateFolders(ctx context.Context, formats strfmt.Registry) error {
+
+	for k := range m.Folders {
+
+		if val, ok := m.Folders[k]; ok {
+			if err := val.ContextValidate(ctx, formats); err != nil {
+				return err
+			}
+		}
+
+	}
+
 	return nil
 }
 

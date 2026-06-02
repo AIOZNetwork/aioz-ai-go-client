@@ -11,13 +11,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResponseUsersMapResponse response users map response
+// ResponseGetUsersUploadStatisticsResponse response get users upload statistics response
 //
-// swagger:model response.UsersMapResponse
-type ResponseUsersMapResponse struct {
+// swagger:model response.GetUsersUploadStatisticsResponse
+type ResponseGetUsersUploadStatisticsResponse struct {
 
 	// data
-	Data *ResponseUsersMapResponseData `json:"data,omitempty"`
+	Data *ResponseGetUsersUploadStatisticsData `json:"data,omitempty"`
 
 	// message
 	Message string `json:"message,omitempty"`
@@ -26,8 +26,8 @@ type ResponseUsersMapResponse struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// Validate validates this response users map response
-func (m *ResponseUsersMapResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this response get users upload statistics response
+func (m *ResponseGetUsersUploadStatisticsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -40,7 +40,7 @@ func (m *ResponseUsersMapResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ResponseUsersMapResponse) validateData(formats strfmt.Registry) error {
+func (m *ResponseGetUsersUploadStatisticsResponse) validateData(formats strfmt.Registry) error {
 	if swag.IsZero(m.Data) { // not required
 		return nil
 	}
@@ -63,8 +63,8 @@ func (m *ResponseUsersMapResponse) validateData(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this response users map response based on the context it is used
-func (m *ResponseUsersMapResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this response get users upload statistics response based on the context it is used
+func (m *ResponseGetUsersUploadStatisticsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateData(ctx, formats); err != nil {
@@ -77,7 +77,7 @@ func (m *ResponseUsersMapResponse) ContextValidate(ctx context.Context, formats 
 	return nil
 }
 
-func (m *ResponseUsersMapResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
+func (m *ResponseGetUsersUploadStatisticsResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
 
@@ -103,7 +103,7 @@ func (m *ResponseUsersMapResponse) contextValidateData(ctx context.Context, form
 }
 
 // MarshalBinary interface implementation
-func (m *ResponseUsersMapResponse) MarshalBinary() ([]byte, error) {
+func (m *ResponseGetUsersUploadStatisticsResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -111,8 +111,8 @@ func (m *ResponseUsersMapResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ResponseUsersMapResponse) UnmarshalBinary(b []byte) error {
-	var res ResponseUsersMapResponse
+func (m *ResponseGetUsersUploadStatisticsResponse) UnmarshalBinary(b []byte) error {
+	var res ResponseGetUsersUploadStatisticsResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

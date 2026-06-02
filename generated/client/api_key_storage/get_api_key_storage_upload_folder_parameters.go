@@ -59,24 +59,27 @@ GetAPIKeyStorageUploadFolderParams contains all the parameters to send to the AP
 */
 type GetAPIKeyStorageUploadFolderParams struct {
 
-	/* Page.
+	/* Folder.
 
-	   Page is the page number (default: 1) (optional)
-
-	   Default: 1
+	   Folder name
 	*/
+	Folder string
+
+	// OrgUsername.
+	OrgUsername *string
+
+	// Page.
+	//
+	// Default: 1
 	Page *int64
 
-	/* PageSize.
-
-	   PageSize is the page size (default: 10) (optional)
-
-	   Default: 10
-	*/
+	// PageSize.
+	//
+	// Default: 10
 	PageSize *int64
 
-	// Search.
-	Search *string
+	// Type.
+	Type *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -145,6 +148,28 @@ func (o *GetAPIKeyStorageUploadFolderParams) SetHTTPClient(client *http.Client) 
 	o.HTTPClient = client
 }
 
+// WithFolder adds the folder to the get API key storage upload folder params
+func (o *GetAPIKeyStorageUploadFolderParams) WithFolder(folder string) *GetAPIKeyStorageUploadFolderParams {
+	o.SetFolder(folder)
+	return o
+}
+
+// SetFolder adds the folder to the get API key storage upload folder params
+func (o *GetAPIKeyStorageUploadFolderParams) SetFolder(folder string) {
+	o.Folder = folder
+}
+
+// WithOrgUsername adds the orgUsername to the get API key storage upload folder params
+func (o *GetAPIKeyStorageUploadFolderParams) WithOrgUsername(orgUsername *string) *GetAPIKeyStorageUploadFolderParams {
+	o.SetOrgUsername(orgUsername)
+	return o
+}
+
+// SetOrgUsername adds the orgUsername to the get API key storage upload folder params
+func (o *GetAPIKeyStorageUploadFolderParams) SetOrgUsername(orgUsername *string) {
+	o.OrgUsername = orgUsername
+}
+
 // WithPage adds the page to the get API key storage upload folder params
 func (o *GetAPIKeyStorageUploadFolderParams) WithPage(page *int64) *GetAPIKeyStorageUploadFolderParams {
 	o.SetPage(page)
@@ -167,15 +192,15 @@ func (o *GetAPIKeyStorageUploadFolderParams) SetPageSize(pageSize *int64) {
 	o.PageSize = pageSize
 }
 
-// WithSearch adds the search to the get API key storage upload folder params
-func (o *GetAPIKeyStorageUploadFolderParams) WithSearch(search *string) *GetAPIKeyStorageUploadFolderParams {
-	o.SetSearch(search)
+// WithType adds the typeVar to the get API key storage upload folder params
+func (o *GetAPIKeyStorageUploadFolderParams) WithType(typeVar *string) *GetAPIKeyStorageUploadFolderParams {
+	o.SetType(typeVar)
 	return o
 }
 
-// SetSearch adds the search to the get API key storage upload folder params
-func (o *GetAPIKeyStorageUploadFolderParams) SetSearch(search *string) {
-	o.Search = search
+// SetType adds the type to the get API key storage upload folder params
+func (o *GetAPIKeyStorageUploadFolderParams) SetType(typeVar *string) {
+	o.Type = typeVar
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -185,6 +210,28 @@ func (o *GetAPIKeyStorageUploadFolderParams) WriteToRequest(r runtime.ClientRequ
 		return err
 	}
 	var res []error
+
+	// path param folder
+	if err := r.SetPathParam("folder", o.Folder); err != nil {
+		return err
+	}
+
+	if o.OrgUsername != nil {
+
+		// query param orgUsername
+		var qrOrgUsername string
+
+		if o.OrgUsername != nil {
+			qrOrgUsername = *o.OrgUsername
+		}
+		qOrgUsername := qrOrgUsername
+		if qOrgUsername != "" {
+
+			if err := r.SetQueryParam("orgUsername", qOrgUsername); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.Page != nil {
 
@@ -220,18 +267,18 @@ func (o *GetAPIKeyStorageUploadFolderParams) WriteToRequest(r runtime.ClientRequ
 		}
 	}
 
-	if o.Search != nil {
+	if o.Type != nil {
 
-		// query param search
-		var qrSearch string
+		// query param type
+		var qrType string
 
-		if o.Search != nil {
-			qrSearch = *o.Search
+		if o.Type != nil {
+			qrType = *o.Type
 		}
-		qSearch := qrSearch
-		if qSearch != "" {
+		qType := qrType
+		if qType != "" {
 
-			if err := r.SetQueryParam("search", qSearch); err != nil {
+			if err := r.SetQueryParam("type", qType); err != nil {
 				return err
 			}
 		}

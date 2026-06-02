@@ -15,7 +15,7 @@ import (
 type ModelsTreasuryWithdrawal struct {
 
 	// amount
-	Amount float64 `json:"amount,omitempty"`
+	Amount string `json:"amount,omitempty"`
 
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
