@@ -6,9 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `PostAPIKeyStorageUploadCreatePresignedURL`
+### `PostStorageUploadCreatePresignedUrl`
 
-**`POST /api-key/storage/upload/create-presigned-url`** — Create Presigned Url By Api Key
+**`POST /api-key/storage/upload/create-presigned-url`** — Create Presigned Url
 
 **Headers**
 
@@ -49,7 +49,8 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 | Status | Description |
 | --- | --- |
-| 400 | Bad Request — [response.ErrorResponse](../README.md#common-response-types) |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
 
 **Example**
 
@@ -62,7 +63,7 @@ req := &models.CreatePresignedUrlRequest{
     OrgUsername: "...",  // string
     Size: "...",  // integer  // required
 }
-resp, err := client.Storages.Storage.PostAPIKeyStorageUploadCreatePresignedURL(ctx, req)
+resp, err := client.Storages.Storage.PostStorageUploadCreatePresignedUrl(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -71,9 +72,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyStorageUploadStatistics`
+### `GetStorageUploadStatistics`
 
-**`GET /api-key/storage/upload/statistics`** — Get user upload statistics by api key
+**`GET /api-key/storage/upload/statistics`** — Get user upload statistics
 
 **Headers**
 
@@ -95,9 +96,16 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `count` | `integer` |  |
-| `folders` | `map[string]any` |  |
-| `storage` | `integer` |  |
+| `folders` | `map[string]response.StorageStatistics` |  |
+| `total_files` | `integer` |  |
+| `total_size` | `integer` |  |
+
+**`response.StorageStatistics`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `total_files` | `integer` |  |
+| `total_size` | `integer` |  |
 
 **Error Responses**
 
@@ -110,7 +118,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Storages.Storage.GetAPIKeyStorageUploadStatistics(ctx)
+resp, err := client.Storages.Storage.GetStorageUploadStatistics(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -119,9 +127,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyStorageUploadFolder`
+### `GetStorageUploadByFolder`
 
-**`GET /api-key/storage/upload/{folder}`** — Get user uploads by folder by api key
+**`GET /api-key/storage/upload/{folder}`** — Get user uploads by folder
 
 **Headers**
 
@@ -133,9 +141,11 @@ fmt.Printf("%+v\n", resp)
 
 | Name | Location | Type | Required | Description |
 | --- | --- | --- | --- | --- |
-| `page` | query | `integer` | No | Page is the page number (default: 1) (optional) |
-| `pageSize` | query | `integer` | No | PageSize is the page size (default: 10) (optional) |
-| `search` | query | `string` | No |  |
+| `folder` | path | `string` | Yes | Folder name |
+| `orgUsername` | query | `string` | No |  |
+| `page` | query | `integer` | No |  |
+| `pageSize` | query | `integer` | No |  |
+| `type` | query | `string` | No |  |
 
 **Responses**
 
@@ -151,9 +161,23 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `count` | `integer` |  |
-| `storage` | `integer` |  |
-| `urls` | `array[string]` |  |
+| `files` | `array[response.ObjectInfo]` |  |
+| `total` | `integer` |  |
+| `total_pages` | `integer` |  |
+
+**`response.ObjectInfo`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `download_url` | `string` |  |
+| `folder` | `string` |  |
+| `id` | `string` |  |
+| `is_expired` | `boolean` |  |
+| `key` | `string` |  |
+| `mime` | `string` |  |
+| `size` | `integer` |  |
+| `status` | `boolean` |  |
 
 **Error Responses**
 
@@ -166,7 +190,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Storages.Storage.GetAPIKeyStorageUploadFolder(ctx)
+resp, err := client.Storages.Storage.GetStorageUploadByFolder(ctx, "<folder>")
 if err != nil {
     log.Fatal(err)
 }
@@ -175,9 +199,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyStorageW3sURL`
+### `DeleteStorageW3sUrl`
 
-**`DELETE /api-key/storage/w3s/url`** — Delete Url By Api Key
+**`DELETE /api-key/storage/w3s/url`** — Delete Url
 
 **Headers**
 
@@ -193,11 +217,19 @@ fmt.Printf("%+v\n", resp)
 
 **Responses**
 
+**200 OK** — `response.SuccessResponse`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `message` | `string` |  |
+| `status` | `string` |  |
+
 **Error Responses**
 
 | Status | Description |
 | --- | --- |
-| 400 | Bad Request — [response.ErrorResponse](../README.md#common-response-types) |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
 
 **Example**
 
@@ -206,7 +238,7 @@ ctx := context.Background()
 req := &models.DeleteUrlRequest{
     URL: "...",  // string  // required
 }
-resp, err := client.Storages.Storage.DeleteAPIKeyStorageW3sURL(ctx, req)
+resp, err := client.Storages.Storage.DeleteStorageW3sUrl(ctx, req)
 if err != nil {
     log.Fatal(err)
 }

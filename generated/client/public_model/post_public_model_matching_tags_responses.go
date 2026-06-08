@@ -41,7 +41,7 @@ func (o *PostPublicModelMatchingTagsReader) ReadResponse(response runtime.Client
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /public/model/matching-tags] PostPublicModelMatchingTags", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /public/model/matching-tags] postPublicModelMatchingTags", response, response.Code())
 	}
 }
 

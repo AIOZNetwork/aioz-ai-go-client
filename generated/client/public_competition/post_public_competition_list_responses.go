@@ -34,8 +34,14 @@ func (o *PostPublicCompetitionListReader) ReadResponse(response runtime.ClientRe
 			return nil, err
 		}
 		return nil, result
+	case 500:
+		result := NewPostPublicCompetitionListInternalServerError()
+		if err := result.readResponse(response, consumer, o.formats); err != nil {
+			return nil, err
+		}
+		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /public/competition/list] PostPublicCompetitionList", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /public/competition/list] postPublicCompetitionList", response, response.Code())
 	}
 }
 
@@ -120,7 +126,7 @@ PostPublicCompetitionListBadRequest describes a response with status code 400, w
 Bad Request
 */
 type PostPublicCompetitionListBadRequest struct {
-	Payload *models.ResponseErrorResponse
+	Payload *models.ResponseFailResponse
 }
 
 // IsSuccess returns true when this post public competition list bad request response has a 2xx status code
@@ -163,11 +169,81 @@ func (o *PostPublicCompetitionListBadRequest) String() string {
 	return fmt.Sprintf("[POST /public/competition/list][%d] postPublicCompetitionListBadRequest %s", 400, payload)
 }
 
-func (o *PostPublicCompetitionListBadRequest) GetPayload() *models.ResponseErrorResponse {
+func (o *PostPublicCompetitionListBadRequest) GetPayload() *models.ResponseFailResponse {
 	return o.Payload
 }
 
 func (o *PostPublicCompetitionListBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
+
+	o.Payload = new(models.ResponseFailResponse)
+
+	// response payload
+	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
+		return err
+	}
+
+	return nil
+}
+
+// NewPostPublicCompetitionListInternalServerError creates a PostPublicCompetitionListInternalServerError with default headers values
+func NewPostPublicCompetitionListInternalServerError() *PostPublicCompetitionListInternalServerError {
+	return &PostPublicCompetitionListInternalServerError{}
+}
+
+/*
+PostPublicCompetitionListInternalServerError describes a response with status code 500, with default header values.
+
+Internal Server Error
+*/
+type PostPublicCompetitionListInternalServerError struct {
+	Payload *models.ResponseErrorResponse
+}
+
+// IsSuccess returns true when this post public competition list internal server error response has a 2xx status code
+func (o *PostPublicCompetitionListInternalServerError) IsSuccess() bool {
+	return false
+}
+
+// IsRedirect returns true when this post public competition list internal server error response has a 3xx status code
+func (o *PostPublicCompetitionListInternalServerError) IsRedirect() bool {
+	return false
+}
+
+// IsClientError returns true when this post public competition list internal server error response has a 4xx status code
+func (o *PostPublicCompetitionListInternalServerError) IsClientError() bool {
+	return false
+}
+
+// IsServerError returns true when this post public competition list internal server error response has a 5xx status code
+func (o *PostPublicCompetitionListInternalServerError) IsServerError() bool {
+	return true
+}
+
+// IsCode returns true when this post public competition list internal server error response a status code equal to that given
+func (o *PostPublicCompetitionListInternalServerError) IsCode(code int) bool {
+	return code == 500
+}
+
+// Code gets the status code for the post public competition list internal server error response
+func (o *PostPublicCompetitionListInternalServerError) Code() int {
+	return 500
+}
+
+func (o *PostPublicCompetitionListInternalServerError) Error() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /public/competition/list][%d] postPublicCompetitionListInternalServerError %s", 500, payload)
+}
+
+func (o *PostPublicCompetitionListInternalServerError) String() string {
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /public/competition/list][%d] postPublicCompetitionListInternalServerError %s", 500, payload)
+}
+
+func (o *PostPublicCompetitionListInternalServerError) GetPayload() *models.ResponseErrorResponse {
+	return o.Payload
+}
+
+func (o *PostPublicCompetitionListInternalServerError) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
 	o.Payload = new(models.ResponseErrorResponse)
 

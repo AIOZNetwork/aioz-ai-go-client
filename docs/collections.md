@@ -6,9 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `PostAPIKeyCollection`
+### `PostCollection`
 
-**`POST /api-key/collection`** — Create Collection By Api Key
+**`POST /api-key/collection`** — Create Collection
 
 **Headers**
 
@@ -20,8 +20,8 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | `string` | No |  |
-| `name` | `string` | No |  |
+| `description` | `string` | Yes |  |
+| `name` | `string` | Yes |  |
 | `thumbnail` | `string` | No |  |
 | `visibility` | `string` | Yes | One of: `public`, `private` |
 
@@ -201,12 +201,12 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 ```go
 ctx := context.Background()
 req := &models.CreateCollectionRequest{
-    Description: "...",  // string
-    Name: "...",  // string
+    Description: "...",  // string  // required
+    Name: "...",  // string  // required
     Thumbnail: "...",  // string
     Visibility: "...",  // string  // required
 }
-resp, err := client.Collections.Collection.PostAPIKeyCollection(ctx, req)
+resp, err := client.Collections.Collection.PostCollection(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -215,9 +215,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCollectionList`
+### `PostCollectionList`
 
-**`POST /api-key/collection/list`** — Get List Collection By Api Key
+**`POST /api-key/collection/list`** — Get List Collection
 
 **Headers**
 
@@ -232,6 +232,7 @@ fmt.Printf("%+v\n", resp)
 | `filter` | `string` | No | One of: `public`, `community`, `author` |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `search` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `votes`, `updated`, `oldest` |
 
@@ -421,10 +422,10 @@ req := &models.GetListCollectionRequest{
     Filter: "...",  // string
     Limit: "...",  // integer
     Offset: "...",  // integer
+    Order: "...",  // string
     Search: "...",  // string
-    Sort: "...",  // string
 }
-resp, err := client.Collections.Collection.PostAPIKeyCollectionList(ctx, req)
+resp, err := client.Collections.Collection.PostCollectionList(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -433,9 +434,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyCollectionID`
+### `GetCollectionByID`
 
-**`GET /api-key/collection/{id}`** — Get Collection By Id By Api Key
+**`GET /api-key/collection/{id}`** — Get Collection By Id
 
 **Headers**
 
@@ -624,7 +625,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Collections.Collection.GetAPIKeyCollectionID(ctx, "<id>")
+resp, err := client.Collections.Collection.GetCollectionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -633,9 +634,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyCollectionID`
+### `PutCollectionByID`
 
-**`PUT /api-key/collection/{id}`** — Update Collection By Api Key
+**`PUT /api-key/collection/{id}`** — Update Collection
 
 **Headers**
 
@@ -839,7 +840,7 @@ req := &models.UpdateCollectionRequest{
     Thumbnail: "...",  // string
     Visibility: "...",  // string
 }
-resp, err := client.Collections.Collection.PutAPIKeyCollectionID(ctx, req)
+resp, err := client.Collections.Collection.PutCollectionByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -848,9 +849,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyCollectionID`
+### `DeleteCollectionByID`
 
-**`DELETE /api-key/collection/{id}`** — Delete Collection By Api Key
+**`DELETE /api-key/collection/{id}`** — Delete Collection
 
 **Headers**
 
@@ -1039,7 +1040,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Collections.Collection.DeleteAPIKeyCollectionID(ctx, "<id>")
+resp, err := client.Collections.Collection.DeleteCollectionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1048,9 +1049,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCollectionIDItem`
+### `PostCollectionByIDItem`
 
-**`POST /api-key/collection/{id}/item`** — Add Item To Collection By Api Key
+**`POST /api-key/collection/{id}/item`** — Add Item To Collection
 
 **Headers**
 
@@ -1250,7 +1251,7 @@ req := &models.AddItemToCollectionRequest{
     ItemID: "...",  // string
     Type: "...",  // string  // required
 }
-resp, err := client.Collections.Collection.PostAPIKeyCollectionIDItem(ctx, req)
+resp, err := client.Collections.Collection.PostCollectionByIDItem(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1259,9 +1260,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyCollectionIDItem`
+### `DeleteCollectionByIDItem`
 
-**`DELETE /api-key/collection/{id}/item`** — Remove Item From Collection By Api Key
+**`DELETE /api-key/collection/{id}/item`** — Remove Item From Collection
 
 **Headers**
 
@@ -1461,7 +1462,7 @@ req := &models.RemoveItemFromCollectionRequest{
     ItemID: "...",  // string  // required
     Type: "...",  // string  // required
 }
-resp, err := client.Collections.Collection.DeleteAPIKeyCollectionIDItem(ctx, req)
+resp, err := client.Collections.Collection.DeleteCollectionByIDItem(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1470,9 +1471,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyCollectionIDVote`
+### `PutCollectionByIDVote`
 
-**`PUT /api-key/collection/{id}/vote`** — Vote Collection By Api Key
+**`PUT /api-key/collection/{id}/vote`** — Vote Collection
 
 **Headers**
 
@@ -1661,7 +1662,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Collections.Collection.PutAPIKeyCollectionIDVote(ctx, "<id>")
+resp, err := client.Collections.Collection.PutCollectionByIDVote(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1670,9 +1671,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCollectionUsernameList`
+### `PostCollectionByUsernameList`
 
-**`POST /api-key/collection/{username}/list`** — Get Collection List By Username By Api Key
+**`POST /api-key/collection/{username}/list`** — Get Collection List By Username
 
 **Headers**
 
@@ -1692,6 +1693,7 @@ fmt.Printf("%+v\n", resp)
 | --- | --- | --- | --- |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `search` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `votes`, `updated`, `oldest` |
 
@@ -1880,10 +1882,11 @@ ctx := context.Background()
 req := &models.GetListCollectionByUsernameRequest{
     Limit: "...",  // integer
     Offset: "...",  // integer
+    Order: "...",  // string
     Search: "...",  // string
     Sort: "...",  // string
 }
-resp, err := client.Collections.Collection.PostAPIKeyCollectionUsernameList(ctx, req)
+resp, err := client.Collections.Collection.PostCollectionByUsernameList(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1903,6 +1906,7 @@ fmt.Printf("%+v\n", resp)
 | `filter` | `string` | No | One of: `public`, `community`, `author` |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `search` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `votes`, `updated`, `oldest` |
 
@@ -2092,8 +2096,8 @@ req := &models.GetListCollectionRequest{
     Filter: "...",  // string
     Limit: "...",  // integer
     Offset: "...",  // integer
+    Order: "...",  // string
     Search: "...",  // string
-    Sort: "...",  // string
 }
 resp, err := client.Collections.Collection.PostPublicCollectionList(ctx, req)
 if err != nil {
@@ -2104,7 +2108,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicCollectionID`
+### `GetPublicCollectionByID`
 
 **`GET /public/collection/{id}`** — Get Public Collection By Id
 
@@ -2289,7 +2293,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Collections.Collection.GetPublicCollectionID(ctx, "<id>")
+resp, err := client.Collections.Collection.GetPublicCollectionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2298,7 +2302,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostPublicCollectionUsernameList`
+### `PostPublicCollectionByUsernameList`
 
 **`POST /public/collection/{username}/list`** — Get List Public Collections By Username
 
@@ -2314,6 +2318,7 @@ fmt.Printf("%+v\n", resp)
 | --- | --- | --- | --- |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `search` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `votes`, `updated`, `oldest` |
 
@@ -2502,10 +2507,11 @@ ctx := context.Background()
 req := &models.GetListCollectionByUsernameRequest{
     Limit: "...",  // integer
     Offset: "...",  // integer
+    Order: "...",  // string
     Search: "...",  // string
     Sort: "...",  // string
 }
-resp, err := client.Collections.Collection.PostPublicCollectionUsernameList(ctx, req)
+resp, err := client.Collections.Collection.PostPublicCollectionByUsernameList(ctx, req)
 if err != nil {
     log.Fatal(err)
 }

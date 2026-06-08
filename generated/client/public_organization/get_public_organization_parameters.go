@@ -59,6 +59,9 @@ GetPublicOrganizationParams contains all the parameters to send to the API endpo
 */
 type GetPublicOrganizationParams struct {
 
+	// Keyword.
+	Keyword *string
+
 	// Limit.
 	//
 	// Default: 10
@@ -67,8 +70,8 @@ type GetPublicOrganizationParams struct {
 	// Offset.
 	Offset *int64
 
-	// Sort.
-	Sort *string
+	// Type.
+	Type *string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -137,6 +140,17 @@ func (o *GetPublicOrganizationParams) SetHTTPClient(client *http.Client) {
 	o.HTTPClient = client
 }
 
+// WithKeyword adds the keyword to the get public organization params
+func (o *GetPublicOrganizationParams) WithKeyword(keyword *string) *GetPublicOrganizationParams {
+	o.SetKeyword(keyword)
+	return o
+}
+
+// SetKeyword adds the keyword to the get public organization params
+func (o *GetPublicOrganizationParams) SetKeyword(keyword *string) {
+	o.Keyword = keyword
+}
+
 // WithLimit adds the limit to the get public organization params
 func (o *GetPublicOrganizationParams) WithLimit(limit *int64) *GetPublicOrganizationParams {
 	o.SetLimit(limit)
@@ -159,15 +173,15 @@ func (o *GetPublicOrganizationParams) SetOffset(offset *int64) {
 	o.Offset = offset
 }
 
-// WithSort adds the sort to the get public organization params
-func (o *GetPublicOrganizationParams) WithSort(sort *string) *GetPublicOrganizationParams {
-	o.SetSort(sort)
+// WithType adds the typeVar to the get public organization params
+func (o *GetPublicOrganizationParams) WithType(typeVar *string) *GetPublicOrganizationParams {
+	o.SetType(typeVar)
 	return o
 }
 
-// SetSort adds the sort to the get public organization params
-func (o *GetPublicOrganizationParams) SetSort(sort *string) {
-	o.Sort = sort
+// SetType adds the type to the get public organization params
+func (o *GetPublicOrganizationParams) SetType(typeVar *string) {
+	o.Type = typeVar
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -177,6 +191,23 @@ func (o *GetPublicOrganizationParams) WriteToRequest(r runtime.ClientRequest, re
 		return err
 	}
 	var res []error
+
+	if o.Keyword != nil {
+
+		// query param keyword
+		var qrKeyword string
+
+		if o.Keyword != nil {
+			qrKeyword = *o.Keyword
+		}
+		qKeyword := qrKeyword
+		if qKeyword != "" {
+
+			if err := r.SetQueryParam("keyword", qKeyword); err != nil {
+				return err
+			}
+		}
+	}
 
 	if o.Limit != nil {
 
@@ -212,18 +243,18 @@ func (o *GetPublicOrganizationParams) WriteToRequest(r runtime.ClientRequest, re
 		}
 	}
 
-	if o.Sort != nil {
+	if o.Type != nil {
 
-		// query param sort
-		var qrSort string
+		// query param type
+		var qrType string
 
-		if o.Sort != nil {
-			qrSort = *o.Sort
+		if o.Type != nil {
+			qrType = *o.Type
 		}
-		qSort := qrSort
-		if qSort != "" {
+		qType := qrType
+		if qType != "" {
 
-			if err := r.SetQueryParam("sort", qSort); err != nil {
+			if err := r.SetQueryParam("type", qType); err != nil {
 				return err
 			}
 		}

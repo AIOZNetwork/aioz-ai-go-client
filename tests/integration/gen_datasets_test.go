@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_dataset"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/dataset"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -33,8 +33,8 @@ func TestGen_Datasets_PostApiKeyDataset(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.PostAPIKeyDataset(
-		api_key_dataset.NewPostAPIKeyDatasetParams().WithContext(t.Context()),
+	result, err := client.Datasets().Dataset.PostDataset(
+		dataset.NewPostDatasetParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -65,8 +65,8 @@ func TestGen_Datasets_PostApiKeyDatasetList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.PostAPIKeyDatasetList(
-		api_key_dataset.NewPostAPIKeyDatasetListParams().WithContext(t.Context()),
+	result, err := client.Datasets().Dataset.PostDatasetList(
+		dataset.NewPostDatasetListParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -97,8 +97,8 @@ func TestGen_Datasets_PostApiKeyDatasetListByAuthorUsername(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.PostAPIKeyDatasetListByAuthorUsername(
-		api_key_dataset.NewPostAPIKeyDatasetListByAuthorUsernameParams().WithContext(t.Context()).WithUsername("testuser"),
+	result, err := client.Datasets().Dataset.PostDatasetListByAuthorByUsername(
+		dataset.NewPostDatasetListByAuthorByUsernameParams().WithContext(t.Context()).WithUsername("testuser"),
 		nil,
 	)
 
@@ -129,8 +129,8 @@ func TestGen_Datasets_PostApiKeyDatasetMatchingTags(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.PostAPIKeyDatasetMatchingTags(
-		api_key_dataset.NewPostAPIKeyDatasetMatchingTagsParams().WithContext(t.Context()),
+	result, err := client.Datasets().Dataset.PostDatasetMatchingTags(
+		dataset.NewPostDatasetMatchingTagsParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -161,8 +161,8 @@ func TestGen_Datasets_GetApiKeyDatasetOrganizationOrg(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.GetAPIKeyDatasetOrganizationOrg(
-		api_key_dataset.NewGetAPIKeyDatasetOrganizationOrgParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Datasets().Dataset.GetDatasetOrganizationByOrg(
+		dataset.NewGetDatasetOrganizationByOrgParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -193,8 +193,8 @@ func TestGen_Datasets_DeleteApiKeyDatasetId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.DeleteAPIKeyDatasetID(
-		api_key_dataset.NewDeleteAPIKeyDatasetIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Datasets().Dataset.DeleteDatasetByID(
+		dataset.NewDeleteDatasetByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -225,8 +225,8 @@ func TestGen_Datasets_GetApiKeyDatasetId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.GetAPIKeyDatasetID(
-		api_key_dataset.NewGetAPIKeyDatasetIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Datasets().Dataset.GetDatasetByID(
+		dataset.NewGetDatasetByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -257,8 +257,8 @@ func TestGen_Datasets_PutApiKeyDatasetId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.PutAPIKeyDatasetID(
-		api_key_dataset.NewPutAPIKeyDatasetIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Datasets().Dataset.PutDatasetByID(
+		dataset.NewPutDatasetByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -289,8 +289,8 @@ func TestGen_Datasets_GetApiKeyDatasetIdDownload(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.GetAPIKeyDatasetIDDownload(
-		api_key_dataset.NewGetAPIKeyDatasetIDDownloadParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Datasets().Dataset.GetDatasetByIDDownload(
+		dataset.NewGetDatasetByIDDownloadParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -321,8 +321,8 @@ func TestGen_Datasets_GetApiKeyDatasetIdLike(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.GetAPIKeyDatasetIDLike(
-		api_key_dataset.NewGetAPIKeyDatasetIDLikeParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Datasets().Dataset.GetDatasetByIDLike(
+		dataset.NewGetDatasetByIDLikeParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -353,8 +353,8 @@ func TestGen_Datasets_PutApiKeyDatasetIdMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.PutAPIKeyDatasetIDMetadata(
-		api_key_dataset.NewPutAPIKeyDatasetIDMetadataParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Datasets().Dataset.PutDatasetByIDMetadata(
+		dataset.NewPutDatasetByIDMetadataParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -385,8 +385,8 @@ func TestGen_Datasets_GetApiKeyDatasetUsernameName(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Datasets().Dataset.GetAPIKeyDatasetUsernameName(
-		api_key_dataset.NewGetAPIKeyDatasetUsernameNameParams().WithContext(t.Context()).WithUsername("testuser").WithName("test-name"),
+	result, err := client.Datasets().Dataset.GetDatasetByUsernameByName(
+		dataset.NewGetDatasetByUsernameByNameParams().WithContext(t.Context()).WithUsername("testuser").WithName("test-name"),
 		nil,
 	)
 

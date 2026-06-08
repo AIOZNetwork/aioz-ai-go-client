@@ -41,7 +41,7 @@ func (o *GetPublicContentTermsPrivacyReader) ReadResponse(response runtime.Clien
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/content/terms-privacy] GetPublicContentTermsPrivacy", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/content/terms-privacy] getPublicContentTermsPrivacy", response, response.Code())
 	}
 }
 
@@ -56,7 +56,7 @@ GetPublicContentTermsPrivacyOK describes a response with status code 200, with d
 OK
 */
 type GetPublicContentTermsPrivacyOK struct {
-	Payload *models.ResponseContentConfigResponse
+	Payload *models.ResponseTermsAndPrivacyResponse
 }
 
 // IsSuccess returns true when this get public content terms privacy o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *GetPublicContentTermsPrivacyOK) String() string {
 	return fmt.Sprintf("[GET /public/content/terms-privacy][%d] getPublicContentTermsPrivacyOK %s", 200, payload)
 }
 
-func (o *GetPublicContentTermsPrivacyOK) GetPayload() *models.ResponseContentConfigResponse {
+func (o *GetPublicContentTermsPrivacyOK) GetPayload() *models.ResponseTermsAndPrivacyResponse {
 	return o.Payload
 }
 
 func (o *GetPublicContentTermsPrivacyOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseContentConfigResponse)
+	o.Payload = new(models.ResponseTermsAndPrivacyResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

@@ -6,9 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `GetAPIKeyNotification`
+### `GetNotification`
 
-**`GET /api-key/notification`** — Get all notifications By Api Key
+**`GET /api-key/notification`** — Get all notifications
 
 **Headers**
 
@@ -66,7 +66,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-resp, err := client.Notifications.Notification.GetAPIKeyNotification(ctx)
+resp, err := client.Notifications.Notification.GetNotification(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -75,9 +75,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyNotification`
+### `DeleteNotification`
 
-**`DELETE /api-key/notification`** — Delete all notifications By Api Key
+**`DELETE /api-key/notification`** — Delete all notifications
 
 **Headers**
 
@@ -111,7 +111,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Notifications.Notification.DeleteAPIKeyNotification(ctx)
+resp, err := client.Notifications.Notification.DeleteNotification(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -120,9 +120,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyNotificationList`
+### `PutNotificationList`
 
-**`PUT /api-key/notification/list`** — Mark list notification By Api Key
+**`PUT /api-key/notification/list`** — Mark list notification
 
 **Headers**
 
@@ -161,7 +161,7 @@ req := &models.UpdateListNotificationStatusByIdsRequest{
     Ids: "...",  // array[string]  // required
     Status: "...",  // string  // required
 }
-resp, err := client.Notifications.Notification.PutAPIKeyNotificationList(ctx, req)
+resp, err := client.Notifications.Notification.PutNotificationList(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -170,9 +170,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyNotificationList`
+### `DeleteNotificationList`
 
-**`DELETE /api-key/notification/list`** — DeleteNotificationByIds By Api Key
+**`DELETE /api-key/notification/list`** — DeleteNotificationByIds
 
 **Headers**
 
@@ -209,7 +209,7 @@ ctx := context.Background()
 req := &models.DeleteNotificationByIdsRequest{
     Ids: "...",  // array[string]  // required
 }
-resp, err := client.Notifications.Notification.DeleteAPIKeyNotificationList(ctx, req)
+resp, err := client.Notifications.Notification.DeleteNotificationList(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -218,9 +218,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyNotificationStatistics`
+### `GetNotificationStatistics`
 
-**`GET /api-key/notification/statistics`** — GetNotifyStatisticsByUserId By Api Key
+**`GET /api-key/notification/statistics`** — GetNotifyStatisticsByUserId
 
 **Headers**
 
@@ -256,7 +256,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Notifications.Notification.GetAPIKeyNotificationStatistics(ctx)
+resp, err := client.Notifications.Notification.GetNotificationStatistics(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -265,9 +265,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyNotificationID`
+### `PutNotificationByID`
 
-**`PUT /api-key/notification/{id}`** — Update notification by id By Api Key
+**`PUT /api-key/notification/{id}`** — Update notification by id
 
 **Headers**
 
@@ -311,7 +311,7 @@ ctx := context.Background()
 req := &models.UpdateNotificationByIdRequest{
     Status: "...",  // string  // required
 }
-resp, err := client.Notifications.Notification.PutAPIKeyNotificationID(ctx, req)
+resp, err := client.Notifications.Notification.PutNotificationByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -320,9 +320,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyNotificationID`
+### `DeleteNotificationByID`
 
-**`DELETE /api-key/notification/{id}`** — Delete notification by id By Api Key
+**`DELETE /api-key/notification/{id}`** — Delete notification by id
 
 **Headers**
 
@@ -356,7 +356,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Notifications.Notification.DeleteAPIKeyNotificationID(ctx, "<id>")
+resp, err := client.Notifications.Notification.DeleteNotificationByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }

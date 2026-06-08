@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_comments"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_discussion"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/comments"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/discussion"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -34,8 +34,8 @@ func TestGen_Discussions_PostApiKeyCollectionIdReport(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.PostAPIKeyCollectionIDReport(
-		api_key_discussion.NewPostAPIKeyCollectionIDReportParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.PostCollectionByIDReport(
+		discussion.NewPostCollectionByIDReportParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -66,8 +66,8 @@ func TestGen_Discussions_DeleteApiKeyCommentsId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Comments.DeleteAPIKeyCommentsID(
-		api_key_comments.NewDeleteAPIKeyCommentsIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Comments.DeleteCommentsByID(
+		comments.NewDeleteCommentsByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -98,8 +98,8 @@ func TestGen_Discussions_PutApiKeyCommentsId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Comments.PutAPIKeyCommentsID(
-		api_key_comments.NewPutAPIKeyCommentsIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Comments.PutCommentsByID(
+		comments.NewPutCommentsByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -130,8 +130,8 @@ func TestGen_Discussions_PostApiKeyCommentsIdReport(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.PostAPIKeyCommentsIDReport(
-		api_key_discussion.NewPostAPIKeyCommentsIDReportParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.PostCommentsByIDReport(
+		discussion.NewPostCommentsByIDReportParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -162,8 +162,8 @@ func TestGen_Discussions_GetApiKeyDiscussionCompetitionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.GetAPIKeyDiscussionCompetitionID(
-		api_key_discussion.NewGetAPIKeyDiscussionCompetitionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.GetDiscussionCompetitionByID(
+		discussion.NewGetDiscussionCompetitionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -194,8 +194,8 @@ func TestGen_Discussions_PostApiKeyDiscussionCompetitionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.PostAPIKeyDiscussionCompetitionID(
-		api_key_discussion.NewPostAPIKeyDiscussionCompetitionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.PostDiscussionCompetitionByID(
+		discussion.NewPostDiscussionCompetitionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -226,8 +226,8 @@ func TestGen_Discussions_GetApiKeyDiscussionDatasetId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.GetAPIKeyDiscussionDatasetID(
-		api_key_discussion.NewGetAPIKeyDiscussionDatasetIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.GetDiscussionDatasetByID(
+		discussion.NewGetDiscussionDatasetByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -258,8 +258,8 @@ func TestGen_Discussions_PostApiKeyDiscussionDatasetId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.PostAPIKeyDiscussionDatasetID(
-		api_key_discussion.NewPostAPIKeyDiscussionDatasetIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.PostDiscussionDatasetByID(
+		discussion.NewPostDiscussionDatasetByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -290,8 +290,8 @@ func TestGen_Discussions_GetApiKeyDiscussionModelId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.GetAPIKeyDiscussionModelID(
-		api_key_discussion.NewGetAPIKeyDiscussionModelIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.GetDiscussionModelByID(
+		discussion.NewGetDiscussionModelByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -322,8 +322,8 @@ func TestGen_Discussions_PostApiKeyDiscussionModelId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.PostAPIKeyDiscussionModelID(
-		api_key_discussion.NewPostAPIKeyDiscussionModelIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.PostDiscussionModelByID(
+		discussion.NewPostDiscussionModelByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -354,8 +354,8 @@ func TestGen_Discussions_DeleteApiKeyDiscussionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.DeleteAPIKeyDiscussionID(
-		api_key_discussion.NewDeleteAPIKeyDiscussionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.DeleteDiscussionByID(
+		discussion.NewDeleteDiscussionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -386,8 +386,8 @@ func TestGen_Discussions_PutApiKeyDiscussionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.PutAPIKeyDiscussionID(
-		api_key_discussion.NewPutAPIKeyDiscussionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.PutDiscussionByID(
+		discussion.NewPutDiscussionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -418,8 +418,8 @@ func TestGen_Discussions_GetApiKeyDiscussionIdComments(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Comments.GetAPIKeyDiscussionIDComments(
-		api_key_comments.NewGetAPIKeyDiscussionIDCommentsParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Comments.GetDiscussionByIDComments(
+		comments.NewGetDiscussionByIDCommentsParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -450,8 +450,8 @@ func TestGen_Discussions_PostApiKeyDiscussionIdComments(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Comments.PostAPIKeyDiscussionIDComments(
-		api_key_comments.NewPostAPIKeyDiscussionIDCommentsParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Comments.PostDiscussionByIDComments(
+		comments.NewPostDiscussionByIDCommentsParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -482,8 +482,8 @@ func TestGen_Discussions_PostApiKeyDiscussionIdReport(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.PostAPIKeyDiscussionIDReport(
-		api_key_discussion.NewPostAPIKeyDiscussionIDReportParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Discussion.PostDiscussionByIDReport(
+		discussion.NewPostDiscussionByIDReportParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 

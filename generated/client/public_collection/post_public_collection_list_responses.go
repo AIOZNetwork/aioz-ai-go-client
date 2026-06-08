@@ -41,7 +41,7 @@ func (o *PostPublicCollectionListReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /public/collection/list] PostPublicCollectionList", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /public/collection/list] postPublicCollectionList", response, response.Code())
 	}
 }
 

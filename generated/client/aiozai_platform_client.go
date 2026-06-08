@@ -7,38 +7,28 @@ import (
 	httptransport "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_collection"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_comments"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_competition"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_competition_leaderboard"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_dataset"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_dependency"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_discussion"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_api_key"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_package"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_playground"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_reviews"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_setting"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_training"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_verify"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_versioning"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_notification"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_offer"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_organization"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_organization_wallet"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_package"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_platform_task"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_reaction"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_repository"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_search"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_storage"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_training_task"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_user"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_user_public_key"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_user_voucher"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_user_wallet"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/collection"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/comments"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/competition"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/competition_leaderboard"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/dataset"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/dependency"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/discussion"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_api_key"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_package"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_playground"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_reviews"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_setting"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_training"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_verify"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_versioning"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/notification"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/offer"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization_wallet"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/packages"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/platform_task"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_collection"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_competition"
@@ -47,6 +37,16 @@ import (
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_medals"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_model"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_organization"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/reaction"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/repository"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/search"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/storage"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/task"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/training_task"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_public_key"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_voucher"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_wallet"
 )
 
 // Default aiozai platform HTTP client.
@@ -91,38 +91,28 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *AiozaiPlat
 
 	cli := new(AiozaiPlatform)
 	cli.Transport = transport
-	cli.APIKey = api_key.New(transport, formats)
-	cli.APIKeyCollection = api_key_collection.New(transport, formats)
-	cli.APIKeyComments = api_key_comments.New(transport, formats)
-	cli.APIKeyCompetition = api_key_competition.New(transport, formats)
-	cli.APIKeyCompetitionLeaderboard = api_key_competition_leaderboard.New(transport, formats)
-	cli.APIKeyDataset = api_key_dataset.New(transport, formats)
-	cli.APIKeyDependency = api_key_dependency.New(transport, formats)
-	cli.APIKeyDiscussion = api_key_discussion.New(transport, formats)
-	cli.APIKeyModel = api_key_model.New(transport, formats)
-	cli.APIKeyModelAPIKey = api_key_model_api_key.New(transport, formats)
-	cli.APIKeyModelPackage = api_key_model_package.New(transport, formats)
-	cli.APIKeyModelPlayground = api_key_model_playground.New(transport, formats)
-	cli.APIKeyModelReviews = api_key_model_reviews.New(transport, formats)
-	cli.APIKeyModelSetting = api_key_model_setting.New(transport, formats)
-	cli.APIKeyModelTraining = api_key_model_training.New(transport, formats)
-	cli.APIKeyModelVerify = api_key_model_verify.New(transport, formats)
-	cli.APIKeyModelVersioning = api_key_model_versioning.New(transport, formats)
-	cli.APIKeyNotification = api_key_notification.New(transport, formats)
-	cli.APIKeyOffer = api_key_offer.New(transport, formats)
-	cli.APIKeyOrganization = api_key_organization.New(transport, formats)
-	cli.APIKeyOrganizationWallet = api_key_organization_wallet.New(transport, formats)
-	cli.APIKeyPackage = api_key_package.New(transport, formats)
-	cli.APIKeyPlatformTask = api_key_platform_task.New(transport, formats)
-	cli.APIKeyReaction = api_key_reaction.New(transport, formats)
-	cli.APIKeyRepository = api_key_repository.New(transport, formats)
-	cli.APIKeySearch = api_key_search.New(transport, formats)
-	cli.APIKeyStorage = api_key_storage.New(transport, formats)
-	cli.APIKeyTrainingTask = api_key_training_task.New(transport, formats)
-	cli.APIKeyUser = api_key_user.New(transport, formats)
-	cli.APIKeyUserPublicKey = api_key_user_public_key.New(transport, formats)
-	cli.APIKeyUserVoucher = api_key_user_voucher.New(transport, formats)
-	cli.APIKeyUserWallet = api_key_user_wallet.New(transport, formats)
+	cli.Collection = collection.New(transport, formats)
+	cli.Comments = comments.New(transport, formats)
+	cli.Competition = competition.New(transport, formats)
+	cli.CompetitionLeaderboard = competition_leaderboard.New(transport, formats)
+	cli.Dataset = dataset.New(transport, formats)
+	cli.Dependency = dependency.New(transport, formats)
+	cli.Discussion = discussion.New(transport, formats)
+	cli.Model = model.New(transport, formats)
+	cli.ModelAPIKey = model_api_key.New(transport, formats)
+	cli.ModelPackage = model_package.New(transport, formats)
+	cli.ModelPlayground = model_playground.New(transport, formats)
+	cli.ModelReviews = model_reviews.New(transport, formats)
+	cli.ModelSetting = model_setting.New(transport, formats)
+	cli.ModelTraining = model_training.New(transport, formats)
+	cli.ModelVerify = model_verify.New(transport, formats)
+	cli.ModelVersioning = model_versioning.New(transport, formats)
+	cli.Notification = notification.New(transport, formats)
+	cli.Offer = offer.New(transport, formats)
+	cli.Organization = organization.New(transport, formats)
+	cli.OrganizationWallet = organization_wallet.New(transport, formats)
+	cli.Packages = packages.New(transport, formats)
+	cli.PlatformTask = platform_task.New(transport, formats)
 	cli.Public = public.New(transport, formats)
 	cli.PublicCollection = public_collection.New(transport, formats)
 	cli.PublicCompetition = public_competition.New(transport, formats)
@@ -131,6 +121,16 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *AiozaiPlat
 	cli.PublicMedals = public_medals.New(transport, formats)
 	cli.PublicModel = public_model.New(transport, formats)
 	cli.PublicOrganization = public_organization.New(transport, formats)
+	cli.Reaction = reaction.New(transport, formats)
+	cli.Repository = repository.New(transport, formats)
+	cli.Search = search.New(transport, formats)
+	cli.Storage = storage.New(transport, formats)
+	cli.Task = task.New(transport, formats)
+	cli.TrainingTask = training_task.New(transport, formats)
+	cli.User = user.New(transport, formats)
+	cli.UserPublicKey = user_public_key.New(transport, formats)
+	cli.UserVoucher = user_voucher.New(transport, formats)
+	cli.UserWallet = user_wallet.New(transport, formats)
 	return cli
 }
 
@@ -175,69 +175,49 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 
 // AiozaiPlatform is a client for aiozai platform
 type AiozaiPlatform struct {
-	APIKey api_key.ClientService
+	Collection collection.ClientService
 
-	APIKeyCollection api_key_collection.ClientService
+	Comments comments.ClientService
 
-	APIKeyComments api_key_comments.ClientService
+	Competition competition.ClientService
 
-	APIKeyCompetition api_key_competition.ClientService
+	CompetitionLeaderboard competition_leaderboard.ClientService
 
-	APIKeyCompetitionLeaderboard api_key_competition_leaderboard.ClientService
+	Dataset dataset.ClientService
 
-	APIKeyDataset api_key_dataset.ClientService
+	Dependency dependency.ClientService
 
-	APIKeyDependency api_key_dependency.ClientService
+	Discussion discussion.ClientService
 
-	APIKeyDiscussion api_key_discussion.ClientService
+	Model model.ClientService
 
-	APIKeyModel api_key_model.ClientService
+	ModelAPIKey model_api_key.ClientService
 
-	APIKeyModelAPIKey api_key_model_api_key.ClientService
+	ModelPackage model_package.ClientService
 
-	APIKeyModelPackage api_key_model_package.ClientService
+	ModelPlayground model_playground.ClientService
 
-	APIKeyModelPlayground api_key_model_playground.ClientService
+	ModelReviews model_reviews.ClientService
 
-	APIKeyModelReviews api_key_model_reviews.ClientService
+	ModelSetting model_setting.ClientService
 
-	APIKeyModelSetting api_key_model_setting.ClientService
+	ModelTraining model_training.ClientService
 
-	APIKeyModelTraining api_key_model_training.ClientService
+	ModelVerify model_verify.ClientService
 
-	APIKeyModelVerify api_key_model_verify.ClientService
+	ModelVersioning model_versioning.ClientService
 
-	APIKeyModelVersioning api_key_model_versioning.ClientService
+	Notification notification.ClientService
 
-	APIKeyNotification api_key_notification.ClientService
+	Offer offer.ClientService
 
-	APIKeyOffer api_key_offer.ClientService
+	Organization organization.ClientService
 
-	APIKeyOrganization api_key_organization.ClientService
+	OrganizationWallet organization_wallet.ClientService
 
-	APIKeyOrganizationWallet api_key_organization_wallet.ClientService
+	Packages packages.ClientService
 
-	APIKeyPackage api_key_package.ClientService
-
-	APIKeyPlatformTask api_key_platform_task.ClientService
-
-	APIKeyReaction api_key_reaction.ClientService
-
-	APIKeyRepository api_key_repository.ClientService
-
-	APIKeySearch api_key_search.ClientService
-
-	APIKeyStorage api_key_storage.ClientService
-
-	APIKeyTrainingTask api_key_training_task.ClientService
-
-	APIKeyUser api_key_user.ClientService
-
-	APIKeyUserPublicKey api_key_user_public_key.ClientService
-
-	APIKeyUserVoucher api_key_user_voucher.ClientService
-
-	APIKeyUserWallet api_key_user_wallet.ClientService
+	PlatformTask platform_task.ClientService
 
 	Public public.ClientService
 
@@ -255,44 +235,54 @@ type AiozaiPlatform struct {
 
 	PublicOrganization public_organization.ClientService
 
+	Reaction reaction.ClientService
+
+	Repository repository.ClientService
+
+	Search search.ClientService
+
+	Storage storage.ClientService
+
+	Task task.ClientService
+
+	TrainingTask training_task.ClientService
+
+	User user.ClientService
+
+	UserPublicKey user_public_key.ClientService
+
+	UserVoucher user_voucher.ClientService
+
+	UserWallet user_wallet.ClientService
+
 	Transport runtime.ClientTransport
 }
 
 // SetTransport changes the transport on the client and all its subresources
 func (c *AiozaiPlatform) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
-	c.APIKey.SetTransport(transport)
-	c.APIKeyCollection.SetTransport(transport)
-	c.APIKeyComments.SetTransport(transport)
-	c.APIKeyCompetition.SetTransport(transport)
-	c.APIKeyCompetitionLeaderboard.SetTransport(transport)
-	c.APIKeyDataset.SetTransport(transport)
-	c.APIKeyDependency.SetTransport(transport)
-	c.APIKeyDiscussion.SetTransport(transport)
-	c.APIKeyModel.SetTransport(transport)
-	c.APIKeyModelAPIKey.SetTransport(transport)
-	c.APIKeyModelPackage.SetTransport(transport)
-	c.APIKeyModelPlayground.SetTransport(transport)
-	c.APIKeyModelReviews.SetTransport(transport)
-	c.APIKeyModelSetting.SetTransport(transport)
-	c.APIKeyModelTraining.SetTransport(transport)
-	c.APIKeyModelVerify.SetTransport(transport)
-	c.APIKeyModelVersioning.SetTransport(transport)
-	c.APIKeyNotification.SetTransport(transport)
-	c.APIKeyOffer.SetTransport(transport)
-	c.APIKeyOrganization.SetTransport(transport)
-	c.APIKeyOrganizationWallet.SetTransport(transport)
-	c.APIKeyPackage.SetTransport(transport)
-	c.APIKeyPlatformTask.SetTransport(transport)
-	c.APIKeyReaction.SetTransport(transport)
-	c.APIKeyRepository.SetTransport(transport)
-	c.APIKeySearch.SetTransport(transport)
-	c.APIKeyStorage.SetTransport(transport)
-	c.APIKeyTrainingTask.SetTransport(transport)
-	c.APIKeyUser.SetTransport(transport)
-	c.APIKeyUserPublicKey.SetTransport(transport)
-	c.APIKeyUserVoucher.SetTransport(transport)
-	c.APIKeyUserWallet.SetTransport(transport)
+	c.Collection.SetTransport(transport)
+	c.Comments.SetTransport(transport)
+	c.Competition.SetTransport(transport)
+	c.CompetitionLeaderboard.SetTransport(transport)
+	c.Dataset.SetTransport(transport)
+	c.Dependency.SetTransport(transport)
+	c.Discussion.SetTransport(transport)
+	c.Model.SetTransport(transport)
+	c.ModelAPIKey.SetTransport(transport)
+	c.ModelPackage.SetTransport(transport)
+	c.ModelPlayground.SetTransport(transport)
+	c.ModelReviews.SetTransport(transport)
+	c.ModelSetting.SetTransport(transport)
+	c.ModelTraining.SetTransport(transport)
+	c.ModelVerify.SetTransport(transport)
+	c.ModelVersioning.SetTransport(transport)
+	c.Notification.SetTransport(transport)
+	c.Offer.SetTransport(transport)
+	c.Organization.SetTransport(transport)
+	c.OrganizationWallet.SetTransport(transport)
+	c.Packages.SetTransport(transport)
+	c.PlatformTask.SetTransport(transport)
 	c.Public.SetTransport(transport)
 	c.PublicCollection.SetTransport(transport)
 	c.PublicCompetition.SetTransport(transport)
@@ -301,4 +291,14 @@ func (c *AiozaiPlatform) SetTransport(transport runtime.ClientTransport) {
 	c.PublicMedals.SetTransport(transport)
 	c.PublicModel.SetTransport(transport)
 	c.PublicOrganization.SetTransport(transport)
+	c.Reaction.SetTransport(transport)
+	c.Repository.SetTransport(transport)
+	c.Search.SetTransport(transport)
+	c.Storage.SetTransport(transport)
+	c.Task.SetTransport(transport)
+	c.TrainingTask.SetTransport(transport)
+	c.User.SetTransport(transport)
+	c.UserPublicKey.SetTransport(transport)
+	c.UserVoucher.SetTransport(transport)
+	c.UserWallet.SetTransport(transport)
 }

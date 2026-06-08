@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_competition"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_competition_leaderboard"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/competition"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/competition_leaderboard"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -34,8 +34,8 @@ func TestGen_Competitions_PostApiKeyCompetition(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.PostAPIKeyCompetition(
-		api_key_competition.NewPostAPIKeyCompetitionParams().WithContext(t.Context()),
+	result, err := client.Competitions().Competition.PostCompetition(
+		competition.NewPostCompetitionParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -66,8 +66,8 @@ func TestGen_Competitions_PostApiKeyCompetitionList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.PostAPIKeyCompetitionList(
-		api_key_competition.NewPostAPIKeyCompetitionListParams().WithContext(t.Context()),
+	result, err := client.Competitions().Competition.PostCompetitionList(
+		competition.NewPostCompetitionListParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -98,8 +98,8 @@ func TestGen_Competitions_GetApiKeyCompetitionPathPath(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.GetAPIKeyCompetitionPathPath(
-		api_key_competition.NewGetAPIKeyCompetitionPathPathParams().WithContext(t.Context()).WithPath("test-path"),
+	result, err := client.Competitions().Competition.GetCompetitionPathByPath(
+		competition.NewGetCompetitionPathByPathParams().WithContext(t.Context()).WithPath("test-path"),
 		nil,
 	)
 
@@ -130,8 +130,8 @@ func TestGen_Competitions_PostApiKeyCompetitionPreSubmit(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.PostAPIKeyCompetitionPreSubmit(
-		api_key_competition.NewPostAPIKeyCompetitionPreSubmitParams().WithContext(t.Context()),
+	result, err := client.Competitions().Competition.PostCompetitionPreSubmit(
+		competition.NewPostCompetitionPreSubmitParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -162,8 +162,8 @@ func TestGen_Competitions_PostApiKeyCompetitionSubmit(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.PostAPIKeyCompetitionSubmit(
-		api_key_competition.NewPostAPIKeyCompetitionSubmitParams().WithContext(t.Context()),
+	result, err := client.Competitions().Competition.PostCompetitionSubmit(
+		competition.NewPostCompetitionSubmitParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -194,8 +194,8 @@ func TestGen_Competitions_PostApiKeyCompetitionSubmitCost(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.PostAPIKeyCompetitionSubmitCost(
-		api_key_competition.NewPostAPIKeyCompetitionSubmitCostParams().WithContext(t.Context()),
+	result, err := client.Competitions().Competition.PostCompetitionSubmitCost(
+		competition.NewPostCompetitionSubmitCostParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -226,8 +226,8 @@ func TestGen_Competitions_GetApiKeyCompetitionSubmitHistoryId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.GetAPIKeyCompetitionSubmitHistoryID(
-		api_key_competition.NewGetAPIKeyCompetitionSubmitHistoryIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Competitions().Competition.GetCompetitionSubmitHistoryByID(
+		competition.NewGetCompetitionSubmitHistoryByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -258,8 +258,8 @@ func TestGen_Competitions_DeleteApiKeyCompetitionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.DeleteAPIKeyCompetitionID(
-		api_key_competition.NewDeleteAPIKeyCompetitionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Competitions().Competition.DeleteCompetitionByID(
+		competition.NewDeleteCompetitionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -290,8 +290,8 @@ func TestGen_Competitions_GetApiKeyCompetitionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.GetAPIKeyCompetitionID(
-		api_key_competition.NewGetAPIKeyCompetitionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Competitions().Competition.GetCompetitionByID(
+		competition.NewGetCompetitionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -322,8 +322,8 @@ func TestGen_Competitions_PutApiKeyCompetitionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.PutAPIKeyCompetitionID(
-		api_key_competition.NewPutAPIKeyCompetitionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Competitions().Competition.PutCompetitionByID(
+		competition.NewPutCompetitionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -354,8 +354,8 @@ func TestGen_Competitions_PostApiKeyCompetitionIdJoin(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.PostAPIKeyCompetitionIDJoin(
-		api_key_competition.NewPostAPIKeyCompetitionIDJoinParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Competitions().Competition.PostCompetitionByIDJoin(
+		competition.NewPostCompetitionByIDJoinParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -386,8 +386,8 @@ func TestGen_Competitions_PostApiKeyCompetitionIdLaunch(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.PostAPIKeyCompetitionIDLaunch(
-		api_key_competition.NewPostAPIKeyCompetitionIDLaunchParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Competitions().Competition.PostCompetitionByIDLaunch(
+		competition.NewPostCompetitionByIDLaunchParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -418,8 +418,8 @@ func TestGen_Competitions_GetApiKeyCompetitionIdLeaderboard(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Leaderboard.GetAPIKeyCompetitionIDLeaderboard(
-		api_key_competition_leaderboard.NewGetAPIKeyCompetitionIDLeaderboardParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Competitions().Leaderboard.GetCompetitionByIDLeaderboard(
+		competition_leaderboard.NewGetCompetitionByIDLeaderboardParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -450,8 +450,8 @@ func TestGen_Competitions_PostApiKeyCompetitionIdLeave(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Competition.PostAPIKeyCompetitionIDLeave(
-		api_key_competition.NewPostAPIKeyCompetitionIDLeaveParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Competitions().Competition.PostCompetitionByIDLeave(
+		competition.NewPostCompetitionByIDLeaveParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -482,8 +482,8 @@ func TestGen_Competitions_GetApiKeyCompetitionIdPublicLeaderboard(t *testing.T) 
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Leaderboard.GetAPIKeyCompetitionIDPublicLeaderboard(
-		api_key_competition_leaderboard.NewGetAPIKeyCompetitionIDPublicLeaderboardParams().WithContext(t.Context()).WithID("test-id").WithPhase("test-id"),
+	result, err := client.Competitions().Leaderboard.GetCompetitionByIDPublicLeaderboard(
+		competition_leaderboard.NewGetCompetitionByIDPublicLeaderboardParams().WithContext(t.Context()).WithID("test-id").WithPhase("test-id"),
 		nil,
 	)
 

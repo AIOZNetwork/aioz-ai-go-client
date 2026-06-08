@@ -41,7 +41,7 @@ func (o *GetPublicMetadataReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/metadata] GetPublicMetadata", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/metadata] getPublicMetadata", response, response.Code())
 	}
 }
 
@@ -56,7 +56,7 @@ GetPublicMetadataOK describes a response with status code 200, with default head
 OK
 */
 type GetPublicMetadataOK struct {
-	Payload *models.ResponseMetadataResponse
+	Payload *models.ResponseGetListMetadataResponse
 }
 
 // IsSuccess returns true when this get public metadata o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *GetPublicMetadataOK) String() string {
 	return fmt.Sprintf("[GET /public/metadata][%d] getPublicMetadataOK %s", 200, payload)
 }
 
-func (o *GetPublicMetadataOK) GetPayload() *models.ResponseMetadataResponse {
+func (o *GetPublicMetadataOK) GetPayload() *models.ResponseGetListMetadataResponse {
 	return o.Payload
 }
 
 func (o *GetPublicMetadataOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseMetadataResponse)
+	o.Payload = new(models.ResponseGetListMetadataResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

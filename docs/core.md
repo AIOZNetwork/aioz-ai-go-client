@@ -6,7 +6,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `GetAPIKeyBalance`
+### `GetBalance`
 
 **`GET /api-key/balance`** — Get Api Key Balance
 
@@ -30,10 +30,10 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 | `wallet_address` | `string` |  |
 
 **Error Responses**
@@ -47,7 +47,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-resp, err := client.Api-keys.Api-key.GetAPIKeyBalance(ctx)
+resp, err := client.Api-keys.Api-key.GetBalance(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -56,9 +56,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyCommentsID`
+### `PutCommentsByID`
 
-**`PUT /api-key/comments/{id}`** — Update comment By Api Key
+**`PUT /api-key/comments/{id}`** — Update comment
 
 **Headers**
 
@@ -169,7 +169,7 @@ req := &models.UpdateCommentRequest{
     Content: "...",  // string
     TagUsernames: "...",  // array[string]
 }
-resp, err := client.Commentss.Comments.PutAPIKeyCommentsID(ctx, req)
+resp, err := client.Commentss.Comments.PutCommentsByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -178,9 +178,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyCommentsID`
+### `DeleteCommentsByID`
 
-**`DELETE /api-key/comments/{id}`** — Delete comment By Api Key
+**`DELETE /api-key/comments/{id}`** — Delete comment
 
 **Headers**
 
@@ -280,7 +280,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Commentss.Comments.DeleteAPIKeyCommentsID(ctx, "<id>")
+resp, err := client.Commentss.Comments.DeleteCommentsByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -289,9 +289,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyDatasetIDLike`
+### `PutDatasetByIDLike`
 
-**`PUT /api-key/dataset/{id}/like`** — Like dataset By Api Key
+**`PUT /api-key/dataset/{id}/like`** — Like dataset
 
 **Headers**
 
@@ -325,7 +325,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Reactions.Reaction.PutAPIKeyDatasetIDLike(ctx, "<id>")
+resp, err := client.Reactions.Reaction.PutDatasetByIDLike(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -334,9 +334,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDependencyLibRequest`
+### `PostDependencyLibRequest`
 
-**`POST /api-key/dependency/lib-request`** — Create Dependency Package Request By Api Key
+**`POST /api-key/dependency/lib-request`** — Create Dependency Package Request
 
 **Headers**
 
@@ -377,7 +377,7 @@ req := &models.CreateDependencyLibRequest{
     Reason: "...",  // string
     Version: "...",  // string
 }
-resp, err := client.Dependencys.Dependency.PostAPIKeyDependencyLibRequest(ctx, req)
+resp, err := client.Dependencys.Dependency.PostDependencyLibRequest(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -386,9 +386,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDependencyList`
+### `PostDependencyList`
 
-**`POST /api-key/dependency/list`** — Get Dependency List By Api Key
+**`POST /api-key/dependency/list`** — Get Dependency List
 
 **Headers**
 
@@ -444,7 +444,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Dependencys.Dependency.PostAPIKeyDependencyList(ctx)
+resp, err := client.Dependencys.Dependency.PostDependencyList(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -453,9 +453,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDependencyID`
+### `GetDependencyByID`
 
-**`GET /api-key/dependency/{id}`** — Get Dependency By Api Key
+**`GET /api-key/dependency/{id}`** — Get Dependency
 
 **Headers**
 
@@ -503,7 +503,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Dependencys.Dependency.GetAPIKeyDependencyID(ctx, "<id>")
+resp, err := client.Dependencys.Dependency.GetDependencyByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -512,9 +512,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDiscussionIDComments`
+### `GetDiscussionByIDComments`
 
-**`GET /api-key/discussion/{id}/comments`** — Get comment list By Api Key
+**`GET /api-key/discussion/{id}/comments`** — Get comment list
 
 **Headers**
 
@@ -624,7 +624,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Commentss.Comments.GetAPIKeyDiscussionIDComments(ctx, "<id>")
+resp, err := client.Commentss.Comments.GetDiscussionByIDComments(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -633,9 +633,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDiscussionIDComments`
+### `PostDiscussionByIDComments`
 
-**`POST /api-key/discussion/{id}/comments`** — Create comment By Api Key
+**`POST /api-key/discussion/{id}/comments`** — Create comment
 
 **Headers**
 
@@ -746,7 +746,7 @@ req := &models.CreateCommentRequest{
     Content: "...",  // string
     TagUsernames: "...",  // array[string]
 }
-resp, err := client.Commentss.Comments.PostAPIKeyDiscussionIDComments(ctx, req)
+resp, err := client.Commentss.Comments.PostDiscussionByIDComments(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -755,9 +755,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyItemsIDReact`
+### `PutItemsByIDReact`
 
-**`PUT /api-key/items/{id}/react`** — React item By Api Key
+**`PUT /api-key/items/{id}/react`** — React item
 
 **Headers**
 
@@ -802,7 +802,7 @@ req := &models.ReactItemRequest{
     Itemname: "...",  // string
     Reactname: "...",  // string
 }
-resp, err := client.Reactions.Reaction.PutAPIKeyItemsIDReact(ctx, req)
+resp, err := client.Reactions.Reaction.PutItemsByIDReact(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -811,9 +811,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyModelIDLike`
+### `PutModelByIDLike`
 
-**`PUT /api-key/model/{id}/like`** — Like model By Api Key
+**`PUT /api-key/model/{id}/like`** — Like model
 
 **Headers**
 
@@ -847,7 +847,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Reactions.Reaction.PutAPIKeyModelIDLike(ctx, "<id>")
+resp, err := client.Reactions.Reaction.PutModelByIDLike(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -856,9 +856,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelIDTask`
+### `PostModelByIDTask`
 
-**`POST /api-key/model/{id}/task`** — Distribute Task v2 (Api-Key)
+**`POST /api-key/model/{id}/task`** — Distribute Task v2
 
 **Headers**
 
@@ -900,7 +900,7 @@ ctx := context.Background()
 req := &models.DistributeTaskWithApiKeyRequest{
     
 }
-resp, err := client.Api-keys.Api-key.PostAPIKeyModelIDTask(ctx, req)
+resp, err := client.Api-keys.Api-key.PostModelByIDTask(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -909,9 +909,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyOfferInvite`
+### `PostOfferInvite`
 
-**`POST /api-key/offer/invite`** — Create invite to join organization By Api Key
+**`POST /api-key/offer/invite`** — Create invite to join organization
 
 **Headers**
 
@@ -946,7 +946,7 @@ req := &models.MakeInviteOfferRequest{
     Role: "...",  // string  // required
     Username: "...",  // string  // required
 }
-resp, err := client.Offers.Offer.PostAPIKeyOfferInvite(ctx, req)
+resp, err := client.Offers.Offer.PostOfferInvite(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -955,9 +955,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyOfferJoin`
+### `PostOfferJoin`
 
-**`POST /api-key/offer/join`** — Request to join organization By Api Key
+**`POST /api-key/offer/join`** — Request to join organization
 
 **Headers**
 
@@ -1014,7 +1014,7 @@ ctx := context.Background()
 req := &models.MakeJoinOfferRequest{
     JoinID: "...",  // string  // required
 }
-resp, err := client.Offers.Offer.PostAPIKeyOfferJoin(ctx, req)
+resp, err := client.Offers.Offer.PostOfferJoin(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1023,9 +1023,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyOfferOffer_idAccept`
+### `PutOfferByOfferIDAccept`
 
-**`PUT /api-key/offer/{offer_id}/accept`** — Accept offer By Api Key
+**`PUT /api-key/offer/{offer_id}/accept`** — Accept offer
 
 **Headers**
 
@@ -1059,7 +1059,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Offers.Offer.PutAPIKeyOfferOffer_idAccept(ctx, "<offer_id>")
+resp, err := client.Offers.Offer.PutOfferByOfferIDAccept(ctx, "<offer_id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1068,9 +1068,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyOfferOffer_idDeny`
+### `PutOfferByOfferIDDeny`
 
-**`PUT /api-key/offer/{offer_id}/deny`** — Deny offer By Api Key
+**`PUT /api-key/offer/{offer_id}/deny`** — Deny offer
 
 **Headers**
 
@@ -1104,7 +1104,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Offers.Offer.PutAPIKeyOfferOffer_idDeny(ctx, "<offer_id>")
+resp, err := client.Offers.Offer.PutOfferByOfferIDDeny(ctx, "<offer_id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1113,9 +1113,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOfferOffer_idResend`
+### `GetOfferByOfferIDResend`
 
-**`GET /api-key/offer/{offer_id}/resend`** — Resend offer By Api Key
+**`GET /api-key/offer/{offer_id}/resend`** — Resend offer
 
 **Headers**
 
@@ -1149,7 +1149,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Offers.Offer.GetAPIKeyOfferOffer_idResend(ctx, "<offer_id>")
+resp, err := client.Offers.Offer.GetOfferByOfferIDResend(ctx, "<offer_id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1158,9 +1158,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyOfferOffer_idRevoke`
+### `DeleteOfferByOfferIDRevoke`
 
-**`DELETE /api-key/offer/{offer_id}/revoke`** — Revoke offer By Api Key
+**`DELETE /api-key/offer/{offer_id}/revoke`** — Revoke offer
 
 **Headers**
 
@@ -1194,7 +1194,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Offers.Offer.DeleteAPIKeyOfferOffer_idRevoke(ctx, "<offer_id>")
+resp, err := client.Offers.Offer.DeleteOfferByOfferIDRevoke(ctx, "<offer_id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1203,9 +1203,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyPackageAPIBuy`
+### `PostPackageApiBuy`
 
-**`POST /api-key/package/api/buy`** — Buy Api Key Package By Api Key
+**`POST /api-key/package/api/buy`** — Buy Api Key Package
 
 **Headers**
 
@@ -1260,7 +1260,7 @@ req := &models.BuyApiKeyPackageRequest{
     ModelID: "...",  // string
     QuantityUses: "...",  // integer
 }
-resp, err := client.Packages.Package.PostAPIKeyPackageAPIBuy(ctx, req)
+resp, err := client.Packages.Package.PostPackageApiBuy(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1269,9 +1269,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyPackageBuyCost`
+### `PostPackageBuyCost`
 
-**`POST /api-key/package/buy/cost`** — Calculate Cost To Buy Package By Api Key
+**`POST /api-key/package/buy/cost`** — Calculate Cost To Buy Package
 
 **Headers**
 
@@ -1319,7 +1319,7 @@ req := &models.BuyPlaygroundPackageRequest{
     ModelID: "...",  // string
     QuantityUses: "...",  // integer
 }
-resp, err := client.Packages.Package.PostAPIKeyPackageBuyCost(ctx, req)
+resp, err := client.Packages.Package.PostPackageBuyCost(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1328,9 +1328,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyPackageMasterBuyCost`
+### `PostPackageMasterBuyCost`
 
-**`POST /api-key/package/master/buy/cost`** — Calculate Cost To Buy Master Package By Api Key
+**`POST /api-key/package/master/buy/cost`** — Calculate Cost To Buy Master Package
 
 **Headers**
 
@@ -1376,7 +1376,7 @@ ctx := context.Background()
 req := &models.BuyPlaygroundMasterPackageRequest{
     QuantityUses: "...",  // integer
 }
-resp, err := client.Packages.Package.PostAPIKeyPackageMasterBuyCost(ctx, req)
+resp, err := client.Packages.Package.PostPackageMasterBuyCost(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1385,9 +1385,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyPackagePlaygroundBuy`
+### `PostPackagePlaygroundBuy`
 
-**`POST /api-key/package/playground/buy`** — Unlock Playground Package By Api Key
+**`POST /api-key/package/playground/buy`** — Unlock Playground Package
 
 **Headers**
 
@@ -1440,7 +1440,7 @@ req := &models.BuyPlaygroundPackageRequest{
     ModelID: "...",  // string
     QuantityUses: "...",  // integer
 }
-resp, err := client.Packages.Package.PostAPIKeyPackagePlaygroundBuy(ctx, req)
+resp, err := client.Packages.Package.PostPackagePlaygroundBuy(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1449,9 +1449,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyPackageID`
+### `GetPackageByID`
 
-**`GET /api-key/package/{id}`** — Get Api Package By Api Key
+**`GET /api-key/package/{id}`** — Get Api Package
 
 **Headers**
 
@@ -1499,7 +1499,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Packages.Package.GetAPIKeyPackageID(ctx, "<id>")
+resp, err := client.Packages.Package.GetPackageByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1508,7 +1508,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyPermission`
+### `GetPermission`
 
 **`GET /api-key/permission`** — Get Api Key Permission
 
@@ -1554,7 +1554,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Api-keys.Api-key.GetAPIKeyPermission(ctx)
+resp, err := client.Api-keys.Api-key.GetPermission(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -1563,9 +1563,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyPlatformTaskDatasetIDTraining`
+### `GetPlatformTaskDatasetByIDTraining`
 
-**`GET /api-key/platform/task/dataset/{id}/training`** — Get List Platform Task By DatasetId And UserId By Api Key
+**`GET /api-key/platform/task/dataset/{id}/training`** — Get List Platform Task By DatasetId And UserId
 
 **Headers**
 
@@ -1623,7 +1623,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Platforms.Task.GetAPIKeyPlatformTaskDatasetIDTraining(ctx, "<id>")
+resp, err := client.Platforms.Task.GetPlatformTaskDatasetByIDTraining(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1632,9 +1632,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyPlatformTaskModelIDVerify`
+### `GetPlatformTaskModelByIDVerify`
 
-**`GET /api-key/platform/task/model/{id}/verify`** — Get List Platform Task By ModelId And UserId By Api Key
+**`GET /api-key/platform/task/model/{id}/verify`** — Get List Platform Task By ModelId And UserId
 
 **Headers**
 
@@ -1692,7 +1692,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Platforms.Task.GetAPIKeyPlatformTaskModelIDVerify(ctx, "<id>")
+resp, err := client.Platforms.Task.GetPlatformTaskModelByIDVerify(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1701,9 +1701,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyPlatformTaskID`
+### `GetPlatformTaskByID`
 
-**`GET /api-key/platform/task/{id}`** — Get Platform Task By Id By Api Key
+**`GET /api-key/platform/task/{id}`** — Get Platform Task By Id
 
 **Headers**
 
@@ -1752,7 +1752,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Platforms.Task.GetAPIKeyPlatformTaskID(ctx, "<id>")
+resp, err := client.Platforms.Task.GetPlatformTaskByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1761,9 +1761,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeySearch`
+### `GetSearch`
 
-**`GET /api-key/search`** — Multiple Search By Api Key
+**`GET /api-key/search`** — Multiple Search
 
 **Headers**
 
@@ -1793,11 +1793,257 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `competition` | `array[object]` |  |
-| `dataset` | `array[object]` |  |
-| `model` | `array[object]` |  |
-| `organization` | `array[object]` |  |
-| `user` | `array[object]` |  |
+| `competition` | `response.CompetitionListData` |  |
+| `dataset` | `response.DatasetListData` |  |
+| `model` | `response.ModelListData` |  |
+| `organization` | `response.OrganizationListData` |  |
+| `user` | `response.UserListData` |  |
+
+**`response.CompetitionListData`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `records` | `array[models.Competition]` |  |
+| `total` | `integer` |  |
+
+**`models.Competition`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `author_id` | `string` |  |
+| `category` | `string` |  |
+| `code` | `string` |  |
+| `cover` | `string` |  |
+| `created_at` | `string` |  |
+| `data` | `string` |  |
+| `description` | `string` |  |
+| `end_date` | `string` |  |
+| `final_result_mode` | `string` |  |
+| `id` | `string` |  |
+| `joined` | `boolean` |  |
+| `launched` | `boolean` |  |
+| `max_daily_private_submissions` | `integer` |  |
+| `overview` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `participants` | `integer` |  |
+| `path` | `string` |  |
+| `permission` | `map[string]any` |  |
+| `private_leaderboard_release_date` | `string` |  |
+| `private_submissions_remaining` | `integer` |  |
+| `prize_distribution_method` | `string` |  |
+| `registration_deadline` | `string` |  |
+| `reward_type` | `string` |  |
+| `rules` | `string` |  |
+| `start_date` | `string` |  |
+| `submission_deadline` | `string` |  |
+| `submissions` | `integer` |  |
+| `tags` | `array[string]` |  |
+| `thumbnail` | `string` |  |
+| `time_zone_config` | `map[string]any` |  |
+| `title` | `string` |  |
+| `total_prize_pool` | `number` |  |
+| `updated_at` | `string` |  |
+| `user_id` | `string` |  |
+| `visibility` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`response.DatasetListData`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `records` | `array[models.Dataset]` |  |
+| `total` | `integer` |  |
+
+**`models.Dataset`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `author_avatar` | `string` |  |
+| `author_id` | `string` |  |
+| `cover` | `string` |  |
+| `create_by` | `string` |  |
+| `created_at` | `string` |  |
+| `description` | `string` |  |
+| `discussions_count` | `integer` |  |
+| `downloads_count` | `integer` |  |
+| `id` | `string` |  |
+| `is_liked_by_user` | `boolean` |  |
+| `is_official` | `boolean` |  |
+| `is_released` | `boolean` |  |
+| `is_verified` | `boolean` |  |
+| `likes_count` | `integer` |  |
+| `metadata` | `models.DatasetMetadata` |  |
+| `name` | `string` |  |
+| `price` | `number` |  |
+| `reacted` | `models.Reaction` |  |
+| `reactions_statistics` | `array[models.ReactionStats]` |  |
+| `thumbnail` | `string` |  |
+| `updated_at` | `string` |  |
+| `username` | `string` |  |
+| `visibility` | `string` |  |
+
+**`models.DatasetMetadata`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `dataset_id` | `string` |  |
+| `id` | `string` |  |
+| `language` | `array[string]` | en, vi |
+| `license` | `string` |  |
+| `pretty_name` | `string` |  |
+| `size_category` | `string` |  |
+| `tags` | `array[string]` | art |
+| `task_categories` | `array[string]` | text-to-image |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.ReactionStats`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `count` | `integer` |  |
+| `name` | `string` |  |
+
+**`response.ModelListData`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `records` | `array[models.Model]` |  |
+| `total` | `integer` |  |
+
+**`models.Model`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `author_avatar` | `string` |  |
+| `author_id` | `string` |  |
+| `commit_hash` | `string` |  |
+| `cover` | `string` |  |
+| `create_by` | `string` |  |
+| `created_at` | `string` |  |
+| `dependency_id` | `string` |  |
+| `description` | `string` |  |
+| `discussions_count` | `integer` |  |
+| `downloads_count` | `integer` |  |
+| `id` | `string` |  |
+| `is_liked_by_user` | `boolean` |  |
+| `is_official` | `boolean` |  |
+| `is_released` | `boolean` |  |
+| `is_verified` | `boolean` |  |
+| `likes_count` | `integer` |  |
+| `model_metadata` | `models.ModelMetadata` |  |
+| `name` | `string` |  |
+| `playground_count` | `integer` |  |
+| `price` | `number` |  |
+| `reacted` | `models.Reaction` |  |
+| `reactions_statistics` | `array[models.ReactionStats]` |  |
+| `task_reviews_count` | `integer` |  |
+| `task_reviews_point` | `number` |  |
+| `thumbnail` | `string` |  |
+| `updated_at` | `string` |  |
+| `username` | `string` |  |
+| `visibility` | `string` |  |
+
+**`models.ModelMetadata`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+| `license` | `string` |  |
+| `model_id` | `string` |  |
+| `pretty_name` | `string` |  |
+| `task` | `string` |  |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.ReactionStats`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `count` | `integer` |  |
+| `name` | `string` |  |
+
+**`response.OrganizationListData`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `records` | `array[models.OrganizationInfo]` |  |
+| `total` | `integer` |  |
+
+**`models.OrganizationInfo`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `full_name` | `string` |  |
+| `id` | `string` |  |
+| `org_type` | `string` |  |
+| `permission` | `map[string]any` |  |
+| `type` | `string` |  |
+| `username` | `string` |  |
+| `verified` | `boolean` |  |
+| `visibility` | `string` |  |
+
+**`response.UserListData`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `records` | `array[models.UserInfo]` |  |
+| `total` | `integer` |  |
+
+**`models.UserInfo`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `bio` | `string` |  |
+| `fullname` | `string` |  |
+| `github_link` | `string` |  |
+| `home_page` | `string` |  |
+| `id` | `string` |  |
+| `interests` | `string` |  |
+| `twitter_link` | `string` |  |
+| `twitter_name` | `string` |  |
+| `type` | `string` |  |
+| `username` | `string` |  |
+| `visibility` | `string` |  |
 
 **Error Responses**
 
@@ -1810,7 +2056,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Searchs.Search.GetAPIKeySearch(ctx)
+resp, err := client.Searchs.Search.GetSearch(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -1819,7 +2065,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyStatistics`
+### `PostStatistics`
 
 **`POST /api-key/statistics`** — Get Api Key Statistics
 
@@ -1870,7 +2116,7 @@ req := &models.GetApiKeyStatisticsByModelIdRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Api-keys.Api-key.PostAPIKeyStatistics(ctx, req)
+resp, err := client.Api-keys.Api-key.PostStatistics(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1879,9 +2125,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyTask`
+### `PostTask`
 
-**`POST /api-key/task`** — Distribute Task (Api-Key)
+**`POST /api-key/task`** — Distribute Task
 
 **Headers**
 
@@ -1923,7 +2169,7 @@ req := &models.DistributeTaskRequest{
     InputParams: "...",  // map[string]any
     ModelID: "...",  // string
 }
-resp, err := client.Api-keys.Api-key.PostAPIKeyTask(ctx, req)
+resp, err := client.Api-keys.Api-key.PostTask(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1932,7 +2178,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyTaskHistories`
+### `GetTaskHistories`
 
 **`GET /api-key/task/histories`** — Get Tasks Histories
 
@@ -2000,7 +2246,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Api-keys.Api-key.GetAPIKeyTaskHistories(ctx)
+resp, err := client.Api-keys.Api-key.GetTaskHistories(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -2009,9 +2255,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyTaskIDCancel`
+### `DeleteTaskByIDCancel`
 
-**`DELETE /api-key/task/{id}/cancel`** — Cancel Task By Api Key
+**`DELETE /api-key/task/{id}/cancel`** — Cancel Task
 
 **Headers**
 
@@ -2045,7 +2291,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Api-keys.Api-key.DeleteAPIKeyTaskIDCancel(ctx, "<id>")
+resp, err := client.Api-keys.Api-key.DeleteTaskByIDCancel(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2054,7 +2300,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyTaskIDDetail`
+### `GetTaskByIDDetail`
 
 **`GET /api-key/task/{id}/detail`** — Get Api Key Log By TaskId
 
@@ -2114,7 +2360,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Api-keys.Api-key.GetAPIKeyTaskIDDetail(ctx, "<id>")
+resp, err := client.Api-keys.Api-key.GetTaskByIDDetail(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2123,9 +2369,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyTrainingTaskID`
+### `GetTrainingTaskByID`
 
-**`GET /api-key/training-task/{id}`** — Get Training Task By Api Key
+**`GET /api-key/training-task/{id}`** — Get Training Task
 
 **Headers**
 
@@ -2172,7 +2418,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Trainings.Task.GetAPIKeyTrainingTaskID(ctx, "<id>")
+resp, err := client.Trainings.Task.GetTrainingTaskByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2181,9 +2427,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyTrainingTaskList`
+### `GetTrainingTaskList`
 
-**`GET /api-key/training/task/list`** — Get Training Task List By Api Key
+**`GET /api-key/training/task/list`** — Get Training Task List
 
 **Headers**
 
@@ -2238,7 +2484,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Trainings.Task.GetAPIKeyTrainingTaskList(ctx)
+resp, err := client.Trainings.Task.GetTrainingTaskList(ctx)
 if err != nil {
     log.Fatal(err)
 }

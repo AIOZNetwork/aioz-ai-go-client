@@ -32,6 +32,10 @@ type RequestGetCompetitionListRequest struct {
 	// Minimum: 0
 	Offset *int64 `json:"offset,omitempty"`
 
+	// order
+	// Enum: ["desc","asc"]
+	Order *string `json:"order,omitempty"`
+
 	// reward type
 	// Example: monetary,knowledge,swag,kudos
 	RewardType string `json:"reward_type,omitempty"`
@@ -68,6 +72,10 @@ func (m *RequestGetCompetitionListRequest) Validate(formats strfmt.Registry) err
 		res = append(res, err)
 	}
 
+	if err := m.validateOrder(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSortBy(formats); err != nil {
 		res = append(res, err)
 	}
@@ -96,6 +104,48 @@ func (m *RequestGetCompetitionListRequest) validateOffset(formats strfmt.Registr
 	}
 
 	if err := validate.MinimumInt("offset", "body", *m.Offset, 0, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var requestGetCompetitionListRequestTypeOrderPropEnum []any
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["desc","asc"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		requestGetCompetitionListRequestTypeOrderPropEnum = append(requestGetCompetitionListRequestTypeOrderPropEnum, v)
+	}
+}
+
+const (
+
+	// RequestGetCompetitionListRequestOrderDesc captures enum value "desc"
+	RequestGetCompetitionListRequestOrderDesc string = "desc"
+
+	// RequestGetCompetitionListRequestOrderAsc captures enum value "asc"
+	RequestGetCompetitionListRequestOrderAsc string = "asc"
+)
+
+// prop value enum
+func (m *RequestGetCompetitionListRequest) validateOrderEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, requestGetCompetitionListRequestTypeOrderPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *RequestGetCompetitionListRequest) validateOrder(formats strfmt.Registry) error {
+	if swag.IsZero(m.Order) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateOrderEnum("order", "body", *m.Order); err != nil {
 		return err
 	}
 

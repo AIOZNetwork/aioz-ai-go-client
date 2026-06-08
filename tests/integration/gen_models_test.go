@@ -9,15 +9,15 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_api_key"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_package"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_playground"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_reviews"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_setting"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_training"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_verify"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_model_versioning"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_api_key"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_package"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_playground"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_reviews"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_setting"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_training"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_verify"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_versioning"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -41,8 +41,8 @@ func TestGen_Models_PostApiKeyModel(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.PostAPIKeyModel(
-		api_key_model.NewPostAPIKeyModelParams().WithContext(t.Context()),
+	result, err := client.Models().Model.PostModel(
+		model.NewPostModelParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -73,8 +73,8 @@ func TestGen_Models_PostApiKeyModelList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.PostAPIKeyModelList(
-		api_key_model.NewPostAPIKeyModelListParams().WithContext(t.Context()),
+	result, err := client.Models().Model.PostModelList(
+		model.NewPostModelListParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -105,8 +105,8 @@ func TestGen_Models_PostApiKeyModelListByAuthorUsername(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.PostAPIKeyModelListByAuthorUsername(
-		api_key_model.NewPostAPIKeyModelListByAuthorUsernameParams().WithContext(t.Context()).WithUsername("testuser"),
+	result, err := client.Models().Model.PostModelListByAuthorByUsername(
+		model.NewPostModelListByAuthorByUsernameParams().WithContext(t.Context()).WithUsername("testuser"),
 		nil,
 	)
 
@@ -137,8 +137,8 @@ func TestGen_Models_PostApiKeyModelMatchingTags(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.PostAPIKeyModelMatchingTags(
-		api_key_model.NewPostAPIKeyModelMatchingTagsParams().WithContext(t.Context()),
+	result, err := client.Models().Model.PostModelMatchingTags(
+		model.NewPostModelMatchingTagsParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -169,8 +169,8 @@ func TestGen_Models_GetApiKeyModelOrganizationOrg(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelOrganizationOrg(
-		api_key_model.NewGetAPIKeyModelOrganizationOrgParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Models().Model.GetModelOrganizationByOrg(
+		model.NewGetModelOrganizationByOrgParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -201,8 +201,8 @@ func TestGen_Models_DeleteApiKeyModelTaskReviewsId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Reviews.DeleteAPIKeyModelTaskReviewsID(
-		api_key_model_reviews.NewDeleteAPIKeyModelTaskReviewsIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Reviews.DeleteModelTaskReviewsByID(
+		model_reviews.NewDeleteModelTaskReviewsByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -233,8 +233,8 @@ func TestGen_Models_GetApiKeyModelTaskIdReviews(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Reviews.GetAPIKeyModelTaskIDReviews(
-		api_key_model_reviews.NewGetAPIKeyModelTaskIDReviewsParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Reviews.GetModelTaskByIDReviews(
+		model_reviews.NewGetModelTaskByIDReviewsParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -265,8 +265,8 @@ func TestGen_Models_PostApiKeyModelTrainingCost(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Training.PostAPIKeyModelTrainingCost(
-		api_key_model_training.NewPostAPIKeyModelTrainingCostParams().WithContext(t.Context()),
+	result, err := client.Models().Training.PostModelTrainingCost(
+		model_training.NewPostModelTrainingCostParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -297,8 +297,8 @@ func TestGen_Models_GetApiKeyModelTrainingTask(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Training.GetAPIKeyModelTrainingTask(
-		api_key_model_training.NewGetAPIKeyModelTrainingTaskParams().WithContext(t.Context()),
+	result, err := client.Models().Training.GetModelTrainingTask(
+		model_training.NewGetModelTrainingTaskParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -329,8 +329,8 @@ func TestGen_Models_DeleteApiKeyModelTrainingTaskId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Training.DeleteAPIKeyModelTrainingTaskID(
-		api_key_model_training.NewDeleteAPIKeyModelTrainingTaskIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Training.DeleteModelTrainingTaskByID(
+		model_training.NewDeleteModelTrainingTaskByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -361,8 +361,8 @@ func TestGen_Models_GetApiKeyModelVerifyHubTaskId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Verify.GetAPIKeyModelVerifyHubTaskID(
-		api_key_model_verify.NewGetAPIKeyModelVerifyHubTaskIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Verify.GetModelVerifyHubTaskByID(
+		model_verify.NewGetModelVerifyHubTaskByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -393,8 +393,8 @@ func TestGen_Models_GetApiKeyModelVerifySupportPlatforms(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelVerifySupportPlatforms(
-		api_key_model.NewGetAPIKeyModelVerifySupportPlatformsParams().WithContext(t.Context()),
+	result, err := client.Models().Model.GetModelVerifySupportPlatforms(
+		model.NewGetModelVerifySupportPlatformsParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -425,8 +425,8 @@ func TestGen_Models_DeleteApiKeyModelId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.DeleteAPIKeyModelID(
-		api_key_model.NewDeleteAPIKeyModelIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.DeleteModelByID(
+		model.NewDeleteModelByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -457,8 +457,8 @@ func TestGen_Models_GetApiKeyModelId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelID(
-		api_key_model.NewGetAPIKeyModelIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.GetModelByID(
+		model.NewGetModelByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -489,8 +489,8 @@ func TestGen_Models_PutApiKeyModelId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.PutAPIKeyModelID(
-		api_key_model.NewPutAPIKeyModelIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.PutModelByID(
+		model.NewPutModelByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -521,8 +521,8 @@ func TestGen_Models_GetApiKeyModelIdApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelIDAPIKey(
-		api_key_model.NewGetAPIKeyModelIDAPIKeyParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.GetModelByIDAPIKey(
+		model.NewGetModelByIDAPIKeyParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -553,8 +553,8 @@ func TestGen_Models_PostApiKeyModelIdApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.PostAPIKeyModelIDAPIKey(
-		api_key_model.NewPostAPIKeyModelIDAPIKeyParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.PostModelByIDAPIKey(
+		model.NewPostModelByIDAPIKeyParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -585,8 +585,8 @@ func TestGen_Models_GetApiKeyModelIdDownload(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelIDDownload(
-		api_key_model.NewGetAPIKeyModelIDDownloadParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.GetModelByIDDownload(
+		model.NewGetModelByIDDownloadParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -617,8 +617,8 @@ func TestGen_Models_GetApiKeyModelIdInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelIDInfo(
-		api_key_model.NewGetAPIKeyModelIDInfoParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.GetModelByIDInfo(
+		model.NewGetModelByIDInfoParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -649,8 +649,8 @@ func TestGen_Models_GetApiKeyModelIdLike(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelIDLike(
-		api_key_model.NewGetAPIKeyModelIDLikeParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.GetModelByIDLike(
+		model.NewGetModelByIDLikeParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -681,8 +681,8 @@ func TestGen_Models_PutApiKeyModelIdMetadata(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.PutAPIKeyModelIDMetadata(
-		api_key_model.NewPutAPIKeyModelIDMetadataParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.PutModelByIDMetadata(
+		model.NewPutModelByIDMetadataParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -713,8 +713,8 @@ func TestGen_Models_PostApiKeyModelIdPreVerify(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Verify.PostAPIKeyModelIDPreVerify(
-		api_key_model_verify.NewPostAPIKeyModelIDPreVerifyParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Verify.PostModelByIDPreVerify(
+		model_verify.NewPostModelByIDPreVerifyParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -745,8 +745,8 @@ func TestGen_Models_GetApiKeyModelIdServing(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelIDServing(
-		api_key_model.NewGetAPIKeyModelIDServingParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.GetModelByIDServing(
+		model.NewGetModelByIDServingParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -777,8 +777,8 @@ func TestGen_Models_GetApiKeyModelIdSetting(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Setting.GetAPIKeyModelIDSetting(
-		api_key_model_setting.NewGetAPIKeyModelIDSettingParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Setting.GetModelByIDSetting(
+		model_setting.NewGetModelByIDSettingParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -809,8 +809,8 @@ func TestGen_Models_PutApiKeyModelIdSetting(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Setting.PutAPIKeyModelIDSetting(
-		api_key_model_setting.NewPutAPIKeyModelIDSettingParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Setting.PutModelByIDSetting(
+		model_setting.NewPutModelByIDSettingParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -841,8 +841,8 @@ func TestGen_Models_PostApiKeyModelIdStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.PostAPIKeyModelIDStatistics(
-		api_key_model.NewPostAPIKeyModelIDStatisticsParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.PostModelByIDStatistics(
+		model.NewPostModelByIDStatisticsParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -873,8 +873,8 @@ func TestGen_Models_GetApiKeyModelIdTaskCost(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelIDTaskCost(
-		api_key_model.NewGetAPIKeyModelIDTaskCostParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Model.GetModelByIDTaskCost(
+		model.NewGetModelByIDTaskCostParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -905,8 +905,8 @@ func TestGen_Models_PostApiKeyModelIdTaskReviews(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Reviews.PostAPIKeyModelIDTaskReviews(
-		api_key_model_reviews.NewPostAPIKeyModelIDTaskReviewsParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Reviews.PostModelByIDTaskReviews(
+		model_reviews.NewPostModelByIDTaskReviewsParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -937,8 +937,8 @@ func TestGen_Models_PostApiKeyModelIdVerify(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Verify.PostAPIKeyModelIDVerify(
-		api_key_model_verify.NewPostAPIKeyModelIDVerifyParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Verify.PostModelByIDVerify(
+		model_verify.NewPostModelByIDVerifyParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -969,8 +969,8 @@ func TestGen_Models_PostApiKeyModelIdVerifyCost(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Verify.PostAPIKeyModelIDVerifyCost(
-		api_key_model_verify.NewPostAPIKeyModelIDVerifyCostParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Verify.PostModelByIDVerifyCost(
+		model_verify.NewPostModelByIDVerifyCostParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1001,8 +1001,8 @@ func TestGen_Models_GetApiKeyModelIdVerifyPending(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Verify.GetAPIKeyModelIDVerifyPending(
-		api_key_model_verify.NewGetAPIKeyModelIDVerifyPendingParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Verify.GetModelByIDVerifyPending(
+		model_verify.NewGetModelByIDVerifyPendingParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1033,8 +1033,8 @@ func TestGen_Models_GetApiKeyModelIdVerifyTask(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Verify.GetAPIKeyModelIDVerifyTask(
-		api_key_model_verify.NewGetAPIKeyModelIDVerifyTaskParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Verify.GetModelByIDVerifyTask(
+		model_verify.NewGetModelByIDVerifyTaskParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1065,8 +1065,8 @@ func TestGen_Models_DeleteApiKeyModelIdVersioning(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Versioning.DeleteAPIKeyModelIDVersioning(
-		api_key_model_versioning.NewDeleteAPIKeyModelIDVersioningParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Versioning.DeleteModelByIDVersioning(
+		model_versioning.NewDeleteModelByIDVersioningParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1097,8 +1097,8 @@ func TestGen_Models_GetApiKeyModelIdVersioning(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Versioning.GetAPIKeyModelIDVersioning(
-		api_key_model_versioning.NewGetAPIKeyModelIDVersioningParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Versioning.GetModelByIDVersioning(
+		model_versioning.NewGetModelByIDVersioningParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1129,8 +1129,8 @@ func TestGen_Models_PutApiKeyModelIdVersioning(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Versioning.PutAPIKeyModelIDVersioning(
-		api_key_model_versioning.NewPutAPIKeyModelIDVersioningParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Versioning.PutModelByIDVersioning(
+		model_versioning.NewPutModelByIDVersioningParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1161,8 +1161,8 @@ func TestGen_Models_GetApiKeyModelIdVersioningList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Versioning.GetAPIKeyModelIDVersioningList(
-		api_key_model_versioning.NewGetAPIKeyModelIDVersioningListParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().Versioning.GetModelByIDVersioningList(
+		model_versioning.NewGetModelByIDVersioningListParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1193,8 +1193,8 @@ func TestGen_Models_GetApiKeyModelUsernameName(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Model.GetAPIKeyModelUsernameName(
-		api_key_model.NewGetAPIKeyModelUsernameNameParams().WithContext(t.Context()).WithUsername("testuser").WithName("test-name"),
+	result, err := client.Models().Model.GetModelByUsernameByName(
+		model.NewGetModelByUsernameByNameParams().WithContext(t.Context()).WithUsername("testuser").WithName("test-name"),
 		nil,
 	)
 
@@ -1225,8 +1225,8 @@ func TestGen_Models_PostApiKeyPackageList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().ModelPackage.PostAPIKeyPackageList(
-		api_key_model_package.NewPostAPIKeyPackageListParams().WithContext(t.Context()),
+	result, err := client.Models().ModelPackage.PostPackageList(
+		model_package.NewPostPackageListParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -1257,8 +1257,8 @@ func TestGen_Models_GetApiKeyUserApiKeyId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().ModelAPIKey.GetAPIKeyUserAPIKeyID(
-		api_key_model_api_key.NewGetAPIKeyUserAPIKeyIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().ModelAPIKey.GetUserAPIKeyByID(
+		model_api_key.NewGetUserAPIKeyByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1289,8 +1289,8 @@ func TestGen_Models_PutApiKeyUserApiKeyId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().ModelAPIKey.PutAPIKeyUserAPIKeyID(
-		api_key_model_api_key.NewPutAPIKeyUserAPIKeyIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().ModelAPIKey.PutUserAPIKeyByID(
+		model_api_key.NewPutUserAPIKeyByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1321,8 +1321,8 @@ func TestGen_Models_PostApiKeyUserApiKeyIdStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().ModelAPIKey.PostAPIKeyUserAPIKeyIDStatistics(
-		api_key_model_api_key.NewPostAPIKeyUserAPIKeyIDStatisticsParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Models().ModelAPIKey.PostUserAPIKeyByIDStatistics(
+		model_api_key.NewPostUserAPIKeyByIDStatisticsParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -1353,8 +1353,8 @@ func TestGen_Models_GetApiKeyUserPlaygroundRemaining(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Models().Playground.GetAPIKeyUserPlaygroundRemaining(
-		api_key_model_playground.NewGetAPIKeyUserPlaygroundRemainingParams().WithContext(t.Context()),
+	result, err := client.Models().Playground.GetUserPlaygroundRemaining(
+		model_playground.NewGetUserPlaygroundRemainingParams().WithContext(t.Context()),
 		nil,
 	)
 

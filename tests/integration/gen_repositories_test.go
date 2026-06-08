@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_repository"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/repository"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -33,8 +33,8 @@ func TestGen_Repositories_GetApiKeyRepositoryModelCommitCommitShaHistory(t *test
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryModelCommitCommitShaHistory(
-		api_key_repository.NewGetAPIKeyRepositoryModelCommitCommitShaHistoryParams().WithContext(t.Context()).WithCommitSha("test-id"),
+	result, err := client.Repositories().Repository.GetRepositoryModelCommitByCommitShaHistory(
+		repository.NewGetRepositoryModelCommitByCommitShaHistoryParams().WithContext(t.Context()).WithCommitSha("test-id"),
 		nil,
 	)
 
@@ -65,8 +65,8 @@ func TestGen_Repositories_GetApiKeyRepositoryModelIdCommitHistory(t *testing.T) 
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryModelIDCommitHistory(
-		api_key_repository.NewGetAPIKeyRepositoryModelIDCommitHistoryParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Repositories().Repository.GetRepositoryModelByIDCommitHistory(
+		repository.NewGetRepositoryModelByIDCommitHistoryParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -97,8 +97,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositoryname(t *test
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryName(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositoryname(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -129,8 +129,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameBranches
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameBranches(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameBranchesParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameBranches(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameBranchesParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -161,8 +161,8 @@ func TestGen_Repositories_PostApiKeyRepositoryOwnerusernameRepositorynameBuy(t *
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.PostAPIKeyRepositoryOwnerUsernameRepositoryNameBuy(
-		api_key_repository.NewPostAPIKeyRepositoryOwnerUsernameRepositoryNameBuyParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.PostRepositoryByOwnerusernameByRepositorynameBuy(
+		repository.NewPostRepositoryByOwnerusernameByRepositorynameBuyParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -193,8 +193,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameCollabor
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameCollaborators(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameCollaboratorsParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameCollaborators(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameCollaboratorsParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -225,8 +225,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameCommit(t
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameCommit(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameCommitParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameCommit(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameCommitParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -257,8 +257,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameCommitHi
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameCommitHistory(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameCommitHistoryParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameCommitHistory(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameCommitHistoryParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -289,8 +289,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameCommitTr
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameCommitTree(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameCommitTreeParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameCommitTree(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameCommitTreeParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -321,8 +321,8 @@ func TestGen_Repositories_DeleteApiKeyRepositoryOwnerusernameRepositorynameConte
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.DeleteAPIKeyRepositoryOwnerUsernameRepositoryNameContent(
-		api_key_repository.NewDeleteAPIKeyRepositoryOwnerUsernameRepositoryNameContentParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.DeleteRepositoryByOwnerusernameByRepositorynameContent(
+		repository.NewDeleteRepositoryByOwnerusernameByRepositorynameContentParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -353,8 +353,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameContent(
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameContent(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameContentParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameContent(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameContentParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -385,8 +385,8 @@ func TestGen_Repositories_PutApiKeyRepositoryOwnerusernameRepositorynameContent(
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.PutAPIKeyRepositoryOwnerUsernameRepositoryNameContent(
-		api_key_repository.NewPutAPIKeyRepositoryOwnerUsernameRepositoryNameContentParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.PutRepositoryByOwnerusernameByRepositorynameContent(
+		repository.NewPutRepositoryByOwnerusernameByRepositorynameContentParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -417,8 +417,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameContentM
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameContentMetadata(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameContentMetadataParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameContentMetadata(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameContentMetadataParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -449,8 +449,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameContentP
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameContentPlayground(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameContentPlaygroundParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameContentPlayground(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameContentPlaygroundParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -481,8 +481,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameContentP
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameContentPreDownload(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameContentPreDownloadParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameContentPreDownload(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameContentPreDownloadParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -513,8 +513,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameContentR
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameContentReadme(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameContentReadmeParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameContentReadme(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameContentReadmeParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -545,8 +545,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameDownload
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNameDownload(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNameDownloadParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameDownload(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynameDownloadParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 
@@ -577,8 +577,8 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynamePreDownl
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetAPIKeyRepositoryOwnerUsernameRepositoryNamePreDownload(
-		api_key_repository.NewGetAPIKeyRepositoryOwnerUsernameRepositoryNamePreDownloadParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
+	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynamePreDownload(
+		repository.NewGetRepositoryByOwnerusernameByRepositorynamePreDownloadParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
 	)
 

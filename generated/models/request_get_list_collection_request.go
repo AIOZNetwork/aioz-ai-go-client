@@ -27,6 +27,10 @@ type RequestGetListCollectionRequest struct {
 	// offset
 	Offset int64 `json:"offset,omitempty"`
 
+	// order
+	// Enum: ["desc","asc"]
+	Order *string `json:"order,omitempty"`
+
 	// search
 	Search string `json:"search,omitempty"`
 
@@ -40,6 +44,10 @@ func (m *RequestGetListCollectionRequest) Validate(formats strfmt.Registry) erro
 	var res []error
 
 	if err := m.validateFilter(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOrder(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -92,6 +100,48 @@ func (m *RequestGetListCollectionRequest) validateFilter(formats strfmt.Registry
 
 	// value enum
 	if err := m.validateFilterEnum("filter", "body", *m.Filter); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var requestGetListCollectionRequestTypeOrderPropEnum []any
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["desc","asc"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		requestGetListCollectionRequestTypeOrderPropEnum = append(requestGetListCollectionRequestTypeOrderPropEnum, v)
+	}
+}
+
+const (
+
+	// RequestGetListCollectionRequestOrderDesc captures enum value "desc"
+	RequestGetListCollectionRequestOrderDesc string = "desc"
+
+	// RequestGetListCollectionRequestOrderAsc captures enum value "asc"
+	RequestGetListCollectionRequestOrderAsc string = "asc"
+)
+
+// prop value enum
+func (m *RequestGetListCollectionRequest) validateOrderEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, requestGetListCollectionRequestTypeOrderPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *RequestGetListCollectionRequest) validateOrder(formats strfmt.Registry) error {
+	if swag.IsZero(m.Order) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateOrderEnum("order", "body", *m.Order); err != nil {
 		return err
 	}
 

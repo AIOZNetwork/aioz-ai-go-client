@@ -4,7 +4,9 @@ package models
 
 import (
 	"context"
+	stderrors "errors"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
 )
@@ -15,28 +17,318 @@ import (
 type ResponseSearchResponseData struct {
 
 	// competition
-	Competition []any `json:"competition"`
+	Competition *ResponseCompetitionListData `json:"competition,omitempty"`
 
 	// dataset
-	Dataset []any `json:"dataset"`
+	Dataset *ResponseDatasetListData `json:"dataset,omitempty"`
 
 	// model
-	Model []any `json:"model"`
+	Model *ResponseModelListData `json:"model,omitempty"`
 
 	// organization
-	Organization []any `json:"organization"`
+	Organization *ResponseOrganizationListData `json:"organization,omitempty"`
 
 	// user
-	User []any `json:"user"`
+	User *ResponseUserListData `json:"user,omitempty"`
 }
 
 // Validate validates this response search response data
 func (m *ResponseSearchResponseData) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateCompetition(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDataset(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateModel(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOrganization(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateUser(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
 	return nil
 }
 
-// ContextValidate validates this response search response data based on context it is used
+func (m *ResponseSearchResponseData) validateCompetition(formats strfmt.Registry) error {
+	if swag.IsZero(m.Competition) { // not required
+		return nil
+	}
+
+	if m.Competition != nil {
+		if err := m.Competition.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("competition")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("competition")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ResponseSearchResponseData) validateDataset(formats strfmt.Registry) error {
+	if swag.IsZero(m.Dataset) { // not required
+		return nil
+	}
+
+	if m.Dataset != nil {
+		if err := m.Dataset.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("dataset")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("dataset")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ResponseSearchResponseData) validateModel(formats strfmt.Registry) error {
+	if swag.IsZero(m.Model) { // not required
+		return nil
+	}
+
+	if m.Model != nil {
+		if err := m.Model.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("model")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("model")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ResponseSearchResponseData) validateOrganization(formats strfmt.Registry) error {
+	if swag.IsZero(m.Organization) { // not required
+		return nil
+	}
+
+	if m.Organization != nil {
+		if err := m.Organization.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("organization")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("organization")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ResponseSearchResponseData) validateUser(formats strfmt.Registry) error {
+	if swag.IsZero(m.User) { // not required
+		return nil
+	}
+
+	if m.User != nil {
+		if err := m.User.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("user")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("user")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+// ContextValidate validate this response search response data based on the context it is used
 func (m *ResponseSearchResponseData) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.contextValidateCompetition(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateDataset(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateModel(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateOrganization(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.contextValidateUser(ctx, formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *ResponseSearchResponseData) contextValidateCompetition(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Competition != nil {
+
+		if swag.IsZero(m.Competition) { // not required
+			return nil
+		}
+
+		if err := m.Competition.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("competition")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("competition")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ResponseSearchResponseData) contextValidateDataset(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Dataset != nil {
+
+		if swag.IsZero(m.Dataset) { // not required
+			return nil
+		}
+
+		if err := m.Dataset.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("dataset")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("dataset")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ResponseSearchResponseData) contextValidateModel(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Model != nil {
+
+		if swag.IsZero(m.Model) { // not required
+			return nil
+		}
+
+		if err := m.Model.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("model")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("model")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ResponseSearchResponseData) contextValidateOrganization(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Organization != nil {
+
+		if swag.IsZero(m.Organization) { // not required
+			return nil
+		}
+
+		if err := m.Organization.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("organization")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("organization")
+			}
+
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (m *ResponseSearchResponseData) contextValidateUser(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.User != nil {
+
+		if swag.IsZero(m.User) { // not required
+			return nil
+		}
+
+		if err := m.User.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("user")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("user")
+			}
+
+			return err
+		}
+	}
+
 	return nil
 }
 

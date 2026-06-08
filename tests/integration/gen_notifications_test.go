@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_notification"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/notification"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -33,8 +33,8 @@ func TestGen_Notifications_DeleteApiKeyNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Notifications().Notification.DeleteAPIKeyNotification(
-		api_key_notification.NewDeleteAPIKeyNotificationParams().WithContext(t.Context()),
+	result, err := client.Notifications().Notification.DeleteNotification(
+		notification.NewDeleteNotificationParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -65,8 +65,8 @@ func TestGen_Notifications_GetApiKeyNotification(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Notifications().Notification.GetAPIKeyNotification(
-		api_key_notification.NewGetAPIKeyNotificationParams().WithContext(t.Context()),
+	result, err := client.Notifications().Notification.GetNotification(
+		notification.NewGetNotificationParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -97,8 +97,8 @@ func TestGen_Notifications_DeleteApiKeyNotificationList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Notifications().Notification.DeleteAPIKeyNotificationList(
-		api_key_notification.NewDeleteAPIKeyNotificationListParams().WithContext(t.Context()),
+	result, err := client.Notifications().Notification.DeleteNotificationList(
+		notification.NewDeleteNotificationListParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -129,8 +129,8 @@ func TestGen_Notifications_PutApiKeyNotificationList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Notifications().Notification.PutAPIKeyNotificationList(
-		api_key_notification.NewPutAPIKeyNotificationListParams().WithContext(t.Context()),
+	result, err := client.Notifications().Notification.PutNotificationList(
+		notification.NewPutNotificationListParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -161,8 +161,8 @@ func TestGen_Notifications_GetApiKeyNotificationStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Notifications().Notification.GetAPIKeyNotificationStatistics(
-		api_key_notification.NewGetAPIKeyNotificationStatisticsParams().WithContext(t.Context()),
+	result, err := client.Notifications().Notification.GetNotificationStatistics(
+		notification.NewGetNotificationStatisticsParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -193,8 +193,8 @@ func TestGen_Notifications_DeleteApiKeyNotificationId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Notifications().Notification.DeleteAPIKeyNotificationID(
-		api_key_notification.NewDeleteAPIKeyNotificationIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Notifications().Notification.DeleteNotificationByID(
+		notification.NewDeleteNotificationByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -225,8 +225,8 @@ func TestGen_Notifications_PutApiKeyNotificationId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Notifications().Notification.PutAPIKeyNotificationID(
-		api_key_notification.NewPutAPIKeyNotificationIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Notifications().Notification.PutNotificationByID(
+		notification.NewPutNotificationByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 

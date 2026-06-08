@@ -23,6 +23,10 @@ type RequestGetListCollectionByUsernameRequest struct {
 	// offset
 	Offset int64 `json:"offset,omitempty"`
 
+	// order
+	// Enum: ["desc","asc"]
+	Order *string `json:"order,omitempty"`
+
 	// search
 	Search string `json:"search,omitempty"`
 
@@ -35,6 +39,10 @@ type RequestGetListCollectionByUsernameRequest struct {
 func (m *RequestGetListCollectionByUsernameRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateOrder(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSort(formats); err != nil {
 		res = append(res, err)
 	}
@@ -42,6 +50,48 @@ func (m *RequestGetListCollectionByUsernameRequest) Validate(formats strfmt.Regi
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+var requestGetListCollectionByUsernameRequestTypeOrderPropEnum []any
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["desc","asc"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		requestGetListCollectionByUsernameRequestTypeOrderPropEnum = append(requestGetListCollectionByUsernameRequestTypeOrderPropEnum, v)
+	}
+}
+
+const (
+
+	// RequestGetListCollectionByUsernameRequestOrderDesc captures enum value "desc"
+	RequestGetListCollectionByUsernameRequestOrderDesc string = "desc"
+
+	// RequestGetListCollectionByUsernameRequestOrderAsc captures enum value "asc"
+	RequestGetListCollectionByUsernameRequestOrderAsc string = "asc"
+)
+
+// prop value enum
+func (m *RequestGetListCollectionByUsernameRequest) validateOrderEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, requestGetListCollectionByUsernameRequestTypeOrderPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *RequestGetListCollectionByUsernameRequest) validateOrder(formats strfmt.Registry) error {
+	if swag.IsZero(m.Order) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateOrderEnum("order", "body", *m.Order); err != nil {
+		return err
+	}
+
 	return nil
 }
 

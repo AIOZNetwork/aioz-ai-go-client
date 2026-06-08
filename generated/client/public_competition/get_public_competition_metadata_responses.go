@@ -41,7 +41,7 @@ func (o *GetPublicCompetitionMetadataReader) ReadResponse(response runtime.Clien
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/competition/metadata] GetPublicCompetitionMetadata", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/competition/metadata] getPublicCompetitionMetadata", response, response.Code())
 	}
 }
 

@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_collection"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/collection"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -33,8 +33,8 @@ func TestGen_Collections_PostApiKeyCollection(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Collections().Collection.PostAPIKeyCollection(
-		api_key_collection.NewPostAPIKeyCollectionParams().WithContext(t.Context()),
+	result, err := client.Collections().Collection.PostCollection(
+		collection.NewPostCollectionParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -65,8 +65,8 @@ func TestGen_Collections_PostApiKeyCollectionList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Collections().Collection.PostAPIKeyCollectionList(
-		api_key_collection.NewPostAPIKeyCollectionListParams().WithContext(t.Context()),
+	result, err := client.Collections().Collection.PostCollectionList(
+		collection.NewPostCollectionListParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -97,8 +97,8 @@ func TestGen_Collections_DeleteApiKeyCollectionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Collections().Collection.DeleteAPIKeyCollectionID(
-		api_key_collection.NewDeleteAPIKeyCollectionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Collections().Collection.DeleteCollectionByID(
+		collection.NewDeleteCollectionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -129,8 +129,8 @@ func TestGen_Collections_GetApiKeyCollectionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Collections().Collection.GetAPIKeyCollectionID(
-		api_key_collection.NewGetAPIKeyCollectionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Collections().Collection.GetCollectionByID(
+		collection.NewGetCollectionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -161,8 +161,8 @@ func TestGen_Collections_PutApiKeyCollectionId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Collections().Collection.PutAPIKeyCollectionID(
-		api_key_collection.NewPutAPIKeyCollectionIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Collections().Collection.PutCollectionByID(
+		collection.NewPutCollectionByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -193,8 +193,8 @@ func TestGen_Collections_DeleteApiKeyCollectionIdItem(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Collections().Collection.DeleteAPIKeyCollectionIDItem(
-		api_key_collection.NewDeleteAPIKeyCollectionIDItemParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Collections().Collection.DeleteCollectionByIDItem(
+		collection.NewDeleteCollectionByIDItemParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -225,8 +225,8 @@ func TestGen_Collections_PostApiKeyCollectionIdItem(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Collections().Collection.PostAPIKeyCollectionIDItem(
-		api_key_collection.NewPostAPIKeyCollectionIDItemParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Collections().Collection.PostCollectionByIDItem(
+		collection.NewPostCollectionByIDItemParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -257,8 +257,8 @@ func TestGen_Collections_PutApiKeyCollectionIdVote(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Collections().Collection.PutAPIKeyCollectionIDVote(
-		api_key_collection.NewPutAPIKeyCollectionIDVoteParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Collections().Collection.PutCollectionByIDVote(
+		collection.NewPutCollectionByIDVoteParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -289,8 +289,8 @@ func TestGen_Collections_PostApiKeyCollectionUsernameList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Collections().Collection.PostAPIKeyCollectionUsernameList(
-		api_key_collection.NewPostAPIKeyCollectionUsernameListParams().WithContext(t.Context()).WithUsername("testuser"),
+	result, err := client.Collections().Collection.PostCollectionByUsernameList(
+		collection.NewPostCollectionByUsernameListParams().WithContext(t.Context()).WithUsername("testuser"),
 		nil,
 	)
 

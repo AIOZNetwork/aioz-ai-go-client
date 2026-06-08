@@ -144,8 +144,8 @@ func (c *Client) Public() *services.PublicService {
 }
 
 // Core returns the core service for root endpoints and minor services.
-func (c *Client) Core() *services.CoreService {
-	return services.NewCoreService(c.raw)
+func (c *Client) Core() *services.TaskService {
+	return services.NewTaskService(c.raw)
 }
 
 // errorTransport wraps an http.RoundTripper and converts non-2xx responses

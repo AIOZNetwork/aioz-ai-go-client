@@ -41,7 +41,7 @@ func (o *GetPublicModelTrendingReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/model/trending] GetPublicModelTrending", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/model/trending] getPublicModelTrending", response, response.Code())
 	}
 }
 

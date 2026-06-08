@@ -41,7 +41,7 @@ func (o *PostPublicDatasetListReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /public/dataset/list] PostPublicDatasetList", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /public/dataset/list] postPublicDatasetList", response, response.Code())
 	}
 }
 

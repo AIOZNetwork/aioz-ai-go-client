@@ -6,9 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `PostAPIKeyModel`
+### `PostModel`
 
-**`POST /api-key/model`** — Create Model By Api Key
+**`POST /api-key/model`** — Create Model
 
 **Headers**
 
@@ -76,7 +76,7 @@ req := &models.CreateModelRequest{
     Description: "...",  // string
     Language: "...",  // array[string]
 }
-resp, err := client.Models.Model.PostAPIKeyModel(ctx, req)
+resp, err := client.Models.Model.PostModel(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -85,9 +85,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelList`
+### `PostModelList`
 
-**`POST /api-key/model/list`** — Get Model List By Api Key
+**`POST /api-key/model/list`** — Get Model List
 
 **Headers**
 
@@ -105,6 +105,7 @@ fmt.Printf("%+v\n", resp)
 | `license` | `string` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `asc`, `desc` |
 | `search` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `likes`, `downloads`, `created`, `created_oldest`, `modified`, `name`, `size` |
 | `tag_type` | `string` | No |  |
@@ -212,7 +213,7 @@ req := &models.GetModelListRequest{
     License: "...",  // string
     Limit: "...",  // integer
 }
-resp, err := client.Models.Model.PostAPIKeyModelList(ctx, req)
+resp, err := client.Models.Model.PostModelList(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -221,9 +222,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelListByAuthorUsername`
+### `PostModelListByAuthorByUsername`
 
-**`POST /api-key/model/list-by-author/{username}`** — Get Model List By User By Api Key
+**`POST /api-key/model/list-by-author/{username}`** — Get Model List By User
 
 **Headers**
 
@@ -246,6 +247,7 @@ fmt.Printf("%+v\n", resp)
 | `license` | `string` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `asc`, `desc` |
 | `search` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `likes`, `downloads`, `created`, `created_oldest`, `modified`, `name`, `size` |
 | `tag_type` | `string` | No |  |
@@ -353,7 +355,7 @@ req := &models.GetModelListByAuthorRequest{
     Limit: "...",  // integer
     Offset: "...",  // integer
 }
-resp, err := client.Models.Model.PostAPIKeyModelListByAuthorUsername(ctx, req)
+resp, err := client.Models.Model.PostModelListByAuthorByUsername(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -362,9 +364,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelMatchingTags`
+### `PostModelMatchingTags`
 
-**`POST /api-key/model/matching-tags`** — MatchingModels Tags By Api Key
+**`POST /api-key/model/matching-tags`** — MatchingModels Tags
 
 **Headers**
 
@@ -410,7 +412,7 @@ req := &models.MatchingModelsTagsRequest{
     TagType: "...",  // string
     Task: "...",  // string
 }
-resp, err := client.Models.Model.PostAPIKeyModelMatchingTags(ctx, req)
+resp, err := client.Models.Model.PostModelMatchingTags(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -419,9 +421,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelOrganizationOrg`
+### `GetModelOrganizationByOrg`
 
-**`GET /api-key/model/organization/{org}`** — Get List Model By Org Username By Api Key
+**`GET /api-key/model/organization/{org}`** — Get List Model By Org Username
 
 **Headers**
 
@@ -533,7 +535,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelOrganizationOrg(ctx, "<org>")
+resp, err := client.Models.Model.GetModelOrganizationByOrg(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -542,9 +544,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyModelTaskReviewsID`
+### `DeleteModelTaskReviewsByID`
 
-**`DELETE /api-key/model/task/reviews/{id}`** — Delete Task Reviews By Id By Api Key
+**`DELETE /api-key/model/task/reviews/{id}`** — Delete Task Reviews By Id
 
 **Headers**
 
@@ -578,7 +580,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Reviews.DeleteAPIKeyModelTaskReviewsID(ctx, "<id>")
+resp, err := client.Models.Reviews.DeleteModelTaskReviewsByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -587,9 +589,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelTaskIDReviews`
+### `GetModelTaskByIDReviews`
 
-**`GET /api-key/model/task/{id}/reviews`** — Get Task Review By Task Id By Api Key
+**`GET /api-key/model/task/{id}/reviews`** — Get Task Review By Task Id
 
 **Headers**
 
@@ -653,7 +655,7 @@ ctx := context.Background()
 req := &models.GetTaskReviewByTaskIdRequest{
     
 }
-resp, err := client.Models.Reviews.GetAPIKeyModelTaskIDReviews(ctx, req)
+resp, err := client.Models.Reviews.GetModelTaskByIDReviews(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -662,9 +664,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelTrainingCost`
+### `PostModelTrainingCost`
 
-**`POST /api-key/model/training/cost`** — Calculate Cost To Training Ai Model By Api Key
+**`POST /api-key/model/training/cost`** — Calculate Cost To Training Ai Model
 
 **Headers**
 
@@ -712,7 +714,7 @@ req := &models.CalculateCostToTrainingAiModelRequest{
     DatasetID: "...",  // string
     TrainingTaskID: "...",  // string
 }
-resp, err := client.Models.Training.PostAPIKeyModelTrainingCost(ctx, req)
+resp, err := client.Models.Training.PostModelTrainingCost(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -721,9 +723,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelTrainingTask`
+### `GetModelTrainingTask`
 
-**`GET /api-key/model/training/task`** — Get List User Training Task By Api Key
+**`GET /api-key/model/training/task`** — Get List User Training Task
 
 **Headers**
 
@@ -786,7 +788,7 @@ req := &models.GetListUserTrainingTaskRequest{
     Limit: "...",  // integer
     Offset: "...",  // integer
 }
-resp, err := client.Models.Training.GetAPIKeyModelTrainingTask(ctx, req)
+resp, err := client.Models.Training.GetModelTrainingTask(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -795,9 +797,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyModelTrainingTaskID`
+### `DeleteModelTrainingTaskByID`
 
-**`DELETE /api-key/model/training/task/{id}`** — Delete User Training Task By Task Id By Api Key
+**`DELETE /api-key/model/training/task/{id}`** — Delete User Training Task By Task Id
 
 **Headers**
 
@@ -831,7 +833,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Training.DeleteAPIKeyModelTrainingTaskID(ctx, "<id>")
+resp, err := client.Models.Training.DeleteModelTrainingTaskByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -840,9 +842,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelVerifyHubTaskID`
+### `GetModelVerifyHubTaskByID`
 
-**`GET /api-key/model/verify/hub/task/{id}`** — Get Model Versioning By Hub Task Id By Api Key
+**`GET /api-key/model/verify/hub/task/{id}`** — Get Model Versioning By Hub Task Id
 
 **Headers**
 
@@ -897,7 +899,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Verify.GetAPIKeyModelVerifyHubTaskID(ctx, "<id>")
+resp, err := client.Models.Verify.GetModelVerifyHubTaskByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -906,9 +908,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelVerifySupportPlatforms`
+### `GetModelVerifySupportPlatforms`
 
-**`GET /api-key/model/verify/support/platforms`** — Get List Platforms Support By Api Key
+**`GET /api-key/model/verify/support/platforms`** — Get List Platforms Support
 
 **Headers**
 
@@ -937,7 +939,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelVerifySupportPlatforms(ctx)
+resp, err := client.Models.Model.GetModelVerifySupportPlatforms(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -946,9 +948,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelID`
+### `GetModelByID`
 
-**`GET /api-key/model/{id}`** — Get Model By Api Key
+**`GET /api-key/model/{id}`** — Get Model
 
 **Headers**
 
@@ -997,7 +999,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelID(ctx, "<id>")
+resp, err := client.Models.Model.GetModelByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1006,9 +1008,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyModelID`
+### `PutModelByID`
 
-**`PUT /api-key/model/{id}`** — Update Model By Api Key
+**`PUT /api-key/model/{id}`** — Update Model
 
 **Headers**
 
@@ -1075,7 +1077,7 @@ req := &models.UpdateModelRequest{
     Price: "...",  // number
     Thumbnail: "...",  // string
 }
-resp, err := client.Models.Model.PutAPIKeyModelID(ctx, req)
+resp, err := client.Models.Model.PutModelByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1084,9 +1086,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyModelID`
+### `DeleteModelByID`
 
-**`DELETE /api-key/model/{id}`** — Delete Model By Api Key
+**`DELETE /api-key/model/{id}`** — Delete Model
 
 **Headers**
 
@@ -1129,7 +1131,7 @@ ctx := context.Background()
 req := &models.DeleteModelRequest{
     Name: "...",  // string  // required
 }
-resp, err := client.Models.Model.DeleteAPIKeyModelID(ctx, req)
+resp, err := client.Models.Model.DeleteModelByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1138,9 +1140,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDAPIKey`
+### `GetModelByIDApiKey`
 
-**`GET /api-key/model/{id}/api-key`** — Get List Model ApiKey By Api Key
+**`GET /api-key/model/{id}/api-key`** — Get List Model ApiKey
 
 **Headers**
 
@@ -1198,7 +1200,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelIDAPIKey(ctx, "<id>")
+resp, err := client.Models.Model.GetModelByIDApiKey(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1207,9 +1209,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelIDAPIKey`
+### `PostModelByIDApiKey`
 
-**`POST /api-key/model/{id}/api-key`** — Create Model ApiKey By Api Key
+**`POST /api-key/model/{id}/api-key`** — Create Model ApiKey
 
 **Headers**
 
@@ -1361,10 +1363,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -1383,7 +1385,7 @@ req := &models.CreateApiKeyRequest{
     Name: "...",  // string  // required
     OrgUsername: "...",  // string
 }
-resp, err := client.Models.Model.PostAPIKeyModelIDAPIKey(ctx, req)
+resp, err := client.Models.Model.PostModelByIDApiKey(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1392,9 +1394,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDDownload`
+### `GetModelByIDDownload`
 
-**`GET /api-key/model/{id}/download`** — Get List Model Download By Api Key
+**`GET /api-key/model/{id}/download`** — Get List Model Download
 
 **Headers**
 
@@ -1454,7 +1456,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelIDDownload(ctx, "<id>")
+resp, err := client.Models.Model.GetModelByIDDownload(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1463,7 +1465,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDInfo`
+### `GetModelByIDInfo`
 
 **`GET /api-key/model/{id}/info`** — Get Api Key Model Info
 
@@ -1511,7 +1513,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelIDInfo(ctx, "<id>")
+resp, err := client.Models.Model.GetModelByIDInfo(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1520,9 +1522,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDLike`
+### `GetModelByIDLike`
 
-**`GET /api-key/model/{id}/like`** — Get List Model Like By Api Key
+**`GET /api-key/model/{id}/like`** — Get List Model Like
 
 **Headers**
 
@@ -1582,7 +1584,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelIDLike(ctx, "<id>")
+resp, err := client.Models.Model.GetModelByIDLike(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1591,9 +1593,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyModelIDMetadata`
+### `PutModelByIDMetadata`
 
-**`PUT /api-key/model/{id}/metadata`** — Update Model Metadata By Api Key
+**`PUT /api-key/model/{id}/metadata`** — Update Model Metadata
 
 **Headers**
 
@@ -1659,7 +1661,7 @@ req := &models.UpdateModelMetadataRequest{
     PrettyName: "...",  // string
     Task: "...",  // string
 }
-resp, err := client.Models.Model.PutAPIKeyModelIDMetadata(ctx, req)
+resp, err := client.Models.Model.PutModelByIDMetadata(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1668,9 +1670,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelIDPreVerify`
+### `PostModelByIDPreVerify`
 
-**`POST /api-key/model/{id}/pre-verify`** — Check Valid Source code To Verify Ai Model By Api Key
+**`POST /api-key/model/{id}/pre-verify`** — Check Valid Source code To Verify Ai Model
 
 **Headers**
 
@@ -1722,7 +1724,7 @@ req := &models.CheckValidToVerifyAiModelRequest{
     CommitHash: "...",  // string  // required
     Platforms: "...",  // array[string]  // required
 }
-resp, err := client.Models.Verify.PostAPIKeyModelIDPreVerify(ctx, req)
+resp, err := client.Models.Verify.PostModelByIDPreVerify(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1731,7 +1733,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDServing`
+### `GetModelByIDServing`
 
 **`GET /api-key/model/{id}/serving`** — Check Model Is Serving
 
@@ -1775,7 +1777,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelIDServing(ctx, "<id>")
+resp, err := client.Models.Model.GetModelByIDServing(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1784,9 +1786,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDSetting`
+### `GetModelByIDSetting`
 
-**`GET /api-key/model/{id}/setting`** — Get Model Setting By Model Id By Api Key
+**`GET /api-key/model/{id}/setting`** — Get Model Setting By Model Id
 
 **Headers**
 
@@ -1836,7 +1838,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Setting.GetAPIKeyModelIDSetting(ctx, "<id>")
+resp, err := client.Models.Setting.GetModelByIDSetting(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1845,9 +1847,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyModelIDSetting`
+### `PutModelByIDSetting`
 
-**`PUT /api-key/model/{id}/setting`** — Update Model Setting By Api Key
+**`PUT /api-key/model/{id}/setting`** — Update Model Setting
 
 **Headers**
 
@@ -1912,7 +1914,7 @@ req := &models.UpdateModelSettingRequest{
     SysReqGpuMemory: "...",  // integer
     SysReqRam: "...",  // integer
 }
-resp, err := client.Models.Setting.PutAPIKeyModelIDSetting(ctx, req)
+resp, err := client.Models.Setting.PutModelByIDSetting(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1921,7 +1923,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelIDStatistics`
+### `PostModelByIDStatistics`
 
 **`POST /api-key/model/{id}/statistics`** — Get Model Statistics
 
@@ -1978,7 +1980,7 @@ req := &models.GetApiKeyStatisticsByModelIdRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Models.Model.PostAPIKeyModelIDStatistics(ctx, req)
+resp, err := client.Models.Model.PostModelByIDStatistics(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1987,7 +1989,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDTaskCost`
+### `GetModelByIDTaskCost`
 
 **`GET /api-key/model/{id}/task/cost`** — Get cost to compute task by model api key
 
@@ -2032,7 +2034,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelIDTaskCost(ctx, "<id>")
+resp, err := client.Models.Model.GetModelByIDTaskCost(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2041,9 +2043,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelIDTaskReviews`
+### `PostModelByIDTaskReviews`
 
-**`POST /api-key/model/{id}/task/reviews`** — Create Task Reviews By Api Key
+**`POST /api-key/model/{id}/task/reviews`** — Create Task Reviews
 
 **Headers**
 
@@ -2113,7 +2115,7 @@ req := &models.CreateTaskReviewsRequest{
     Point: "...",  // integer
     TaskID: "...",  // string
 }
-resp, err := client.Models.Reviews.PostAPIKeyModelIDTaskReviews(ctx, req)
+resp, err := client.Models.Reviews.PostModelByIDTaskReviews(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -2122,9 +2124,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelIDVerify`
+### `PostModelByIDVerify`
 
-**`POST /api-key/model/{id}/verify`** — Verify Ai Model By Api Key
+**`POST /api-key/model/{id}/verify`** — Verify Ai Model
 
 **Headers**
 
@@ -2170,7 +2172,7 @@ req := &models.VerifyAiModelRequest{
     CommitHash: "...",  // string
     Platforms: "...",  // array[string]  // required
 }
-resp, err := client.Models.Verify.PostAPIKeyModelIDVerify(ctx, req)
+resp, err := client.Models.Verify.PostModelByIDVerify(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -2179,9 +2181,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyModelIDVerifyCost`
+### `PostModelByIDVerifyCost`
 
-**`POST /api-key/model/{id}/verify/cost`** — Calculate Cost To Verify Ai Model By Api Key
+**`POST /api-key/model/{id}/verify/cost`** — Calculate Cost To Verify Ai Model
 
 **Headers**
 
@@ -2235,7 +2237,7 @@ req := &models.CalculateCostToVerifyAiModelRequest{
     CommitHash: "...",  // string  // required
     Platforms: "...",  // array[string]  // required
 }
-resp, err := client.Models.Verify.PostAPIKeyModelIDVerifyCost(ctx, req)
+resp, err := client.Models.Verify.PostModelByIDVerifyCost(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -2244,9 +2246,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDVerifyPending`
+### `GetModelByIDVerifyPending`
 
-**`GET /api-key/model/{id}/verify/pending`** — Check Model Pending State By Api Key
+**`GET /api-key/model/{id}/verify/pending`** — Check Model Pending State
 
 **Headers**
 
@@ -2294,7 +2296,7 @@ ctx := context.Background()
 req := &models.CheckModelPendingStateRequest{
     
 }
-resp, err := client.Models.Verify.GetAPIKeyModelIDVerifyPending(ctx, req)
+resp, err := client.Models.Verify.GetModelByIDVerifyPending(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -2303,7 +2305,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDVerifyTask`
+### `GetModelByIDVerifyTask`
 
 **`GET /api-key/model/{id}/verify/task`** — Get List Verify Model Task By Commit Hash And Status
 
@@ -2393,7 +2395,7 @@ SysRequired       map[string]interface{} `json:"sys_require"` |
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Verify.GetAPIKeyModelIDVerifyTask(ctx, "<id>")
+resp, err := client.Models.Verify.GetModelByIDVerifyTask(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2402,7 +2404,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDVersioning`
+### `GetModelByIDVersioning`
 
 **`GET /api-key/model/{id}/versioning`** — Get Current Model Versioning By Model Id By ApiKey
 
@@ -2483,7 +2485,7 @@ SysRequired       map[string]interface{} `json:"sys_require"` |
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Versioning.GetAPIKeyModelIDVersioning(ctx, "<id>")
+resp, err := client.Models.Versioning.GetModelByIDVersioning(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2492,9 +2494,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyModelIDVersioning`
+### `PutModelByIDVersioning`
 
-**`PUT /api-key/model/{id}/versioning`** — Change Model Versioning By Commit Hash By Api Key
+**`PUT /api-key/model/{id}/versioning`** — Change Model Versioning By Commit Hash
 
 **Headers**
 
@@ -2529,7 +2531,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Versioning.PutAPIKeyModelIDVersioning(ctx, "<id>")
+resp, err := client.Models.Versioning.PutModelByIDVersioning(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2538,9 +2540,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyModelIDVersioning`
+### `DeleteModelByIDVersioning`
 
-**`DELETE /api-key/model/{id}/versioning`** — Delete Model Versioning By Commit Hash By Api Key
+**`DELETE /api-key/model/{id}/versioning`** — Delete Model Versioning By Commit Hash
 
 **Headers**
 
@@ -2575,7 +2577,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Versioning.DeleteAPIKeyModelIDVersioning(ctx, "<id>")
+resp, err := client.Models.Versioning.DeleteModelByIDVersioning(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2584,9 +2586,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelIDVersioningList`
+### `GetModelByIDVersioningList`
 
-**`GET /api-key/model/{id}/versioning/list`** — Get Verified List Model Versioning By Api Key
+**`GET /api-key/model/{id}/versioning/list`** — Get Verified List Model Versioning
 
 **Headers**
 
@@ -2675,7 +2677,7 @@ SysRequired       map[string]interface{} `json:"sys_require"` |
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Versioning.GetAPIKeyModelIDVersioningList(ctx, "<id>")
+resp, err := client.Models.Versioning.GetModelByIDVersioningList(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2684,9 +2686,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyModelUsernameName`
+### `GetModelByUsernameByName`
 
-**`GET /api-key/model/{username}/{name}`** — Get Model By Name By Api Key
+**`GET /api-key/model/{username}/{name}`** — Get Model By Name
 
 **Headers**
 
@@ -2736,7 +2738,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetAPIKeyModelUsernameName(ctx, "<username>", "<name>")
+resp, err := client.Models.Model.GetModelByUsernameByName(ctx, "<username>", "<name>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2745,9 +2747,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyPackageList`
+### `PostPackageList`
 
-**`POST /api-key/package/list`** — Get Api Package List By Api Key
+**`POST /api-key/package/list`** — Get Api Package List
 
 **Headers**
 
@@ -2807,7 +2809,7 @@ req := &models.GetApiPackageListRequest{
     Limit: "...",  // integer
     Offset: "...",  // integer
 }
-resp, err := client.Models.Package.PostAPIKeyPackageList(ctx, req)
+resp, err := client.Models.Package.PostPackageList(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -2816,9 +2818,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserAPIKeyID`
+### `GetUserApiKeyByID`
 
-**`GET /api-key/user/api-key/{id}`** — Get Api Key Detail By Id By Api Key
+**`GET /api-key/user/api-key/{id}`** — Get Api Key Detail By Id
 
 **Headers**
 
@@ -2867,7 +2869,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.APIKey.GetAPIKeyUserAPIKeyID(ctx, "<id>")
+resp, err := client.Models.APIKey.GetUserApiKeyByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2876,9 +2878,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyUserAPIKeyID`
+### `PutUserApiKeyByID`
 
-**`PUT /api-key/user/api-key/{id}`** — Update Api Key By Api Key
+**`PUT /api-key/user/api-key/{id}`** — Update Api Key
 
 **Headers**
 
@@ -3030,10 +3032,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -3052,7 +3054,7 @@ req := &models.UpdateApiKeyRequest{
     Name: "...",  // string
     OrgUsername: "...",  // string
 }
-resp, err := client.Models.APIKey.PutAPIKeyUserAPIKeyID(ctx, req)
+resp, err := client.Models.APIKey.PutUserApiKeyByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -3061,9 +3063,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserAPIKeyIDStatistics`
+### `PostUserApiKeyByIDStatistics`
 
-**`POST /api-key/user/api-key/{id}/statistics`** — Get Api Key By Id By Api Key
+**`POST /api-key/user/api-key/{id}/statistics`** — Get Api Key By Id
 
 **Headers**
 
@@ -3214,10 +3216,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -3235,7 +3237,7 @@ req := &models.GetApiKeyByIdRequest{
     OrgUsername: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Models.APIKey.PostAPIKeyUserAPIKeyIDStatistics(ctx, req)
+resp, err := client.Models.APIKey.PostUserApiKeyByIDStatistics(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -3244,9 +3246,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserPlaygroundRemaining`
+### `GetUserPlaygroundRemaining`
 
-**`GET /api-key/user/playground/remaining`** — Get Playground Uses Remaining By User By Api Key
+**`GET /api-key/user/playground/remaining`** — Get Playground Uses Remaining By User
 
 **Headers**
 
@@ -3289,7 +3291,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Playground.GetAPIKeyUserPlaygroundRemaining(ctx)
+resp, err := client.Models.Playground.GetUserPlaygroundRemaining(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -3312,6 +3314,7 @@ fmt.Printf("%+v\n", resp)
 | `license` | `string` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `asc`, `desc` |
 | `search` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `likes`, `downloads`, `created`, `created_oldest`, `modified`, `name`, `size` |
 | `tag_type` | `string` | No |  |
@@ -3428,7 +3431,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostPublicModelListByAuthorUsername`
+### `PostPublicModelListByAuthorByUsername`
 
 **`POST /public/model/list-by-author/{username}`** — Get Public Model List By User
 
@@ -3447,6 +3450,7 @@ fmt.Printf("%+v\n", resp)
 | `license` | `string` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `asc`, `desc` |
 | `search` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `likes`, `downloads`, `created`, `created_oldest`, `modified`, `name`, `size` |
 | `tag_type` | `string` | No |  |
@@ -3554,7 +3558,7 @@ req := &models.GetModelListByAuthorRequest{
     Limit: "...",  // integer
     Offset: "...",  // integer
 }
-resp, err := client.Models.Model.PostPublicModelListByAuthorUsername(ctx, req)
+resp, err := client.Models.Model.PostPublicModelListByAuthorByUsername(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -3663,7 +3667,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicModelOrganizationOrg`
+### `GetPublicModelOrganizationByOrg`
 
 **`GET /public/model/organization/{org}`** — Get List Model By Org Username
 
@@ -3771,7 +3775,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetPublicModelOrganizationOrg(ctx, "<org>")
+resp, err := client.Models.Model.GetPublicModelOrganizationByOrg(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -3895,7 +3899,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicModelID`
+### `GetPublicModelByID`
 
 **`GET /public/model/{id}`** — Get public model by id
 
@@ -3940,7 +3944,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetPublicModelID(ctx, "<id>")
+resp, err := client.Models.Model.GetPublicModelByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -3949,7 +3953,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicModelIDVersioning`
+### `GetPublicModelByIDVersioning`
 
 **`GET /public/model/{id}/versioning`** — Get Current Model Versioning By Model Id
 
@@ -4024,7 +4028,7 @@ SysRequired       map[string]interface{} `json:"sys_require"` |
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetPublicModelIDVersioning(ctx, "<id>")
+resp, err := client.Models.Model.GetPublicModelByIDVersioning(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -4033,7 +4037,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicModelUsernameName`
+### `GetPublicModelByUsernameByName`
 
 **`GET /public/model/{username}/{name}`** — Get Public Model By Name
 
@@ -4079,7 +4083,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models.Model.GetPublicModelUsernameName(ctx, "<username>", "<name>")
+resp, err := client.Models.Model.GetPublicModelByUsernameByName(ctx, "<username>", "<name>")
 if err != nil {
     log.Fatal(err)
 }

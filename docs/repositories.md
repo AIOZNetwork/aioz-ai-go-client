@@ -6,7 +6,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `GetAPIKeyRepositoryModelCommitCommit_shaHistory`
+### `GetRepositoryModelCommitByCommitShaHistory`
 
 **`GET /api-key/repository/model/commit/{commit_sha}/history`** — Get Checked Commit By Id (model) by api-key
 
@@ -64,7 +64,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryModelCommitCommit_shaHistory(ctx, "<commit_sha>")
+resp, err := client.Repositorys.Repository.GetRepositoryModelCommitByCommitShaHistory(ctx, "<commit_sha>")
 if err != nil {
     log.Fatal(err)
 }
@@ -73,7 +73,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryModelIDCommitHistory`
+### `GetRepositoryModelByIDCommitHistory`
 
 **`GET /api-key/repository/model/{id}/commit/history`** — Get List Checked Commit (model) by api-key
 
@@ -133,7 +133,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryModelIDCommitHistory(ctx, "<id>")
+resp, err := client.Repositorys.Repository.GetRepositoryModelByIDCommitHistory(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -142,7 +142,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositoryname`
+### `GetRepositoryByOwnerusernameByRepositoryname`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}`** — Get repository by name by api-key
 
@@ -308,10 +308,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **`models.Permission`**
 
@@ -332,7 +332,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositoryname(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositoryname(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -341,7 +341,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameBranches`
+### `GetRepositoryByOwnerusernameByRepositorynameBranches`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/branches`** — Get repository branches by repository name by api-key
 
@@ -431,7 +431,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameBranches(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameBranches(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -440,7 +440,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyRepositoryOwnerusernameRepositorynameBuy`
+### `PostRepositoryByOwnerusernameByRepositorynameBuy`
 
 **`POST /api-key/repository/{ownerUsername}/{repositoryName}/buy`** — Unlock Repository By User by api-key
 
@@ -497,7 +497,7 @@ req := &models.DownloadRepoZipRequest{
     Repotype: "...",  // string
     Ziptype: "...",  // string
 }
-resp, err := client.Repositorys.Repository.PostAPIKeyRepositoryOwnerusernameRepositorynameBuy(ctx, req)
+resp, err := client.Repositorys.Repository.PostRepositoryByOwnerusernameByRepositorynameBuy(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -506,7 +506,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameCollaborators`
+### `GetRepositoryByOwnerusernameByRepositorynameCollaborators`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/collaborators`** — Get repository collaborators by repository name by api-key
 
@@ -639,10 +639,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -655,7 +655,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameCollaborators(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameCollaborators(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -664,7 +664,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameCommit`
+### `GetRepositoryByOwnerusernameByRepositorynameCommit`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/commit`** — Get repository single commit by repository name and commit sha by api-key
 
@@ -810,10 +810,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **`models.User`**
 
@@ -912,10 +912,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **`models.CommitMeta`**
 
@@ -985,7 +985,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameCommit(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameCommit(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -994,9 +994,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameCommitHistory`
+### `GetRepositoryByOwnerusernameByRepositorynameCommitHistory`
 
-**`GET /api-key/repository/{ownerUsername}/{repositoryName}/commit/history`** — Get commit history by repository name and branch name by api key
+**`GET /api-key/repository/{ownerUsername}/{repositoryName}/commit/history`** — Get commit history by repository name and branch name
 
 **Headers**
 
@@ -1143,10 +1143,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **`models.User`**
 
@@ -1245,10 +1245,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **`models.CommitMeta`**
 
@@ -1318,7 +1318,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameCommitHistory(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameCommitHistory(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1327,7 +1327,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameCommitTree`
+### `GetRepositoryByOwnerusernameByRepositorynameCommitTree`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/commit/tree`** — Get commit tree by repository name and commit sha by api-key
 
@@ -1395,7 +1395,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameCommitTree(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameCommitTree(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1404,7 +1404,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameContent`
+### `GetRepositoryByOwnerusernameByRepositorynameContent`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/content`** — Get file content by api-key
 
@@ -1444,7 +1444,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameContent(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameContent(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1453,7 +1453,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyRepositoryOwnerusernameRepositorynameContent`
+### `PutRepositoryByOwnerusernameByRepositorynameContent`
 
 **`PUT /api-key/repository/{ownerUsername}/{repositoryName}/content`** — Modify repository content by api-key
 
@@ -1617,10 +1617,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **`models.User`**
 
@@ -1719,10 +1719,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **`models.CommitMeta`**
 
@@ -1799,7 +1799,7 @@ req := &models.CreateRepositoryContentRequest{
     Message: "...",  // string
     NewBranchName: "...",  // string
 }
-resp, err := client.Repositorys.Repository.PutAPIKeyRepositoryOwnerusernameRepositorynameContent(ctx, req)
+resp, err := client.Repositorys.Repository.PutRepositoryByOwnerusernameByRepositorynameContent(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1808,7 +1808,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyRepositoryOwnerusernameRepositorynameContent`
+### `DeleteRepositoryByOwnerusernameByRepositorynameContent`
 
 **`DELETE /api-key/repository/{ownerUsername}/{repositoryName}/content`** — Delete single repository content by api-key
 
@@ -1921,7 +1921,7 @@ req := &models.DeleteRepositoryContentRequest{
     Path: "...",  // string
     Sha: "...",  // string  // required
 }
-resp, err := client.Repositorys.Repository.DeleteAPIKeyRepositoryOwnerusernameRepositorynameContent(ctx, req)
+resp, err := client.Repositorys.Repository.DeleteRepositoryByOwnerusernameByRepositorynameContent(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1930,7 +1930,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameContentMetadata`
+### `GetRepositoryByOwnerusernameByRepositorynameContentMetadata`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/content/metadata`** — Get repository content metadata by repository name, branch name and path by api-key
 
@@ -2008,7 +2008,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameContentMetadata(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameContentMetadata(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2017,7 +2017,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameContentPlayground`
+### `GetRepositoryByOwnerusernameByRepositorynameContentPlayground`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/content/playground`** — Get playground file content (model only) by api-key
 
@@ -2054,7 +2054,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameContentPlayground(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameContentPlayground(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2063,7 +2063,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameContentPreDownload`
+### `GetRepositoryByOwnerusernameByRepositorynameContentPreDownload`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/content/pre-download`** — Calculate Cost To Download Repo Content by api-key
 
@@ -2112,7 +2112,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameContentPreDownload(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameContentPreDownload(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2121,7 +2121,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameContentReadme`
+### `GetRepositoryByOwnerusernameByRepositorynameContentReadme`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/content/readme`** — Get readme file content by api-key
 
@@ -2161,7 +2161,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameContentReadme(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameContentReadme(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2170,7 +2170,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynameDownload`
+### `GetRepositoryByOwnerusernameByRepositorynameDownload`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/download`** — Download repository zip by api-key
 
@@ -2210,7 +2210,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynameDownload(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynameDownload(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }
@@ -2219,7 +2219,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyRepositoryOwnerusernameRepositorynamePreDownload`
+### `GetRepositoryByOwnerusernameByRepositorynamePreDownload`
 
 **`GET /api-key/repository/{ownerUsername}/{repositoryName}/pre-download`** — Check Available Free Download Repo Zip by api-key
 
@@ -2259,7 +2259,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositorys.Repository.GetAPIKeyRepositoryOwnerusernameRepositorynamePreDownload(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositorys.Repository.GetRepositoryByOwnerusernameByRepositorynamePreDownload(ctx, "<ownerUsername>", "<repositoryName>")
 if err != nil {
     log.Fatal(err)
 }

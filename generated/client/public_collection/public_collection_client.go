@@ -77,32 +77,32 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetPublicCollectionID(params *GetPublicCollectionIDParams, opts ...ClientOption) (*GetPublicCollectionIDOK, error)
+	GetPublicCollectionByID(params *GetPublicCollectionByIDParams, opts ...ClientOption) (*GetPublicCollectionByIDOK, error)
+
+	PostPublicCollectionByUsernameList(params *PostPublicCollectionByUsernameListParams, opts ...ClientOption) (*PostPublicCollectionByUsernameListOK, error)
 
 	PostPublicCollectionList(params *PostPublicCollectionListParams, opts ...ClientOption) (*PostPublicCollectionListOK, error)
-
-	PostPublicCollectionUsernameList(params *PostPublicCollectionUsernameListParams, opts ...ClientOption) (*PostPublicCollectionUsernameListOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetPublicCollectionID gets public collection by Id
+GetPublicCollectionByID gets public collection by Id
 */
-func (a *Client) GetPublicCollectionID(params *GetPublicCollectionIDParams, opts ...ClientOption) (*GetPublicCollectionIDOK, error) {
+func (a *Client) GetPublicCollectionByID(params *GetPublicCollectionByIDParams, opts ...ClientOption) (*GetPublicCollectionByIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicCollectionIDParams()
+		params = NewGetPublicCollectionByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicCollectionID",
+		ID:                 "getPublicCollectionById",
 		Method:             "GET",
 		PathPattern:        "/public/collection/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicCollectionIDReader{formats: a.formats},
+		Reader:             &GetPublicCollectionByIDReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -115,7 +115,7 @@ func (a *Client) GetPublicCollectionID(params *GetPublicCollectionIDParams, opts
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicCollectionIDOK)
+	success, ok := result.(*GetPublicCollectionByIDOK)
 	if ok {
 		return success, nil
 	}
@@ -125,7 +125,52 @@ func (a *Client) GetPublicCollectionID(params *GetPublicCollectionIDParams, opts
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicCollectionID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicCollectionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+PostPublicCollectionByUsernameList gets list public collections by username
+
+Sort:(trending, votes, updated, oldest)
+*/
+func (a *Client) PostPublicCollectionByUsernameList(params *PostPublicCollectionByUsernameListParams, opts ...ClientOption) (*PostPublicCollectionByUsernameListOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewPostPublicCollectionByUsernameListParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "postPublicCollectionByUsernameList",
+		Method:             "POST",
+		PathPattern:        "/public/collection/{username}/list",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &PostPublicCollectionByUsernameListReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*PostPublicCollectionByUsernameListOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for postPublicCollectionByUsernameList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -140,7 +185,7 @@ func (a *Client) PostPublicCollectionList(params *PostPublicCollectionListParams
 		params = NewPostPublicCollectionListParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostPublicCollectionList",
+		ID:                 "postPublicCollectionList",
 		Method:             "POST",
 		PathPattern:        "/public/collection/list",
 		ProducesMediaTypes: []string{"application/json"},
@@ -170,52 +215,7 @@ func (a *Client) PostPublicCollectionList(params *PostPublicCollectionListParams
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostPublicCollectionList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostPublicCollectionUsernameList gets list public collections by username
-
-Sort:(trending, votes, updated, oldest)
-*/
-func (a *Client) PostPublicCollectionUsernameList(params *PostPublicCollectionUsernameListParams, opts ...ClientOption) (*PostPublicCollectionUsernameListOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPostPublicCollectionUsernameListParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "PostPublicCollectionUsernameList",
-		Method:             "POST",
-		PathPattern:        "/public/collection/{username}/list",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostPublicCollectionUsernameListReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PostPublicCollectionUsernameListOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostPublicCollectionUsernameList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for postPublicCollectionList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

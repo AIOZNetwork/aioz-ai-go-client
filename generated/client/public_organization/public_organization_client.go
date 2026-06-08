@@ -79,9 +79,9 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 type ClientService interface {
 	GetPublicOrganization(params *GetPublicOrganizationParams, opts ...ClientOption) (*GetPublicOrganizationOK, error)
 
-	GetPublicOrganizationOrg(params *GetPublicOrganizationOrgParams, opts ...ClientOption) (*GetPublicOrganizationOrgOK, error)
+	GetPublicOrganizationByOrg(params *GetPublicOrganizationByOrgParams, opts ...ClientOption) (*GetPublicOrganizationByOrgOK, error)
 
-	GetPublicOrganizationOrgMembers(params *GetPublicOrganizationOrgMembersParams, opts ...ClientOption) (*GetPublicOrganizationOrgMembersOK, error)
+	GetPublicOrganizationByOrgMembers(params *GetPublicOrganizationByOrgMembersParams, opts ...ClientOption) (*GetPublicOrganizationByOrgMembersOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -95,7 +95,7 @@ func (a *Client) GetPublicOrganization(params *GetPublicOrganizationParams, opts
 		params = NewGetPublicOrganizationParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicOrganization",
+		ID:                 "getPublicOrganization",
 		Method:             "GET",
 		PathPattern:        "/public/organization",
 		ProducesMediaTypes: []string{"application/json"},
@@ -125,27 +125,27 @@ func (a *Client) GetPublicOrganization(params *GetPublicOrganizationParams, opts
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicOrganization: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicOrganization: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicOrganizationOrg gets organization detail
+GetPublicOrganizationByOrg gets organization detail
 */
-func (a *Client) GetPublicOrganizationOrg(params *GetPublicOrganizationOrgParams, opts ...ClientOption) (*GetPublicOrganizationOrgOK, error) {
+func (a *Client) GetPublicOrganizationByOrg(params *GetPublicOrganizationByOrgParams, opts ...ClientOption) (*GetPublicOrganizationByOrgOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicOrganizationOrgParams()
+		params = NewGetPublicOrganizationByOrgParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicOrganizationOrg",
+		ID:                 "getPublicOrganizationByOrg",
 		Method:             "GET",
 		PathPattern:        "/public/organization/{org}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicOrganizationOrgReader{formats: a.formats},
+		Reader:             &GetPublicOrganizationByOrgReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -158,7 +158,7 @@ func (a *Client) GetPublicOrganizationOrg(params *GetPublicOrganizationOrgParams
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicOrganizationOrgOK)
+	success, ok := result.(*GetPublicOrganizationByOrgOK)
 	if ok {
 		return success, nil
 	}
@@ -168,27 +168,27 @@ func (a *Client) GetPublicOrganizationOrg(params *GetPublicOrganizationOrgParams
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicOrganizationOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicOrganizationByOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicOrganizationOrgMembers gets pulic organization s members
+GetPublicOrganizationByOrgMembers gets pulic organization s members
 */
-func (a *Client) GetPublicOrganizationOrgMembers(params *GetPublicOrganizationOrgMembersParams, opts ...ClientOption) (*GetPublicOrganizationOrgMembersOK, error) {
+func (a *Client) GetPublicOrganizationByOrgMembers(params *GetPublicOrganizationByOrgMembersParams, opts ...ClientOption) (*GetPublicOrganizationByOrgMembersOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicOrganizationOrgMembersParams()
+		params = NewGetPublicOrganizationByOrgMembersParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicOrganizationOrgMembers",
+		ID:                 "getPublicOrganizationByOrgMembers",
 		Method:             "GET",
 		PathPattern:        "/public/organization/{org}/members",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicOrganizationOrgMembersReader{formats: a.formats},
+		Reader:             &GetPublicOrganizationByOrgMembersReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -201,7 +201,7 @@ func (a *Client) GetPublicOrganizationOrgMembers(params *GetPublicOrganizationOr
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicOrganizationOrgMembersOK)
+	success, ok := result.(*GetPublicOrganizationByOrgMembersOK)
 	if ok {
 		return success, nil
 	}
@@ -211,7 +211,7 @@ func (a *Client) GetPublicOrganizationOrgMembers(params *GetPublicOrganizationOr
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicOrganizationOrgMembers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicOrganizationByOrgMembers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

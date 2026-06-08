@@ -41,7 +41,7 @@ func (o *PostPublicModelListReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /public/model/list] PostPublicModelList", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /public/model/list] postPublicModelList", response, response.Code())
 	}
 }
 

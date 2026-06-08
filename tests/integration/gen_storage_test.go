@@ -9,7 +9,7 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_storage"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/storage"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -33,8 +33,8 @@ func TestGen_Storage_PostApiKeyStorageUploadCreatePresignedUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Storage().Storage.PostAPIKeyStorageUploadCreatePresignedURL(
-		api_key_storage.NewPostAPIKeyStorageUploadCreatePresignedURLParams().WithContext(t.Context()),
+	result, err := client.Storage().Storage.PostStorageUploadCreatePresignedURL(
+		storage.NewPostStorageUploadCreatePresignedURLParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -65,8 +65,8 @@ func TestGen_Storage_GetApiKeyStorageUploadStatistics(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Storage().Storage.GetAPIKeyStorageUploadStatistics(
-		api_key_storage.NewGetAPIKeyStorageUploadStatisticsParams().WithContext(t.Context()),
+	result, err := client.Storage().Storage.GetStorageUploadStatistics(
+		storage.NewGetStorageUploadStatisticsParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -97,8 +97,8 @@ func TestGen_Storage_GetApiKeyStorageUploadFolder(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Storage().Storage.GetAPIKeyStorageUploadFolder(
-		api_key_storage.NewGetAPIKeyStorageUploadFolderParams().WithContext(t.Context()).WithFolder("test-folder"),
+	result, err := client.Storage().Storage.GetStorageUploadByFolder(
+		storage.NewGetStorageUploadByFolderParams().WithContext(t.Context()).WithFolder("test-folder"),
 		nil,
 	)
 
@@ -117,7 +117,7 @@ func TestGen_Storage_DeleteApiKeyStorageW3sUrl(t *testing.T) {
 		capturedPath = r.URL.Path
 		capturedAPIKey = r.Header.Get("x-api-key")
 		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode("ok")
+		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
 	}))
 	defer server.Close()
 
@@ -129,12 +129,14 @@ func TestGen_Storage_DeleteApiKeyStorageW3sUrl(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, _ = client.Storage().Storage.DeleteAPIKeyStorageW3sURL(
-		api_key_storage.NewDeleteAPIKeyStorageW3sURLParams().WithContext(t.Context()),
+	result, err := client.Storage().Storage.DeleteStorageW3sURL(
+		storage.NewDeleteStorageW3sURLParams().WithContext(t.Context()),
 		nil,
 	)
 
 	assert.Equal(t, "DELETE", capturedMethod)
 	assert.Contains(t, capturedPath, "/api-key/storage/w3s/url")
 	assert.Equal(t, "test-key", capturedAPIKey)
+	assert.NoError(t, err)
+	assert.NotNil(t, result)
 }

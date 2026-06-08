@@ -9,8 +9,8 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_organization"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_organization_wallet"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization_wallet"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -34,8 +34,8 @@ func TestGen_Organizations_PostApiKeyOrganization(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, _ = client.Organizations().Organization.PostAPIKeyOrganization(
-		api_key_organization.NewPostAPIKeyOrganizationParams().WithContext(t.Context()),
+	_, _ = client.Organizations().Organization.PostOrganization(
+		organization.NewPostOrganizationParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -64,8 +64,8 @@ func TestGen_Organizations_GetApiKeyOrganizationList(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.GetAPIKeyOrganizationList(
-		api_key_organization.NewGetAPIKeyOrganizationListParams().WithContext(t.Context()),
+	result, err := client.Organizations().Organization.GetOrganizationList(
+		organization.NewGetOrganizationListParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -96,8 +96,8 @@ func TestGen_Organizations_DeleteApiKeyOrganizationOrg(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.DeleteAPIKeyOrganizationOrg(
-		api_key_organization.NewDeleteAPIKeyOrganizationOrgParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.DeleteOrganizationByOrg(
+		organization.NewDeleteOrganizationByOrgParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -128,8 +128,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrg(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.GetAPIKeyOrganizationOrg(
-		api_key_organization.NewGetAPIKeyOrganizationOrgParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.GetOrganizationByOrg(
+		organization.NewGetOrganizationByOrgParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -160,8 +160,8 @@ func TestGen_Organizations_PatchApiKeyOrganizationOrgInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.PatchAPIKeyOrganizationOrgInfo(
-		api_key_organization.NewPatchAPIKeyOrganizationOrgInfoParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.PatchOrganizationByOrgInfo(
+		organization.NewPatchOrganizationByOrgInfoParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -192,8 +192,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgIsMember(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.GetAPIKeyOrganizationOrgIsMember(
-		api_key_organization.NewGetAPIKeyOrganizationOrgIsMemberParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.GetOrganizationByOrgIsMember(
+		organization.NewGetOrganizationByOrgIsMemberParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -224,8 +224,8 @@ func TestGen_Organizations_DeleteApiKeyOrganizationOrgLeave(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.DeleteAPIKeyOrganizationOrgLeave(
-		api_key_organization.NewDeleteAPIKeyOrganizationOrgLeaveParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.DeleteOrganizationByOrgLeave(
+		organization.NewDeleteOrganizationByOrgLeaveParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -256,8 +256,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgMembers(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.GetAPIKeyOrganizationOrgMembers(
-		api_key_organization.NewGetAPIKeyOrganizationOrgMembersParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.GetOrganizationByOrgMembers(
+		organization.NewGetOrganizationByOrgMembersParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -288,8 +288,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgOffers(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.GetAPIKeyOrganizationOrgOffers(
-		api_key_organization.NewGetAPIKeyOrganizationOrgOffersParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.GetOrganizationByOrgOffers(
+		organization.NewGetOrganizationByOrgOffersParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -320,8 +320,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgPermission(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.GetAPIKeyOrganizationOrgPermission(
-		api_key_organization.NewGetAPIKeyOrganizationOrgPermissionParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.GetOrganizationByOrgPermission(
+		organization.NewGetOrganizationByOrgPermissionParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -352,8 +352,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgSetting(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.GetAPIKeyOrganizationOrgSetting(
-		api_key_organization.NewGetAPIKeyOrganizationOrgSettingParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.GetOrganizationByOrgSetting(
+		organization.NewGetOrganizationByOrgSettingParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -384,8 +384,8 @@ func TestGen_Organizations_PatchApiKeyOrganizationOrgSetting(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.PatchAPIKeyOrganizationOrgSetting(
-		api_key_organization.NewPatchAPIKeyOrganizationOrgSettingParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.PatchOrganizationByOrgSetting(
+		organization.NewPatchOrganizationByOrgSettingParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -416,8 +416,8 @@ func TestGen_Organizations_PostApiKeyOrganizationOrgStatisticsEarnings(t *testin
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.PostAPIKeyOrganizationOrgStatisticsEarnings(
-		api_key_organization_wallet.NewPostAPIKeyOrganizationOrgStatisticsEarningsParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Wallet.PostOrganizationByOrgStatisticsEarnings(
+		organization_wallet.NewPostOrganizationByOrgStatisticsEarningsParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -448,8 +448,8 @@ func TestGen_Organizations_PostApiKeyOrganizationOrgStatisticsSpendingCost(t *te
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.PostAPIKeyOrganizationOrgStatisticsSpendingCost(
-		api_key_organization_wallet.NewPostAPIKeyOrganizationOrgStatisticsSpendingCostParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Wallet.PostOrganizationByOrgStatisticsSpendingCost(
+		organization_wallet.NewPostOrganizationByOrgStatisticsSpendingCostParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -480,8 +480,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgWalletDepositHistory(t *testi
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.GetAPIKeyOrganizationOrgWalletDepositHistory(
-		api_key_organization_wallet.NewGetAPIKeyOrganizationOrgWalletDepositHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Wallet.GetOrganizationByOrgWalletDepositHistory(
+		organization_wallet.NewGetOrganizationByOrgWalletDepositHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -512,8 +512,8 @@ func TestGen_Organizations_PostApiKeyOrganizationOrgWalletTransactionAnalytics(t
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.PostAPIKeyOrganizationOrgWalletTransactionAnalytics(
-		api_key_organization_wallet.NewPostAPIKeyOrganizationOrgWalletTransactionAnalyticsParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Wallet.PostOrganizationByOrgWalletTransactionAnalytics(
+		organization_wallet.NewPostOrganizationByOrgWalletTransactionAnalyticsParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -544,8 +544,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgWalletTransactionHistory(t *t
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.GetAPIKeyOrganizationOrgWalletTransactionHistory(
-		api_key_organization_wallet.NewGetAPIKeyOrganizationOrgWalletTransactionHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Wallet.GetOrganizationByOrgWalletTransactionHistory(
+		organization_wallet.NewGetOrganizationByOrgWalletTransactionHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -576,8 +576,8 @@ func TestGen_Organizations_PostApiKeyOrganizationOrgWalletTransactionRecent(t *t
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.PostAPIKeyOrganizationOrgWalletTransactionRecent(
-		api_key_organization_wallet.NewPostAPIKeyOrganizationOrgWalletTransactionRecentParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Wallet.PostOrganizationByOrgWalletTransactionRecent(
+		organization_wallet.NewPostOrganizationByOrgWalletTransactionRecentParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -608,8 +608,8 @@ func TestGen_Organizations_PostApiKeyOrganizationOrgWalletWithdrawEarnings(t *te
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.PostAPIKeyOrganizationOrgWalletWithdrawEarnings(
-		api_key_organization_wallet.NewPostAPIKeyOrganizationOrgWalletWithdrawEarningsParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Wallet.PostOrganizationByOrgWalletWithdrawEarnings(
+		organization_wallet.NewPostOrganizationByOrgWalletWithdrawEarningsParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -640,8 +640,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgWalletWithdrawHistory(t *test
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.GetAPIKeyOrganizationOrgWalletWithdrawHistory(
-		api_key_organization_wallet.NewGetAPIKeyOrganizationOrgWalletWithdrawHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Wallet.GetOrganizationByOrgWalletWithdrawHistory(
+		organization_wallet.NewGetOrganizationByOrgWalletWithdrawHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -672,8 +672,8 @@ func TestGen_Organizations_DeleteApiKeyOrganizationOrgMember(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.DeleteAPIKeyOrganizationOrgMember(
-		api_key_organization.NewDeleteAPIKeyOrganizationOrgMemberParams().WithContext(t.Context()).WithOrg("testorg").WithMember("testuser"),
+	result, err := client.Organizations().Organization.DeleteOrganizationByOrgByMember(
+		organization.NewDeleteOrganizationByOrgByMemberParams().WithContext(t.Context()).WithOrg("testorg").WithMember("testuser"),
 		nil,
 	)
 
@@ -704,8 +704,8 @@ func TestGen_Organizations_PatchApiKeyOrganizationOrgMember(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Organization.PatchAPIKeyOrganizationOrgMember(
-		api_key_organization.NewPatchAPIKeyOrganizationOrgMemberParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Organization.PatchOrganizationByOrgByMember(
+		organization.NewPatchOrganizationByOrgByMemberParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 

@@ -41,7 +41,7 @@ func (o *PostPublicCostEstimatingReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /public/cost/estimating] PostPublicCostEstimating", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /public/cost/estimating] postPublicCostEstimating", response, response.Code())
 	}
 }
 

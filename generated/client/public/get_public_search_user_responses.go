@@ -41,7 +41,7 @@ func (o *GetPublicSearchUserReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/search/user] GetPublicSearchUser", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/search/user] getPublicSearchUser", response, response.Code())
 	}
 }
 

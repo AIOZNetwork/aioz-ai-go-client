@@ -6,9 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `PostAPIKeyCollectionIDReport`
+### `PostCollectionByIDReport`
 
-**`POST /api-key/collection/{id}/report`** — Report Collection By Api Key
+**`POST /api-key/collection/{id}/report`** — Report Collection
 
 **Headers**
 
@@ -103,7 +103,7 @@ req := &models.ReportCollectionRequest{
     Reason: "...",  // string  // required
     URL: "...",  // string  // required
 }
-resp, err := client.Discussions.Discussion.PostAPIKeyCollectionIDReport(ctx, req)
+resp, err := client.Discussions.Discussion.PostCollectionByIDReport(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -112,9 +112,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCommentsIDReport`
+### `PostCommentsByIDReport`
 
-**`POST /api-key/comments/{id}/report`** — Report Comment By Api Key
+**`POST /api-key/comments/{id}/report`** — Report Comment
 
 **Headers**
 
@@ -209,7 +209,7 @@ req := &models.ReportCommentRequest{
     Reason: "...",  // string  // required
     URL: "...",  // string  // required
 }
-resp, err := client.Discussions.Discussion.PostAPIKeyCommentsIDReport(ctx, req)
+resp, err := client.Discussions.Discussion.PostCommentsByIDReport(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -218,9 +218,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDiscussionCompetitionID`
+### `GetDiscussionCompetitionByID`
 
-**`GET /api-key/discussion/competition/{id}`** — Get competition discussion list By Api Key
+**`GET /api-key/discussion/competition/{id}`** — Get competition discussion list
 
 **Headers**
 
@@ -316,7 +316,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetAPIKeyDiscussionCompetitionID(ctx, "<id>")
+resp, err := client.Discussions.Discussion.GetDiscussionCompetitionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -325,9 +325,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDiscussionCompetitionID`
+### `PostDiscussionCompetitionByID`
 
-**`POST /api-key/discussion/competition/{id}`** — Create competition discussion By Api Key
+**`POST /api-key/discussion/competition/{id}`** — Create competition discussion
 
 **Headers**
 
@@ -422,7 +422,7 @@ req := &models.CreateCompetitionDiscussionRequest{
     Content: "...",  // string  // required
     Title: "...",  // string  // required
 }
-resp, err := client.Discussions.Discussion.PostAPIKeyDiscussionCompetitionID(ctx, req)
+resp, err := client.Discussions.Discussion.PostDiscussionCompetitionByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -431,9 +431,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDiscussionDatasetID`
+### `GetDiscussionDatasetByID`
 
-**`GET /api-key/discussion/dataset/{id}`** — Get dataset discussion list By Api Key
+**`GET /api-key/discussion/dataset/{id}`** — Get dataset discussion list
 
 **Headers**
 
@@ -527,7 +527,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetAPIKeyDiscussionDatasetID(ctx, "<id>")
+resp, err := client.Discussions.Discussion.GetDiscussionDatasetByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -536,9 +536,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDiscussionDatasetID`
+### `PostDiscussionDatasetByID`
 
-**`POST /api-key/discussion/dataset/{id}`** — Create dataset discussion By Api Key
+**`POST /api-key/discussion/dataset/{id}`** — Create dataset discussion
 
 **Headers**
 
@@ -633,7 +633,7 @@ req := &models.CreateDatasetDiscussionRequest{
     Content: "...",  // string  // required
     Title: "...",  // string  // required
 }
-resp, err := client.Discussions.Discussion.PostAPIKeyDiscussionDatasetID(ctx, req)
+resp, err := client.Discussions.Discussion.PostDiscussionDatasetByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -642,9 +642,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDiscussionModelID`
+### `GetDiscussionModelByID`
 
-**`GET /api-key/discussion/model/{id}`** — Get model discussion list By Api Key
+**`GET /api-key/discussion/model/{id}`** — Get model discussion list
 
 **Headers**
 
@@ -738,7 +738,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetAPIKeyDiscussionModelID(ctx, "<id>")
+resp, err := client.Discussions.Discussion.GetDiscussionModelByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -747,9 +747,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDiscussionModelID`
+### `PostDiscussionModelByID`
 
-**`POST /api-key/discussion/model/{id}`** — Create model discussion By Api Key
+**`POST /api-key/discussion/model/{id}`** — Create model discussion
 
 **Headers**
 
@@ -844,7 +844,7 @@ req := &models.CreateModelDiscussionRequest{
     Content: "...",  // string  // required
     Title: "...",  // string  // required
 }
-resp, err := client.Discussions.Discussion.PostAPIKeyDiscussionModelID(ctx, req)
+resp, err := client.Discussions.Discussion.PostDiscussionModelByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -853,9 +853,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyDiscussionID`
+### `PutDiscussionByID`
 
-**`PUT /api-key/discussion/{id}`** — Update discussion By Api Key
+**`PUT /api-key/discussion/{id}`** — Update discussion
 
 **Headers**
 
@@ -952,7 +952,7 @@ req := &models.UpdateDiscussionRequest{
     IsClosed: "...",  // boolean
     Title: "...",  // string
 }
-resp, err := client.Discussions.Discussion.PutAPIKeyDiscussionID(ctx, req)
+resp, err := client.Discussions.Discussion.PutDiscussionByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -961,9 +961,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyDiscussionID`
+### `DeleteDiscussionByID`
 
-**`DELETE /api-key/discussion/{id}`** — Delete discussion By Api Key
+**`DELETE /api-key/discussion/{id}`** — Delete discussion
 
 **Headers**
 
@@ -1047,7 +1047,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.DeleteAPIKeyDiscussionID(ctx, "<id>")
+resp, err := client.Discussions.Discussion.DeleteDiscussionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1056,9 +1056,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDiscussionIDReport`
+### `PostDiscussionByIDReport`
 
-**`POST /api-key/discussion/{id}/report`** — Report Discussion By Api Key
+**`POST /api-key/discussion/{id}/report`** — Report Discussion
 
 **Headers**
 
@@ -1153,7 +1153,7 @@ req := &models.ReportDiscussionRequest{
     Reason: "...",  // string  // required
     URL: "...",  // string  // required
 }
-resp, err := client.Discussions.Discussion.PostAPIKeyDiscussionIDReport(ctx, req)
+resp, err := client.Discussions.Discussion.PostDiscussionByIDReport(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1162,7 +1162,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicDiscussionCompetitionID`
+### `GetPublicDiscussionCompetitionByID`
 
 **`GET /public/discussion/competition/{id}`** — Get public competition discussion list
 
@@ -1254,7 +1254,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionCompetitionID(ctx, "<id>")
+resp, err := client.Discussions.Discussion.GetPublicDiscussionCompetitionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1263,7 +1263,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicDiscussionDatasetID`
+### `GetPublicDiscussionDatasetByID`
 
 **`GET /public/discussion/dataset/{id}`** — Get dataset discussion list
 
@@ -1353,7 +1353,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionDatasetID(ctx, "<id>")
+resp, err := client.Discussions.Discussion.GetPublicDiscussionDatasetByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1362,7 +1362,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicDiscussionModelID`
+### `GetPublicDiscussionModelByID`
 
 **`GET /public/discussion/model/{id}`** — Get model discussion list
 
@@ -1452,7 +1452,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionModelID(ctx, "<id>")
+resp, err := client.Discussions.Discussion.GetPublicDiscussionModelByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1461,7 +1461,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicDiscussionID`
+### `GetPublicDiscussionByID`
 
 **`GET /public/discussion/{id}`** — Get discussion detail
 
@@ -1541,7 +1541,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionID(ctx, "<id>")
+resp, err := client.Discussions.Discussion.GetPublicDiscussionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1550,7 +1550,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicDiscussionIDComments`
+### `GetPublicDiscussionByIDComments`
 
 **`GET /public/discussion/{id}/comments`** — Get a list of comments
 
@@ -1656,7 +1656,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionIDComments(ctx, "<id>")
+resp, err := client.Discussions.Discussion.GetPublicDiscussionByIDComments(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }

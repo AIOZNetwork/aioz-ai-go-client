@@ -39,7 +39,7 @@ func (o *PostPublicDatasetMatchingTagsReader) ReadResponse(response runtime.Clie
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /public/dataset/matching-tags] PostPublicDatasetMatchingTags", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /public/dataset/matching-tags] postPublicDatasetMatchingTags", response, response.Code())
 	}
 }
 

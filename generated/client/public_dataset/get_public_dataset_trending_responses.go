@@ -41,7 +41,7 @@ func (o *GetPublicDatasetTrendingReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/dataset/trending] GetPublicDatasetTrending", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/dataset/trending] getPublicDatasetTrending", response, response.Code())
 	}
 }
 

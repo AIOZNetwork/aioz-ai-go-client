@@ -41,7 +41,7 @@ func (o *GetPublicDatasetMetadataReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/dataset/metadata] GetPublicDatasetMetadata", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/dataset/metadata] getPublicDatasetMetadata", response, response.Code())
 	}
 }
 

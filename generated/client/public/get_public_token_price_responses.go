@@ -41,7 +41,7 @@ func (o *GetPublicTokenPriceReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/token/price] GetPublicTokenPrice", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/token/price] getPublicTokenPrice", response, response.Code())
 	}
 }
 

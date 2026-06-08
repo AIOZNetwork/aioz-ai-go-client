@@ -41,7 +41,7 @@ func (o *GetPublicOrganizationReader) ReadResponse(response runtime.ClientRespon
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/organization] GetPublicOrganization", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/organization] getPublicOrganization", response, response.Code())
 	}
 }
 

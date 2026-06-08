@@ -137,12 +137,13 @@ These types appear in error responses across all endpoints.
 | Field | Type | Description |
 | --- | --- | --- |
 | `message` | `string` | Human-readable error message |
-| `errors` | `array[string]` | Field-level validation errors |
+| `status` | `string` | fail |
 
 **`ErrorResponse`** (500 Internal Server Error)
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `message` | `string` | Internal error message |
+| `status` | `string` | error |
 
 <!-- SDK_GUIDE_END -->

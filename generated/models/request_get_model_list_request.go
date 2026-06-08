@@ -36,6 +36,10 @@ type RequestGetModelListRequest struct {
 	// offset
 	Offset int64 `json:"offset,omitempty"`
 
+	// order
+	// Enum: ["asc","desc"]
+	Order string `json:"order,omitempty"`
+
 	// search
 	Search string `json:"search,omitempty"`
 
@@ -55,6 +59,10 @@ func (m *RequestGetModelListRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateFilterBy(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOrder(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -116,6 +124,48 @@ func (m *RequestGetModelListRequest) validateFilterBy(formats strfmt.Registry) e
 
 	// value enum
 	if err := m.validateFilterByEnum("filter_by", "body", m.FilterBy); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var requestGetModelListRequestTypeOrderPropEnum []any
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["asc","desc"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		requestGetModelListRequestTypeOrderPropEnum = append(requestGetModelListRequestTypeOrderPropEnum, v)
+	}
+}
+
+const (
+
+	// RequestGetModelListRequestOrderAsc captures enum value "asc"
+	RequestGetModelListRequestOrderAsc string = "asc"
+
+	// RequestGetModelListRequestOrderDesc captures enum value "desc"
+	RequestGetModelListRequestOrderDesc string = "desc"
+)
+
+// prop value enum
+func (m *RequestGetModelListRequest) validateOrderEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, requestGetModelListRequestTypeOrderPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *RequestGetModelListRequest) validateOrder(formats strfmt.Registry) error {
+	if swag.IsZero(m.Order) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateOrderEnum("order", "body", m.Order); err != nil {
 		return err
 	}
 

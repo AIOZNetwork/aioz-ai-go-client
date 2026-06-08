@@ -77,21 +77,21 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetPublicModelID(params *GetPublicModelIDParams, opts ...ClientOption) (*GetPublicModelIDOK, error)
+	GetPublicModelByID(params *GetPublicModelByIDParams, opts ...ClientOption) (*GetPublicModelByIDOK, error)
 
-	GetPublicModelIDVersioning(params *GetPublicModelIDVersioningParams, opts ...ClientOption) (*GetPublicModelIDVersioningOK, error)
+	GetPublicModelByIDVersioning(params *GetPublicModelByIDVersioningParams, opts ...ClientOption) (*GetPublicModelByIDVersioningOK, error)
+
+	GetPublicModelByUsernameByName(params *GetPublicModelByUsernameByNameParams, opts ...ClientOption) (*GetPublicModelByUsernameByNameOK, error)
 
 	GetPublicModelMetadata(params *GetPublicModelMetadataParams, opts ...ClientOption) (*GetPublicModelMetadataOK, error)
 
-	GetPublicModelOrganizationOrg(params *GetPublicModelOrganizationOrgParams, opts ...ClientOption) (*GetPublicModelOrganizationOrgOK, error)
+	GetPublicModelOrganizationByOrg(params *GetPublicModelOrganizationByOrgParams, opts ...ClientOption) (*GetPublicModelOrganizationByOrgOK, error)
 
 	GetPublicModelTrending(params *GetPublicModelTrendingParams, opts ...ClientOption) (*GetPublicModelTrendingOK, error)
 
-	GetPublicModelUsernameName(params *GetPublicModelUsernameNameParams, opts ...ClientOption) (*GetPublicModelUsernameNameOK, error)
-
 	PostPublicModelList(params *PostPublicModelListParams, opts ...ClientOption) (*PostPublicModelListOK, error)
 
-	PostPublicModelListByAuthorUsername(params *PostPublicModelListByAuthorUsernameParams, opts ...ClientOption) (*PostPublicModelListByAuthorUsernameOK, error)
+	PostPublicModelListByAuthorByUsername(params *PostPublicModelListByAuthorByUsernameParams, opts ...ClientOption) (*PostPublicModelListByAuthorByUsernameOK, error)
 
 	PostPublicModelMatchingTags(params *PostPublicModelMatchingTagsParams, opts ...ClientOption) (*PostPublicModelMatchingTagsOK, error)
 
@@ -99,22 +99,22 @@ type ClientService interface {
 }
 
 /*
-GetPublicModelID gets public model by id
+GetPublicModelByID gets public model by id
 */
-func (a *Client) GetPublicModelID(params *GetPublicModelIDParams, opts ...ClientOption) (*GetPublicModelIDOK, error) {
+func (a *Client) GetPublicModelByID(params *GetPublicModelByIDParams, opts ...ClientOption) (*GetPublicModelByIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicModelIDParams()
+		params = NewGetPublicModelByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicModelID",
+		ID:                 "getPublicModelById",
 		Method:             "GET",
 		PathPattern:        "/public/model/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicModelIDReader{formats: a.formats},
+		Reader:             &GetPublicModelByIDReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -127,7 +127,7 @@ func (a *Client) GetPublicModelID(params *GetPublicModelIDParams, opts ...Client
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicModelIDOK)
+	success, ok := result.(*GetPublicModelByIDOK)
 	if ok {
 		return success, nil
 	}
@@ -137,27 +137,27 @@ func (a *Client) GetPublicModelID(params *GetPublicModelIDParams, opts ...Client
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicModelID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicModelById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicModelIDVersioning gets current model versioning by model Id
+GetPublicModelByIDVersioning gets current model versioning by model Id
 */
-func (a *Client) GetPublicModelIDVersioning(params *GetPublicModelIDVersioningParams, opts ...ClientOption) (*GetPublicModelIDVersioningOK, error) {
+func (a *Client) GetPublicModelByIDVersioning(params *GetPublicModelByIDVersioningParams, opts ...ClientOption) (*GetPublicModelByIDVersioningOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicModelIDVersioningParams()
+		params = NewGetPublicModelByIDVersioningParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicModelIDVersioning",
+		ID:                 "getPublicModelByIdVersioning",
 		Method:             "GET",
 		PathPattern:        "/public/model/{id}/versioning",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicModelIDVersioningReader{formats: a.formats},
+		Reader:             &GetPublicModelByIDVersioningReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -170,7 +170,7 @@ func (a *Client) GetPublicModelIDVersioning(params *GetPublicModelIDVersioningPa
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicModelIDVersioningOK)
+	success, ok := result.(*GetPublicModelByIDVersioningOK)
 	if ok {
 		return success, nil
 	}
@@ -180,7 +180,50 @@ func (a *Client) GetPublicModelIDVersioning(params *GetPublicModelIDVersioningPa
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicModelIDVersioning: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicModelByIdVersioning: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetPublicModelByUsernameByName gets public model by name
+*/
+func (a *Client) GetPublicModelByUsernameByName(params *GetPublicModelByUsernameByNameParams, opts ...ClientOption) (*GetPublicModelByUsernameByNameOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetPublicModelByUsernameByNameParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getPublicModelByUsernameByName",
+		Method:             "GET",
+		PathPattern:        "/public/model/{username}/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetPublicModelByUsernameByNameReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetPublicModelByUsernameByNameOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getPublicModelByUsernameByName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -193,7 +236,7 @@ func (a *Client) GetPublicModelMetadata(params *GetPublicModelMetadataParams, op
 		params = NewGetPublicModelMetadataParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicModelMetadata",
+		ID:                 "getPublicModelMetadata",
 		Method:             "GET",
 		PathPattern:        "/public/model/metadata",
 		ProducesMediaTypes: []string{"application/json"},
@@ -223,29 +266,29 @@ func (a *Client) GetPublicModelMetadata(params *GetPublicModelMetadataParams, op
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicModelMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicModelMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicModelOrganizationOrg gets list model by org username
+GetPublicModelOrganizationByOrg gets list model by org username
 
 sort is one of name, created, modified
 */
-func (a *Client) GetPublicModelOrganizationOrg(params *GetPublicModelOrganizationOrgParams, opts ...ClientOption) (*GetPublicModelOrganizationOrgOK, error) {
+func (a *Client) GetPublicModelOrganizationByOrg(params *GetPublicModelOrganizationByOrgParams, opts ...ClientOption) (*GetPublicModelOrganizationByOrgOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicModelOrganizationOrgParams()
+		params = NewGetPublicModelOrganizationByOrgParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicModelOrganizationOrg",
+		ID:                 "getPublicModelOrganizationByOrg",
 		Method:             "GET",
 		PathPattern:        "/public/model/organization/{org}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicModelOrganizationOrgReader{formats: a.formats},
+		Reader:             &GetPublicModelOrganizationByOrgReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -258,7 +301,7 @@ func (a *Client) GetPublicModelOrganizationOrg(params *GetPublicModelOrganizatio
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicModelOrganizationOrgOK)
+	success, ok := result.(*GetPublicModelOrganizationByOrgOK)
 	if ok {
 		return success, nil
 	}
@@ -268,7 +311,7 @@ func (a *Client) GetPublicModelOrganizationOrg(params *GetPublicModelOrganizatio
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicModelOrganizationOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicModelOrganizationByOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -281,7 +324,7 @@ func (a *Client) GetPublicModelTrending(params *GetPublicModelTrendingParams, op
 		params = NewGetPublicModelTrendingParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicModelTrending",
+		ID:                 "getPublicModelTrending",
 		Method:             "GET",
 		PathPattern:        "/public/model/trending",
 		ProducesMediaTypes: []string{"application/json"},
@@ -311,50 +354,7 @@ func (a *Client) GetPublicModelTrending(params *GetPublicModelTrendingParams, op
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicModelTrending: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetPublicModelUsernameName gets public model by name
-*/
-func (a *Client) GetPublicModelUsernameName(params *GetPublicModelUsernameNameParams, opts ...ClientOption) (*GetPublicModelUsernameNameOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicModelUsernameNameParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetPublicModelUsernameName",
-		Method:             "GET",
-		PathPattern:        "/public/model/{username}/{name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicModelUsernameNameReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicModelUsernameNameOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicModelUsernameName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicModelTrending: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -367,7 +367,7 @@ func (a *Client) PostPublicModelList(params *PostPublicModelListParams, opts ...
 		params = NewPostPublicModelListParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostPublicModelList",
+		ID:                 "postPublicModelList",
 		Method:             "POST",
 		PathPattern:        "/public/model/list",
 		ProducesMediaTypes: []string{"application/json"},
@@ -397,27 +397,27 @@ func (a *Client) PostPublicModelList(params *PostPublicModelListParams, opts ...
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostPublicModelList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for postPublicModelList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PostPublicModelListByAuthorUsername gets public model list by user
+PostPublicModelListByAuthorByUsername gets public model list by user
 */
-func (a *Client) PostPublicModelListByAuthorUsername(params *PostPublicModelListByAuthorUsernameParams, opts ...ClientOption) (*PostPublicModelListByAuthorUsernameOK, error) {
+func (a *Client) PostPublicModelListByAuthorByUsername(params *PostPublicModelListByAuthorByUsernameParams, opts ...ClientOption) (*PostPublicModelListByAuthorByUsernameOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewPostPublicModelListByAuthorUsernameParams()
+		params = NewPostPublicModelListByAuthorByUsernameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostPublicModelListByAuthorUsername",
+		ID:                 "postPublicModelListByAuthorByUsername",
 		Method:             "POST",
 		PathPattern:        "/public/model/list-by-author/{username}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostPublicModelListByAuthorUsernameReader{formats: a.formats},
+		Reader:             &PostPublicModelListByAuthorByUsernameReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -430,7 +430,7 @@ func (a *Client) PostPublicModelListByAuthorUsername(params *PostPublicModelList
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*PostPublicModelListByAuthorUsernameOK)
+	success, ok := result.(*PostPublicModelListByAuthorByUsernameOK)
 	if ok {
 		return success, nil
 	}
@@ -440,7 +440,7 @@ func (a *Client) PostPublicModelListByAuthorUsername(params *PostPublicModelList
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostPublicModelListByAuthorUsername: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for postPublicModelListByAuthorByUsername: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -455,7 +455,7 @@ func (a *Client) PostPublicModelMatchingTags(params *PostPublicModelMatchingTags
 		params = NewPostPublicModelMatchingTagsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostPublicModelMatchingTags",
+		ID:                 "postPublicModelMatchingTags",
 		Method:             "POST",
 		PathPattern:        "/public/model/matching-tags",
 		ProducesMediaTypes: []string{"application/json"},
@@ -485,7 +485,7 @@ func (a *Client) PostPublicModelMatchingTags(params *PostPublicModelMatchingTags
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostPublicModelMatchingTags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for postPublicModelMatchingTags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

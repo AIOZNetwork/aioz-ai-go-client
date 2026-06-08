@@ -31,6 +31,10 @@ type RequestGetDatasetListByAuthorRequest struct {
 	// Minimum: 0
 	Offset *int64 `json:"offset,omitempty"`
 
+	// order
+	// Enum: ["desc","asc"]
+	Order *string `json:"order,omitempty"`
+
 	// search
 	Search string `json:"search,omitempty"`
 
@@ -63,6 +67,10 @@ func (m *RequestGetDatasetListByAuthorRequest) Validate(formats strfmt.Registry)
 		res = append(res, err)
 	}
 
+	if err := m.validateOrder(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateSort(formats); err != nil {
 		res = append(res, err)
 	}
@@ -91,6 +99,48 @@ func (m *RequestGetDatasetListByAuthorRequest) validateOffset(formats strfmt.Reg
 	}
 
 	if err := validate.MinimumInt("offset", "body", *m.Offset, 0, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+var requestGetDatasetListByAuthorRequestTypeOrderPropEnum []any
+
+func init() {
+	var res []string
+	if err := json.Unmarshal([]byte(`["desc","asc"]`), &res); err != nil {
+		panic(err)
+	}
+	for _, v := range res {
+		requestGetDatasetListByAuthorRequestTypeOrderPropEnum = append(requestGetDatasetListByAuthorRequestTypeOrderPropEnum, v)
+	}
+}
+
+const (
+
+	// RequestGetDatasetListByAuthorRequestOrderDesc captures enum value "desc"
+	RequestGetDatasetListByAuthorRequestOrderDesc string = "desc"
+
+	// RequestGetDatasetListByAuthorRequestOrderAsc captures enum value "asc"
+	RequestGetDatasetListByAuthorRequestOrderAsc string = "asc"
+)
+
+// prop value enum
+func (m *RequestGetDatasetListByAuthorRequest) validateOrderEnum(path, location string, value string) error {
+	if err := validate.EnumCase(path, location, value, requestGetDatasetListByAuthorRequestTypeOrderPropEnum, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (m *RequestGetDatasetListByAuthorRequest) validateOrder(formats strfmt.Registry) error {
+	if swag.IsZero(m.Order) { // not required
+		return nil
+	}
+
+	// value enum
+	if err := m.validateOrderEnum("order", "body", *m.Order); err != nil {
 		return err
 	}
 

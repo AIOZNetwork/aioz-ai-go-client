@@ -6,9 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `DeleteAPIKeyUser`
+### `DeleteUser`
 
-**`DELETE /api-key/user`** — Delete user's account By Api Key
+**`DELETE /api-key/user`** — Delete user's account
 
 **Headers**
 
@@ -36,7 +36,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.DeleteAPIKeyUser(ctx)
+resp, err := client.Users.User.DeleteUser(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -45,9 +45,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserAPIKey`
+### `PostUserApiKey`
 
-**`POST /api-key/user/api-key`** — Create ApiKey By Api Key
+**`POST /api-key/user/api-key`** — Create ApiKey
 
 **Headers**
 
@@ -193,10 +193,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -215,7 +215,7 @@ req := &models.CreateApiKeyRequest{
     Name: "...",  // string  // required
     OrgUsername: "...",  // string
 }
-resp, err := client.Users.User.PostAPIKeyUserAPIKey(ctx, req)
+resp, err := client.Users.User.PostUserApiKey(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -224,9 +224,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserChallengeWalletaddress`
+### `GetUserChallengeByWalletaddress`
 
-**`GET /api-key/user/challenge/{walletAddress}`** — Get link wallet address challenge By Api Key
+**`GET /api-key/user/challenge/{walletAddress}`** — Get link wallet address challenge
 
 **Headers**
 
@@ -267,7 +267,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.GetAPIKeyUserChallengeWalletaddress(ctx, "<walletAddress>")
+resp, err := client.Users.User.GetUserChallengeByWalletaddress(ctx, "<walletAddress>")
 if err != nil {
     log.Fatal(err)
 }
@@ -276,9 +276,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PatchAPIKeyUserChangePassword`
+### `PatchUserChangePassword`
 
-**`PATCH /api-key/user/change-password`** — Change user's password By Api Key
+**`PATCH /api-key/user/change-password`** — Change user's password
 
 **Headers**
 
@@ -317,7 +317,7 @@ req := &models.ChangeUserPasswordRequest{
     NewPassword: "...",  // string  // required
     OldPassword: "...",  // string  // required
 }
-resp, err := client.Users.User.PatchAPIKeyUserChangePassword(ctx, req)
+resp, err := client.Users.User.PatchUserChangePassword(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -326,9 +326,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyUserFollowID`
+### `PutUserFollowByID`
 
-**`PUT /api-key/user/follow/{id}`** — Follow/Unfollow user By Api Key
+**`PUT /api-key/user/follow/{id}`** — Follow/Unfollow user
 
 **Headers**
 
@@ -362,7 +362,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.PutAPIKeyUserFollowID(ctx, "<id>")
+resp, err := client.Users.User.PutUserFollowByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -371,9 +371,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserLinkEmail`
+### `PostUserLinkEmail`
 
-**`POST /api-key/user/link-email`** — Verify link email code By Api Key
+**`POST /api-key/user/link-email`** — Verify link email code
 
 **Headers**
 
@@ -412,7 +412,7 @@ req := &models.VerifyLinkEmailCodeRequest{
     Code: "...",  // string  // required
     Email: "...",  // string  // required
 }
-resp, err := client.Users.User.PostAPIKeyUserLinkEmail(ctx, req)
+resp, err := client.Users.User.PostUserLinkEmail(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -421,9 +421,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PatchAPIKeyUserLinkEmailEmail`
+### `PatchUserLinkEmailByEmail`
 
-**`PATCH /api-key/user/link-email/{email}`** — Get link email code By Api Key
+**`PATCH /api-key/user/link-email/{email}`** — Get link email code
 
 **Headers**
 
@@ -470,7 +470,7 @@ req := &models.GetLinkEmailCodeRequest{
     Password: "...",  // string
     Username: "...",  // string  // required
 }
-resp, err := client.Users.User.PatchAPIKeyUserLinkEmailEmail(ctx, req)
+resp, err := client.Users.User.PatchUserLinkEmailByEmail(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -479,9 +479,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserLinkWallet`
+### `PostUserLinkWallet`
 
-**`POST /api-key/user/link-wallet`** — Verify link wallet address signature By Api Key
+**`POST /api-key/user/link-wallet`** — Verify link wallet address signature
 
 **Headers**
 
@@ -520,7 +520,7 @@ req := &models.VerifyLinkWalletAddressSignatureRequest{
     Signature: "...",  // string  // required
     WalletAddress: "...",  // string  // required
 }
-resp, err := client.Users.User.PostAPIKeyUserLinkWallet(ctx, req)
+resp, err := client.Users.User.PostUserLinkWallet(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -529,9 +529,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserMe`
+### `GetUserMe`
 
-**`GET /api-key/user/me`** — Get user's info By Api Key
+**`GET /api-key/user/me`** — Get user's info
 
 **Headers**
 
@@ -652,10 +652,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -668,7 +668,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.GetAPIKeyUserMe(ctx)
+resp, err := client.Users.User.GetUserMe(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -677,9 +677,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserOffers`
+### `GetUserOffers`
 
-**`GET /api-key/user/offers`** — Get user's offers By Api Key
+**`GET /api-key/user/offers`** — Get user's offers
 
 **Headers**
 
@@ -716,7 +716,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.GetAPIKeyUserOffers(ctx)
+resp, err := client.Users.User.GetUserOffers(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -725,9 +725,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserOrgUsernames`
+### `GetUserOrgUsernames`
 
-**`GET /api-key/user/org-usernames`** — Get user's organization usernames By Api Key
+**`GET /api-key/user/org-usernames`** — Get user's organization usernames
 
 **Headers**
 
@@ -778,7 +778,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.GetAPIKeyUserOrgUsernames(ctx)
+resp, err := client.Users.User.GetUserOrgUsernames(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -787,9 +787,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserPermissionSearch`
+### `GetUserPermissionSearch`
 
-**`GET /api-key/user/permission/search`** — Search Users By Api Key
+**`GET /api-key/user/permission/search`** — Search Users
 
 **Headers**
 
@@ -850,7 +850,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.GetAPIKeyUserPermissionSearch(ctx)
+resp, err := client.Users.User.GetUserPermissionSearch(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -859,9 +859,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PatchAPIKeyUserProfile`
+### `PatchUserProfile`
 
-**`PATCH /api-key/user/profile`** — Update user's profile By Api Key
+**`PATCH /api-key/user/profile`** — Update user's profile
 
 **Headers**
 
@@ -910,7 +910,7 @@ req := &models.UpdateUserProfileRequest{
     GithubLink: "...",  // string
     GithubName: "...",  // string
 }
-resp, err := client.Users.User.PatchAPIKeyUserProfile(ctx, req)
+resp, err := client.Users.User.PatchUserProfile(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -919,9 +919,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserPublicKey`
+### `GetUserPublicKey`
 
-**`GET /api-key/user/public-key`** — Get source control public keys By Api Key
+**`GET /api-key/user/public-key`** — Get source control public keys
 
 **Headers**
 
@@ -967,7 +967,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.PublicKey.GetAPIKeyUserPublicKey(ctx)
+resp, err := client.Users.PublicKey.GetUserPublicKey(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -976,9 +976,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserPublicKey`
+### `PostUserPublicKey`
 
-**`POST /api-key/user/public-key`** — Create source control public key By Api Key
+**`POST /api-key/user/public-key`** — Create source control public key
 
 **Headers**
 
@@ -1019,7 +1019,7 @@ req := &models.CreatePublicKeyRequest{
     ReadOnly: "...",  // boolean
     Title: "...",  // string  // required
 }
-resp, err := client.Users.PublicKey.PostAPIKeyUserPublicKey(ctx, req)
+resp, err := client.Users.PublicKey.PostUserPublicKey(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1028,9 +1028,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyUserPublicKeyKeyid`
+### `DeleteUserPublicKeyByKeyid`
 
-**`DELETE /api-key/user/public-key/{keyId}`** — Delete source control public key By Api Key
+**`DELETE /api-key/user/public-key/{keyId}`** — Delete source control public key
 
 **Headers**
 
@@ -1057,13 +1057,14 @@ fmt.Printf("%+v\n", resp)
 
 | Status | Description |
 | --- | --- |
-| 400 | Bad Request — [response.ErrorResponse](../README.md#common-response-types) |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
 
 **Example**
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.PublicKey.DeleteAPIKeyUserPublicKeyKeyid(ctx, "<keyId>")
+resp, err := client.Users.PublicKey.DeleteUserPublicKeyByKeyid(ctx, "<keyId>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1072,9 +1073,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserStatisticsEarnings`
+### `PostUserStatisticsEarnings`
 
-**`POST /api-key/user/statistics/earnings`** — Get User Earnings Statistics By Api Key
+**`POST /api-key/user/statistics/earnings`** — Get User Earnings Statistics
 
 **Headers**
 
@@ -1128,7 +1129,7 @@ req := &models.GetTransactionAnalyticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Users.Wallet.PostAPIKeyUserStatisticsEarnings(ctx, req)
+resp, err := client.Users.Wallet.PostUserStatisticsEarnings(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1137,9 +1138,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserStatisticsSpendingCost`
+### `PostUserStatisticsSpendingCost`
 
-**`POST /api-key/user/statistics/spending-cost`** — Get User Spending Cost Statitics By Api Key
+**`POST /api-key/user/statistics/spending-cost`** — Get User Spending Cost Statitics
 
 **Headers**
 
@@ -1197,7 +1198,7 @@ req := &models.GetUserSpendingCostStatisticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Users.Wallet.PostAPIKeyUserStatisticsSpendingCost(ctx, req)
+resp, err := client.Users.Wallet.PostUserStatisticsSpendingCost(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1206,9 +1207,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserVoucherClaim`
+### `PostUserVoucherClaim`
 
-**`POST /api-key/user/voucher/claim`** — User Claim Free Balance By Voucher By Api Key
+**`POST /api-key/user/voucher/claim`** — User Claim Free Balance By Voucher
 
 **Headers**
 
@@ -1245,7 +1246,7 @@ ctx := context.Background()
 req := &models.UserClaimFreeBalanceByVoucherRequest{
     VoucherCode: "...",  // string  // required
 }
-resp, err := client.Users.Voucher.PostAPIKeyUserVoucherClaim(ctx, req)
+resp, err := client.Users.Voucher.PostUserVoucherClaim(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1254,9 +1255,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserWalletDepositHistory`
+### `GetUserWalletDepositHistory`
 
-**`GET /api-key/user/wallet/deposit/history`** — Get List User Deposit History By Api Key
+**`GET /api-key/user/wallet/deposit/history`** — Get List User Deposit History
 
 **Headers**
 
@@ -1314,7 +1315,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.Wallet.GetAPIKeyUserWalletDepositHistory(ctx)
+resp, err := client.Users.Wallet.GetUserWalletDepositHistory(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -1323,9 +1324,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserWalletTransactionAnalytics`
+### `PostUserWalletTransactionAnalytics`
 
-**`POST /api-key/user/wallet/transaction/analytics`** — Get User Transaction Analytics By Api Key
+**`POST /api-key/user/wallet/transaction/analytics`** — Get User Transaction Analytics
 
 **Headers**
 
@@ -1396,7 +1397,7 @@ req := &models.GetUserTransactionAnalyticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Users.Wallet.PostAPIKeyUserWalletTransactionAnalytics(ctx, req)
+resp, err := client.Users.Wallet.PostUserWalletTransactionAnalytics(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1405,9 +1406,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserWalletTransactionHistory`
+### `GetUserWalletTransactionHistory`
 
-**`GET /api-key/user/wallet/transaction/history`** — Get List Transaction History By User By Api Key
+**`GET /api-key/user/wallet/transaction/history`** — Get List Transaction History By User
 
 **Headers**
 
@@ -1470,7 +1471,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.Wallet.GetAPIKeyUserWalletTransactionHistory(ctx)
+resp, err := client.Users.Wallet.GetUserWalletTransactionHistory(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -1479,9 +1480,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyUserWalletTransactionRecent`
+### `PostUserWalletTransactionRecent`
 
-**`POST /api-key/user/wallet/transaction/recent`** — Get List Recent Transaction By User By Api Key
+**`POST /api-key/user/wallet/transaction/recent`** — Get List Recent Transaction By User
 
 **Headers**
 
@@ -1553,7 +1554,7 @@ req := &models.GetListRecentTransactionByUserRequest{
     To: "...",  // string
     Type: "...",  // string
 }
-resp, err := client.Users.Wallet.PostAPIKeyUserWalletTransactionRecent(ctx, req)
+resp, err := client.Users.Wallet.PostUserWalletTransactionRecent(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1562,9 +1563,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserWalletWithdrawHistory`
+### `GetUserWalletWithdrawHistory`
 
-**`GET /api-key/user/wallet/withdraw/history`** — Get List User Withdrawal History By Api Key
+**`GET /api-key/user/wallet/withdraw/history`** — Get List User Withdrawal History
 
 **Headers**
 
@@ -1600,7 +1601,7 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `amount` | `number` |  |
+| `amount` | `string` |  |
 | `created_at` | `string` |  |
 | `evm_tx_hash` | `string` |  |
 | `from_service` | `string` |  |
@@ -1620,7 +1621,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.Wallet.GetAPIKeyUserWalletWithdrawHistory(ctx)
+resp, err := client.Users.Wallet.GetUserWalletWithdrawHistory(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -1629,9 +1630,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyUserUsername`
+### `GetUserByUsername`
 
-**`GET /api-key/user/{username}`** — Get user's info By Api Key
+**`GET /api-key/user/{username}`** — Get user's info
 
 **Headers**
 
@@ -1760,7 +1761,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.GetAPIKeyUserUsername(ctx, "<username>")
+resp, err := client.Users.User.GetUserByUsername(ctx, "<username>")
 if err != nil {
     log.Fatal(err)
 }

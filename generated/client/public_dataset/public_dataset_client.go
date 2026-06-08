@@ -77,19 +77,19 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetPublicDatasetID(params *GetPublicDatasetIDParams, opts ...ClientOption) (*GetPublicDatasetIDOK, error)
+	GetPublicDatasetByID(params *GetPublicDatasetByIDParams, opts ...ClientOption) (*GetPublicDatasetByIDOK, error)
+
+	GetPublicDatasetByUsernameByName(params *GetPublicDatasetByUsernameByNameParams, opts ...ClientOption) (*GetPublicDatasetByUsernameByNameOK, error)
 
 	GetPublicDatasetMetadata(params *GetPublicDatasetMetadataParams, opts ...ClientOption) (*GetPublicDatasetMetadataOK, error)
 
-	GetPublicDatasetOrganizationOrg(params *GetPublicDatasetOrganizationOrgParams, opts ...ClientOption) (*GetPublicDatasetOrganizationOrgOK, error)
+	GetPublicDatasetOrganizationByOrg(params *GetPublicDatasetOrganizationByOrgParams, opts ...ClientOption) (*GetPublicDatasetOrganizationByOrgOK, error)
 
 	GetPublicDatasetTrending(params *GetPublicDatasetTrendingParams, opts ...ClientOption) (*GetPublicDatasetTrendingOK, error)
 
-	GetPublicDatasetUsernameName(params *GetPublicDatasetUsernameNameParams, opts ...ClientOption) (*GetPublicDatasetUsernameNameOK, error)
-
 	PostPublicDatasetList(params *PostPublicDatasetListParams, opts ...ClientOption) (*PostPublicDatasetListOK, error)
 
-	PostPublicDatasetListByAuthorUsername(params *PostPublicDatasetListByAuthorUsernameParams, opts ...ClientOption) (*PostPublicDatasetListByAuthorUsernameOK, error)
+	PostPublicDatasetListByAuthorByUsername(params *PostPublicDatasetListByAuthorByUsernameParams, opts ...ClientOption) (*PostPublicDatasetListByAuthorByUsernameOK, error)
 
 	PostPublicDatasetMatchingTags(params *PostPublicDatasetMatchingTagsParams, opts ...ClientOption) (*PostPublicDatasetMatchingTagsOK, error)
 
@@ -97,22 +97,22 @@ type ClientService interface {
 }
 
 /*
-GetPublicDatasetID gets public dataset by id
+GetPublicDatasetByID gets public dataset by id
 */
-func (a *Client) GetPublicDatasetID(params *GetPublicDatasetIDParams, opts ...ClientOption) (*GetPublicDatasetIDOK, error) {
+func (a *Client) GetPublicDatasetByID(params *GetPublicDatasetByIDParams, opts ...ClientOption) (*GetPublicDatasetByIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicDatasetIDParams()
+		params = NewGetPublicDatasetByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDatasetID",
+		ID:                 "getPublicDatasetById",
 		Method:             "GET",
 		PathPattern:        "/public/dataset/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicDatasetIDReader{formats: a.formats},
+		Reader:             &GetPublicDatasetByIDReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -125,7 +125,7 @@ func (a *Client) GetPublicDatasetID(params *GetPublicDatasetIDParams, opts ...Cl
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicDatasetIDOK)
+	success, ok := result.(*GetPublicDatasetByIDOK)
 	if ok {
 		return success, nil
 	}
@@ -135,7 +135,50 @@ func (a *Client) GetPublicDatasetID(params *GetPublicDatasetIDParams, opts ...Cl
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDatasetID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicDatasetById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetPublicDatasetByUsernameByName gets public dataset by name
+*/
+func (a *Client) GetPublicDatasetByUsernameByName(params *GetPublicDatasetByUsernameByNameParams, opts ...ClientOption) (*GetPublicDatasetByUsernameByNameOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetPublicDatasetByUsernameByNameParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getPublicDatasetByUsernameByName",
+		Method:             "GET",
+		PathPattern:        "/public/dataset/{username}/{name}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetPublicDatasetByUsernameByNameReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetPublicDatasetByUsernameByNameOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getPublicDatasetByUsernameByName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -148,7 +191,7 @@ func (a *Client) GetPublicDatasetMetadata(params *GetPublicDatasetMetadataParams
 		params = NewGetPublicDatasetMetadataParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDatasetMetadata",
+		ID:                 "getPublicDatasetMetadata",
 		Method:             "GET",
 		PathPattern:        "/public/dataset/metadata",
 		ProducesMediaTypes: []string{"application/json"},
@@ -178,29 +221,29 @@ func (a *Client) GetPublicDatasetMetadata(params *GetPublicDatasetMetadataParams
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDatasetMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicDatasetMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicDatasetOrganizationOrg gets list dataset by org username
+GetPublicDatasetOrganizationByOrg gets list dataset by org username
 
 sort is one of name, size, created, modified
 */
-func (a *Client) GetPublicDatasetOrganizationOrg(params *GetPublicDatasetOrganizationOrgParams, opts ...ClientOption) (*GetPublicDatasetOrganizationOrgOK, error) {
+func (a *Client) GetPublicDatasetOrganizationByOrg(params *GetPublicDatasetOrganizationByOrgParams, opts ...ClientOption) (*GetPublicDatasetOrganizationByOrgOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicDatasetOrganizationOrgParams()
+		params = NewGetPublicDatasetOrganizationByOrgParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDatasetOrganizationOrg",
+		ID:                 "getPublicDatasetOrganizationByOrg",
 		Method:             "GET",
 		PathPattern:        "/public/dataset/organization/{org}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicDatasetOrganizationOrgReader{formats: a.formats},
+		Reader:             &GetPublicDatasetOrganizationByOrgReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -213,7 +256,7 @@ func (a *Client) GetPublicDatasetOrganizationOrg(params *GetPublicDatasetOrganiz
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicDatasetOrganizationOrgOK)
+	success, ok := result.(*GetPublicDatasetOrganizationByOrgOK)
 	if ok {
 		return success, nil
 	}
@@ -223,7 +266,7 @@ func (a *Client) GetPublicDatasetOrganizationOrg(params *GetPublicDatasetOrganiz
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDatasetOrganizationOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicDatasetOrganizationByOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -236,7 +279,7 @@ func (a *Client) GetPublicDatasetTrending(params *GetPublicDatasetTrendingParams
 		params = NewGetPublicDatasetTrendingParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDatasetTrending",
+		ID:                 "getPublicDatasetTrending",
 		Method:             "GET",
 		PathPattern:        "/public/dataset/trending",
 		ProducesMediaTypes: []string{"application/json"},
@@ -266,50 +309,7 @@ func (a *Client) GetPublicDatasetTrending(params *GetPublicDatasetTrendingParams
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDatasetTrending: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetPublicDatasetUsernameName gets public dataset by name
-*/
-func (a *Client) GetPublicDatasetUsernameName(params *GetPublicDatasetUsernameNameParams, opts ...ClientOption) (*GetPublicDatasetUsernameNameOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicDatasetUsernameNameParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDatasetUsernameName",
-		Method:             "GET",
-		PathPattern:        "/public/dataset/{username}/{name}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicDatasetUsernameNameReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicDatasetUsernameNameOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDatasetUsernameName: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicDatasetTrending: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -324,7 +324,7 @@ func (a *Client) PostPublicDatasetList(params *PostPublicDatasetListParams, opts
 		params = NewPostPublicDatasetListParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostPublicDatasetList",
+		ID:                 "postPublicDatasetList",
 		Method:             "POST",
 		PathPattern:        "/public/dataset/list",
 		ProducesMediaTypes: []string{"application/json"},
@@ -354,29 +354,29 @@ func (a *Client) PostPublicDatasetList(params *PostPublicDatasetListParams, opts
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostPublicDatasetList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for postPublicDatasetList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-PostPublicDatasetListByAuthorUsername gets public dataset list by user
+PostPublicDatasetListByAuthorByUsername gets public dataset list by user
 
 sort is one of likes, downloads, created, modified
 */
-func (a *Client) PostPublicDatasetListByAuthorUsername(params *PostPublicDatasetListByAuthorUsernameParams, opts ...ClientOption) (*PostPublicDatasetListByAuthorUsernameOK, error) {
+func (a *Client) PostPublicDatasetListByAuthorByUsername(params *PostPublicDatasetListByAuthorByUsernameParams, opts ...ClientOption) (*PostPublicDatasetListByAuthorByUsernameOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewPostPublicDatasetListByAuthorUsernameParams()
+		params = NewPostPublicDatasetListByAuthorByUsernameParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostPublicDatasetListByAuthorUsername",
+		ID:                 "postPublicDatasetListByAuthorByUsername",
 		Method:             "POST",
 		PathPattern:        "/public/dataset/list-by-author/{username}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostPublicDatasetListByAuthorUsernameReader{formats: a.formats},
+		Reader:             &PostPublicDatasetListByAuthorByUsernameReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -389,7 +389,7 @@ func (a *Client) PostPublicDatasetListByAuthorUsername(params *PostPublicDataset
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*PostPublicDatasetListByAuthorUsernameOK)
+	success, ok := result.(*PostPublicDatasetListByAuthorByUsernameOK)
 	if ok {
 		return success, nil
 	}
@@ -399,7 +399,7 @@ func (a *Client) PostPublicDatasetListByAuthorUsername(params *PostPublicDataset
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostPublicDatasetListByAuthorUsername: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for postPublicDatasetListByAuthorByUsername: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -414,7 +414,7 @@ func (a *Client) PostPublicDatasetMatchingTags(params *PostPublicDatasetMatching
 		params = NewPostPublicDatasetMatchingTagsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostPublicDatasetMatchingTags",
+		ID:                 "postPublicDatasetMatchingTags",
 		Method:             "POST",
 		PathPattern:        "/public/dataset/matching-tags",
 		ProducesMediaTypes: []string{"application/json"},
@@ -444,7 +444,7 @@ func (a *Client) PostPublicDatasetMatchingTags(params *PostPublicDatasetMatching
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostPublicDatasetMatchingTags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for postPublicDatasetMatchingTags: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

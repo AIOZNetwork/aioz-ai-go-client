@@ -77,19 +77,19 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetPublicCompetitionID(params *GetPublicCompetitionIDParams, opts ...ClientOption) (*GetPublicCompetitionIDOK, error)
+	GetPublicCompetitionByID(params *GetPublicCompetitionByIDParams, opts ...ClientOption) (*GetPublicCompetitionByIDOK, error)
 
-	GetPublicCompetitionIDLeaderboard(params *GetPublicCompetitionIDLeaderboardParams, opts ...ClientOption) (*GetPublicCompetitionIDLeaderboardOK, error)
+	GetPublicCompetitionByIDLeaderboard(params *GetPublicCompetitionByIDLeaderboardParams, opts ...ClientOption) (*GetPublicCompetitionByIDLeaderboardOK, error)
 
-	GetPublicCompetitionIDPublicLeaderboard(params *GetPublicCompetitionIDPublicLeaderboardParams, opts ...ClientOption) (*GetPublicCompetitionIDPublicLeaderboardOK, error)
+	GetPublicCompetitionByIDPublicLeaderboard(params *GetPublicCompetitionByIDPublicLeaderboardParams, opts ...ClientOption) (*GetPublicCompetitionByIDPublicLeaderboardOK, error)
 
-	GetPublicCompetitionIDTimelines(params *GetPublicCompetitionIDTimelinesParams, opts ...ClientOption) (*GetPublicCompetitionIDTimelinesOK, error)
+	GetPublicCompetitionByIDTimelines(params *GetPublicCompetitionByIDTimelinesParams, opts ...ClientOption) (*GetPublicCompetitionByIDTimelinesOK, error)
 
 	GetPublicCompetitionMetadata(params *GetPublicCompetitionMetadataParams, opts ...ClientOption) (*GetPublicCompetitionMetadataOK, error)
 
-	GetPublicCompetitionPathPath(params *GetPublicCompetitionPathPathParams, opts ...ClientOption) (*GetPublicCompetitionPathPathOK, error)
+	GetPublicCompetitionPathByPath(params *GetPublicCompetitionPathByPathParams, opts ...ClientOption) (*GetPublicCompetitionPathByPathOK, error)
 
-	GetPublicCompetitionTimelineID(params *GetPublicCompetitionTimelineIDParams, opts ...ClientOption) (*GetPublicCompetitionTimelineIDOK, error)
+	GetPublicCompetitionTimelineByID(params *GetPublicCompetitionTimelineByIDParams, opts ...ClientOption) (*GetPublicCompetitionTimelineByIDOK, error)
 
 	PostPublicCompetitionList(params *PostPublicCompetitionListParams, opts ...ClientOption) (*PostPublicCompetitionListOK, error)
 
@@ -97,24 +97,24 @@ type ClientService interface {
 }
 
 /*
-GetPublicCompetitionID gets competition details
+GetPublicCompetitionByID gets competition details
 
 Get details of a specific competition by ID
 */
-func (a *Client) GetPublicCompetitionID(params *GetPublicCompetitionIDParams, opts ...ClientOption) (*GetPublicCompetitionIDOK, error) {
+func (a *Client) GetPublicCompetitionByID(params *GetPublicCompetitionByIDParams, opts ...ClientOption) (*GetPublicCompetitionByIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicCompetitionIDParams()
+		params = NewGetPublicCompetitionByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicCompetitionID",
+		ID:                 "getPublicCompetitionById",
 		Method:             "GET",
 		PathPattern:        "/public/competition/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicCompetitionIDReader{formats: a.formats},
+		Reader:             &GetPublicCompetitionByIDReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -127,7 +127,7 @@ func (a *Client) GetPublicCompetitionID(params *GetPublicCompetitionIDParams, op
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicCompetitionIDOK)
+	success, ok := result.(*GetPublicCompetitionByIDOK)
 	if ok {
 		return success, nil
 	}
@@ -137,29 +137,29 @@ func (a *Client) GetPublicCompetitionID(params *GetPublicCompetitionIDParams, op
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicCompetitionID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicCompetitionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicCompetitionIDLeaderboard gets competition leaderboard
+GetPublicCompetitionByIDLeaderboard gets competition leaderboard
 
 Get leaderboard for a competition. Type allowed [public, private]. Sort allowed [accuracy, submission_count]
 */
-func (a *Client) GetPublicCompetitionIDLeaderboard(params *GetPublicCompetitionIDLeaderboardParams, opts ...ClientOption) (*GetPublicCompetitionIDLeaderboardOK, error) {
+func (a *Client) GetPublicCompetitionByIDLeaderboard(params *GetPublicCompetitionByIDLeaderboardParams, opts ...ClientOption) (*GetPublicCompetitionByIDLeaderboardOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicCompetitionIDLeaderboardParams()
+		params = NewGetPublicCompetitionByIDLeaderboardParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicCompetitionIDLeaderboard",
+		ID:                 "getPublicCompetitionByIdLeaderboard",
 		Method:             "GET",
 		PathPattern:        "/public/competition/{id}/leaderboard",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicCompetitionIDLeaderboardReader{formats: a.formats},
+		Reader:             &GetPublicCompetitionByIDLeaderboardReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -172,7 +172,7 @@ func (a *Client) GetPublicCompetitionIDLeaderboard(params *GetPublicCompetitionI
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicCompetitionIDLeaderboardOK)
+	success, ok := result.(*GetPublicCompetitionByIDLeaderboardOK)
 	if ok {
 		return success, nil
 	}
@@ -182,29 +182,29 @@ func (a *Client) GetPublicCompetitionIDLeaderboard(params *GetPublicCompetitionI
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicCompetitionIDLeaderboard: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicCompetitionByIdLeaderboard: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicCompetitionIDPublicLeaderboard gets leaderboard by competition Id and phase
+GetPublicCompetitionByIDPublicLeaderboard gets leaderboard by competition Id and phase
 
 GetLeaderboardByCompetitionIdAndPhase. Sort allowed [accuracy, submissions]
 */
-func (a *Client) GetPublicCompetitionIDPublicLeaderboard(params *GetPublicCompetitionIDPublicLeaderboardParams, opts ...ClientOption) (*GetPublicCompetitionIDPublicLeaderboardOK, error) {
+func (a *Client) GetPublicCompetitionByIDPublicLeaderboard(params *GetPublicCompetitionByIDPublicLeaderboardParams, opts ...ClientOption) (*GetPublicCompetitionByIDPublicLeaderboardOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicCompetitionIDPublicLeaderboardParams()
+		params = NewGetPublicCompetitionByIDPublicLeaderboardParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicCompetitionIDPublicLeaderboard",
+		ID:                 "getPublicCompetitionByIdPublicLeaderboard",
 		Method:             "GET",
 		PathPattern:        "/public/competition/{id}/public/leaderboard",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicCompetitionIDPublicLeaderboardReader{formats: a.formats},
+		Reader:             &GetPublicCompetitionByIDPublicLeaderboardReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -217,7 +217,7 @@ func (a *Client) GetPublicCompetitionIDPublicLeaderboard(params *GetPublicCompet
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicCompetitionIDPublicLeaderboardOK)
+	success, ok := result.(*GetPublicCompetitionByIDPublicLeaderboardOK)
 	if ok {
 		return success, nil
 	}
@@ -227,29 +227,29 @@ func (a *Client) GetPublicCompetitionIDPublicLeaderboard(params *GetPublicCompet
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicCompetitionIDPublicLeaderboard: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicCompetitionByIdPublicLeaderboard: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicCompetitionIDTimelines gets public list of timelines by competition ID
+GetPublicCompetitionByIDTimelines gets public list of timelines by competition ID
 
 Get all timelines for a competition
 */
-func (a *Client) GetPublicCompetitionIDTimelines(params *GetPublicCompetitionIDTimelinesParams, opts ...ClientOption) (*GetPublicCompetitionIDTimelinesOK, error) {
+func (a *Client) GetPublicCompetitionByIDTimelines(params *GetPublicCompetitionByIDTimelinesParams, opts ...ClientOption) (*GetPublicCompetitionByIDTimelinesOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicCompetitionIDTimelinesParams()
+		params = NewGetPublicCompetitionByIDTimelinesParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicCompetitionIDTimelines",
+		ID:                 "getPublicCompetitionByIdTimelines",
 		Method:             "GET",
 		PathPattern:        "/public/competition/{id}/timelines",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicCompetitionIDTimelinesReader{formats: a.formats},
+		Reader:             &GetPublicCompetitionByIDTimelinesReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -262,7 +262,7 @@ func (a *Client) GetPublicCompetitionIDTimelines(params *GetPublicCompetitionIDT
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicCompetitionIDTimelinesOK)
+	success, ok := result.(*GetPublicCompetitionByIDTimelinesOK)
 	if ok {
 		return success, nil
 	}
@@ -272,7 +272,7 @@ func (a *Client) GetPublicCompetitionIDTimelines(params *GetPublicCompetitionIDT
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicCompetitionIDTimelines: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicCompetitionByIdTimelines: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -285,7 +285,7 @@ func (a *Client) GetPublicCompetitionMetadata(params *GetPublicCompetitionMetada
 		params = NewGetPublicCompetitionMetadataParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicCompetitionMetadata",
+		ID:                 "getPublicCompetitionMetadata",
 		Method:             "GET",
 		PathPattern:        "/public/competition/metadata",
 		ProducesMediaTypes: []string{"application/json"},
@@ -315,29 +315,29 @@ func (a *Client) GetPublicCompetitionMetadata(params *GetPublicCompetitionMetada
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicCompetitionMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicCompetitionMetadata: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicCompetitionPathPath gets competition details by path
+GetPublicCompetitionPathByPath gets competition details by path
 
 Get details of a specific competition by path
 */
-func (a *Client) GetPublicCompetitionPathPath(params *GetPublicCompetitionPathPathParams, opts ...ClientOption) (*GetPublicCompetitionPathPathOK, error) {
+func (a *Client) GetPublicCompetitionPathByPath(params *GetPublicCompetitionPathByPathParams, opts ...ClientOption) (*GetPublicCompetitionPathByPathOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicCompetitionPathPathParams()
+		params = NewGetPublicCompetitionPathByPathParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicCompetitionPathPath",
+		ID:                 "getPublicCompetitionPathByPath",
 		Method:             "GET",
 		PathPattern:        "/public/competition/path/{path}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicCompetitionPathPathReader{formats: a.formats},
+		Reader:             &GetPublicCompetitionPathByPathReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -350,7 +350,7 @@ func (a *Client) GetPublicCompetitionPathPath(params *GetPublicCompetitionPathPa
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicCompetitionPathPathOK)
+	success, ok := result.(*GetPublicCompetitionPathByPathOK)
 	if ok {
 		return success, nil
 	}
@@ -360,29 +360,29 @@ func (a *Client) GetPublicCompetitionPathPath(params *GetPublicCompetitionPathPa
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicCompetitionPathPath: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicCompetitionPathByPath: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicCompetitionTimelineID gets timeline by ID
+GetPublicCompetitionTimelineByID gets timeline by ID
 
 Get details of a timeline
 */
-func (a *Client) GetPublicCompetitionTimelineID(params *GetPublicCompetitionTimelineIDParams, opts ...ClientOption) (*GetPublicCompetitionTimelineIDOK, error) {
+func (a *Client) GetPublicCompetitionTimelineByID(params *GetPublicCompetitionTimelineByIDParams, opts ...ClientOption) (*GetPublicCompetitionTimelineByIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicCompetitionTimelineIDParams()
+		params = NewGetPublicCompetitionTimelineByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicCompetitionTimelineID",
+		ID:                 "getPublicCompetitionTimelineById",
 		Method:             "GET",
 		PathPattern:        "/public/competition/timeline/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicCompetitionTimelineIDReader{formats: a.formats},
+		Reader:             &GetPublicCompetitionTimelineByIDReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -395,7 +395,7 @@ func (a *Client) GetPublicCompetitionTimelineID(params *GetPublicCompetitionTime
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicCompetitionTimelineIDOK)
+	success, ok := result.(*GetPublicCompetitionTimelineByIDOK)
 	if ok {
 		return success, nil
 	}
@@ -405,7 +405,7 @@ func (a *Client) GetPublicCompetitionTimelineID(params *GetPublicCompetitionTime
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicCompetitionTimelineID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicCompetitionTimelineById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -420,7 +420,7 @@ func (a *Client) PostPublicCompetitionList(params *PostPublicCompetitionListPara
 		params = NewPostPublicCompetitionListParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "PostPublicCompetitionList",
+		ID:                 "postPublicCompetitionList",
 		Method:             "POST",
 		PathPattern:        "/public/competition/list",
 		ProducesMediaTypes: []string{"application/json"},
@@ -450,7 +450,7 @@ func (a *Client) PostPublicCompetitionList(params *PostPublicCompetitionListPara
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for PostPublicCompetitionList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for postPublicCompetitionList: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

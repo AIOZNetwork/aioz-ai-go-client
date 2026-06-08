@@ -77,126 +77,36 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetPublicDiscussionCompetitionID(params *GetPublicDiscussionCompetitionIDParams, opts ...ClientOption) (*GetPublicDiscussionCompetitionIDOK, error)
+	GetPublicDiscussionByID(params *GetPublicDiscussionByIDParams, opts ...ClientOption) (*GetPublicDiscussionByIDOK, error)
 
-	GetPublicDiscussionDatasetID(params *GetPublicDiscussionDatasetIDParams, opts ...ClientOption) (*GetPublicDiscussionDatasetIDOK, error)
+	GetPublicDiscussionByIDComments(params *GetPublicDiscussionByIDCommentsParams, opts ...ClientOption) (*GetPublicDiscussionByIDCommentsOK, error)
 
-	GetPublicDiscussionID(params *GetPublicDiscussionIDParams, opts ...ClientOption) (*GetPublicDiscussionIDOK, error)
+	GetPublicDiscussionCompetitionByID(params *GetPublicDiscussionCompetitionByIDParams, opts ...ClientOption) (*GetPublicDiscussionCompetitionByIDOK, error)
 
-	GetPublicDiscussionIDComments(params *GetPublicDiscussionIDCommentsParams, opts ...ClientOption) (*GetPublicDiscussionIDCommentsOK, error)
+	GetPublicDiscussionDatasetByID(params *GetPublicDiscussionDatasetByIDParams, opts ...ClientOption) (*GetPublicDiscussionDatasetByIDOK, error)
 
-	GetPublicDiscussionModelID(params *GetPublicDiscussionModelIDParams, opts ...ClientOption) (*GetPublicDiscussionModelIDOK, error)
+	GetPublicDiscussionModelByID(params *GetPublicDiscussionModelByIDParams, opts ...ClientOption) (*GetPublicDiscussionModelByIDOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetPublicDiscussionCompetitionID gets public competition discussion list
-
-sort is allow [trending, created]
+GetPublicDiscussionByID gets discussion detail
 */
-func (a *Client) GetPublicDiscussionCompetitionID(params *GetPublicDiscussionCompetitionIDParams, opts ...ClientOption) (*GetPublicDiscussionCompetitionIDOK, error) {
+func (a *Client) GetPublicDiscussionByID(params *GetPublicDiscussionByIDParams, opts ...ClientOption) (*GetPublicDiscussionByIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicDiscussionCompetitionIDParams()
+		params = NewGetPublicDiscussionByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDiscussionCompetitionID",
-		Method:             "GET",
-		PathPattern:        "/public/discussion/competition/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicDiscussionCompetitionIDReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicDiscussionCompetitionIDOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDiscussionCompetitionID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetPublicDiscussionDatasetID gets dataset discussion list
-
-sort is allow [trending, created]
-*/
-func (a *Client) GetPublicDiscussionDatasetID(params *GetPublicDiscussionDatasetIDParams, opts ...ClientOption) (*GetPublicDiscussionDatasetIDOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicDiscussionDatasetIDParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDiscussionDatasetID",
-		Method:             "GET",
-		PathPattern:        "/public/discussion/dataset/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicDiscussionDatasetIDReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicDiscussionDatasetIDOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDiscussionDatasetID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetPublicDiscussionID gets discussion detail
-*/
-func (a *Client) GetPublicDiscussionID(params *GetPublicDiscussionIDParams, opts ...ClientOption) (*GetPublicDiscussionIDOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicDiscussionIDParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDiscussionID",
+		ID:                 "getPublicDiscussionById",
 		Method:             "GET",
 		PathPattern:        "/public/discussion/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicDiscussionIDReader{formats: a.formats},
+		Reader:             &GetPublicDiscussionByIDReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -209,7 +119,7 @@ func (a *Client) GetPublicDiscussionID(params *GetPublicDiscussionIDParams, opts
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicDiscussionIDOK)
+	success, ok := result.(*GetPublicDiscussionByIDOK)
 	if ok {
 		return success, nil
 	}
@@ -219,27 +129,27 @@ func (a *Client) GetPublicDiscussionID(params *GetPublicDiscussionIDParams, opts
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDiscussionID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicDiscussionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicDiscussionIDComments gets a list of comments
+GetPublicDiscussionByIDComments gets a list of comments
 */
-func (a *Client) GetPublicDiscussionIDComments(params *GetPublicDiscussionIDCommentsParams, opts ...ClientOption) (*GetPublicDiscussionIDCommentsOK, error) {
+func (a *Client) GetPublicDiscussionByIDComments(params *GetPublicDiscussionByIDCommentsParams, opts ...ClientOption) (*GetPublicDiscussionByIDCommentsOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicDiscussionIDCommentsParams()
+		params = NewGetPublicDiscussionByIDCommentsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDiscussionIDComments",
+		ID:                 "getPublicDiscussionByIdComments",
 		Method:             "GET",
 		PathPattern:        "/public/discussion/{id}/comments",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicDiscussionIDCommentsReader{formats: a.formats},
+		Reader:             &GetPublicDiscussionByIDCommentsReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -252,7 +162,7 @@ func (a *Client) GetPublicDiscussionIDComments(params *GetPublicDiscussionIDComm
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicDiscussionIDCommentsOK)
+	success, ok := result.(*GetPublicDiscussionByIDCommentsOK)
 	if ok {
 		return success, nil
 	}
@@ -262,29 +172,119 @@ func (a *Client) GetPublicDiscussionIDComments(params *GetPublicDiscussionIDComm
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDiscussionIDComments: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicDiscussionByIdComments: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicDiscussionModelID gets model discussion list
+GetPublicDiscussionCompetitionByID gets public competition discussion list
 
 sort is allow [trending, created]
 */
-func (a *Client) GetPublicDiscussionModelID(params *GetPublicDiscussionModelIDParams, opts ...ClientOption) (*GetPublicDiscussionModelIDOK, error) {
+func (a *Client) GetPublicDiscussionCompetitionByID(params *GetPublicDiscussionCompetitionByIDParams, opts ...ClientOption) (*GetPublicDiscussionCompetitionByIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicDiscussionModelIDParams()
+		params = NewGetPublicDiscussionCompetitionByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicDiscussionModelID",
+		ID:                 "getPublicDiscussionCompetitionById",
+		Method:             "GET",
+		PathPattern:        "/public/discussion/competition/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetPublicDiscussionCompetitionByIDReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetPublicDiscussionCompetitionByIDOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getPublicDiscussionCompetitionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetPublicDiscussionDatasetByID gets dataset discussion list
+
+sort is allow [trending, created]
+*/
+func (a *Client) GetPublicDiscussionDatasetByID(params *GetPublicDiscussionDatasetByIDParams, opts ...ClientOption) (*GetPublicDiscussionDatasetByIDOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetPublicDiscussionDatasetByIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getPublicDiscussionDatasetById",
+		Method:             "GET",
+		PathPattern:        "/public/discussion/dataset/{id}",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetPublicDiscussionDatasetByIDReader{formats: a.formats},
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetPublicDiscussionDatasetByIDOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getPublicDiscussionDatasetById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetPublicDiscussionModelByID gets model discussion list
+
+sort is allow [trending, created]
+*/
+func (a *Client) GetPublicDiscussionModelByID(params *GetPublicDiscussionModelByIDParams, opts ...ClientOption) (*GetPublicDiscussionModelByIDOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetPublicDiscussionModelByIDParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getPublicDiscussionModelById",
 		Method:             "GET",
 		PathPattern:        "/public/discussion/model/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicDiscussionModelIDReader{formats: a.formats},
+		Reader:             &GetPublicDiscussionModelByIDReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -297,7 +297,7 @@ func (a *Client) GetPublicDiscussionModelID(params *GetPublicDiscussionModelIDPa
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicDiscussionModelIDOK)
+	success, ok := result.(*GetPublicDiscussionModelByIDOK)
 	if ok {
 		return success, nil
 	}
@@ -307,7 +307,7 @@ func (a *Client) GetPublicDiscussionModelID(params *GetPublicDiscussionModelIDPa
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicDiscussionModelID: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicDiscussionModelById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

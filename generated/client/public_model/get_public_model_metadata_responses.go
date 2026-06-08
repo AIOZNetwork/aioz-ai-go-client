@@ -41,7 +41,7 @@ func (o *GetPublicModelMetadataReader) ReadResponse(response runtime.ClientRespo
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/model/metadata] GetPublicModelMetadata", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /public/model/metadata] getPublicModelMetadata", response, response.Code())
 	}
 }
 

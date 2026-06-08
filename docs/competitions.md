@@ -6,9 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `PostAPIKeyCompetition`
+### `PostCompetition`
 
-**`POST /api-key/competition`** — Create a new competition By Api Key
+**`POST /api-key/competition`** — Create a new competition
 
 **Headers**
 
@@ -120,7 +120,7 @@ req := &models.CreateCompetitionRequest{
     Cover: "...",  // string
     Data: "...",  // string
 }
-resp, err := client.Competitions.Competition.PostAPIKeyCompetition(ctx, req)
+resp, err := client.Competitions.Competition.PostCompetition(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -129,9 +129,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCompetitionList`
+### `PostCompetitionList`
 
-**`POST /api-key/competition/list`** — List competitions By Api Key
+**`POST /api-key/competition/list`** — List competitions
 
 **Headers**
 
@@ -147,6 +147,7 @@ fmt.Printf("%+v\n", resp)
 | `following` | `boolean` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `reward_type` | `string` | No | monetary,knowledge,swag,kudos |
 | `role` | `string` | No | host,participant |
 | `search` | `string` | No |  |
@@ -235,9 +236,9 @@ req := &models.GetCompetitionListRequest{
     Following: "...",  // boolean
     Limit: "...",  // integer
     Offset: "...",  // integer
-    RewardType: "...",  // string
+    Order: "...",  // string
 }
-resp, err := client.Competitions.Competition.PostAPIKeyCompetitionList(ctx, req)
+resp, err := client.Competitions.Competition.PostCompetitionList(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -246,9 +247,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyCompetitionPathPath`
+### `GetCompetitionPathByPath`
 
-**`GET /api-key/competition/path/{path}`** — Get competition details by path By Api Key
+**`GET /api-key/competition/path/{path}`** — Get competition details by path
 
 **Headers**
 
@@ -331,7 +332,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.GetAPIKeyCompetitionPathPath(ctx, "<path>")
+resp, err := client.Competitions.Competition.GetCompetitionPathByPath(ctx, "<path>")
 if err != nil {
     log.Fatal(err)
 }
@@ -340,9 +341,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCompetitionPreSubmit`
+### `PostCompetitionPreSubmit`
 
-**`POST /api-key/competition/pre-submit`** — Check valid repo to submit data By Api Key
+**`POST /api-key/competition/pre-submit`** — Check valid repo to submit data
 
 **Headers**
 
@@ -381,7 +382,7 @@ req := &models.CheckValidRepoToEvaluateModelRequest{
     CommitHash: "...",  // string
     ModelID: "...",  // string  // required
 }
-resp, err := client.Competitions.Competition.PostAPIKeyCompetitionPreSubmit(ctx, req)
+resp, err := client.Competitions.Competition.PostCompetitionPreSubmit(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -390,9 +391,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCompetitionSubmit`
+### `PostCompetitionSubmit`
 
-**`POST /api-key/competition/submit`** — Submit competition data By Api Key
+**`POST /api-key/competition/submit`** — Submit competition data
 
 **Headers**
 
@@ -455,7 +456,7 @@ SourceCodeUrl  string    `json:"source_code_url"` |
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.PostAPIKeyCompetitionSubmit(ctx)
+resp, err := client.Competitions.Competition.PostCompetitionSubmit(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -464,9 +465,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCompetitionSubmitCost`
+### `PostCompetitionSubmitCost`
 
-**`POST /api-key/competition/submit/cost`** — Estimate cost to submit data By Api Key
+**`POST /api-key/competition/submit/cost`** — Estimate cost to submit data
 
 **Headers**
 
@@ -516,7 +517,7 @@ req := &models.EstimateCostToEvaluateModelRequest{
     CompetitionID: "...",  // string  // required
     ModelID: "...",  // string  // required
 }
-resp, err := client.Competitions.Competition.PostAPIKeyCompetitionSubmitCost(ctx, req)
+resp, err := client.Competitions.Competition.PostCompetitionSubmitCost(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -525,9 +526,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyCompetitionSubmitHistoryID`
+### `GetCompetitionSubmitHistoryByID`
 
-**`GET /api-key/competition/submit/history/{id}`** — Get submission history By Api Key
+**`GET /api-key/competition/submit/history/{id}`** — Get submission history
 
 **Headers**
 
@@ -592,7 +593,7 @@ SourceCodeUrl  string    `json:"source_code_url"` |
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.GetAPIKeyCompetitionSubmitHistoryID(ctx, "<id>")
+resp, err := client.Competitions.Competition.GetCompetitionSubmitHistoryByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -601,9 +602,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyCompetitionID`
+### `GetCompetitionByID`
 
-**`GET /api-key/competition/{id}`** — Get competition details By Api Key
+**`GET /api-key/competition/{id}`** — Get competition details
 
 **Headers**
 
@@ -686,7 +687,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.GetAPIKeyCompetitionID(ctx, "<id>")
+resp, err := client.Competitions.Competition.GetCompetitionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -695,9 +696,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyCompetitionID`
+### `PutCompetitionByID`
 
-**`PUT /api-key/competition/{id}`** — Update a competition By Api Key
+**`PUT /api-key/competition/{id}`** — Update a competition
 
 **Headers**
 
@@ -814,7 +815,7 @@ req := &models.UpdateCompetitionRequest{
     Data: "...",  // string
     Description: "...",  // string
 }
-resp, err := client.Competitions.Competition.PutAPIKeyCompetitionID(ctx, req)
+resp, err := client.Competitions.Competition.PutCompetitionByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -823,9 +824,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyCompetitionID`
+### `DeleteCompetitionByID`
 
-**`DELETE /api-key/competition/{id}`** — Delete a competition By Api Key
+**`DELETE /api-key/competition/{id}`** — Delete a competition
 
 **Headers**
 
@@ -859,7 +860,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.DeleteAPIKeyCompetitionID(ctx, "<id>")
+resp, err := client.Competitions.Competition.DeleteCompetitionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -868,9 +869,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCompetitionIDJoin`
+### `PostCompetitionByIDJoin`
 
-**`POST /api-key/competition/{id}/join`** — Join a competition By Api Key
+**`POST /api-key/competition/{id}/join`** — Join a competition
 
 **Headers**
 
@@ -904,7 +905,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.PostAPIKeyCompetitionIDJoin(ctx, "<id>")
+resp, err := client.Competitions.Competition.PostCompetitionByIDJoin(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -913,9 +914,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCompetitionIDLaunch`
+### `PostCompetitionByIDLaunch`
 
-**`POST /api-key/competition/{id}/launch`** — Launch a competition By Api Key
+**`POST /api-key/competition/{id}/launch`** — Launch a competition
 
 **Headers**
 
@@ -949,7 +950,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.PostAPIKeyCompetitionIDLaunch(ctx, "<id>")
+resp, err := client.Competitions.Competition.PostCompetitionByIDLaunch(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -958,9 +959,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyCompetitionIDLeaderboard`
+### `GetCompetitionByIDLeaderboard`
 
-**`GET /api-key/competition/{id}/leaderboard`** — Get competition leaderboard By Api Key
+**`GET /api-key/competition/{id}/leaderboard`** — Get competition leaderboard
 
 **Headers**
 
@@ -1033,7 +1034,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Leaderboard.GetAPIKeyCompetitionIDLeaderboard(ctx, "<id>")
+resp, err := client.Competitions.Leaderboard.GetCompetitionByIDLeaderboard(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1042,9 +1043,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyCompetitionIDLeave`
+### `PostCompetitionByIDLeave`
 
-**`POST /api-key/competition/{id}/leave`** — Leave competition By Api Key
+**`POST /api-key/competition/{id}/leave`** — Leave competition
 
 **Headers**
 
@@ -1078,7 +1079,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.PostAPIKeyCompetitionIDLeave(ctx, "<id>")
+resp, err := client.Competitions.Competition.PostCompetitionByIDLeave(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1087,9 +1088,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyCompetitionIDPublicLeaderboard`
+### `GetCompetitionByIDPublicLeaderboard`
 
-**`GET /api-key/competition/{id}/public/leaderboard`** — GetLeaderboardByCompetitionIdAndPhase By Api Key
+**`GET /api-key/competition/{id}/public/leaderboard`** — GetLeaderboardByCompetitionIdAndPhase
 
 **Headers**
 
@@ -1158,7 +1159,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Leaderboard.GetAPIKeyCompetitionIDPublicLeaderboard(ctx, "<id>", "<phase>")
+resp, err := client.Competitions.Leaderboard.GetCompetitionByIDPublicLeaderboard(ctx, "<id>", "<phase>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1179,6 +1180,7 @@ fmt.Printf("%+v\n", resp)
 | `following` | `boolean` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `reward_type` | `string` | No | monetary,knowledge,swag,kudos |
 | `role` | `string` | No | host,participant |
 | `search` | `string` | No |  |
@@ -1255,7 +1257,8 @@ fmt.Printf("%+v\n", resp)
 
 | Status | Description |
 | --- | --- |
-| 400 | Bad Request — [response.ErrorResponse](../README.md#common-response-types) |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
 
 **Example**
 
@@ -1266,7 +1269,7 @@ req := &models.GetCompetitionListRequest{
     Following: "...",  // boolean
     Limit: "...",  // integer
     Offset: "...",  // integer
-    RewardType: "...",  // string
+    Order: "...",  // string
 }
 resp, err := client.Competitions.Competition.PostPublicCompetitionList(ctx, req)
 if err != nil {
@@ -1326,7 +1329,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicCompetitionPathPath`
+### `GetPublicCompetitionPathByPath`
 
 **`GET /public/competition/path/{path}`** — Get competition details by path
 
@@ -1405,7 +1408,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.GetPublicCompetitionPathPath(ctx, "<path>")
+resp, err := client.Competitions.Competition.GetPublicCompetitionPathByPath(ctx, "<path>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1414,7 +1417,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicCompetitionTimelineID`
+### `GetPublicCompetitionTimelineByID`
 
 **`GET /public/competition/timeline/{id}`** — Get timeline by ID
 
@@ -1452,13 +1455,14 @@ fmt.Printf("%+v\n", resp)
 
 | Status | Description |
 | --- | --- |
-| 400 | Bad Request — [response.ErrorResponse](../README.md#common-response-types) |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
 
 **Example**
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.GetPublicCompetitionTimelineID(ctx, "<id>")
+resp, err := client.Competitions.Competition.GetPublicCompetitionTimelineByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1467,7 +1471,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicCompetitionID`
+### `GetPublicCompetitionByID`
 
 **`GET /public/competition/{id}`** — Get competition details
 
@@ -1546,7 +1550,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.GetPublicCompetitionID(ctx, "<id>")
+resp, err := client.Competitions.Competition.GetPublicCompetitionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1555,7 +1559,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicCompetitionIDLeaderboard`
+### `GetPublicCompetitionByIDLeaderboard`
 
 **`GET /public/competition/{id}/leaderboard`** — Get competition leaderboard
 
@@ -1617,13 +1621,14 @@ fmt.Printf("%+v\n", resp)
 
 | Status | Description |
 | --- | --- |
-| 400 | Bad Request — [response.ErrorResponse](../README.md#common-response-types) |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
 
 **Example**
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.GetPublicCompetitionIDLeaderboard(ctx, "<id>")
+resp, err := client.Competitions.Competition.GetPublicCompetitionByIDLeaderboard(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1632,7 +1637,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicCompetitionIDPublicLeaderboard`
+### `GetPublicCompetitionByIDPublicLeaderboard`
 
 **`GET /public/competition/{id}/public/leaderboard`** — GetLeaderboardByCompetitionIdAndPhase
 
@@ -1694,13 +1699,14 @@ fmt.Printf("%+v\n", resp)
 
 | Status | Description |
 | --- | --- |
-| 400 | Bad Request — [response.ErrorResponse](../README.md#common-response-types) |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
 
 **Example**
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.GetPublicCompetitionIDPublicLeaderboard(ctx, "<id>")
+resp, err := client.Competitions.Competition.GetPublicCompetitionByIDPublicLeaderboard(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1709,7 +1715,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicCompetitionIDTimelines`
+### `GetPublicCompetitionByIDTimelines`
 
 **`GET /public/competition/{id}/timelines`** — Get public list of timelines by competition ID
 
@@ -1749,13 +1755,14 @@ fmt.Printf("%+v\n", resp)
 
 | Status | Description |
 | --- | --- |
-| 400 | Bad Request — [response.ErrorResponse](../README.md#common-response-types) |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
 
 **Example**
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions.Competition.GetPublicCompetitionIDTimelines(ctx, "<id>")
+resp, err := client.Competitions.Competition.GetPublicCompetitionByIDTimelines(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }

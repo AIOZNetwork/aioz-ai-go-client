@@ -6,9 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `PostAPIKeyDataset`
+### `PostDataset`
 
-**`POST /api-key/dataset`** — Create dataset By Api Key
+**`POST /api-key/dataset`** — Create dataset
 
 **Headers**
 
@@ -21,8 +21,8 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `author_id` | `string` | No |  |
-| `cover` | `string` | No |  |
-| `description` | `string` | No |  |
+| `cover` | `string` | Yes |  |
+| `description` | `string` | Yes |  |
 | `language` | `array[string]` | No | en, vi |
 | `license` | `string` | Yes |  |
 | `name` | `string` | Yes |  |
@@ -31,7 +31,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 | `size_category` | `string` | No |  |
 | `tags` | `array[string]` | No | art, medical |
 | `task_categories` | `array[string]` | No | feature-extraction, text-to-video |
-| `thumbnail` | `string` | No |  |
+| `thumbnail` | `string` | Yes |  |
 | `visibility` | `string` | Yes | One of: `public`, `private` |
 
 **Responses**
@@ -122,12 +122,12 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 ctx := context.Background()
 req := &models.CreateDatasetRequest{
     AuthorID: "...",  // string
-    Cover: "...",  // string
-    Description: "...",  // string
+    Cover: "...",  // string  // required
+    Description: "...",  // string  // required
     Language: "...",  // array[string]
     License: "...",  // string  // required
 }
-resp, err := client.Datasets.Dataset.PostAPIKeyDataset(ctx, req)
+resp, err := client.Datasets.Dataset.PostDataset(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -136,9 +136,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDatasetList`
+### `PostDatasetList`
 
-**`POST /api-key/dataset/list`** — Get dataset list By Api Key
+**`POST /api-key/dataset/list`** — Get dataset list
 
 **Headers**
 
@@ -155,6 +155,7 @@ fmt.Printf("%+v\n", resp)
 | `license` | `string` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `search` | `string` | No |  |
 | `size_category` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `likes`, `downloads`, `created`, `created_oldest`, `modified` |
@@ -262,7 +263,7 @@ req := &models.GetDatasetListRequest{
     Limit: "...",  // integer
     Offset: "...",  // integer
 }
-resp, err := client.Datasets.Dataset.PostAPIKeyDatasetList(ctx, req)
+resp, err := client.Datasets.Dataset.PostDatasetList(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -271,9 +272,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDatasetListByAuthorUsername`
+### `PostDatasetListByAuthorByUsername`
 
-**`POST /api-key/dataset/list-by-author/{username}`** — Get dataset list by user By Api Key
+**`POST /api-key/dataset/list-by-author/{username}`** — Get dataset list by user
 
 **Headers**
 
@@ -295,6 +296,7 @@ fmt.Printf("%+v\n", resp)
 | `license` | `string` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `search` | `string` | No |  |
 | `size_category` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `likes`, `downloads`, `created`, `created_oldest`, `modified` |
@@ -400,9 +402,9 @@ req := &models.GetDatasetListByAuthorRequest{
     License: "...",  // string
     Limit: "...",  // integer
     Offset: "...",  // integer
-    Search: "...",  // string
+    Order: "...",  // string
 }
-resp, err := client.Datasets.Dataset.PostAPIKeyDatasetListByAuthorUsername(ctx, req)
+resp, err := client.Datasets.Dataset.PostDatasetListByAuthorByUsername(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -411,9 +413,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyDatasetMatchingTags`
+### `PostDatasetMatchingTags`
 
-**`POST /api-key/dataset/matching-tags`** — Get matching datasets tags By Api Key
+**`POST /api-key/dataset/matching-tags`** — Get matching datasets tags
 
 **Headers**
 
@@ -460,7 +462,7 @@ req := &models.MatchingDatasetsTagsRequest{
     TagType: "...",  // string
     Tags: "...",  // array[string]
 }
-resp, err := client.Datasets.Dataset.PostAPIKeyDatasetMatchingTags(ctx, req)
+resp, err := client.Datasets.Dataset.PostDatasetMatchingTags(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -469,9 +471,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDatasetOrganizationOrg`
+### `GetDatasetOrganizationByOrg`
 
-**`GET /api-key/dataset/organization/{org}`** — Get List Dataset By Org Username By Api Key
+**`GET /api-key/dataset/organization/{org}`** — Get List Dataset By Org Username
 
 **Headers**
 
@@ -486,6 +488,7 @@ fmt.Printf("%+v\n", resp)
 | `org` | path | `string` | Yes | Org's username |
 | `limit` | query | `integer` | No |  |
 | `offset` | query | `integer` | No |  |
+| `order` | query | `string` | No |  |
 | `sort` | query | `string` | No |  |
 
 **Responses**
@@ -581,7 +584,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets.Dataset.GetAPIKeyDatasetOrganizationOrg(ctx, "<org>")
+resp, err := client.Datasets.Dataset.GetDatasetOrganizationByOrg(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -590,9 +593,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDatasetID`
+### `GetDatasetByID`
 
-**`GET /api-key/dataset/{id}`** — Get dataset by id By Api Key
+**`GET /api-key/dataset/{id}`** — Get dataset by id
 
 **Headers**
 
@@ -692,7 +695,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets.Dataset.GetAPIKeyDatasetID(ctx, "<id>")
+resp, err := client.Datasets.Dataset.GetDatasetByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -701,9 +704,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyDatasetID`
+### `PutDatasetByID`
 
-**`PUT /api-key/dataset/{id}`** — Update Dataset By Api Key
+**`PUT /api-key/dataset/{id}`** — Update Dataset
 
 **Headers**
 
@@ -820,7 +823,7 @@ req := &models.UpdateDatasetRequest{
     Thumbnail: "...",  // string
     Visibility: "...",  // string
 }
-resp, err := client.Datasets.Dataset.PutAPIKeyDatasetID(ctx, req)
+resp, err := client.Datasets.Dataset.PutDatasetByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -829,9 +832,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyDatasetID`
+### `DeleteDatasetByID`
 
-**`DELETE /api-key/dataset/{id}`** — Delete dataset By Api Key
+**`DELETE /api-key/dataset/{id}`** — Delete dataset
 
 **Headers**
 
@@ -940,7 +943,7 @@ ctx := context.Background()
 req := &models.DeleteDatasetRequest{
     RepositoryName: "...",  // string
 }
-resp, err := client.Datasets.Dataset.DeleteAPIKeyDatasetID(ctx, req)
+resp, err := client.Datasets.Dataset.DeleteDatasetByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -949,9 +952,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDatasetIDDownload`
+### `GetDatasetByIDDownload`
 
-**`GET /api-key/dataset/{id}/download`** — Get List Dataset Download By Api Key
+**`GET /api-key/dataset/{id}/download`** — Get List Dataset Download
 
 **Headers**
 
@@ -1011,7 +1014,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets.Dataset.GetAPIKeyDatasetIDDownload(ctx, "<id>")
+resp, err := client.Datasets.Dataset.GetDatasetByIDDownload(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1020,9 +1023,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDatasetIDLike`
+### `GetDatasetByIDLike`
 
-**`GET /api-key/dataset/{id}/like`** — Get List Dataset Like By Api Key
+**`GET /api-key/dataset/{id}/like`** — Get List Dataset Like
 
 **Headers**
 
@@ -1082,7 +1085,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets.Dataset.GetAPIKeyDatasetIDLike(ctx, "<id>")
+resp, err := client.Datasets.Dataset.GetDatasetByIDLike(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1091,9 +1094,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PutAPIKeyDatasetIDMetadata`
+### `PutDatasetByIDMetadata`
 
-**`PUT /api-key/dataset/{id}/metadata`** — Update dataset's metadata By Api Key
+**`PUT /api-key/dataset/{id}/metadata`** — Update dataset's metadata
 
 **Headers**
 
@@ -1159,7 +1162,7 @@ req := &models.UpdateDatasetMetadataRequest{
     SizeCategory: "...",  // string
     Tags: "...",  // array[string]
 }
-resp, err := client.Datasets.Dataset.PutAPIKeyDatasetIDMetadata(ctx, req)
+resp, err := client.Datasets.Dataset.PutDatasetByIDMetadata(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1168,9 +1171,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyDatasetUsernameName`
+### `GetDatasetByUsernameByName`
 
-**`GET /api-key/dataset/{username}/{name}`** — Get dataset by name By Api Key
+**`GET /api-key/dataset/{username}/{name}`** — Get dataset by name
 
 **Headers**
 
@@ -1271,7 +1274,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets.Dataset.GetAPIKeyDatasetUsernameName(ctx, "<username>", "<name>")
+resp, err := client.Datasets.Dataset.GetDatasetByUsernameByName(ctx, "<username>", "<name>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1293,6 +1296,7 @@ fmt.Printf("%+v\n", resp)
 | `license` | `string` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `search` | `string` | No |  |
 | `size_category` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `likes`, `downloads`, `created`, `created_oldest`, `modified` |
@@ -1409,7 +1413,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostPublicDatasetListByAuthorUsername`
+### `PostPublicDatasetListByAuthorByUsername`
 
 **`POST /public/dataset/list-by-author/{username}`** — Get public dataset list by user
 
@@ -1427,6 +1431,7 @@ fmt.Printf("%+v\n", resp)
 | `license` | `string` | No |  |
 | `limit` | `integer` | No |  |
 | `offset` | `integer` | No |  |
+| `order` | `string` | No | One of: `desc`, `asc` |
 | `search` | `string` | No |  |
 | `size_category` | `string` | No |  |
 | `sort` | `string` | No | One of: `trending`, `likes`, `downloads`, `created`, `created_oldest`, `modified` |
@@ -1532,9 +1537,9 @@ req := &models.GetDatasetListByAuthorRequest{
     License: "...",  // string
     Limit: "...",  // integer
     Offset: "...",  // integer
-    Search: "...",  // string
+    Order: "...",  // string
 }
-resp, err := client.Datasets.Dataset.PostPublicDatasetListByAuthorUsername(ctx, req)
+resp, err := client.Datasets.Dataset.PostPublicDatasetListByAuthorByUsername(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1636,7 +1641,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicDatasetOrganizationOrg`
+### `GetPublicDatasetOrganizationByOrg`
 
 **`GET /public/dataset/organization/{org}`** — Get List Dataset By Org Username
 
@@ -1647,6 +1652,7 @@ fmt.Printf("%+v\n", resp)
 | `org` | path | `string` | Yes | Org's username |
 | `limit` | query | `integer` | No |  |
 | `offset` | query | `integer` | No |  |
+| `order` | query | `string` | No |  |
 | `sort` | query | `string` | No |  |
 
 **Responses**
@@ -1742,7 +1748,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets.Dataset.GetPublicDatasetOrganizationOrg(ctx, "<org>")
+resp, err := client.Datasets.Dataset.GetPublicDatasetOrganizationByOrg(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1864,7 +1870,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicDatasetID`
+### `GetPublicDatasetByID`
 
 **`GET /public/dataset/{id}`** — Get public dataset by id
 
@@ -1960,7 +1966,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets.Dataset.GetPublicDatasetID(ctx, "<id>")
+resp, err := client.Datasets.Dataset.GetPublicDatasetByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1969,7 +1975,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicDatasetUsernameName`
+### `GetPublicDatasetByUsernameByName`
 
 **`GET /public/dataset/{username}/{name}`** — Get public dataset by name
 
@@ -2066,7 +2072,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets.Dataset.GetPublicDatasetUsernameName(ctx, "<username>", "<name>")
+resp, err := client.Datasets.Dataset.GetPublicDatasetByUsernameByName(ctx, "<username>", "<name>")
 if err != nil {
     log.Fatal(err)
 }

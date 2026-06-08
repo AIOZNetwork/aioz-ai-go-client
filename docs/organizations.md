@@ -6,9 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `PostAPIKeyOrganization`
+### `PostOrganization`
 
-**`POST /api-key/organization`** — Create new organization By Api Key
+**`POST /api-key/organization`** — Create new organization
 
 **Headers**
 
@@ -52,7 +52,7 @@ req := &models.CreateOrganizationRequest{
     GithubName: "...",  // string
     HomePage: "...",  // string
 }
-resp, err := client.Organizations.Organization.PostAPIKeyOrganization(ctx, req)
+resp, err := client.Organizations.Organization.PostOrganization(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -61,9 +61,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationList`
+### `GetOrganizationList`
 
-**`GET /api-key/organization/list`** — Get organizations By Api Key
+**`GET /api-key/organization/list`** — Get organizations
 
 **Headers**
 
@@ -122,7 +122,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.GetAPIKeyOrganizationList(ctx)
+resp, err := client.Organizations.Organization.GetOrganizationList(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -131,9 +131,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationOrg`
+### `GetOrganizationByOrg`
 
-**`GET /api-key/organization/{org}`** — Get organization By Api Key
+**`GET /api-key/organization/{org}`** — Get organization
 
 **Headers**
 
@@ -182,7 +182,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.GetAPIKeyOrganizationOrg(ctx, "<org>")
+resp, err := client.Organizations.Organization.GetOrganizationByOrg(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -191,9 +191,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyOrganizationOrg`
+### `DeleteOrganizationByOrg`
 
-**`DELETE /api-key/organization/{org}`** — Delete organization By Api Key
+**`DELETE /api-key/organization/{org}`** — Delete organization
 
 **Headers**
 
@@ -227,7 +227,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.DeleteAPIKeyOrganizationOrg(ctx, "<org>")
+resp, err := client.Organizations.Organization.DeleteOrganizationByOrg(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -236,9 +236,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PatchAPIKeyOrganizationOrgInfo`
+### `PatchOrganizationByOrgInfo`
 
-**`PATCH /api-key/organization/{org}/info`** — Update organization's info By Api Key
+**`PATCH /api-key/organization/{org}/info`** — Update organization's info
 
 **Headers**
 
@@ -310,7 +310,7 @@ req := &models.UpdateOrganizationInfoRequest{
     GithubLink: "...",  // string
     GithubName: "...",  // string
 }
-resp, err := client.Organizations.Organization.PatchAPIKeyOrganizationOrgInfo(ctx, req)
+resp, err := client.Organizations.Organization.PatchOrganizationByOrgInfo(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -319,9 +319,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationOrgIsMember`
+### `GetOrganizationByOrgIsMember`
 
-**`GET /api-key/organization/{org}/is-member`** — Check if user is member of organization By Api Key
+**`GET /api-key/organization/{org}/is-member`** — Check if user is member of organization
 
 **Headers**
 
@@ -363,7 +363,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.GetAPIKeyOrganizationOrgIsMember(ctx, "<org>")
+resp, err := client.Organizations.Organization.GetOrganizationByOrgIsMember(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -372,9 +372,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyOrganizationOrgLeave`
+### `DeleteOrganizationByOrgLeave`
 
-**`DELETE /api-key/organization/{org}/leave`** — Leave Organization By Api Key
+**`DELETE /api-key/organization/{org}/leave`** — Leave Organization
 
 **Headers**
 
@@ -408,7 +408,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.DeleteAPIKeyOrganizationOrgLeave(ctx, "<org>")
+resp, err := client.Organizations.Organization.DeleteOrganizationByOrgLeave(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -417,9 +417,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationOrgMembers`
+### `GetOrganizationByOrgMembers`
 
-**`GET /api-key/organization/{org}/members`** — Get organization's members By Api Key
+**`GET /api-key/organization/{org}/members`** — Get organization's members
 
 **Headers**
 
@@ -551,7 +551,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.GetAPIKeyOrganizationOrgMembers(ctx, "<org>")
+resp, err := client.Organizations.Organization.GetOrganizationByOrgMembers(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -560,9 +560,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationOrgOffers`
+### `GetOrganizationByOrgOffers`
 
-**`GET /api-key/organization/{org}/offers`** — Get organization's offers By Api Key
+**`GET /api-key/organization/{org}/offers`** — Get organization's offers
 
 **Headers**
 
@@ -620,7 +620,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.GetAPIKeyOrganizationOrgOffers(ctx, "<org>")
+resp, err := client.Organizations.Organization.GetOrganizationByOrgOffers(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -629,9 +629,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationOrgPermission`
+### `GetOrganizationByOrgPermission`
 
-**`GET /api-key/organization/{org}/permission`** — Get user organization permission By Api Key
+**`GET /api-key/organization/{org}/permission`** — Get user organization permission
 
 **Headers**
 
@@ -688,7 +688,7 @@ ctx := context.Background()
 req := &models.GetUserOrganizationPermissionRequest{
     
 }
-resp, err := client.Organizations.Organization.GetAPIKeyOrganizationOrgPermission(ctx, req)
+resp, err := client.Organizations.Organization.GetOrganizationByOrgPermission(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -697,9 +697,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationOrgSetting`
+### `GetOrganizationByOrgSetting`
 
-**`GET /api-key/organization/{org}/setting`** — Get organization's setting By Api Key
+**`GET /api-key/organization/{org}/setting`** — Get organization's setting
 
 **Headers**
 
@@ -746,7 +746,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.GetAPIKeyOrganizationOrgSetting(ctx, "<org>")
+resp, err := client.Organizations.Organization.GetOrganizationByOrgSetting(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -755,9 +755,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PatchAPIKeyOrganizationOrgSetting`
+### `PatchOrganizationByOrgSetting`
 
-**`PATCH /api-key/organization/{org}/setting`** — Update organization's join settings By Api Key
+**`PATCH /api-key/organization/{org}/setting`** — Update organization's join settings
 
 **Headers**
 
@@ -821,7 +821,7 @@ req := &models.UpdateJoinSettingsRequest{
     AutoApproveJoinRequest: "...",  // boolean  // required
     DefaultRole: "...",  // string  // required
 }
-resp, err := client.Organizations.Organization.PatchAPIKeyOrganizationOrgSetting(ctx, req)
+resp, err := client.Organizations.Organization.PatchOrganizationByOrgSetting(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -830,9 +830,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyOrganizationOrgStatisticsEarnings`
+### `PostOrganizationByOrgStatisticsEarnings`
 
-**`POST /api-key/organization/{org}/statistics/earnings`** — Get Organzition Earnings Statistics By Owner By Api Key
+**`POST /api-key/organization/{org}/statistics/earnings`** — Get Organzition Earnings Statistics By Owner
 
 **Headers**
 
@@ -892,7 +892,7 @@ req := &models.GetTransactionAnalyticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Organizations.Wallet.PostAPIKeyOrganizationOrgStatisticsEarnings(ctx, req)
+resp, err := client.Organizations.Wallet.PostOrganizationByOrgStatisticsEarnings(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -901,9 +901,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyOrganizationOrgStatisticsSpendingCost`
+### `PostOrganizationByOrgStatisticsSpendingCost`
 
-**`POST /api-key/organization/{org}/statistics/spending-cost`** — Get Organzition Spending Cost Statistics By Owner By Api Key
+**`POST /api-key/organization/{org}/statistics/spending-cost`** — Get Organzition Spending Cost Statistics By Owner
 
 **Headers**
 
@@ -967,7 +967,7 @@ req := &models.GetOrganizationSpendingCostStatisticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Organizations.Wallet.PostAPIKeyOrganizationOrgStatisticsSpendingCost(ctx, req)
+resp, err := client.Organizations.Wallet.PostOrganizationByOrgStatisticsSpendingCost(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -976,9 +976,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationOrgWalletDepositHistory`
+### `GetOrganizationByOrgWalletDepositHistory`
 
-**`GET /api-key/organization/{org}/wallet/deposit/history`** — Get List Org Deposit History By Owner By Api Key
+**`GET /api-key/organization/{org}/wallet/deposit/history`** — Get List Org Deposit History By Owner
 
 **Headers**
 
@@ -1046,7 +1046,7 @@ req := &models.GetListOrgDepositHistoryByOwnerRequest{
     Limit: "...",  // integer
     Offset: "...",  // integer
 }
-resp, err := client.Organizations.Wallet.GetAPIKeyOrganizationOrgWalletDepositHistory(ctx, req)
+resp, err := client.Organizations.Wallet.GetOrganizationByOrgWalletDepositHistory(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1055,9 +1055,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyOrganizationOrgWalletTransactionAnalytics`
+### `PostOrganizationByOrgWalletTransactionAnalytics`
 
-**`POST /api-key/organization/{org}/wallet/transaction/analytics`** — Get Org Transaction Analytics By Owner By Api Key
+**`POST /api-key/organization/{org}/wallet/transaction/analytics`** — Get Org Transaction Analytics By Owner
 
 **Headers**
 
@@ -1134,7 +1134,7 @@ req := &models.GetOrgTransactionAnalyticsByOwnerRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Organizations.Wallet.PostAPIKeyOrganizationOrgWalletTransactionAnalytics(ctx, req)
+resp, err := client.Organizations.Wallet.PostOrganizationByOrgWalletTransactionAnalytics(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1143,9 +1143,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationOrgWalletTransactionHistory`
+### `GetOrganizationByOrgWalletTransactionHistory`
 
-**`GET /api-key/organization/{org}/wallet/transaction/history`** — Get List Org Transaction History By Owner By Api Key
+**`GET /api-key/organization/{org}/wallet/transaction/history`** — Get List Org Transaction History By Owner
 
 **Headers**
 
@@ -1158,14 +1158,9 @@ fmt.Printf("%+v\n", resp)
 | Name | Location | Type | Required | Description |
 | --- | --- | --- | --- | --- |
 | `org` | path | `string` | Yes | organization's username |
-
-**Request Body** — `request.GetListOrgTransactionHistoryByOwnerRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `limit` | `integer` | No |  |
-| `offset` | `integer` | No |  |
-| `type` | `string` | No |  |
+| `limit` | query | `integer` | No |  |
+| `offset` | query | `integer` | No |  |
+| `type` | query | `string` | No |  |
 
 **Responses**
 
@@ -1214,12 +1209,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetListOrgTransactionHistoryByOwnerRequest{
-    Limit: "...",  // integer
-    Offset: "...",  // integer
-    Type: "...",  // string
-}
-resp, err := client.Organizations.Wallet.GetAPIKeyOrganizationOrgWalletTransactionHistory(ctx, req)
+resp, err := client.Organizations.Wallet.GetOrganizationByOrgWalletTransactionHistory(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1228,9 +1218,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyOrganizationOrgWalletTransactionRecent`
+### `PostOrganizationByOrgWalletTransactionRecent`
 
-**`POST /api-key/organization/{org}/wallet/transaction/recent`** — Get List Org Recent Transaction By Owner By Api Key
+**`POST /api-key/organization/{org}/wallet/transaction/recent`** — Get List Org Recent Transaction By Owner
 
 **Headers**
 
@@ -1308,7 +1298,7 @@ req := &models.GetListOrgRecentTransactionByOwnerRequest{
     To: "...",  // string
     Type: "...",  // string
 }
-resp, err := client.Organizations.Wallet.PostAPIKeyOrganizationOrgWalletTransactionRecent(ctx, req)
+resp, err := client.Organizations.Wallet.PostOrganizationByOrgWalletTransactionRecent(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1317,9 +1307,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PostAPIKeyOrganizationOrgWalletWithdrawEarnings`
+### `PostOrganizationByOrgWalletWithdrawEarnings`
 
-**`POST /api-key/organization/{org}/wallet/withdraw/earnings`** — Withdraw Org Earnings By Owner By Api Key
+**`POST /api-key/organization/{org}/wallet/withdraw/earnings`** — Withdraw Org Earnings By Owner
 
 **Headers**
 
@@ -1364,7 +1354,7 @@ req := &models.WithdrawOrgEarningsByOwnerRequest{
     Amount: "...",  // string  // required
     ToWallet: "...",  // string  // required
 }
-resp, err := client.Organizations.Wallet.PostAPIKeyOrganizationOrgWalletWithdrawEarnings(ctx, req)
+resp, err := client.Organizations.Wallet.PostOrganizationByOrgWalletWithdrawEarnings(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1373,9 +1363,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetAPIKeyOrganizationOrgWalletWithdrawHistory`
+### `GetOrganizationByOrgWalletWithdrawHistory`
 
-**`GET /api-key/organization/{org}/wallet/withdraw/history`** — Get list org withdrawal history by owner By Api Key
+**`GET /api-key/organization/{org}/wallet/withdraw/history`** — Get list org withdrawal history by owner
 
 **Headers**
 
@@ -1417,7 +1407,7 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `amount` | `number` |  |
+| `amount` | `string` |  |
 | `created_at` | `string` |  |
 | `evm_tx_hash` | `string` |  |
 | `from_service` | `string` |  |
@@ -1441,7 +1431,7 @@ req := &models.GetListOrgWithdrawalHistoryByOwnerRequest{
     Limit: "...",  // integer
     Offset: "...",  // integer
 }
-resp, err := client.Organizations.Wallet.GetAPIKeyOrganizationOrgWalletWithdrawHistory(ctx, req)
+resp, err := client.Organizations.Wallet.GetOrganizationByOrgWalletWithdrawHistory(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1450,9 +1440,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteAPIKeyOrganizationOrgMember`
+### `DeleteOrganizationByOrgByMember`
 
-**`DELETE /api-key/organization/{org}/{member}`** — Delete organization's member By Api Key
+**`DELETE /api-key/organization/{org}/{member}`** — Delete organization's member
 
 **Headers**
 
@@ -1487,7 +1477,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.DeleteAPIKeyOrganizationOrgMember(ctx, "<org>", "<member>")
+resp, err := client.Organizations.Organization.DeleteOrganizationByOrgByMember(ctx, "<org>", "<member>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1496,9 +1486,9 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `PatchAPIKeyOrganizationOrgMember`
+### `PatchOrganizationByOrgByMember`
 
-**`PATCH /api-key/organization/{org}/{member}`** — Change member's role By Api Key
+**`PATCH /api-key/organization/{org}/{member}`** — Change member's role
 
 **Headers**
 
@@ -1541,7 +1531,7 @@ ctx := context.Background()
 req := &models.ChangeMemberRoleRequest{
     Role: "...",  // string  // required
 }
-resp, err := client.Organizations.Organization.PatchAPIKeyOrganizationOrgMember(ctx, req)
+resp, err := client.Organizations.Organization.PatchOrganizationByOrgByMember(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1558,9 +1548,10 @@ fmt.Printf("%+v\n", resp)
 
 | Name | Location | Type | Required | Description |
 | --- | --- | --- | --- | --- |
+| `keyword` | query | `string` | No |  |
 | `limit` | query | `integer` | No |  |
 | `offset` | query | `integer` | No |  |
-| `sort` | query | `string` | No |  |
+| `type` | query | `string` | No |  |
 
 **Responses**
 
@@ -1613,10 +1604,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -1638,7 +1629,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicOrganizationOrg`
+### `GetPublicOrganizationByOrg`
 
 **`GET /public/organization/{org}`** — Get organization detail
 
@@ -1692,10 +1683,10 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `balance` | `number` |  |
-| `debt` | `number` |  |
-| `earnings` | `number` |  |
-| `free_balance` | `number` |  |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -1708,7 +1699,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.GetPublicOrganizationOrg(ctx, "<org>")
+resp, err := client.Organizations.Organization.GetPublicOrganizationByOrg(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }
@@ -1717,7 +1708,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `GetPublicOrganizationOrgMembers`
+### `GetPublicOrganizationByOrgMembers`
 
 **`GET /public/organization/{org}/members`** — Get pulic organization's members
 
@@ -1845,7 +1836,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations.Organization.GetPublicOrganizationOrgMembers(ctx, "<org>")
+resp, err := client.Organizations.Organization.GetPublicOrganizationByOrgMembers(ctx, "<org>")
 if err != nil {
     log.Fatal(err)
 }

@@ -53,32 +53,32 @@ type ClientOption func(*runtime.ClientOperation)
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetPublicUserUsernameMedals(params *GetPublicUserUsernameMedalsParams, opts ...ClientOption) (*GetPublicUserUsernameMedalsOK, error)
+	GetPublicUserByUsernameMedals(params *GetPublicUserByUsernameMedalsParams, opts ...ClientOption) (*GetPublicUserByUsernameMedalsOK, error)
 
-	GetPublicUserUsernameMedalsStatistics(params *GetPublicUserUsernameMedalsStatisticsParams, opts ...ClientOption) (*GetPublicUserUsernameMedalsStatisticsOK, error)
+	GetPublicUserByUsernameMedalsStatistics(params *GetPublicUserByUsernameMedalsStatisticsParams, opts ...ClientOption) (*GetPublicUserByUsernameMedalsStatisticsOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
 
 /*
-GetPublicUserUsernameMedals gets user medals by medal name
+GetPublicUserByUsernameMedals gets user medals by medal name
 
 Get user medals by medal name. Medal name is allowed [gold, silver, bronze, swag, kudos, knowledge]
 */
-func (a *Client) GetPublicUserUsernameMedals(params *GetPublicUserUsernameMedalsParams, opts ...ClientOption) (*GetPublicUserUsernameMedalsOK, error) {
+func (a *Client) GetPublicUserByUsernameMedals(params *GetPublicUserByUsernameMedalsParams, opts ...ClientOption) (*GetPublicUserByUsernameMedalsOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicUserUsernameMedalsParams()
+		params = NewGetPublicUserByUsernameMedalsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicUserUsernameMedals",
+		ID:                 "getPublicUserByUsernameMedals",
 		Method:             "GET",
 		PathPattern:        "/public/user/{username}/medals",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicUserUsernameMedalsReader{formats: a.formats},
+		Reader:             &GetPublicUserByUsernameMedalsReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -91,7 +91,7 @@ func (a *Client) GetPublicUserUsernameMedals(params *GetPublicUserUsernameMedals
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicUserUsernameMedalsOK)
+	success, ok := result.(*GetPublicUserByUsernameMedalsOK)
 	if ok {
 		return success, nil
 	}
@@ -101,29 +101,29 @@ func (a *Client) GetPublicUserUsernameMedals(params *GetPublicUserUsernameMedals
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicUserUsernameMedals: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicUserByUsernameMedals: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicUserUsernameMedalsStatistics gets user medal statistics by username
+GetPublicUserByUsernameMedalsStatistics gets user medal statistics by username
 
 Get user medal statistics by username
 */
-func (a *Client) GetPublicUserUsernameMedalsStatistics(params *GetPublicUserUsernameMedalsStatisticsParams, opts ...ClientOption) (*GetPublicUserUsernameMedalsStatisticsOK, error) {
+func (a *Client) GetPublicUserByUsernameMedalsStatistics(params *GetPublicUserByUsernameMedalsStatisticsParams, opts ...ClientOption) (*GetPublicUserByUsernameMedalsStatisticsOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicUserUsernameMedalsStatisticsParams()
+		params = NewGetPublicUserByUsernameMedalsStatisticsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "GetPublicUserUsernameMedalsStatistics",
+		ID:                 "getPublicUserByUsernameMedalsStatistics",
 		Method:             "GET",
 		PathPattern:        "/public/user/{username}/medals/statistics",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicUserUsernameMedalsStatisticsReader{formats: a.formats},
+		Reader:             &GetPublicUserByUsernameMedalsStatisticsReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -136,7 +136,7 @@ func (a *Client) GetPublicUserUsernameMedalsStatistics(params *GetPublicUserUser
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicUserUsernameMedalsStatisticsOK)
+	success, ok := result.(*GetPublicUserByUsernameMedalsStatisticsOK)
 	if ok {
 		return success, nil
 	}
@@ -146,7 +146,7 @@ func (a *Client) GetPublicUserUsernameMedalsStatistics(params *GetPublicUserUser
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for GetPublicUserUsernameMedalsStatistics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicUserByUsernameMedalsStatistics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

@@ -9,10 +9,10 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_user"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_user_public_key"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_user_voucher"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/api_key_user_wallet"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_public_key"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_voucher"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_wallet"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -36,8 +36,8 @@ func TestGen_Users_DeleteApiKeyUser(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.DeleteAPIKeyUser(
-		api_key_user.NewDeleteAPIKeyUserParams().WithContext(t.Context()),
+	result, err := client.Users().User.DeleteUser(
+		user.NewDeleteUserParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -68,8 +68,8 @@ func TestGen_Users_PostApiKeyUserApiKey(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.PostAPIKeyUserAPIKey(
-		api_key_user.NewPostAPIKeyUserAPIKeyParams().WithContext(t.Context()),
+	result, err := client.Users().User.PostUserAPIKey(
+		user.NewPostUserAPIKeyParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -100,8 +100,8 @@ func TestGen_Users_GetApiKeyUserChallengeWalletaddress(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.GetAPIKeyUserChallengeWalletAddress(
-		api_key_user.NewGetAPIKeyUserChallengeWalletAddressParams().WithContext(t.Context()).WithWalletAddress("test-id"),
+	result, err := client.Users().User.GetUserChallengeByWalletaddress(
+		user.NewGetUserChallengeByWalletaddressParams().WithContext(t.Context()).WithWalletAddress("test-id"),
 		nil,
 	)
 
@@ -132,8 +132,8 @@ func TestGen_Users_PatchApiKeyUserChangePassword(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.PatchAPIKeyUserChangePassword(
-		api_key_user.NewPatchAPIKeyUserChangePasswordParams().WithContext(t.Context()),
+	result, err := client.Users().User.PatchUserChangePassword(
+		user.NewPatchUserChangePasswordParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -164,8 +164,8 @@ func TestGen_Users_PutApiKeyUserFollowId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.PutAPIKeyUserFollowID(
-		api_key_user.NewPutAPIKeyUserFollowIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Users().User.PutUserFollowByID(
+		user.NewPutUserFollowByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -196,8 +196,8 @@ func TestGen_Users_PostApiKeyUserLinkEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.PostAPIKeyUserLinkEmail(
-		api_key_user.NewPostAPIKeyUserLinkEmailParams().WithContext(t.Context()),
+	result, err := client.Users().User.PostUserLinkEmail(
+		user.NewPostUserLinkEmailParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -228,8 +228,8 @@ func TestGen_Users_PatchApiKeyUserLinkEmailEmail(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.PatchAPIKeyUserLinkEmailEmail(
-		api_key_user.NewPatchAPIKeyUserLinkEmailEmailParams().WithContext(t.Context()).WithEmail("test-id"),
+	result, err := client.Users().User.PatchUserLinkEmailByEmail(
+		user.NewPatchUserLinkEmailByEmailParams().WithContext(t.Context()).WithEmail("test-id"),
 		nil,
 	)
 
@@ -260,8 +260,8 @@ func TestGen_Users_PostApiKeyUserLinkWallet(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.PostAPIKeyUserLinkWallet(
-		api_key_user.NewPostAPIKeyUserLinkWalletParams().WithContext(t.Context()),
+	result, err := client.Users().User.PostUserLinkWallet(
+		user.NewPostUserLinkWalletParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -292,8 +292,8 @@ func TestGen_Users_GetApiKeyUserMe(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.GetAPIKeyUserMe(
-		api_key_user.NewGetAPIKeyUserMeParams().WithContext(t.Context()),
+	result, err := client.Users().User.GetUserMe(
+		user.NewGetUserMeParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -324,8 +324,8 @@ func TestGen_Users_GetApiKeyUserOffers(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.GetAPIKeyUserOffers(
-		api_key_user.NewGetAPIKeyUserOffersParams().WithContext(t.Context()),
+	result, err := client.Users().User.GetUserOffers(
+		user.NewGetUserOffersParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -356,8 +356,8 @@ func TestGen_Users_GetApiKeyUserOrgUsernames(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.GetAPIKeyUserOrgUsernames(
-		api_key_user.NewGetAPIKeyUserOrgUsernamesParams().WithContext(t.Context()),
+	result, err := client.Users().User.GetUserOrgUsernames(
+		user.NewGetUserOrgUsernamesParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -388,8 +388,8 @@ func TestGen_Users_GetApiKeyUserPermissionSearch(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.GetAPIKeyUserPermissionSearch(
-		api_key_user.NewGetAPIKeyUserPermissionSearchParams().WithContext(t.Context()),
+	result, err := client.Users().User.GetUserPermissionSearch(
+		user.NewGetUserPermissionSearchParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -420,8 +420,8 @@ func TestGen_Users_PatchApiKeyUserProfile(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.PatchAPIKeyUserProfile(
-		api_key_user.NewPatchAPIKeyUserProfileParams().WithContext(t.Context()),
+	result, err := client.Users().User.PatchUserProfile(
+		user.NewPatchUserProfileParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -452,8 +452,8 @@ func TestGen_Users_GetApiKeyUserPublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().PublicKey.GetAPIKeyUserPublicKey(
-		api_key_user_public_key.NewGetAPIKeyUserPublicKeyParams().WithContext(t.Context()),
+	result, err := client.Users().PublicKey.GetUserPublicKey(
+		user_public_key.NewGetUserPublicKeyParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -484,8 +484,8 @@ func TestGen_Users_PostApiKeyUserPublicKey(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().PublicKey.PostAPIKeyUserPublicKey(
-		api_key_user_public_key.NewPostAPIKeyUserPublicKeyParams().WithContext(t.Context()),
+	result, err := client.Users().PublicKey.PostUserPublicKey(
+		user_public_key.NewPostUserPublicKeyParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -516,8 +516,8 @@ func TestGen_Users_DeleteApiKeyUserPublicKeyKeyid(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().PublicKey.DeleteAPIKeyUserPublicKeyKeyID(
-		api_key_user_public_key.NewDeleteAPIKeyUserPublicKeyKeyIDParams().WithContext(t.Context()).WithKeyID(1),
+	result, err := client.Users().PublicKey.DeleteUserPublicKeyByKeyid(
+		user_public_key.NewDeleteUserPublicKeyByKeyidParams().WithContext(t.Context()).WithKeyID(1),
 		nil,
 	)
 
@@ -548,8 +548,8 @@ func TestGen_Users_PostApiKeyUserStatisticsEarnings(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.PostAPIKeyUserStatisticsEarnings(
-		api_key_user_wallet.NewPostAPIKeyUserStatisticsEarningsParams().WithContext(t.Context()),
+	result, err := client.Users().Wallet.PostUserStatisticsEarnings(
+		user_wallet.NewPostUserStatisticsEarningsParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -580,8 +580,8 @@ func TestGen_Users_PostApiKeyUserStatisticsSpendingCost(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.PostAPIKeyUserStatisticsSpendingCost(
-		api_key_user_wallet.NewPostAPIKeyUserStatisticsSpendingCostParams().WithContext(t.Context()),
+	result, err := client.Users().Wallet.PostUserStatisticsSpendingCost(
+		user_wallet.NewPostUserStatisticsSpendingCostParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -612,8 +612,8 @@ func TestGen_Users_PostApiKeyUserVoucherClaim(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Voucher.PostAPIKeyUserVoucherClaim(
-		api_key_user_voucher.NewPostAPIKeyUserVoucherClaimParams().WithContext(t.Context()),
+	result, err := client.Users().Voucher.PostUserVoucherClaim(
+		user_voucher.NewPostUserVoucherClaimParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -644,8 +644,8 @@ func TestGen_Users_GetApiKeyUserWalletDepositHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.GetAPIKeyUserWalletDepositHistory(
-		api_key_user_wallet.NewGetAPIKeyUserWalletDepositHistoryParams().WithContext(t.Context()),
+	result, err := client.Users().Wallet.GetUserWalletDepositHistory(
+		user_wallet.NewGetUserWalletDepositHistoryParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -676,8 +676,8 @@ func TestGen_Users_PostApiKeyUserWalletTransactionAnalytics(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.PostAPIKeyUserWalletTransactionAnalytics(
-		api_key_user_wallet.NewPostAPIKeyUserWalletTransactionAnalyticsParams().WithContext(t.Context()),
+	result, err := client.Users().Wallet.PostUserWalletTransactionAnalytics(
+		user_wallet.NewPostUserWalletTransactionAnalyticsParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -708,8 +708,8 @@ func TestGen_Users_GetApiKeyUserWalletTransactionHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.GetAPIKeyUserWalletTransactionHistory(
-		api_key_user_wallet.NewGetAPIKeyUserWalletTransactionHistoryParams().WithContext(t.Context()),
+	result, err := client.Users().Wallet.GetUserWalletTransactionHistory(
+		user_wallet.NewGetUserWalletTransactionHistoryParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -740,8 +740,8 @@ func TestGen_Users_PostApiKeyUserWalletTransactionRecent(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.PostAPIKeyUserWalletTransactionRecent(
-		api_key_user_wallet.NewPostAPIKeyUserWalletTransactionRecentParams().WithContext(t.Context()),
+	result, err := client.Users().Wallet.PostUserWalletTransactionRecent(
+		user_wallet.NewPostUserWalletTransactionRecentParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -772,8 +772,8 @@ func TestGen_Users_GetApiKeyUserWalletWithdrawHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.GetAPIKeyUserWalletWithdrawHistory(
-		api_key_user_wallet.NewGetAPIKeyUserWalletWithdrawHistoryParams().WithContext(t.Context()),
+	result, err := client.Users().Wallet.GetUserWalletWithdrawHistory(
+		user_wallet.NewGetUserWalletWithdrawHistoryParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -804,8 +804,8 @@ func TestGen_Users_GetApiKeyUserUsername(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().User.GetAPIKeyUserUsername(
-		api_key_user.NewGetAPIKeyUserUsernameParams().WithContext(t.Context()).WithUsername("testuser"),
+	result, err := client.Users().User.GetUserByUsername(
+		user.NewGetUserByUsernameParams().WithContext(t.Context()).WithUsername("testuser"),
 		nil,
 	)
 
