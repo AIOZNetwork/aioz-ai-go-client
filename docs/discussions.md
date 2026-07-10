@@ -6,115 +6,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `PostCollectionByIDReport`
+### `PutCommentsByID`
 
-**`POST /api-key/collection/{id}/report`** — Report Collection
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `id` | path | `string` | Yes | Collection's id |
-
-**Request Body** — `request.ReportCollectionRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `reason` | `string` | Yes |  |
-| `url` | `string` | Yes |  |
-
-**Responses**
-
-**200 OK** — `response.DiscussionResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `models.LiteDiscussion` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`models.LiteDiscussion`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `comments_count` | `integer` |  |
-| `content` | `string` |  |
-| `created_at` | `string` |  |
-| `id` | `string` |  |
-| `is_closed` | `boolean` |  |
-| `owner` | `models.Owner` |  |
-| `reacted` | `models.Reaction` |  |
-| `reactions_statistics` | `array[models.ReactionStats]` |  |
-| `reacts_count` | `integer` |  |
-| `title` | `string` |  |
-| `updated_at` | `string` |  |
-| `violated` | `boolean` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Reaction`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created_at` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `models.Owner` |  |
-| `updated_at` | `string` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.ReactionStats`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `count` | `integer` |  |
-| `name` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-req := &models.ReportCollectionRequest{
-    Reason: "...",  // string  // required
-    URL: "...",  // string  // required
-}
-resp, err := client.Discussions.Discussion.PostCollectionByIDReport(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PostCommentsByIDReport`
-
-**`POST /api-key/comments/{id}/report`** — Report Comment
+**`PUT /api-key/comments/{id}`** — Update comment
 
 **Headers**
 
@@ -128,39 +22,55 @@ fmt.Printf("%+v\n", resp)
 | --- | --- | --- | --- | --- |
 | `id` | path | `string` | Yes | Comment's id |
 
-**Request Body** — `request.ReportCommentRequest`
+**Request Body** — `request.UpdateCommentRequest`
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `reason` | `string` | Yes |  |
-| `url` | `string` | Yes |  |
+| `content` | `string` | No |  |
+| `tag_usernames` | `array[string]` | No |  |
 
 **Responses**
 
-**200 OK** — `response.DiscussionResponse`
+**200 OK** — `response.CommentResponse`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `models.LiteDiscussion` |  |
+| `data` | `models.Comment` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
 
-**`models.LiteDiscussion`**
+**`models.Comment`**
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comments_count` | `integer` |  |
 | `content` | `string` |  |
 | `created_at` | `string` |  |
 | `id` | `string` |  |
-| `is_closed` | `boolean` |  |
 | `owner` | `models.Owner` |  |
 | `reacted` | `models.Reaction` |  |
+| `reactions` | `array[models.Reaction]` |  |
 | `reactions_statistics` | `array[models.ReactionStats]` |  |
 | `reacts_count` | `integer` |  |
-| `title` | `string` |  |
+| `tag_usernames` | `array[string]` |  |
 | `updated_at` | `string` |  |
 | `violated` | `boolean` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
 
 **`models.Owner`**
 
@@ -205,11 +115,56 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.ReportCommentRequest{
-    Reason: "...",  // string  // required
-    URL: "...",  // string  // required
+req := &models.UpdateCommentRequest{
+    Content: "...",  // string
+    TagUsernames: "...",  // array[string]
 }
-resp, err := client.Discussions.Discussion.PostCommentsByIDReport(ctx, req)
+resp, err := client.Discussions().Comment.PutCommentsByID(ctx, req)
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Printf("%+v\n", resp)
+```
+
+---
+
+### `PutDatasetByIDLike`
+
+**`PUT /api-key/dataset/{id}/like`** — Like dataset
+
+**Headers**
+
+| Header | Value | Required |
+| --- | --- | --- |
+| `x-api-key` | Your API key | Yes |
+
+**Parameters**
+
+| Name | Location | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `id` | path | `string` | Yes | Dataset's id |
+
+**Responses**
+
+**200 OK** — `response.SuccessResponse`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `message` | `string` |  |
+| `status` | `string` |  |
+
+**Error Responses**
+
+| Status | Description |
+| --- | --- |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
+
+**Example**
+
+```go
+ctx := context.Background()
+resp, err := client.Discussions().Reaction.PutDatasetByIDLike(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -316,7 +271,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetDiscussionCompetitionByID(ctx, "<id>")
+resp, err := client.Discussions().Discussion.GetDiscussionCompetitionByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -422,7 +377,7 @@ req := &models.CreateCompetitionDiscussionRequest{
     Content: "...",  // string  // required
     Title: "...",  // string  // required
 }
-resp, err := client.Discussions.Discussion.PostDiscussionCompetitionByID(ctx, req)
+resp, err := client.Discussions().Discussion.PostDiscussionCompetitionByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -527,7 +482,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetDiscussionDatasetByID(ctx, "<id>")
+resp, err := client.Discussions().Discussion.GetDiscussionDatasetByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -633,7 +588,7 @@ req := &models.CreateDatasetDiscussionRequest{
     Content: "...",  // string  // required
     Title: "...",  // string  // required
 }
-resp, err := client.Discussions.Discussion.PostDiscussionDatasetByID(ctx, req)
+resp, err := client.Discussions().Discussion.PostDiscussionDatasetByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -738,7 +693,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetDiscussionModelByID(ctx, "<id>")
+resp, err := client.Discussions().Discussion.GetDiscussionModelByID(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }
@@ -844,7 +799,7 @@ req := &models.CreateModelDiscussionRequest{
     Content: "...",  // string  // required
     Title: "...",  // string  // required
 }
-resp, err := client.Discussions.Discussion.PostDiscussionModelByID(ctx, req)
+resp, err := client.Discussions().Discussion.PostDiscussionModelByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -952,7 +907,7 @@ req := &models.UpdateDiscussionRequest{
     IsClosed: "...",  // boolean
     Title: "...",  // string
 }
-resp, err := client.Discussions.Discussion.PutDiscussionByID(ctx, req)
+resp, err := client.Discussions().Discussion.PutDiscussionByID(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -961,598 +916,15 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteDiscussionByID`
+### `GetDiscussionByIDComments`
 
-**`DELETE /api-key/discussion/{id}`** — Delete discussion
+**`GET /api-key/discussion/{id}/comments`** — Get comment list
 
 **Headers**
 
 | Header | Value | Required |
 | --- | --- | --- |
 | `x-api-key` | Your API key | Yes |
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `id` | path | `string` | Yes | Discussion's id |
-
-**Responses**
-
-**200 OK** — `response.DiscussionResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `models.LiteDiscussion` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`models.LiteDiscussion`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `comments_count` | `integer` |  |
-| `content` | `string` |  |
-| `created_at` | `string` |  |
-| `id` | `string` |  |
-| `is_closed` | `boolean` |  |
-| `owner` | `models.Owner` |  |
-| `reacted` | `models.Reaction` |  |
-| `reactions_statistics` | `array[models.ReactionStats]` |  |
-| `reacts_count` | `integer` |  |
-| `title` | `string` |  |
-| `updated_at` | `string` |  |
-| `violated` | `boolean` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Reaction`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created_at` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `models.Owner` |  |
-| `updated_at` | `string` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.ReactionStats`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `count` | `integer` |  |
-| `name` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Discussions.Discussion.DeleteDiscussionByID(ctx, "<id>")
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PostDiscussionByIDReport`
-
-**`POST /api-key/discussion/{id}/report`** — Report Discussion
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `id` | path | `string` | Yes | Discussion's id |
-
-**Request Body** — `request.ReportDiscussionRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `reason` | `string` | Yes |  |
-| `url` | `string` | Yes |  |
-
-**Responses**
-
-**200 OK** — `response.DiscussionResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `models.LiteDiscussion` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`models.LiteDiscussion`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `comments_count` | `integer` |  |
-| `content` | `string` |  |
-| `created_at` | `string` |  |
-| `id` | `string` |  |
-| `is_closed` | `boolean` |  |
-| `owner` | `models.Owner` |  |
-| `reacted` | `models.Reaction` |  |
-| `reactions_statistics` | `array[models.ReactionStats]` |  |
-| `reacts_count` | `integer` |  |
-| `title` | `string` |  |
-| `updated_at` | `string` |  |
-| `violated` | `boolean` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Reaction`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created_at` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `models.Owner` |  |
-| `updated_at` | `string` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.ReactionStats`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `count` | `integer` |  |
-| `name` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-req := &models.ReportDiscussionRequest{
-    Reason: "...",  // string  // required
-    URL: "...",  // string  // required
-}
-resp, err := client.Discussions.Discussion.PostDiscussionByIDReport(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `GetPublicDiscussionCompetitionByID`
-
-**`GET /public/discussion/competition/{id}`** — Get public competition discussion list
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `id` | path | `string` | Yes | Competition's id |
-| `filter` | query | `string` | No |  |
-| `limit` | query | `integer` | No |  |
-| `offset` | query | `integer` | No |  |
-| `search` | query | `string` | No |  |
-| `sort` | query | `string` | No |  |
-
-**Responses**
-
-**200 OK** — `response.DiscussionListResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `response.DiscussionListData` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`response.DiscussionListData`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `records` | `array[models.LiteDiscussion]` |  |
-| `total` | `integer` |  |
-
-**`models.LiteDiscussion`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `comments_count` | `integer` |  |
-| `content` | `string` |  |
-| `created_at` | `string` |  |
-| `id` | `string` |  |
-| `is_closed` | `boolean` |  |
-| `owner` | `models.Owner` |  |
-| `reacted` | `models.Reaction` |  |
-| `reactions_statistics` | `array[models.ReactionStats]` |  |
-| `reacts_count` | `integer` |  |
-| `title` | `string` |  |
-| `updated_at` | `string` |  |
-| `violated` | `boolean` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Reaction`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created_at` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `models.Owner` |  |
-| `updated_at` | `string` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.ReactionStats`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `count` | `integer` |  |
-| `name` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionCompetitionByID(ctx, "<id>")
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `GetPublicDiscussionDatasetByID`
-
-**`GET /public/discussion/dataset/{id}`** — Get dataset discussion list
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `id` | path | `string` | Yes | Dataset's id |
-| `limit` | query | `integer` | No |  |
-| `offset` | query | `integer` | No |  |
-| `sort` | query | `string` | No |  |
-
-**Responses**
-
-**200 OK** — `response.DiscussionListResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `response.DiscussionListData` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`response.DiscussionListData`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `records` | `array[models.LiteDiscussion]` |  |
-| `total` | `integer` |  |
-
-**`models.LiteDiscussion`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `comments_count` | `integer` |  |
-| `content` | `string` |  |
-| `created_at` | `string` |  |
-| `id` | `string` |  |
-| `is_closed` | `boolean` |  |
-| `owner` | `models.Owner` |  |
-| `reacted` | `models.Reaction` |  |
-| `reactions_statistics` | `array[models.ReactionStats]` |  |
-| `reacts_count` | `integer` |  |
-| `title` | `string` |  |
-| `updated_at` | `string` |  |
-| `violated` | `boolean` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Reaction`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created_at` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `models.Owner` |  |
-| `updated_at` | `string` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.ReactionStats`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `count` | `integer` |  |
-| `name` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionDatasetByID(ctx, "<id>")
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `GetPublicDiscussionModelByID`
-
-**`GET /public/discussion/model/{id}`** — Get model discussion list
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `id` | path | `string` | Yes | Model's id |
-| `limit` | query | `integer` | No |  |
-| `offset` | query | `integer` | No |  |
-| `sort` | query | `string` | No |  |
-
-**Responses**
-
-**200 OK** — `response.DiscussionListResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `response.DiscussionListData` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`response.DiscussionListData`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `records` | `array[models.LiteDiscussion]` |  |
-| `total` | `integer` |  |
-
-**`models.LiteDiscussion`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `comments_count` | `integer` |  |
-| `content` | `string` |  |
-| `created_at` | `string` |  |
-| `id` | `string` |  |
-| `is_closed` | `boolean` |  |
-| `owner` | `models.Owner` |  |
-| `reacted` | `models.Reaction` |  |
-| `reactions_statistics` | `array[models.ReactionStats]` |  |
-| `reacts_count` | `integer` |  |
-| `title` | `string` |  |
-| `updated_at` | `string` |  |
-| `violated` | `boolean` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Reaction`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created_at` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `models.Owner` |  |
-| `updated_at` | `string` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.ReactionStats`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `count` | `integer` |  |
-| `name` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionModelByID(ctx, "<id>")
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `GetPublicDiscussionByID`
-
-**`GET /public/discussion/{id}`** — Get discussion detail
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `id` | path | `string` | Yes | Discussion's id |
-
-**Responses**
-
-**200 OK** — `response.DiscussionResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `models.LiteDiscussion` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`models.LiteDiscussion`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `comments_count` | `integer` |  |
-| `content` | `string` |  |
-| `created_at` | `string` |  |
-| `id` | `string` |  |
-| `is_closed` | `boolean` |  |
-| `owner` | `models.Owner` |  |
-| `reacted` | `models.Reaction` |  |
-| `reactions_statistics` | `array[models.ReactionStats]` |  |
-| `reacts_count` | `integer` |  |
-| `title` | `string` |  |
-| `updated_at` | `string` |  |
-| `violated` | `boolean` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Reaction`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created_at` | `string` |  |
-| `name` | `string` |  |
-| `owner` | `models.Owner` |  |
-| `updated_at` | `string` |  |
-
-**`models.Owner`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.ReactionStats`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `count` | `integer` |  |
-| `name` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionByID(ctx, "<id>")
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `GetPublicDiscussionByIDComments`
-
-**`GET /public/discussion/{id}/comments`** — Get a list of comments
 
 **Parameters**
 
@@ -1656,7 +1028,230 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions.Discussion.GetPublicDiscussionByIDComments(ctx, "<id>")
+resp, err := client.Discussions().Comment.GetDiscussionByIDComments(ctx, "<id>")
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Printf("%+v\n", resp)
+```
+
+---
+
+### `PostDiscussionByIDComments`
+
+**`POST /api-key/discussion/{id}/comments`** — Create comment
+
+**Headers**
+
+| Header | Value | Required |
+| --- | --- | --- |
+| `x-api-key` | Your API key | Yes |
+
+**Parameters**
+
+| Name | Location | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `id` | path | `string` | Yes | Discussion's id |
+
+**Request Body** — `request.CreateCommentRequest`
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `content` | `string` | No |  |
+| `tag_usernames` | `array[string]` | No |  |
+
+**Responses**
+
+**200 OK** — `response.CommentResponse`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `data` | `models.Comment` |  |
+| `message` | `string` |  |
+| `status` | `string` |  |
+
+**`models.Comment`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `content` | `string` |  |
+| `created_at` | `string` |  |
+| `id` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `reacted` | `models.Reaction` |  |
+| `reactions` | `array[models.Reaction]` |  |
+| `reactions_statistics` | `array[models.ReactionStats]` |  |
+| `reacts_count` | `integer` |  |
+| `tag_usernames` | `array[string]` |  |
+| `updated_at` | `string` |  |
+| `violated` | `boolean` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.ReactionStats`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `count` | `integer` |  |
+| `name` | `string` |  |
+
+**Error Responses**
+
+| Status | Description |
+| --- | --- |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
+
+**Example**
+
+```go
+ctx := context.Background()
+req := &models.CreateCommentRequest{
+    Content: "...",  // string
+    TagUsernames: "...",  // array[string]
+}
+resp, err := client.Discussions().Comment.PostDiscussionByIDComments(ctx, req)
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Printf("%+v\n", resp)
+```
+
+---
+
+### `PutItemsByIDReact`
+
+**`PUT /api-key/items/{id}/react`** — React item
+
+**Headers**
+
+| Header | Value | Required |
+| --- | --- | --- |
+| `x-api-key` | Your API key | Yes |
+
+**Parameters**
+
+| Name | Location | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `id` | path | `string` | Yes | Item's id |
+
+**Request Body** — `request.ReactItemRequest`
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `itemName` | `string` | No |  |
+| `reactName` | `string` | No |  |
+
+**Responses**
+
+**200 OK** — `response.SuccessResponse`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `message` | `string` |  |
+| `status` | `string` |  |
+
+**Error Responses**
+
+| Status | Description |
+| --- | --- |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
+
+**Example**
+
+```go
+ctx := context.Background()
+req := &models.ReactItemRequest{
+    Itemname: "...",  // string
+    Reactname: "...",  // string
+}
+resp, err := client.Discussions().Reaction.PutItemsByIDReact(ctx, req)
+if err != nil {
+    log.Fatal(err)
+}
+fmt.Printf("%+v\n", resp)
+```
+
+---
+
+### `PutModelByIDLike`
+
+**`PUT /api-key/model/{id}/like`** — Like model
+
+**Headers**
+
+| Header | Value | Required |
+| --- | --- | --- |
+| `x-api-key` | Your API key | Yes |
+
+**Parameters**
+
+| Name | Location | Type | Required | Description |
+| --- | --- | --- | --- | --- |
+| `id` | path | `string` | Yes | Model's id |
+
+**Responses**
+
+**200 OK** — `response.SuccessResponse`
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `message` | `string` |  |
+| `status` | `string` |  |
+
+**Error Responses**
+
+| Status | Description |
+| --- | --- |
+| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
+| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
+
+**Example**
+
+```go
+ctx := context.Background()
+resp, err := client.Discussions().Reaction.PutModelByIDLike(ctx, "<id>")
 if err != nil {
     log.Fatal(err)
 }

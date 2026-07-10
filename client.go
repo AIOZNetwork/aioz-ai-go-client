@@ -56,6 +56,9 @@ func NewClient(opts ...Option) (*Client, error) {
 	// Wrap with error-converting transport
 	rt = &errorTransport{next: rt}
 
+	// Inject SDK identification header on every request
+	rt = &headerTransport{next: rt}
+
 	// Create HTTP client with timeout
 	httpClient := &http.Client{
 		Transport: rt,
@@ -88,7 +91,7 @@ func (c *Client) Config() *ClientConfig {
 	return c.config
 }
 
-// Models returns the models service for AI model management operations.
+// Models returns the models service for Model management operations.
 func (c *Client) Models() *services.ModelsService {
 	return services.NewModelsService(c.raw)
 }
@@ -111,11 +114,6 @@ func (c *Client) Collections() *services.CollectionsService {
 // Discussions returns the discussions service for discussion and comment operations.
 func (c *Client) Discussions() *services.DiscussionsService {
 	return services.NewDiscussionsService(c.raw)
-}
-
-// Notifications returns the notifications service.
-func (c *Client) Notifications() *services.NotificationsService {
-	return services.NewNotificationsService(c.raw)
 }
 
 // Organizations returns the organizations service for org management operations.
@@ -143,9 +141,25 @@ func (c *Client) Public() *services.PublicService {
 	return services.NewPublicService(c.raw)
 }
 
-// Core returns the core service for root endpoints and minor services.
-func (c *Client) Core() *services.TaskService {
-	return services.NewTaskService(c.raw)
+// Task returns the task service for tasks operations.
+func (c *Client) Tasks() *services.TasksService {
+	return services.NewTasksService(c.raw)
+}
+
+// Core returns the core service for core platform operations.
+func (c *Client) Core() *services.CoreService {
+	return services.NewCoreService(c.raw)
+}
+
+// headerTransport injects fixed headers into every outgoing request.
+type headerTransport struct {
+	next http.RoundTripper
+}
+
+func (t *headerTransport) RoundTrip(req *http.Request) (*http.Response, error) {
+	req = req.Clone(req.Context())
+	req.Header.Set("X-Client-Source", "sdk/go-"+Version)
+	return t.next.RoundTrip(req)
 }
 
 // errorTransport wraps an http.RoundTripper and converts non-2xx responses

@@ -5,7 +5,7 @@ import (
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/storage"
 )
 
-// StorageService provides access to storage-related API operations.
+// StorageService provides access to Service wrapper for all storage-related  API operations.-related API operations.
 type StorageService struct {
 	Storage storage.ClientService
 }

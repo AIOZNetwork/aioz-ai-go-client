@@ -77,21 +77,17 @@ func WithContentTypeMultipartFormData(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteCompetitionByID(params *DeleteCompetitionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCompetitionByIDOK, error)
-
 	GetCompetitionByID(params *GetCompetitionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCompetitionByIDOK, error)
+
+	GetCompetitionByIDLeaderboard(params *GetCompetitionByIDLeaderboardParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCompetitionByIDLeaderboardOK, error)
+
+	GetCompetitionByIDPublicLeaderboard(params *GetCompetitionByIDPublicLeaderboardParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCompetitionByIDPublicLeaderboardOK, error)
 
 	GetCompetitionPathByPath(params *GetCompetitionPathByPathParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCompetitionPathByPathOK, error)
 
 	GetCompetitionSubmitHistoryByID(params *GetCompetitionSubmitHistoryByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCompetitionSubmitHistoryByIDOK, error)
 
-	PostCompetition(params *PostCompetitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCompetitionOK, error)
-
 	PostCompetitionByIDJoin(params *PostCompetitionByIDJoinParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCompetitionByIDJoinOK, error)
-
-	PostCompetitionByIDLaunch(params *PostCompetitionByIDLaunchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCompetitionByIDLaunchOK, error)
-
-	PostCompetitionByIDLeave(params *PostCompetitionByIDLeaveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCompetitionByIDLeaveOK, error)
 
 	PostCompetitionList(params *PostCompetitionListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCompetitionListOK, error)
 
@@ -101,55 +97,7 @@ type ClientService interface {
 
 	PostCompetitionSubmitCost(params *PostCompetitionSubmitCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCompetitionSubmitCostOK, error)
 
-	PutCompetitionByID(params *PutCompetitionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutCompetitionByIDOK, error)
-
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-DeleteCompetitionByID deletes a competition
-
-Delete an existing competition by ID
-*/
-func (a *Client) DeleteCompetitionByID(params *DeleteCompetitionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCompetitionByIDOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewDeleteCompetitionByIDParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteCompetitionById",
-		Method:             "DELETE",
-		PathPattern:        "/api-key/competition/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteCompetitionByIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*DeleteCompetitionByIDOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for deleteCompetitionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -195,6 +143,98 @@ func (a *Client) GetCompetitionByID(params *GetCompetitionByIDParams, authInfo r
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getCompetitionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetCompetitionByIDLeaderboard gets competition leaderboard
+
+Get leaderboard for a competition. Type allowed [public, private]. Sort allowed [accuracy, submissions]
+*/
+func (a *Client) GetCompetitionByIDLeaderboard(params *GetCompetitionByIDLeaderboardParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCompetitionByIDLeaderboardOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetCompetitionByIDLeaderboardParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getCompetitionByIdLeaderboard",
+		Method:             "GET",
+		PathPattern:        "/api-key/competition/{id}/leaderboard",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetCompetitionByIDLeaderboardReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetCompetitionByIDLeaderboardOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getCompetitionByIdLeaderboard: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetCompetitionByIDPublicLeaderboard gets leaderboard by competition Id and phase
+
+GetLeaderboardByCompetitionIdAndPhase. Sort allowed [accuracy, submissions]
+*/
+func (a *Client) GetCompetitionByIDPublicLeaderboard(params *GetCompetitionByIDPublicLeaderboardParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCompetitionByIDPublicLeaderboardOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetCompetitionByIDPublicLeaderboardParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getCompetitionByIdPublicLeaderboard",
+		Method:             "GET",
+		PathPattern:        "/api-key/competition/{id}/public/leaderboard",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetCompetitionByIDPublicLeaderboardReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetCompetitionByIDPublicLeaderboardOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getCompetitionByIdPublicLeaderboard: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -291,52 +331,6 @@ func (a *Client) GetCompetitionSubmitHistoryByID(params *GetCompetitionSubmitHis
 }
 
 /*
-PostCompetition creates a new competition
-
-Create a new competition with the given details. Use this field private_leaderboard_release_date to determine whether the competition have private evaluate or not. The medals only distribute when evaluate_type = auto
-*/
-func (a *Client) PostCompetition(params *PostCompetitionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCompetitionOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPostCompetitionParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "postCompetition",
-		Method:             "POST",
-		PathPattern:        "/api-key/competition",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostCompetitionReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PostCompetitionOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for postCompetition: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 PostCompetitionByIDJoin joins a competition
 
 Join an existing competition by its ID
@@ -379,98 +373,6 @@ func (a *Client) PostCompetitionByIDJoin(params *PostCompetitionByIDJoinParams, 
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for postCompetitionByIdJoin: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostCompetitionByIDLaunch launches a competition
-
-Launch an existing competition by ID. Make sure competition is fully updated and setup evaluation before launch
-*/
-func (a *Client) PostCompetitionByIDLaunch(params *PostCompetitionByIDLaunchParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCompetitionByIDLaunchOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPostCompetitionByIDLaunchParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "postCompetitionByIdLaunch",
-		Method:             "POST",
-		PathPattern:        "/api-key/competition/{id}/launch",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostCompetitionByIDLaunchReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PostCompetitionByIDLaunchOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for postCompetitionByIdLaunch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostCompetitionByIDLeave leaves competition
-
-Leave a competition
-*/
-func (a *Client) PostCompetitionByIDLeave(params *PostCompetitionByIDLeaveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCompetitionByIDLeaveOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPostCompetitionByIDLeaveParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "postCompetitionByIdLeave",
-		Method:             "POST",
-		PathPattern:        "/api-key/competition/{id}/leave",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostCompetitionByIDLeaveReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PostCompetitionByIDLeaveOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for postCompetitionByIdLeave: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -655,52 +557,6 @@ func (a *Client) PostCompetitionSubmitCost(params *PostCompetitionSubmitCostPara
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for postCompetitionSubmitCost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PutCompetitionByID updates a competition
-
-Update an existing competition with new details. Use this field private_leaderboard_release_date to determine whether the competition have private evaluate or not. The medals only distribute when evaluate_type = auto
-*/
-func (a *Client) PutCompetitionByID(params *PutCompetitionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutCompetitionByIDOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPutCompetitionByIDParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "putCompetitionById",
-		Method:             "PUT",
-		PathPattern:        "/api-key/competition/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PutCompetitionByIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PutCompetitionByIDOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for putCompetitionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

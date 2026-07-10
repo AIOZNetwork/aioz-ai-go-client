@@ -5,7 +5,7 @@ import (
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/dataset"
 )
 
-// DatasetsService provides access to dataset-related API operations.
+// DatasetsService provides access to Service wrapper for all dataset-related API operations.-related API operations.
 type DatasetsService struct {
 	Dataset dataset.ClientService
 }

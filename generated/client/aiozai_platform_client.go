@@ -8,45 +8,21 @@ import (
 	"github.com/go-openapi/strfmt"
 
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/collection"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/comments"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/comment"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/competition"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/competition_leaderboard"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/core"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/dataset"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/dependency"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/discussion"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_api_key"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_package"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_playground"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_reviews"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_setting"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_training"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_verify"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/model_versioning"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/notification"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/offer"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization_wallet"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/packages"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/platform_task"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization_payment"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_collection"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_competition"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_dataset"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_discussion"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_medals"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_model"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public_organization"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/reaction"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/repository"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/search"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/storage"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/task"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/training_task"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_public_key"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_voucher"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_wallet"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_payment"
 )
 
 // Default aiozai platform HTTP client.
@@ -92,45 +68,21 @@ func New(transport runtime.ClientTransport, formats strfmt.Registry) *AiozaiPlat
 	cli := new(AiozaiPlatform)
 	cli.Transport = transport
 	cli.Collection = collection.New(transport, formats)
-	cli.Comments = comments.New(transport, formats)
+	cli.Comment = comment.New(transport, formats)
 	cli.Competition = competition.New(transport, formats)
-	cli.CompetitionLeaderboard = competition_leaderboard.New(transport, formats)
+	cli.Core = core.New(transport, formats)
 	cli.Dataset = dataset.New(transport, formats)
-	cli.Dependency = dependency.New(transport, formats)
 	cli.Discussion = discussion.New(transport, formats)
 	cli.Model = model.New(transport, formats)
-	cli.ModelAPIKey = model_api_key.New(transport, formats)
-	cli.ModelPackage = model_package.New(transport, formats)
-	cli.ModelPlayground = model_playground.New(transport, formats)
-	cli.ModelReviews = model_reviews.New(transport, formats)
-	cli.ModelSetting = model_setting.New(transport, formats)
-	cli.ModelTraining = model_training.New(transport, formats)
-	cli.ModelVerify = model_verify.New(transport, formats)
-	cli.ModelVersioning = model_versioning.New(transport, formats)
-	cli.Notification = notification.New(transport, formats)
-	cli.Offer = offer.New(transport, formats)
 	cli.Organization = organization.New(transport, formats)
-	cli.OrganizationWallet = organization_wallet.New(transport, formats)
-	cli.Packages = packages.New(transport, formats)
-	cli.PlatformTask = platform_task.New(transport, formats)
+	cli.OrganizationPayment = organization_payment.New(transport, formats)
 	cli.Public = public.New(transport, formats)
-	cli.PublicCollection = public_collection.New(transport, formats)
-	cli.PublicCompetition = public_competition.New(transport, formats)
-	cli.PublicDataset = public_dataset.New(transport, formats)
-	cli.PublicDiscussion = public_discussion.New(transport, formats)
-	cli.PublicMedals = public_medals.New(transport, formats)
-	cli.PublicModel = public_model.New(transport, formats)
-	cli.PublicOrganization = public_organization.New(transport, formats)
 	cli.Reaction = reaction.New(transport, formats)
 	cli.Repository = repository.New(transport, formats)
-	cli.Search = search.New(transport, formats)
 	cli.Storage = storage.New(transport, formats)
 	cli.Task = task.New(transport, formats)
-	cli.TrainingTask = training_task.New(transport, formats)
 	cli.User = user.New(transport, formats)
-	cli.UserPublicKey = user_public_key.New(transport, formats)
-	cli.UserVoucher = user_voucher.New(transport, formats)
-	cli.UserWallet = user_wallet.New(transport, formats)
+	cli.UserPayment = user_payment.New(transport, formats)
 	return cli
 }
 
@@ -177,83 +129,35 @@ func (cfg *TransportConfig) WithSchemes(schemes []string) *TransportConfig {
 type AiozaiPlatform struct {
 	Collection collection.ClientService
 
-	Comments comments.ClientService
+	Comment comment.ClientService
 
 	Competition competition.ClientService
 
-	CompetitionLeaderboard competition_leaderboard.ClientService
+	Core core.ClientService
 
 	Dataset dataset.ClientService
-
-	Dependency dependency.ClientService
 
 	Discussion discussion.ClientService
 
 	Model model.ClientService
 
-	ModelAPIKey model_api_key.ClientService
-
-	ModelPackage model_package.ClientService
-
-	ModelPlayground model_playground.ClientService
-
-	ModelReviews model_reviews.ClientService
-
-	ModelSetting model_setting.ClientService
-
-	ModelTraining model_training.ClientService
-
-	ModelVerify model_verify.ClientService
-
-	ModelVersioning model_versioning.ClientService
-
-	Notification notification.ClientService
-
-	Offer offer.ClientService
-
 	Organization organization.ClientService
 
-	OrganizationWallet organization_wallet.ClientService
-
-	Packages packages.ClientService
-
-	PlatformTask platform_task.ClientService
+	OrganizationPayment organization_payment.ClientService
 
 	Public public.ClientService
-
-	PublicCollection public_collection.ClientService
-
-	PublicCompetition public_competition.ClientService
-
-	PublicDataset public_dataset.ClientService
-
-	PublicDiscussion public_discussion.ClientService
-
-	PublicMedals public_medals.ClientService
-
-	PublicModel public_model.ClientService
-
-	PublicOrganization public_organization.ClientService
 
 	Reaction reaction.ClientService
 
 	Repository repository.ClientService
 
-	Search search.ClientService
-
 	Storage storage.ClientService
 
 	Task task.ClientService
 
-	TrainingTask training_task.ClientService
-
 	User user.ClientService
 
-	UserPublicKey user_public_key.ClientService
-
-	UserVoucher user_voucher.ClientService
-
-	UserWallet user_wallet.ClientService
+	UserPayment user_payment.ClientService
 
 	Transport runtime.ClientTransport
 }
@@ -262,43 +166,19 @@ type AiozaiPlatform struct {
 func (c *AiozaiPlatform) SetTransport(transport runtime.ClientTransport) {
 	c.Transport = transport
 	c.Collection.SetTransport(transport)
-	c.Comments.SetTransport(transport)
+	c.Comment.SetTransport(transport)
 	c.Competition.SetTransport(transport)
-	c.CompetitionLeaderboard.SetTransport(transport)
+	c.Core.SetTransport(transport)
 	c.Dataset.SetTransport(transport)
-	c.Dependency.SetTransport(transport)
 	c.Discussion.SetTransport(transport)
 	c.Model.SetTransport(transport)
-	c.ModelAPIKey.SetTransport(transport)
-	c.ModelPackage.SetTransport(transport)
-	c.ModelPlayground.SetTransport(transport)
-	c.ModelReviews.SetTransport(transport)
-	c.ModelSetting.SetTransport(transport)
-	c.ModelTraining.SetTransport(transport)
-	c.ModelVerify.SetTransport(transport)
-	c.ModelVersioning.SetTransport(transport)
-	c.Notification.SetTransport(transport)
-	c.Offer.SetTransport(transport)
 	c.Organization.SetTransport(transport)
-	c.OrganizationWallet.SetTransport(transport)
-	c.Packages.SetTransport(transport)
-	c.PlatformTask.SetTransport(transport)
+	c.OrganizationPayment.SetTransport(transport)
 	c.Public.SetTransport(transport)
-	c.PublicCollection.SetTransport(transport)
-	c.PublicCompetition.SetTransport(transport)
-	c.PublicDataset.SetTransport(transport)
-	c.PublicDiscussion.SetTransport(transport)
-	c.PublicMedals.SetTransport(transport)
-	c.PublicModel.SetTransport(transport)
-	c.PublicOrganization.SetTransport(transport)
 	c.Reaction.SetTransport(transport)
 	c.Repository.SetTransport(transport)
-	c.Search.SetTransport(transport)
 	c.Storage.SetTransport(transport)
 	c.Task.SetTransport(transport)
-	c.TrainingTask.SetTransport(transport)
 	c.User.SetTransport(transport)
-	c.UserPublicKey.SetTransport(transport)
-	c.UserVoucher.SetTransport(transport)
-	c.UserWallet.SetTransport(transport)
+	c.UserPayment.SetTransport(transport)
 }

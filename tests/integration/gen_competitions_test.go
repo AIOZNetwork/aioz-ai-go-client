@@ -10,41 +10,8 @@ import (
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/competition"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/competition_leaderboard"
 	"github.com/stretchr/testify/assert"
 )
-
-func TestGen_Competitions_PostApiKeyCompetition(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Competitions().Competition.PostCompetition(
-		competition.NewPostCompetitionParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/competition")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
 
 func TestGen_Competitions_PostApiKeyCompetitionList(t *testing.T) {
 	var capturedMethod, capturedPath string
@@ -238,38 +205,6 @@ func TestGen_Competitions_GetApiKeyCompetitionSubmitHistoryId(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Competitions_DeleteApiKeyCompetitionId(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Competitions().Competition.DeleteCompetitionByID(
-		competition.NewDeleteCompetitionByIDParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "DELETE", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/competition")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
 func TestGen_Competitions_GetApiKeyCompetitionId(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
@@ -296,38 +231,6 @@ func TestGen_Competitions_GetApiKeyCompetitionId(t *testing.T) {
 	)
 
 	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/competition")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Competitions_PutApiKeyCompetitionId(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Competitions().Competition.PutCompetitionByID(
-		competition.NewPutCompetitionByIDParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "PUT", capturedMethod)
 	assert.Contains(t, capturedPath, "/api-key/competition")
 	assert.Equal(t, "test-key", capturedAPIKey)
 	assert.NoError(t, err)
@@ -366,38 +269,6 @@ func TestGen_Competitions_PostApiKeyCompetitionIdJoin(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Competitions_PostApiKeyCompetitionIdLaunch(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Competitions().Competition.PostCompetitionByIDLaunch(
-		competition.NewPostCompetitionByIDLaunchParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/competition")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
 func TestGen_Competitions_GetApiKeyCompetitionIdLeaderboard(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
@@ -418,44 +289,12 @@ func TestGen_Competitions_GetApiKeyCompetitionIdLeaderboard(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Leaderboard.GetCompetitionByIDLeaderboard(
-		competition_leaderboard.NewGetCompetitionByIDLeaderboardParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Competitions().Competition.GetCompetitionByIDLeaderboard(
+		competition.NewGetCompetitionByIDLeaderboardParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
 	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/competition")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Competitions_PostApiKeyCompetitionIdLeave(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Competitions().Competition.PostCompetitionByIDLeave(
-		competition.NewPostCompetitionByIDLeaveParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
 	assert.Contains(t, capturedPath, "/api-key/competition")
 	assert.Equal(t, "test-key", capturedAPIKey)
 	assert.NoError(t, err)
@@ -482,8 +321,8 @@ func TestGen_Competitions_GetApiKeyCompetitionIdPublicLeaderboard(t *testing.T) 
 		t.Fatal(err)
 	}
 
-	result, err := client.Competitions().Leaderboard.GetCompetitionByIDPublicLeaderboard(
-		competition_leaderboard.NewGetCompetitionByIDPublicLeaderboardParams().WithContext(t.Context()).WithID("test-id").WithPhase("test-id"),
+	result, err := client.Competitions().Competition.GetCompetitionByIDPublicLeaderboard(
+		competition.NewGetCompetitionByIDPublicLeaderboardParams().WithContext(t.Context()).WithID("test-id").WithPhase("test-id"),
 		nil,
 	)
 

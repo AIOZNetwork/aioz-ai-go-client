@@ -41,7 +41,7 @@ func (o *GetPublicMetadataReader) ReadResponse(response runtime.ClientResponse, 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/metadata] getPublicMetadata", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api-key/public/metadata] getPublicMetadata", response, response.Code())
 	}
 }
 
@@ -91,12 +91,12 @@ func (o *GetPublicMetadataOK) Code() int {
 
 func (o *GetPublicMetadataOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/metadata][%d] getPublicMetadataOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api-key/public/metadata][%d] getPublicMetadataOK %s", 200, payload)
 }
 
 func (o *GetPublicMetadataOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/metadata][%d] getPublicMetadataOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api-key/public/metadata][%d] getPublicMetadataOK %s", 200, payload)
 }
 
 func (o *GetPublicMetadataOK) GetPayload() *models.ResponseGetListMetadataResponse {
@@ -161,12 +161,12 @@ func (o *GetPublicMetadataBadRequest) Code() int {
 
 func (o *GetPublicMetadataBadRequest) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/metadata][%d] getPublicMetadataBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /api-key/public/metadata][%d] getPublicMetadataBadRequest %s", 400, payload)
 }
 
 func (o *GetPublicMetadataBadRequest) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/metadata][%d] getPublicMetadataBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /api-key/public/metadata][%d] getPublicMetadataBadRequest %s", 400, payload)
 }
 
 func (o *GetPublicMetadataBadRequest) GetPayload() *models.ResponseFailResponse {
@@ -231,12 +231,12 @@ func (o *GetPublicMetadataInternalServerError) Code() int {
 
 func (o *GetPublicMetadataInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/metadata][%d] getPublicMetadataInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /api-key/public/metadata][%d] getPublicMetadataInternalServerError %s", 500, payload)
 }
 
 func (o *GetPublicMetadataInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/metadata][%d] getPublicMetadataInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /api-key/public/metadata][%d] getPublicMetadataInternalServerError %s", 500, payload)
 }
 
 func (o *GetPublicMetadataInternalServerError) GetPayload() *models.ResponseErrorResponse {

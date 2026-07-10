@@ -88,12 +88,12 @@ func TestNewClient_ServiceAccessors(t *testing.T) {
 	assert.NotNil(t, client.Competitions())
 	assert.NotNil(t, client.Collections())
 	assert.NotNil(t, client.Discussions())
-	assert.NotNil(t, client.Notifications())
 	assert.NotNil(t, client.Organizations())
 	assert.NotNil(t, client.Repositories())
 	assert.NotNil(t, client.Storage())
 	assert.NotNil(t, client.Users())
 	assert.NotNil(t, client.Public())
+	assert.NotNil(t, client.Tasks())
 	assert.NotNil(t, client.Core())
 }
 

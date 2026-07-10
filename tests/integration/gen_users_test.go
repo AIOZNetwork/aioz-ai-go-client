@@ -10,267 +10,9 @@ import (
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_public_key"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_voucher"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_wallet"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/user_payment"
 	"github.com/stretchr/testify/assert"
 )
-
-func TestGen_Users_DeleteApiKeyUser(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.DeleteUser(
-		user.NewDeleteUserParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "DELETE", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_PostApiKeyUserApiKey(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.PostUserAPIKey(
-		user.NewPostUserAPIKeyParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/api-key")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_GetApiKeyUserChallengeWalletaddress(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.GetUserChallengeByWalletaddress(
-		user.NewGetUserChallengeByWalletaddressParams().WithContext(t.Context()).WithWalletAddress("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/challenge")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_PatchApiKeyUserChangePassword(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.PatchUserChangePassword(
-		user.NewPatchUserChangePasswordParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "PATCH", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/change-password")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_PutApiKeyUserFollowId(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.PutUserFollowByID(
-		user.NewPutUserFollowByIDParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "PUT", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/follow")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_PostApiKeyUserLinkEmail(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.PostUserLinkEmail(
-		user.NewPostUserLinkEmailParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/link-email")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_PatchApiKeyUserLinkEmailEmail(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.PatchUserLinkEmailByEmail(
-		user.NewPatchUserLinkEmailByEmailParams().WithContext(t.Context()).WithEmail("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "PATCH", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/link-email")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_PostApiKeyUserLinkWallet(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.PostUserLinkWallet(
-		user.NewPostUserLinkWalletParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/link-wallet")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
 
 func TestGen_Users_GetApiKeyUserMe(t *testing.T) {
 	var capturedMethod, capturedPath string
@@ -299,38 +41,6 @@ func TestGen_Users_GetApiKeyUserMe(t *testing.T) {
 
 	assert.Equal(t, "GET", capturedMethod)
 	assert.Contains(t, capturedPath, "/api-key/user/me")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_GetApiKeyUserOffers(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.GetUserOffers(
-		user.NewGetUserOffersParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/offers")
 	assert.Equal(t, "test-key", capturedAPIKey)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
@@ -368,38 +78,6 @@ func TestGen_Users_GetApiKeyUserOrgUsernames(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Users_GetApiKeyUserPermissionSearch(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().User.GetUserPermissionSearch(
-		user.NewGetUserPermissionSearchParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/permission/search")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
 func TestGen_Users_PatchApiKeyUserProfile(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
@@ -432,102 +110,6 @@ func TestGen_Users_PatchApiKeyUserProfile(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Users_GetApiKeyUserPublicKey(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().PublicKey.GetUserPublicKey(
-		user_public_key.NewGetUserPublicKeyParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/public-key")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_PostApiKeyUserPublicKey(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().PublicKey.PostUserPublicKey(
-		user_public_key.NewPostUserPublicKeyParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/public-key")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_DeleteApiKeyUserPublicKeyKeyid(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().PublicKey.DeleteUserPublicKeyByKeyid(
-		user_public_key.NewDeleteUserPublicKeyByKeyidParams().WithContext(t.Context()).WithKeyID(1),
-		nil,
-	)
-
-	assert.Equal(t, "DELETE", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/public-key")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
 func TestGen_Users_PostApiKeyUserStatisticsEarnings(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
@@ -548,8 +130,8 @@ func TestGen_Users_PostApiKeyUserStatisticsEarnings(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.PostUserStatisticsEarnings(
-		user_wallet.NewPostUserStatisticsEarningsParams().WithContext(t.Context()),
+	result, err := client.Users().Payment.PostUserStatisticsEarnings(
+		user_payment.NewPostUserStatisticsEarningsParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -580,45 +162,13 @@ func TestGen_Users_PostApiKeyUserStatisticsSpendingCost(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.PostUserStatisticsSpendingCost(
-		user_wallet.NewPostUserStatisticsSpendingCostParams().WithContext(t.Context()),
+	result, err := client.Users().Payment.PostUserStatisticsSpendingCost(
+		user_payment.NewPostUserStatisticsSpendingCostParams().WithContext(t.Context()),
 		nil,
 	)
 
 	assert.Equal(t, "POST", capturedMethod)
 	assert.Contains(t, capturedPath, "/api-key/user/statistics/spending-cost")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Users_PostApiKeyUserVoucherClaim(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Users().Voucher.PostUserVoucherClaim(
-		user_voucher.NewPostUserVoucherClaimParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/user/voucher/claim")
 	assert.Equal(t, "test-key", capturedAPIKey)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
@@ -644,8 +194,8 @@ func TestGen_Users_GetApiKeyUserWalletDepositHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.GetUserWalletDepositHistory(
-		user_wallet.NewGetUserWalletDepositHistoryParams().WithContext(t.Context()),
+	result, err := client.Users().Payment.GetUserWalletDepositHistory(
+		user_payment.NewGetUserWalletDepositHistoryParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -676,8 +226,8 @@ func TestGen_Users_PostApiKeyUserWalletTransactionAnalytics(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.PostUserWalletTransactionAnalytics(
-		user_wallet.NewPostUserWalletTransactionAnalyticsParams().WithContext(t.Context()),
+	result, err := client.Users().Payment.PostUserWalletTransactionAnalytics(
+		user_payment.NewPostUserWalletTransactionAnalyticsParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -708,8 +258,8 @@ func TestGen_Users_GetApiKeyUserWalletTransactionHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.GetUserWalletTransactionHistory(
-		user_wallet.NewGetUserWalletTransactionHistoryParams().WithContext(t.Context()),
+	result, err := client.Users().Payment.GetUserWalletTransactionHistory(
+		user_payment.NewGetUserWalletTransactionHistoryParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -740,8 +290,8 @@ func TestGen_Users_PostApiKeyUserWalletTransactionRecent(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.PostUserWalletTransactionRecent(
-		user_wallet.NewPostUserWalletTransactionRecentParams().WithContext(t.Context()),
+	result, err := client.Users().Payment.PostUserWalletTransactionRecent(
+		user_payment.NewPostUserWalletTransactionRecentParams().WithContext(t.Context()),
 		nil,
 	)
 
@@ -772,8 +322,8 @@ func TestGen_Users_GetApiKeyUserWalletWithdrawHistory(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Users().Wallet.GetUserWalletWithdrawHistory(
-		user_wallet.NewGetUserWalletWithdrawHistoryParams().WithContext(t.Context()),
+	result, err := client.Users().Payment.GetUserWalletWithdrawHistory(
+		user_payment.NewGetUserWalletWithdrawHistoryParams().WithContext(t.Context()),
 		nil,
 	)
 

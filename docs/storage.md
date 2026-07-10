@@ -63,7 +63,7 @@ req := &models.CreatePresignedUrlRequest{
     OrgUsername: "...",  // string
     Size: "...",  // integer  // required
 }
-resp, err := client.Storages.Storage.PostStorageUploadCreatePresignedUrl(ctx, req)
+resp, err := client.Storage().Storage.PostStorageUploadCreatePresignedUrl(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -118,7 +118,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Storages.Storage.GetStorageUploadStatistics(ctx)
+resp, err := client.Storage().Storage.GetStorageUploadStatistics(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -190,7 +190,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Storages.Storage.GetStorageUploadByFolder(ctx, "<folder>")
+resp, err := client.Storage().Storage.GetStorageUploadByFolder(ctx, "<folder>")
 if err != nil {
     log.Fatal(err)
 }
@@ -238,7 +238,7 @@ ctx := context.Background()
 req := &models.DeleteUrlRequest{
     URL: "...",  // string  // required
 }
-resp, err := client.Storages.Storage.DeleteStorageW3sUrl(ctx, req)
+resp, err := client.Storage().Storage.DeleteStorageW3sUrl(ctx, req)
 if err != nil {
     log.Fatal(err)
 }

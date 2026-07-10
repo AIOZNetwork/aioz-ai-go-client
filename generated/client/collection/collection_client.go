@@ -77,8 +77,6 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteCollectionByID(params *DeleteCollectionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCollectionByIDOK, error)
-
 	DeleteCollectionByIDItem(params *DeleteCollectionByIDItemParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCollectionByIDItemOK, error)
 
 	GetCollectionByID(params *GetCollectionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetCollectionByIDOK, error)
@@ -96,50 +94,6 @@ type ClientService interface {
 	PutCollectionByIDVote(params *PutCollectionByIDVoteParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutCollectionByIDVoteOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-DeleteCollectionByID deletes collection
-*/
-func (a *Client) DeleteCollectionByID(params *DeleteCollectionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteCollectionByIDOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewDeleteCollectionByIDParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteCollectionById",
-		Method:             "DELETE",
-		PathPattern:        "/api-key/collection/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteCollectionByIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*DeleteCollectionByIDOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for deleteCollectionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*

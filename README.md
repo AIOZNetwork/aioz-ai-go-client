@@ -4,7 +4,7 @@ Go client SDK for the [AIOZ AI](https://aiozai.network) API. Auto-generated from
 
 ## Features
 
-- Full type safety for all 218+ API endpoints and 578+ models
+- Full type safety for all API endpoints and models
 - API Key configured once at client creation
 - Automatic retry with exponential backoff for transient failures
 - Configurable timeouts for standard and upload operations
@@ -43,7 +43,7 @@ func main() {
 
     ctx := context.Background()
     models := client.Models()
-    _ = models // use models.Model, models.Training, etc.
+    _ = models // use models.Model, etc.
     fmt.Println("client ready", ctx)
 }
 ```
@@ -80,18 +80,19 @@ client, err := aiozai.NewClient(
 
 | Service | Access | Description | Reference |
 | --- | --- | --- | --- |
-| Models | `client.Models()` | AI model management | [docs/models.md](docs/models.md) |
-| Datasets | `client.Datasets()` | Dataset management | [docs/datasets.md](docs/datasets.md) |
+| Collections | `client.Collections()` | Collection management | [docs/collections.md](docs/collections.md) |
 | Competitions | `client.Competitions()` | Competitions & submissions | [docs/competitions.md](docs/competitions.md) |
-| Collections | `client.Collections()` | Curated collections | [docs/collections.md](docs/collections.md) |
+| Core | `client.Core()` | Core endpoints | [docs/core.md](docs/core.md) |
+| Datasets | `client.Datasets()` | Dataset management | [docs/datasets.md](docs/datasets.md) |
 | Discussions | `client.Discussions()` | Discussions & comments | [docs/discussions.md](docs/discussions.md) |
-| Notifications | `client.Notifications()` | Notification system | [docs/notifications.md](docs/notifications.md) |
+| Models | `client.Models()` | Model management | [docs/models.md](docs/models.md) |
 | Organizations | `client.Organizations()` | Organization management | [docs/organizations.md](docs/organizations.md) |
+| Public | `client.Public()` | Public endpoints (no auth) | [docs/public.md](docs/public.md) |
 | Repositories | `client.Repositories()` | Repository operations | [docs/repositories.md](docs/repositories.md) |
 | Storage | `client.Storage()` | Storage & uploads | [docs/storage.md](docs/storage.md) |
+| Tasks | `client.Tasks()` | Task management | [docs/tasks.md](docs/tasks.md) |
 | Users | `client.Users()` | User management | [docs/users.md](docs/users.md) |
-| Core | `client.Core()` | Core endpoints, search, offers | [docs/core.md](docs/core.md) |
-| Public | `client.Public()` | Public endpoints (no auth) | [docs/public.md](docs/public.md) |
+
 
 ## License
 
@@ -103,8 +104,6 @@ Apache-2.0
 
 ## SDK Usage Guide
 
-> Auto-generated from `swagger/sdk.json` — do not edit this section manually.
-> Re-generate with `make guide` from the repo root.
 
 ### Authentication Setup
 

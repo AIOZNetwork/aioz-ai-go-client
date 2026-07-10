@@ -77,13 +77,7 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteDatasetByID(params *DeleteDatasetByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDatasetByIDOK, error)
-
 	GetDatasetByID(params *GetDatasetByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDatasetByIDOK, error)
-
-	GetDatasetByIDDownload(params *GetDatasetByIDDownloadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDatasetByIDDownloadOK, error)
-
-	GetDatasetByIDLike(params *GetDatasetByIDLikeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDatasetByIDLikeOK, error)
 
 	GetDatasetByUsernameByName(params *GetDatasetByUsernameByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDatasetByUsernameByNameOK, error)
 
@@ -102,50 +96,6 @@ type ClientService interface {
 	PutDatasetByIDMetadata(params *PutDatasetByIDMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutDatasetByIDMetadataOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-DeleteDatasetByID deletes dataset
-*/
-func (a *Client) DeleteDatasetByID(params *DeleteDatasetByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDatasetByIDOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewDeleteDatasetByIDParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteDatasetById",
-		Method:             "DELETE",
-		PathPattern:        "/api-key/dataset/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteDatasetByIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*DeleteDatasetByIDOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for deleteDatasetById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -189,94 +139,6 @@ func (a *Client) GetDatasetByID(params *GetDatasetByIDParams, authInfo runtime.C
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getDatasetById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetDatasetByIDDownload gets list dataset download
-*/
-func (a *Client) GetDatasetByIDDownload(params *GetDatasetByIDDownloadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDatasetByIDDownloadOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetDatasetByIDDownloadParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getDatasetByIdDownload",
-		Method:             "GET",
-		PathPattern:        "/api-key/dataset/{id}/download",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetDatasetByIDDownloadReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetDatasetByIDDownloadOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getDatasetByIdDownload: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetDatasetByIDLike gets list dataset like
-*/
-func (a *Client) GetDatasetByIDLike(params *GetDatasetByIDLikeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDatasetByIDLikeOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetDatasetByIDLikeParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getDatasetByIdLike",
-		Method:             "GET",
-		PathPattern:        "/api-key/dataset/{id}/like",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetDatasetByIDLikeReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetDatasetByIDLikeOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getDatasetByIdLike: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

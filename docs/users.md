@@ -1,531 +1,8 @@
 # Users — Go SDK
 
-> User management — profiles, keys, wallets, and vouchers. Requires: `x-api-key` header.
+> User management — profiles and payments. Requires: `x-api-key` header.
 
 Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](../README.md)
-
----
-
-### `DeleteUser`
-
-**`DELETE /api-key/user`** — Delete user's account
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Users.User.DeleteUser(ctx)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PostUserApiKey`
-
-**`POST /api-key/user/api-key`** — Create ApiKey
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Request Body** — `request.CreateApiKeyRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `active` | `boolean` | No |  |
-| `description` | `string` | No |  |
-| `name` | `string` | Yes |  |
-| `org_username` | `string` | No |  |
-
-**Responses**
-
-**200 OK** — `response.ApiKeyResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `models.ApiKey` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`models.ApiKey`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `active` | `boolean` |  |
-| `api_key` | `string` |  |
-| `api_price` | `number` |  |
-| `created_at` | `string` |  |
-| `description` | `string` |  |
-| `id` | `string` |  |
-| `input_format` | `map[string]any` |  |
-| `model_id` | `string` |  |
-| `name` | `string` |  |
-| `output_format` | `map[string]any` |  |
-| `total_cost` | `number` |  |
-| `total_failed` | `integer` |  |
-| `total_request` | `integer` |  |
-| `total_success` | `integer` |  |
-| `updated_at` | `string` |  |
-| `user` | `models.User` |  |
-| `user_id` | `string` |  |
-
-**`models.User`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `allow_request_to_join` | `boolean` |  |
-| `avatar_url` | `string` |  |
-| `bio` | `string` |  |
-| `blocked` | `boolean` |  |
-| `blocked_at` | `string` |  |
-| `email` | `string` |  |
-| `followers` | `array[models.Follow]` |  |
-| `followers_count` | `integer` |  |
-| `followings` | `array[models.Follow]` |  |
-| `followings_count` | `integer` |  |
-| `github_link` | `string` |  |
-| `github_name` | `string` |  |
-| `home_page_name` | `string` |  |
-| `id` | `string` |  |
-| `interests` | `string` |  |
-| `invite_offers` | `array[models.Offer]` |  |
-| `invite_offers_count` | `integer` |  |
-| `is_following` | `boolean` |  |
-| `join_id` | `string` |  |
-| `join_offers` | `array[models.Offer]` |  |
-| `join_offers_count` | `integer` |  |
-| `members` | `array[models.Member]` |  |
-| `members_count` | `integer` |  |
-| `name` | `string` |  |
-| `role` | `string` |  |
-| `token` | `string` |  |
-| `twitter_link` | `string` |  |
-| `twitter_name` | `string` |  |
-| `type` | `string` |  |
-| `username` | `string` |  |
-| `verified` | `boolean` |  |
-| `visibility` | `string` |  |
-| `wallet` | `models.Wallet` |  |
-| `wallet_address` | `string` |  |
-| `wallet_connection` | `string` |  |
-
-**`models.Follow`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `name` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Follow`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `id` | `string` |  |
-| `name` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Offer`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created_at` | `integer` |  |
-| `created_by` | `string` |  |
-| `exp_at` | `integer` |  |
-| `id` | `string` |  |
-| `org_username` | `string` |  |
-| `role` | `string` |  |
-| `type` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Offer`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created_at` | `integer` |  |
-| `created_by` | `string` |  |
-| `exp_at` | `integer` |  |
-| `id` | `string` |  |
-| `org_username` | `string` |  |
-| `role` | `string` |  |
-| `type` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Member`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar_url` | `string` |  |
-| `full_name` | `string` |  |
-| `id` | `string` |  |
-| `username` | `string` |  |
-
-**`models.Wallet`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `balance` | `string` |  |
-| `debt` | `string` |  |
-| `earnings` | `string` |  |
-| `free_balance` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-req := &models.CreateApiKeyRequest{
-    Active: "...",  // boolean
-    Description: "...",  // string
-    Name: "...",  // string  // required
-    OrgUsername: "...",  // string
-}
-resp, err := client.Users.User.PostUserApiKey(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `GetUserChallengeByWalletaddress`
-
-**`GET /api-key/user/challenge/{walletAddress}`** — Get link wallet address challenge
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `walletAddress` | path | `string` | Yes | wallet address |
-
-**Responses**
-
-**200 OK** — `response.GetLinkWalletAddressChallengeResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `response.GetLinkWalletAddressChallengeData` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`response.GetLinkWalletAddressChallengeData`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `challenge` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Users.User.GetUserChallengeByWalletaddress(ctx, "<walletAddress>")
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PatchUserChangePassword`
-
-**`PATCH /api-key/user/change-password`** — Change user's password
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Request Body** — `request.ChangeUserPasswordRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `new_password` | `string` | Yes | User's new password (required) |
-| `old_password` | `string` | Yes | User's old passowrd (required) |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-req := &models.ChangeUserPasswordRequest{
-    NewPassword: "...",  // string  // required
-    OldPassword: "...",  // string  // required
-}
-resp, err := client.Users.User.PatchUserChangePassword(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PutUserFollowByID`
-
-**`PUT /api-key/user/follow/{id}`** — Follow/Unfollow user
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `id` | path | `string` | Yes | user's id |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Users.User.PutUserFollowByID(ctx, "<id>")
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PostUserLinkEmail`
-
-**`POST /api-key/user/link-email`** — Verify link email code
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Request Body** — `request.VerifyLinkEmailCodeRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `code` | `string` | Yes |  |
-| `email` | `string` | Yes |  |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-req := &models.VerifyLinkEmailCodeRequest{
-    Code: "...",  // string  // required
-    Email: "...",  // string  // required
-}
-resp, err := client.Users.User.PostUserLinkEmail(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PatchUserLinkEmailByEmail`
-
-**`PATCH /api-key/user/link-email/{email}`** — Get link email code
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `email` | path | `string` | Yes | user's email |
-
-**Request Body** — `request.GetLinkEmailCodeRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `email` | `string` | No |  |
-| `password` | `string` | No |  |
-| `username` | `string` | Yes | Username is the username of the user (required) |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-req := &models.GetLinkEmailCodeRequest{
-    Email: "...",  // string
-    Password: "...",  // string
-    Username: "...",  // string  // required
-}
-resp, err := client.Users.User.PatchUserLinkEmailByEmail(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PostUserLinkWallet`
-
-**`POST /api-key/user/link-wallet`** — Verify link wallet address signature
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Request Body** — `request.VerifyLinkWalletAddressSignatureRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `signature` | `string` | Yes |  |
-| `wallet_address` | `string` | Yes |  |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-req := &models.VerifyLinkWalletAddressSignatureRequest{
-    Signature: "...",  // string  // required
-    WalletAddress: "...",  // string  // required
-}
-resp, err := client.Users.User.PostUserLinkWallet(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
 
 ---
 
@@ -668,55 +145,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.GetUserMe(ctx)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `GetUserOffers`
-
-**`GET /api-key/user/offers`** — Get user's offers
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `keyword` | query | `string` | No |  |
-| `offerType` | query | `string` | Yes |  |
-| `page` | query | `integer` | No | Page is the page number (default: 1) (optional) |
-| `pageSize` | query | `integer` | No | PageSize is the page size (default: 10) (optional) |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Users.User.GetUserOffers(ctx)
+resp, err := client.Users().User.GetUserMe(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -778,79 +207,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.GetUserOrgUsernames(ctx)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `GetUserPermissionSearch`
-
-**`GET /api-key/user/permission/search`** — Search Users
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `limit` | query | `integer` | No |  |
-| `offset` | query | `integer` | No |  |
-| `search` | query | `string` | Yes |  |
-
-**Responses**
-
-**200 OK** — `response.UserListResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `response.UserListData` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`response.UserListData`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `records` | `array[models.UserInfo]` |  |
-| `total` | `integer` |  |
-
-**`models.UserInfo`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `bio` | `string` |  |
-| `fullname` | `string` |  |
-| `github_link` | `string` |  |
-| `home_page` | `string` |  |
-| `id` | `string` |  |
-| `interests` | `string` |  |
-| `twitter_link` | `string` |  |
-| `twitter_name` | `string` |  |
-| `type` | `string` |  |
-| `username` | `string` |  |
-| `visibility` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Users.User.GetUserPermissionSearch(ctx)
+resp, err := client.Users().User.GetUserOrgUsernames(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -910,161 +267,7 @@ req := &models.UpdateUserProfileRequest{
     GithubLink: "...",  // string
     GithubName: "...",  // string
 }
-resp, err := client.Users.User.PatchUserProfile(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `GetUserPublicKey`
-
-**`GET /api-key/user/public-key`** — Get source control public keys
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Responses**
-
-**200 OK** — `response.GetPublicKeysResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `data` | `response.GetPublicKeysData` |  |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**`response.GetPublicKeysData`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `keys` | `array[models.PublicKey]` |  |
-
-**`models.PublicKey`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `created` | `string` |  |
-| `fingerprint` | `string` |  |
-| `id` | `integer` |  |
-| `key` | `string` |  |
-| `key_type` | `string` |  |
-| `title` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Users.PublicKey.GetUserPublicKey(ctx)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PostUserPublicKey`
-
-**`POST /api-key/user/public-key`** — Create source control public key
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Request Body** — `request.CreatePublicKeyRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `key` | `string` | Yes | Key is the ssh public key (required) |
-| `read_only` | `boolean` | No | ReadOnly is the flag to indicate if the key is read only (default: false) (optional) |
-| `title` | `string` | Yes | Title is the title of the key (required) |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-req := &models.CreatePublicKeyRequest{
-    Key: "...",  // string  // required
-    ReadOnly: "...",  // boolean
-    Title: "...",  // string  // required
-}
-resp, err := client.Users.PublicKey.PostUserPublicKey(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `DeleteUserPublicKeyByKeyid`
-
-**`DELETE /api-key/user/public-key/{keyId}`** — Delete source control public key
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Parameters**
-
-| Name | Location | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| `keyId` | path | `integer` | Yes | key's id |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-resp, err := client.Users.PublicKey.DeleteUserPublicKeyByKeyid(ctx, "<keyId>")
+resp, err := client.Users().User.PatchUserProfile(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1129,7 +332,7 @@ req := &models.GetTransactionAnalyticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Users.Wallet.PostUserStatisticsEarnings(ctx, req)
+resp, err := client.Users().Payment.PostUserStatisticsEarnings(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1140,7 +343,7 @@ fmt.Printf("%+v\n", resp)
 
 ### `PostUserStatisticsSpendingCost`
 
-**`POST /api-key/user/statistics/spending-cost`** — Get User Spending Cost Statitics
+**`POST /api-key/user/statistics/spending-cost`** — Get User Spending Cost Statistics
 
 **Headers**
 
@@ -1198,55 +401,7 @@ req := &models.GetUserSpendingCostStatisticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Users.Wallet.PostUserStatisticsSpendingCost(ctx, req)
-if err != nil {
-    log.Fatal(err)
-}
-fmt.Printf("%+v\n", resp)
-```
-
----
-
-### `PostUserVoucherClaim`
-
-**`POST /api-key/user/voucher/claim`** — User Claim Free Balance By Voucher
-
-**Headers**
-
-| Header | Value | Required |
-| --- | --- | --- |
-| `x-api-key` | Your API key | Yes |
-
-**Request Body** — `request.UserClaimFreeBalanceByVoucherRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `voucher_code` | `string` | Yes |  |
-
-**Responses**
-
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
-**Error Responses**
-
-| Status | Description |
-| --- | --- |
-| 400 | Bad Request — [response.FailResponse](../README.md#common-response-types) |
-| 500 | Internal Server Error — [response.ErrorResponse](../README.md#common-response-types) |
-
-**Example**
-
-```go
-ctx := context.Background()
-req := &models.UserClaimFreeBalanceByVoucherRequest{
-    VoucherCode: "...",  // string  // required
-}
-resp, err := client.Users.Voucher.PostUserVoucherClaim(ctx, req)
+resp, err := client.Users().Payment.PostUserStatisticsSpendingCost(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1315,7 +470,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.Wallet.GetUserWalletDepositHistory(ctx)
+resp, err := client.Users().Payment.GetUserWalletDepositHistory(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -1397,7 +552,7 @@ req := &models.GetUserTransactionAnalyticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Users.Wallet.PostUserWalletTransactionAnalytics(ctx, req)
+resp, err := client.Users().Payment.PostUserWalletTransactionAnalytics(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1471,7 +626,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.Wallet.GetUserWalletTransactionHistory(ctx)
+resp, err := client.Users().Payment.GetUserWalletTransactionHistory(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -1554,7 +709,7 @@ req := &models.GetListRecentTransactionByUserRequest{
     To: "...",  // string
     Type: "...",  // string
 }
-resp, err := client.Users.Wallet.PostUserWalletTransactionRecent(ctx, req)
+resp, err := client.Users().Payment.PostUserWalletTransactionRecent(ctx, req)
 if err != nil {
     log.Fatal(err)
 }
@@ -1621,7 +776,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.Wallet.GetUserWalletWithdrawHistory(ctx)
+resp, err := client.Users().Payment.GetUserWalletWithdrawHistory(ctx)
 if err != nil {
     log.Fatal(err)
 }
@@ -1761,7 +916,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users.User.GetUserByUsername(ctx, "<username>")
+resp, err := client.Users().User.GetUserByUsername(ctx, "<username>")
 if err != nil {
     log.Fatal(err)
 }

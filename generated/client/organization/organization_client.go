@@ -77,167 +77,17 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteOrganizationByOrg(params *DeleteOrganizationByOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationByOrgOK, error)
-
-	DeleteOrganizationByOrgByMember(params *DeleteOrganizationByOrgByMemberParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationByOrgByMemberOK, error)
-
-	DeleteOrganizationByOrgLeave(params *DeleteOrganizationByOrgLeaveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationByOrgLeaveOK, error)
-
 	GetOrganizationByOrg(params *GetOrganizationByOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgOK, error)
-
-	GetOrganizationByOrgIsMember(params *GetOrganizationByOrgIsMemberParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgIsMemberOK, error)
 
 	GetOrganizationByOrgMembers(params *GetOrganizationByOrgMembersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgMembersOK, error)
 
-	GetOrganizationByOrgOffers(params *GetOrganizationByOrgOffersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgOffersOK, error)
-
 	GetOrganizationByOrgPermission(params *GetOrganizationByOrgPermissionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgPermissionOK, error)
-
-	GetOrganizationByOrgSetting(params *GetOrganizationByOrgSettingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgSettingOK, error)
 
 	GetOrganizationList(params *GetOrganizationListParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationListOK, error)
 
-	PatchOrganizationByOrgByMember(params *PatchOrganizationByOrgByMemberParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchOrganizationByOrgByMemberOK, error)
-
 	PatchOrganizationByOrgInfo(params *PatchOrganizationByOrgInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchOrganizationByOrgInfoOK, error)
 
-	PatchOrganizationByOrgSetting(params *PatchOrganizationByOrgSettingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchOrganizationByOrgSettingOK, error)
-
-	PostOrganization(params *PostOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostOrganizationCreated, error)
-
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-DeleteOrganizationByOrg deletes organization
-*/
-func (a *Client) DeleteOrganizationByOrg(params *DeleteOrganizationByOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationByOrgOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewDeleteOrganizationByOrgParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteOrganizationByOrg",
-		Method:             "DELETE",
-		PathPattern:        "/api-key/organization/{org}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteOrganizationByOrgReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*DeleteOrganizationByOrgOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for deleteOrganizationByOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteOrganizationByOrgByMember deletes organization s member
-*/
-func (a *Client) DeleteOrganizationByOrgByMember(params *DeleteOrganizationByOrgByMemberParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationByOrgByMemberOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewDeleteOrganizationByOrgByMemberParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteOrganizationByOrgByMember",
-		Method:             "DELETE",
-		PathPattern:        "/api-key/organization/{org}/{member}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteOrganizationByOrgByMemberReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*DeleteOrganizationByOrgByMemberOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for deleteOrganizationByOrgByMember: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-DeleteOrganizationByOrgLeave leaves organization
-*/
-func (a *Client) DeleteOrganizationByOrgLeave(params *DeleteOrganizationByOrgLeaveParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteOrganizationByOrgLeaveOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewDeleteOrganizationByOrgLeaveParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteOrganizationByOrgLeave",
-		Method:             "DELETE",
-		PathPattern:        "/api-key/organization/{org}/leave",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteOrganizationByOrgLeaveReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*DeleteOrganizationByOrgLeaveOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for deleteOrganizationByOrgLeave: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -281,50 +131,6 @@ func (a *Client) GetOrganizationByOrg(params *GetOrganizationByOrgParams, authIn
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getOrganizationByOrg: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetOrganizationByOrgIsMember checks if user is member of organization
-*/
-func (a *Client) GetOrganizationByOrgIsMember(params *GetOrganizationByOrgIsMemberParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgIsMemberOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetOrganizationByOrgIsMemberParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getOrganizationByOrgIsMember",
-		Method:             "GET",
-		PathPattern:        "/api-key/organization/{org}/is-member",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetOrganizationByOrgIsMemberReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetOrganizationByOrgIsMemberOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getOrganizationByOrgIsMember: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -373,50 +179,6 @@ func (a *Client) GetOrganizationByOrgMembers(params *GetOrganizationByOrgMembers
 }
 
 /*
-GetOrganizationByOrgOffers gets organization s offers
-*/
-func (a *Client) GetOrganizationByOrgOffers(params *GetOrganizationByOrgOffersParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgOffersOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetOrganizationByOrgOffersParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getOrganizationByOrgOffers",
-		Method:             "GET",
-		PathPattern:        "/api-key/organization/{org}/offers",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetOrganizationByOrgOffersReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetOrganizationByOrgOffersOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getOrganizationByOrgOffers: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetOrganizationByOrgPermission gets user organization permission
 */
 func (a *Client) GetOrganizationByOrgPermission(params *GetOrganizationByOrgPermissionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgPermissionOK, error) {
@@ -457,50 +219,6 @@ func (a *Client) GetOrganizationByOrgPermission(params *GetOrganizationByOrgPerm
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getOrganizationByOrgPermission: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetOrganizationByOrgSetting gets organization s setting
-*/
-func (a *Client) GetOrganizationByOrgSetting(params *GetOrganizationByOrgSettingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetOrganizationByOrgSettingOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetOrganizationByOrgSettingParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getOrganizationByOrgSetting",
-		Method:             "GET",
-		PathPattern:        "/api-key/organization/{org}/setting",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetOrganizationByOrgSettingReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetOrganizationByOrgSettingOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getOrganizationByOrgSetting: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -549,50 +267,6 @@ func (a *Client) GetOrganizationList(params *GetOrganizationListParams, authInfo
 }
 
 /*
-PatchOrganizationByOrgByMember changes member s role
-*/
-func (a *Client) PatchOrganizationByOrgByMember(params *PatchOrganizationByOrgByMemberParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchOrganizationByOrgByMemberOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPatchOrganizationByOrgByMemberParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "patchOrganizationByOrgByMember",
-		Method:             "PATCH",
-		PathPattern:        "/api-key/organization/{org}/{member}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PatchOrganizationByOrgByMemberReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PatchOrganizationByOrgByMemberOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for patchOrganizationByOrgByMember: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 PatchOrganizationByOrgInfo updates organization s info
 */
 func (a *Client) PatchOrganizationByOrgInfo(params *PatchOrganizationByOrgInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchOrganizationByOrgInfoOK, error) {
@@ -633,96 +307,6 @@ func (a *Client) PatchOrganizationByOrgInfo(params *PatchOrganizationByOrgInfoPa
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for patchOrganizationByOrgInfo: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PatchOrganizationByOrgSetting updates organization s join settings
-*/
-func (a *Client) PatchOrganizationByOrgSetting(params *PatchOrganizationByOrgSettingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PatchOrganizationByOrgSettingOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPatchOrganizationByOrgSettingParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "patchOrganizationByOrgSetting",
-		Method:             "PATCH",
-		PathPattern:        "/api-key/organization/{org}/setting",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PatchOrganizationByOrgSettingReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PatchOrganizationByOrgSettingOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for patchOrganizationByOrgSetting: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostOrganization creates new organization
-
-Type is the type of the organization (allow: company, university, classroom, non_profit, community)
-*/
-func (a *Client) PostOrganization(params *PostOrganizationParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostOrganizationCreated, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPostOrganizationParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "postOrganization",
-		Method:             "POST",
-		PathPattern:        "/api-key/organization",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostOrganizationReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PostOrganizationCreated)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for postOrganization: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

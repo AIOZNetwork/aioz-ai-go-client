@@ -173,38 +173,6 @@ func TestGen_Datasets_GetApiKeyDatasetOrganizationOrg(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Datasets_DeleteApiKeyDatasetId(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Datasets().Dataset.DeleteDatasetByID(
-		dataset.NewDeleteDatasetByIDParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "DELETE", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/dataset")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
 func TestGen_Datasets_GetApiKeyDatasetId(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
@@ -263,70 +231,6 @@ func TestGen_Datasets_PutApiKeyDatasetId(t *testing.T) {
 	)
 
 	assert.Equal(t, "PUT", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/dataset")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Datasets_GetApiKeyDatasetIdDownload(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Datasets().Dataset.GetDatasetByIDDownload(
-		dataset.NewGetDatasetByIDDownloadParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/dataset")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Datasets_GetApiKeyDatasetIdLike(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Datasets().Dataset.GetDatasetByIDLike(
-		dataset.NewGetDatasetByIDLikeParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
 	assert.Contains(t, capturedPath, "/api-key/dataset")
 	assert.Equal(t, "test-key", capturedAPIKey)
 	assert.NoError(t, err)
