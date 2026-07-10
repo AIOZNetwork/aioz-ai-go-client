@@ -77,31 +77,21 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteModelByID(params *DeleteModelByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteModelByIDOK, error)
-
 	GetModelByID(params *GetModelByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDOK, error)
 
-	GetModelByIDAPIKey(params *GetModelByIDAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDAPIKeyOK, error)
-
-	GetModelByIDDownload(params *GetModelByIDDownloadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDDownloadOK, error)
-
 	GetModelByIDInfo(params *GetModelByIDInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDInfoOK, error)
-
-	GetModelByIDLike(params *GetModelByIDLikeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDLikeOK, error)
 
 	GetModelByIDServing(params *GetModelByIDServingParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDServingOK, error)
 
 	GetModelByIDTaskCost(params *GetModelByIDTaskCostParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDTaskCostOK, error)
 
+	GetModelByIDVersioning(params *GetModelByIDVersioningParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDVersioningOK, error)
+
 	GetModelByUsernameByName(params *GetModelByUsernameByNameParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByUsernameByNameOK, error)
 
 	GetModelOrganizationByOrg(params *GetModelOrganizationByOrgParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelOrganizationByOrgOK, error)
 
-	GetModelVerifySupportPlatforms(params *GetModelVerifySupportPlatformsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelVerifySupportPlatformsOK, error)
-
 	PostModel(params *PostModelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostModelOK, error)
-
-	PostModelByIDAPIKey(params *PostModelByIDAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostModelByIDAPIKeyOK, error)
 
 	PostModelByIDStatistics(params *PostModelByIDStatisticsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostModelByIDStatisticsOK, error)
 
@@ -116,50 +106,6 @@ type ClientService interface {
 	PutModelByIDMetadata(params *PutModelByIDMetadataParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutModelByIDMetadataOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-DeleteModelByID deletes model
-*/
-func (a *Client) DeleteModelByID(params *DeleteModelByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteModelByIDOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewDeleteModelByIDParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteModelById",
-		Method:             "DELETE",
-		PathPattern:        "/api-key/model/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteModelByIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*DeleteModelByIDOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for deleteModelById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -207,94 +153,6 @@ func (a *Client) GetModelByID(params *GetModelByIDParams, authInfo runtime.Clien
 }
 
 /*
-GetModelByIDAPIKey gets list model Api key
-*/
-func (a *Client) GetModelByIDAPIKey(params *GetModelByIDAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDAPIKeyOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetModelByIDAPIKeyParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getModelByIdApiKey",
-		Method:             "GET",
-		PathPattern:        "/api-key/model/{id}/api-key",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetModelByIDAPIKeyReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetModelByIDAPIKeyOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getModelByIdApiKey: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetModelByIDDownload gets list model download
-*/
-func (a *Client) GetModelByIDDownload(params *GetModelByIDDownloadParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDDownloadOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetModelByIDDownloadParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getModelByIdDownload",
-		Method:             "GET",
-		PathPattern:        "/api-key/model/{id}/download",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetModelByIDDownloadReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetModelByIDDownloadOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getModelByIdDownload: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 GetModelByIDInfo gets Api key model info
 */
 func (a *Client) GetModelByIDInfo(params *GetModelByIDInfoParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDInfoOK, error) {
@@ -335,50 +193,6 @@ func (a *Client) GetModelByIDInfo(params *GetModelByIDInfoParams, authInfo runti
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getModelByIdInfo: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetModelByIDLike gets list model like
-*/
-func (a *Client) GetModelByIDLike(params *GetModelByIDLikeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDLikeOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetModelByIDLikeParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getModelByIdLike",
-		Method:             "GET",
-		PathPattern:        "/api-key/model/{id}/like",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetModelByIDLikeReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetModelByIDLikeOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getModelByIdLike: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -467,6 +281,50 @@ func (a *Client) GetModelByIDTaskCost(params *GetModelByIDTaskCostParams, authIn
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getModelByIdTaskCost: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	panic(msg)
+}
+
+/*
+GetModelByIDVersioning gets current model versioning by model Id by Api key
+*/
+func (a *Client) GetModelByIDVersioning(params *GetModelByIDVersioningParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelByIDVersioningOK, error) {
+	// NOTE: parameters are not validated before sending
+	if params == nil {
+		params = NewGetModelByIDVersioningParams()
+	}
+	op := &runtime.ClientOperation{
+		ID:                 "getModelByIdVersioning",
+		Method:             "GET",
+		PathPattern:        "/api-key/model/{id}/versioning",
+		ProducesMediaTypes: []string{"application/json"},
+		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
+		Schemes:            []string{"https"},
+		Params:             params,
+		Reader:             &GetModelByIDVersioningReader{formats: a.formats},
+		AuthInfo:           authInfo,
+		Context:            params.Context,
+		Client:             params.HTTPClient,
+	}
+	for _, opt := range opts {
+		opt(op)
+	}
+	result, err := a.transport.Submit(op)
+	if err != nil {
+		return nil, err
+	}
+
+	// only one success response has to be checked
+	success, ok := result.(*GetModelByIDVersioningOK)
+	if ok {
+		return success, nil
+	}
+
+	// unexpected success response.
+
+	// no default response is defined.
+	//
+	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
+	msg := fmt.Sprintf("unexpected success response for getModelByIdVersioning: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -561,50 +419,6 @@ func (a *Client) GetModelOrganizationByOrg(params *GetModelOrganizationByOrgPara
 }
 
 /*
-GetModelVerifySupportPlatforms gets list platforms support
-*/
-func (a *Client) GetModelVerifySupportPlatforms(params *GetModelVerifySupportPlatformsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelVerifySupportPlatformsOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetModelVerifySupportPlatformsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getModelVerifySupportPlatforms",
-		Method:             "GET",
-		PathPattern:        "/api-key/model/verify/support/platforms",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetModelVerifySupportPlatformsReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetModelVerifySupportPlatformsOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getModelVerifySupportPlatforms: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
 PostModel creates model
 */
 func (a *Client) PostModel(params *PostModelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostModelOK, error) {
@@ -645,50 +459,6 @@ func (a *Client) PostModel(params *PostModelParams, authInfo runtime.ClientAuthI
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for postModel: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostModelByIDAPIKey creates model Api key
-*/
-func (a *Client) PostModelByIDAPIKey(params *PostModelByIDAPIKeyParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostModelByIDAPIKeyOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPostModelByIDAPIKeyParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "postModelByIdApiKey",
-		Method:             "POST",
-		PathPattern:        "/api-key/model/{id}/api-key",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostModelByIDAPIKeyReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PostModelByIDAPIKeyOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for postModelByIdApiKey: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

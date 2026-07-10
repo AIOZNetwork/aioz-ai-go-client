@@ -5,7 +5,7 @@ import (
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/repository"
 )
 
-// RepositoriesService provides access to repository-related API operations.
+// RepositoriesService provides access to Service wrapper for repository-related API operations.-related API operations.
 type RepositoriesService struct {
 	Repository repository.ClientService
 }

@@ -13,63 +13,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGen_Public_GetPublicContentTermsPrivacy(t *testing.T) {
-	var capturedMethod, capturedPath string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Public().Public.GetPublicContentTermsPrivacy(
-		public.NewGetPublicContentTermsPrivacyParams().WithContext(t.Context()),
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/content/terms-privacy")
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Public_GetPublicContentKeys(t *testing.T) {
-	var capturedMethod, capturedPath string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Public().Public.GetPublicContentByKeys(
-		public.NewGetPublicContentByKeysParams().WithContext(t.Context()).WithKeys("test-id"),
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/content")
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Public_PostPublicCostEstimating(t *testing.T) {
+func TestGen_Public_PostApiKeyPublicCostEstimating(t *testing.T) {
 	var capturedMethod, capturedPath string
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		capturedMethod = r.Method
@@ -92,12 +36,12 @@ func TestGen_Public_PostPublicCostEstimating(t *testing.T) {
 	)
 
 	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/cost/estimating")
+	assert.Contains(t, capturedPath, "/api-key/public/cost/estimating")
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
 }
 
-func TestGen_Public_GetPublicMetadata(t *testing.T) {
+func TestGen_Public_GetApiKeyPublicMetadata(t *testing.T) {
 	var capturedMethod, capturedPath string
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		capturedMethod = r.Method
@@ -120,96 +64,12 @@ func TestGen_Public_GetPublicMetadata(t *testing.T) {
 	)
 
 	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/metadata")
+	assert.Contains(t, capturedPath, "/api-key/public/metadata")
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
 }
 
-func TestGen_Public_GetPublicRepositoryOwnerusernameRepositorynameContentReadme(t *testing.T) {
-	var capturedMethod, capturedPath string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Public().Public.GetPublicRepositoryByOwnerusernameByRepositorynameContentReadme(
-		public.NewGetPublicRepositoryByOwnerusernameByRepositorynameContentReadmeParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/repository")
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Public_GetPublicSearch(t *testing.T) {
-	var capturedMethod, capturedPath string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Public().Public.GetPublicSearch(
-		public.NewGetPublicSearchParams().WithContext(t.Context()),
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/search")
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Public_GetPublicSearchUser(t *testing.T) {
-	var capturedMethod, capturedPath string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Public().Public.GetPublicSearchUser(
-		public.NewGetPublicSearchUserParams().WithContext(t.Context()),
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/search/user")
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Public_GetPublicTokenPrice(t *testing.T) {
+func TestGen_Public_GetApiKeyPublicTokenPrice(t *testing.T) {
 	var capturedMethod, capturedPath string
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		capturedMethod = r.Method
@@ -232,12 +92,12 @@ func TestGen_Public_GetPublicTokenPrice(t *testing.T) {
 	)
 
 	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/token/price")
+	assert.Contains(t, capturedPath, "/api-key/public/token/price")
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
 }
 
-func TestGen_Public_GetPublicUserUsername(t *testing.T) {
+func TestGen_Public_GetApiKeyPublicUserUsernameMedals(t *testing.T) {
 	var capturedMethod, capturedPath string
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		capturedMethod = r.Method
@@ -255,17 +115,17 @@ func TestGen_Public_GetPublicUserUsername(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Public().Public.GetPublicUserByUsername(
-		public.NewGetPublicUserByUsernameParams().WithContext(t.Context()).WithUsername("testuser"),
+	result, err := client.Public().Public.GetPublicUserByUsernameMedals(
+		public.NewGetPublicUserByUsernameMedalsParams().WithContext(t.Context()).WithUsername("testuser"),
 	)
 
 	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/user")
+	assert.Contains(t, capturedPath, "/api-key/public/user")
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
 }
 
-func TestGen_Public_GetPublicUserUsernameExisted(t *testing.T) {
+func TestGen_Public_GetApiKeyPublicUserUsernameMedalsStatistics(t *testing.T) {
 	var capturedMethod, capturedPath string
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		capturedMethod = r.Method
@@ -283,40 +143,12 @@ func TestGen_Public_GetPublicUserUsernameExisted(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Public().Public.GetPublicUserByUsernameExisted(
-		public.NewGetPublicUserByUsernameExistedParams().WithContext(t.Context()).WithUsername("testuser"),
+	result, err := client.Public().Public.GetPublicUserByUsernameMedalsStatistics(
+		public.NewGetPublicUserByUsernameMedalsStatisticsParams().WithContext(t.Context()).WithUsername("testuser"),
 	)
 
 	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/user")
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Public_GetPublicUserUsernameOrganizations(t *testing.T) {
-	var capturedMethod, capturedPath string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Public().Public.GetPublicUserByUsernameOrganizations(
-		public.NewGetPublicUserByUsernameOrganizationsParams().WithContext(t.Context()).WithUsername("testuser"),
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/public/user")
+	assert.Contains(t, capturedPath, "/api-key/public/user")
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
 }

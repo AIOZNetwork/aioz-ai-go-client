@@ -5,7 +5,7 @@ import (
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/collection"
 )
 
-// CollectionsService provides access to collection-related API operations.
+// CollectionsService provides access to Service wrapper for all collection-related API operations.-related API operations.
 type CollectionsService struct {
 	Collection collection.ClientService
 }

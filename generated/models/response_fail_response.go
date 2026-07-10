@@ -14,6 +14,9 @@ import (
 // swagger:model response.FailResponse
 type ResponseFailResponse struct {
 
+	// code
+	Code string `json:"code,omitempty"`
+
 	// message
 	Message string `json:"message,omitempty"`
 

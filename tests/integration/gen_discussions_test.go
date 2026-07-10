@@ -9,74 +9,11 @@ import (
 	"testing"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/comments"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/comment"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/discussion"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/reaction"
 	"github.com/stretchr/testify/assert"
 )
-
-func TestGen_Discussions_PostApiKeyCollectionIdReport(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Discussions().Discussion.PostCollectionByIDReport(
-		discussion.NewPostCollectionByIDReportParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/collection")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Discussions_DeleteApiKeyCommentsId(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Discussions().Comments.DeleteCommentsByID(
-		comments.NewDeleteCommentsByIDParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "DELETE", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/comments")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
 
 func TestGen_Discussions_PutApiKeyCommentsId(t *testing.T) {
 	var capturedMethod, capturedPath string
@@ -98,8 +35,8 @@ func TestGen_Discussions_PutApiKeyCommentsId(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Comments.PutCommentsByID(
-		comments.NewPutCommentsByIDParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Comment.PutCommentsByID(
+		comment.NewPutCommentsByIDParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -110,7 +47,7 @@ func TestGen_Discussions_PutApiKeyCommentsId(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Discussions_PostApiKeyCommentsIdReport(t *testing.T) {
+func TestGen_Discussions_PutApiKeyDatasetIdLike(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -130,13 +67,13 @@ func TestGen_Discussions_PostApiKeyCommentsIdReport(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.PostCommentsByIDReport(
-		discussion.NewPostCommentsByIDReportParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Reaction.PutDatasetByIDLike(
+		reaction.NewPutDatasetByIDLikeParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/comments")
+	assert.Equal(t, "PUT", capturedMethod)
+	assert.Contains(t, capturedPath, "/api-key/dataset")
 	assert.Equal(t, "test-key", capturedAPIKey)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
@@ -334,38 +271,6 @@ func TestGen_Discussions_PostApiKeyDiscussionModelId(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Discussions_DeleteApiKeyDiscussionId(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Discussions().Discussion.DeleteDiscussionByID(
-		discussion.NewDeleteDiscussionByIDParams().WithContext(t.Context()).WithID("test-id"),
-		nil,
-	)
-
-	assert.Equal(t, "DELETE", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/discussion")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
 func TestGen_Discussions_PutApiKeyDiscussionId(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
@@ -418,8 +323,8 @@ func TestGen_Discussions_GetApiKeyDiscussionIdComments(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Comments.GetDiscussionByIDComments(
-		comments.NewGetDiscussionByIDCommentsParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Comment.GetDiscussionByIDComments(
+		comment.NewGetDiscussionByIDCommentsParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -450,8 +355,8 @@ func TestGen_Discussions_PostApiKeyDiscussionIdComments(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Comments.PostDiscussionByIDComments(
-		comments.NewPostDiscussionByIDCommentsParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Comment.PostDiscussionByIDComments(
+		comment.NewPostDiscussionByIDCommentsParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
@@ -462,7 +367,7 @@ func TestGen_Discussions_PostApiKeyDiscussionIdComments(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Discussions_PostApiKeyDiscussionIdReport(t *testing.T) {
+func TestGen_Discussions_PutApiKeyItemsIdReact(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -482,13 +387,45 @@ func TestGen_Discussions_PostApiKeyDiscussionIdReport(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	result, err := client.Discussions().Discussion.PostDiscussionByIDReport(
-		discussion.NewPostDiscussionByIDReportParams().WithContext(t.Context()).WithID("test-id"),
+	result, err := client.Discussions().Reaction.PutItemsByIDReact(
+		reaction.NewPutItemsByIDReactParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/discussion")
+	assert.Equal(t, "PUT", capturedMethod)
+	assert.Contains(t, capturedPath, "/api-key/items")
+	assert.Equal(t, "test-key", capturedAPIKey)
+	assert.NoError(t, err)
+	assert.NotNil(t, result)
+}
+
+func TestGen_Discussions_PutApiKeyModelIdLike(t *testing.T) {
+	var capturedMethod, capturedPath string
+	var capturedAPIKey string
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		capturedMethod = r.Method
+		capturedPath = r.URL.Path
+		capturedAPIKey = r.Header.Get("x-api-key")
+		w.Header().Set("Content-Type", "application/json")
+		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
+	}))
+	defer server.Close()
+
+	client, err := aiozai.NewClient(
+		aiozai.WithAPIKey("test-key"),
+		aiozai.WithBaseURL(server.URL+"/api/v1"),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	result, err := client.Discussions().Reaction.PutModelByIDLike(
+		reaction.NewPutModelByIDLikeParams().WithContext(t.Context()).WithID("test-id"),
+		nil,
+	)
+
+	assert.Equal(t, "PUT", capturedMethod)
+	assert.Contains(t, capturedPath, "/api-key/model")
 	assert.Equal(t, "test-key", capturedAPIKey)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)

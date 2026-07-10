@@ -41,7 +41,7 @@ func (o *PostPublicCostEstimatingReader) ReadResponse(response runtime.ClientRes
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[POST /public/cost/estimating] postPublicCostEstimating", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /api-key/public/cost/estimating] postPublicCostEstimating", response, response.Code())
 	}
 }
 
@@ -56,7 +56,7 @@ PostPublicCostEstimatingOK describes a response with status code 200, with defau
 OK
 */
 type PostPublicCostEstimatingOK struct {
-	Payload *models.ResponseEstimateCostResponse
+	Payload *models.ResponseEstimateStorageCostResponse
 }
 
 // IsSuccess returns true when this post public cost estimating o k response has a 2xx status code
@@ -91,21 +91,21 @@ func (o *PostPublicCostEstimatingOK) Code() int {
 
 func (o *PostPublicCostEstimatingOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /public/cost/estimating][%d] postPublicCostEstimatingOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api-key/public/cost/estimating][%d] postPublicCostEstimatingOK %s", 200, payload)
 }
 
 func (o *PostPublicCostEstimatingOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /public/cost/estimating][%d] postPublicCostEstimatingOK %s", 200, payload)
+	return fmt.Sprintf("[POST /api-key/public/cost/estimating][%d] postPublicCostEstimatingOK %s", 200, payload)
 }
 
-func (o *PostPublicCostEstimatingOK) GetPayload() *models.ResponseEstimateCostResponse {
+func (o *PostPublicCostEstimatingOK) GetPayload() *models.ResponseEstimateStorageCostResponse {
 	return o.Payload
 }
 
 func (o *PostPublicCostEstimatingOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseEstimateCostResponse)
+	o.Payload = new(models.ResponseEstimateStorageCostResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
@@ -161,12 +161,12 @@ func (o *PostPublicCostEstimatingBadRequest) Code() int {
 
 func (o *PostPublicCostEstimatingBadRequest) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /public/cost/estimating][%d] postPublicCostEstimatingBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /api-key/public/cost/estimating][%d] postPublicCostEstimatingBadRequest %s", 400, payload)
 }
 
 func (o *PostPublicCostEstimatingBadRequest) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /public/cost/estimating][%d] postPublicCostEstimatingBadRequest %s", 400, payload)
+	return fmt.Sprintf("[POST /api-key/public/cost/estimating][%d] postPublicCostEstimatingBadRequest %s", 400, payload)
 }
 
 func (o *PostPublicCostEstimatingBadRequest) GetPayload() *models.ResponseFailResponse {
@@ -231,12 +231,12 @@ func (o *PostPublicCostEstimatingInternalServerError) Code() int {
 
 func (o *PostPublicCostEstimatingInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /public/cost/estimating][%d] postPublicCostEstimatingInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /api-key/public/cost/estimating][%d] postPublicCostEstimatingInternalServerError %s", 500, payload)
 }
 
 func (o *PostPublicCostEstimatingInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[POST /public/cost/estimating][%d] postPublicCostEstimatingInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[POST /api-key/public/cost/estimating][%d] postPublicCostEstimatingInternalServerError %s", 500, payload)
 }
 
 func (o *PostPublicCostEstimatingInternalServerError) GetPayload() *models.ResponseErrorResponse {

@@ -77,19 +77,11 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	DeleteDiscussionByID(params *DeleteDiscussionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDiscussionByIDOK, error)
-
 	GetDiscussionCompetitionByID(params *GetDiscussionCompetitionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDiscussionCompetitionByIDOK, error)
 
 	GetDiscussionDatasetByID(params *GetDiscussionDatasetByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDiscussionDatasetByIDOK, error)
 
 	GetDiscussionModelByID(params *GetDiscussionModelByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetDiscussionModelByIDOK, error)
-
-	PostCollectionByIDReport(params *PostCollectionByIDReportParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCollectionByIDReportOK, error)
-
-	PostCommentsByIDReport(params *PostCommentsByIDReportParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCommentsByIDReportOK, error)
-
-	PostDiscussionByIDReport(params *PostDiscussionByIDReportParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDiscussionByIDReportOK, error)
 
 	PostDiscussionCompetitionByID(params *PostDiscussionCompetitionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDiscussionCompetitionByIDOK, error)
 
@@ -100,50 +92,6 @@ type ClientService interface {
 	PutDiscussionByID(params *PutDiscussionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PutDiscussionByIDOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-DeleteDiscussionByID deletes discussion
-*/
-func (a *Client) DeleteDiscussionByID(params *DeleteDiscussionByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteDiscussionByIDOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewDeleteDiscussionByIDParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "deleteDiscussionById",
-		Method:             "DELETE",
-		PathPattern:        "/api-key/discussion/{id}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &DeleteDiscussionByIDReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*DeleteDiscussionByIDOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for deleteDiscussionById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -281,138 +229,6 @@ func (a *Client) GetDiscussionModelByID(params *GetDiscussionModelByIDParams, au
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
 	msg := fmt.Sprintf("unexpected success response for getDiscussionModelById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostCollectionByIDReport reports collection
-*/
-func (a *Client) PostCollectionByIDReport(params *PostCollectionByIDReportParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCollectionByIDReportOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPostCollectionByIDReportParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "postCollectionByIdReport",
-		Method:             "POST",
-		PathPattern:        "/api-key/collection/{id}/report",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostCollectionByIDReportReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PostCollectionByIDReportOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for postCollectionByIdReport: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostCommentsByIDReport reports comment
-*/
-func (a *Client) PostCommentsByIDReport(params *PostCommentsByIDReportParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostCommentsByIDReportOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPostCommentsByIDReportParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "postCommentsByIdReport",
-		Method:             "POST",
-		PathPattern:        "/api-key/comments/{id}/report",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostCommentsByIDReportReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PostCommentsByIDReportOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for postCommentsByIdReport: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostDiscussionByIDReport reports discussion
-*/
-func (a *Client) PostDiscussionByIDReport(params *PostDiscussionByIDReportParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostDiscussionByIDReportOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewPostDiscussionByIDReportParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "postDiscussionByIdReport",
-		Method:             "POST",
-		PathPattern:        "/api-key/discussion/{id}/report",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &PostDiscussionByIDReportReader{formats: a.formats},
-		AuthInfo:           authInfo,
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*PostDiscussionByIDReportOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for postDiscussionByIdReport: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

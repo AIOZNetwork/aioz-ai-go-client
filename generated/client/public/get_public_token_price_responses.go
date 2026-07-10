@@ -41,7 +41,7 @@ func (o *GetPublicTokenPriceReader) ReadResponse(response runtime.ClientResponse
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("[GET /public/token/price] getPublicTokenPrice", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /api-key/public/token/price] getPublicTokenPrice", response, response.Code())
 	}
 }
 
@@ -91,12 +91,12 @@ func (o *GetPublicTokenPriceOK) Code() int {
 
 func (o *GetPublicTokenPriceOK) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/token/price][%d] getPublicTokenPriceOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api-key/public/token/price][%d] getPublicTokenPriceOK %s", 200, payload)
 }
 
 func (o *GetPublicTokenPriceOK) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/token/price][%d] getPublicTokenPriceOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api-key/public/token/price][%d] getPublicTokenPriceOK %s", 200, payload)
 }
 
 func (o *GetPublicTokenPriceOK) GetPayload() *models.ResponseGetTokenPriceResponse {
@@ -161,12 +161,12 @@ func (o *GetPublicTokenPriceBadRequest) Code() int {
 
 func (o *GetPublicTokenPriceBadRequest) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/token/price][%d] getPublicTokenPriceBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /api-key/public/token/price][%d] getPublicTokenPriceBadRequest %s", 400, payload)
 }
 
 func (o *GetPublicTokenPriceBadRequest) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/token/price][%d] getPublicTokenPriceBadRequest %s", 400, payload)
+	return fmt.Sprintf("[GET /api-key/public/token/price][%d] getPublicTokenPriceBadRequest %s", 400, payload)
 }
 
 func (o *GetPublicTokenPriceBadRequest) GetPayload() *models.ResponseFailResponse {
@@ -231,12 +231,12 @@ func (o *GetPublicTokenPriceInternalServerError) Code() int {
 
 func (o *GetPublicTokenPriceInternalServerError) Error() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/token/price][%d] getPublicTokenPriceInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /api-key/public/token/price][%d] getPublicTokenPriceInternalServerError %s", 500, payload)
 }
 
 func (o *GetPublicTokenPriceInternalServerError) String() string {
 	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /public/token/price][%d] getPublicTokenPriceInternalServerError %s", 500, payload)
+	return fmt.Sprintf("[GET /api-key/public/token/price][%d] getPublicTokenPriceInternalServerError %s", 500, payload)
 }
 
 func (o *GetPublicTokenPriceInternalServerError) GetPayload() *models.ResponseErrorResponse {

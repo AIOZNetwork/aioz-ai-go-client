@@ -77,115 +77,17 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetPublicContentByKeys(params *GetPublicContentByKeysParams, opts ...ClientOption) (*GetPublicContentByKeysOK, error)
-
-	GetPublicContentTermsPrivacy(params *GetPublicContentTermsPrivacyParams, opts ...ClientOption) (*GetPublicContentTermsPrivacyOK, error)
-
 	GetPublicMetadata(params *GetPublicMetadataParams, opts ...ClientOption) (*GetPublicMetadataOK, error)
-
-	GetPublicRepositoryByOwnerusernameByRepositorynameContentReadme(params *GetPublicRepositoryByOwnerusernameByRepositorynameContentReadmeParams, opts ...ClientOption) (*GetPublicRepositoryByOwnerusernameByRepositorynameContentReadmeOK, error)
-
-	GetPublicSearch(params *GetPublicSearchParams, opts ...ClientOption) (*GetPublicSearchOK, error)
-
-	GetPublicSearchUser(params *GetPublicSearchUserParams, opts ...ClientOption) (*GetPublicSearchUserOK, error)
 
 	GetPublicTokenPrice(params *GetPublicTokenPriceParams, opts ...ClientOption) (*GetPublicTokenPriceOK, error)
 
-	GetPublicUserByUsername(params *GetPublicUserByUsernameParams, opts ...ClientOption) (*GetPublicUserByUsernameOK, error)
+	GetPublicUserByUsernameMedals(params *GetPublicUserByUsernameMedalsParams, opts ...ClientOption) (*GetPublicUserByUsernameMedalsOK, error)
 
-	GetPublicUserByUsernameExisted(params *GetPublicUserByUsernameExistedParams, opts ...ClientOption) (*GetPublicUserByUsernameExistedOK, error)
-
-	GetPublicUserByUsernameOrganizations(params *GetPublicUserByUsernameOrganizationsParams, opts ...ClientOption) (*GetPublicUserByUsernameOrganizationsOK, error)
+	GetPublicUserByUsernameMedalsStatistics(params *GetPublicUserByUsernameMedalsStatisticsParams, opts ...ClientOption) (*GetPublicUserByUsernameMedalsStatisticsOK, error)
 
 	PostPublicCostEstimating(params *PostPublicCostEstimatingParams, opts ...ClientOption) (*PostPublicCostEstimatingOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
-}
-
-/*
-GetPublicContentByKeys gets content config by list keys
-*/
-func (a *Client) GetPublicContentByKeys(params *GetPublicContentByKeysParams, opts ...ClientOption) (*GetPublicContentByKeysOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicContentByKeysParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getPublicContentByKeys",
-		Method:             "GET",
-		PathPattern:        "/public/content/{keys}",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicContentByKeysReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicContentByKeysOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPublicContentByKeys: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetPublicContentTermsPrivacy gets content config by static keys
-*/
-func (a *Client) GetPublicContentTermsPrivacy(params *GetPublicContentTermsPrivacyParams, opts ...ClientOption) (*GetPublicContentTermsPrivacyOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicContentTermsPrivacyParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getPublicContentTermsPrivacy",
-		Method:             "GET",
-		PathPattern:        "/public/content/terms-privacy",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicContentTermsPrivacyReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicContentTermsPrivacyOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPublicContentTermsPrivacy: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
 }
 
 /*
@@ -201,7 +103,7 @@ func (a *Client) GetPublicMetadata(params *GetPublicMetadataParams, opts ...Clie
 	op := &runtime.ClientOperation{
 		ID:                 "getPublicMetadata",
 		Method:             "GET",
-		PathPattern:        "/public/metadata",
+		PathPattern:        "/api-key/public/metadata",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
@@ -234,136 +136,7 @@ func (a *Client) GetPublicMetadata(params *GetPublicMetadataParams, opts ...Clie
 }
 
 /*
-GetPublicRepositoryByOwnerusernameByRepositorynameContentReadme gets readme file content public
-*/
-func (a *Client) GetPublicRepositoryByOwnerusernameByRepositorynameContentReadme(params *GetPublicRepositoryByOwnerusernameByRepositorynameContentReadmeParams, opts ...ClientOption) (*GetPublicRepositoryByOwnerusernameByRepositorynameContentReadmeOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicRepositoryByOwnerusernameByRepositorynameContentReadmeParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getPublicRepositoryByOwnerusernameByRepositorynameContentReadme",
-		Method:             "GET",
-		PathPattern:        "/public/repository/{ownerUsername}/{repositoryName}/content/readme",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicRepositoryByOwnerusernameByRepositorynameContentReadmeReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicRepositoryByOwnerusernameByRepositorynameContentReadmeOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPublicRepositoryByOwnerusernameByRepositorynameContentReadme: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetPublicSearch multiples search
-*/
-func (a *Client) GetPublicSearch(params *GetPublicSearchParams, opts ...ClientOption) (*GetPublicSearchOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicSearchParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getPublicSearch",
-		Method:             "GET",
-		PathPattern:        "/public/search",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicSearchReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicSearchOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPublicSearch: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetPublicSearchUser searches public users
-*/
-func (a *Client) GetPublicSearchUser(params *GetPublicSearchUserParams, opts ...ClientOption) (*GetPublicSearchUserOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicSearchUserParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getPublicSearchUser",
-		Method:             "GET",
-		PathPattern:        "/public/search/user",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicSearchUserReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicSearchUserOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPublicSearchUser: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-GetPublicTokenPrice gets aioz price
+GetPublicTokenPrice gets aioz token price
 */
 func (a *Client) GetPublicTokenPrice(params *GetPublicTokenPriceParams, opts ...ClientOption) (*GetPublicTokenPriceOK, error) {
 	// NOTE: parameters are not validated before sending
@@ -373,7 +146,7 @@ func (a *Client) GetPublicTokenPrice(params *GetPublicTokenPriceParams, opts ...
 	op := &runtime.ClientOperation{
 		ID:                 "getPublicTokenPrice",
 		Method:             "GET",
-		PathPattern:        "/public/token/price",
+		PathPattern:        "/api-key/public/token/price",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
@@ -406,22 +179,24 @@ func (a *Client) GetPublicTokenPrice(params *GetPublicTokenPriceParams, opts ...
 }
 
 /*
-GetPublicUserByUsername gets user s info
+GetPublicUserByUsernameMedals gets user medals by medal name
+
+Get user medals by medal name. Medal name is allowed [gold, silver, bronze, swag, kudos, knowledge]
 */
-func (a *Client) GetPublicUserByUsername(params *GetPublicUserByUsernameParams, opts ...ClientOption) (*GetPublicUserByUsernameOK, error) {
+func (a *Client) GetPublicUserByUsernameMedals(params *GetPublicUserByUsernameMedalsParams, opts ...ClientOption) (*GetPublicUserByUsernameMedalsOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicUserByUsernameParams()
+		params = NewGetPublicUserByUsernameMedalsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getPublicUserByUsername",
+		ID:                 "getPublicUserByUsernameMedals",
 		Method:             "GET",
-		PathPattern:        "/public/user/{username}",
+		PathPattern:        "/api-key/public/user/{username}/medals",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicUserByUsernameReader{formats: a.formats},
+		Reader:             &GetPublicUserByUsernameMedalsReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -434,7 +209,7 @@ func (a *Client) GetPublicUserByUsername(params *GetPublicUserByUsernameParams, 
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicUserByUsernameOK)
+	success, ok := result.(*GetPublicUserByUsernameMedalsOK)
 	if ok {
 		return success, nil
 	}
@@ -444,27 +219,29 @@ func (a *Client) GetPublicUserByUsername(params *GetPublicUserByUsernameParams, 
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPublicUserByUsername: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicUserByUsernameMedals: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicUserByUsernameExisted checks if a username have already existed
+GetPublicUserByUsernameMedalsStatistics gets user medal statistics by username
+
+Get user medal statistics by username
 */
-func (a *Client) GetPublicUserByUsernameExisted(params *GetPublicUserByUsernameExistedParams, opts ...ClientOption) (*GetPublicUserByUsernameExistedOK, error) {
+func (a *Client) GetPublicUserByUsernameMedalsStatistics(params *GetPublicUserByUsernameMedalsStatisticsParams, opts ...ClientOption) (*GetPublicUserByUsernameMedalsStatisticsOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPublicUserByUsernameExistedParams()
+		params = NewGetPublicUserByUsernameMedalsStatisticsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getPublicUserByUsernameExisted",
+		ID:                 "getPublicUserByUsernameMedalsStatistics",
 		Method:             "GET",
-		PathPattern:        "/public/user/{username}/existed",
+		PathPattern:        "/api-key/public/user/{username}/medals/statistics",
 		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
+		ConsumesMediaTypes: []string{"application/json"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPublicUserByUsernameExistedReader{formats: a.formats},
+		Reader:             &GetPublicUserByUsernameMedalsStatisticsReader{formats: a.formats},
 		Context:            params.Context,
 		Client:             params.HTTPClient,
 	}
@@ -477,7 +254,7 @@ func (a *Client) GetPublicUserByUsernameExisted(params *GetPublicUserByUsernameE
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPublicUserByUsernameExistedOK)
+	success, ok := result.(*GetPublicUserByUsernameMedalsStatisticsOK)
 	if ok {
 		return success, nil
 	}
@@ -487,55 +264,12 @@ func (a *Client) GetPublicUserByUsernameExisted(params *GetPublicUserByUsernameE
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPublicUserByUsernameExisted: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPublicUserByUsernameMedalsStatistics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPublicUserByUsernameOrganizations gets public user s organizations by username
-*/
-func (a *Client) GetPublicUserByUsernameOrganizations(params *GetPublicUserByUsernameOrganizationsParams, opts ...ClientOption) (*GetPublicUserByUsernameOrganizationsOK, error) {
-	// NOTE: parameters are not validated before sending
-	if params == nil {
-		params = NewGetPublicUserByUsernameOrganizationsParams()
-	}
-	op := &runtime.ClientOperation{
-		ID:                 "getPublicUserByUsernameOrganizations",
-		Method:             "GET",
-		PathPattern:        "/public/user/{username}/organizations",
-		ProducesMediaTypes: []string{"application/json"},
-		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
-		Schemes:            []string{"https"},
-		Params:             params,
-		Reader:             &GetPublicUserByUsernameOrganizationsReader{formats: a.formats},
-		Context:            params.Context,
-		Client:             params.HTTPClient,
-	}
-	for _, opt := range opts {
-		opt(op)
-	}
-	result, err := a.transport.Submit(op)
-	if err != nil {
-		return nil, err
-	}
-
-	// only one success response has to be checked
-	success, ok := result.(*GetPublicUserByUsernameOrganizationsOK)
-	if ok {
-		return success, nil
-	}
-
-	// unexpected success response.
-
-	// no default response is defined.
-	//
-	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPublicUserByUsernameOrganizations: API contract not enforced by server. Client expected to get an error, but got: %T", result)
-	panic(msg)
-}
-
-/*
-PostPublicCostEstimating estimates cost
+PostPublicCostEstimating estimates storage cost
 */
 func (a *Client) PostPublicCostEstimating(params *PostPublicCostEstimatingParams, opts ...ClientOption) (*PostPublicCostEstimatingOK, error) {
 	// NOTE: parameters are not validated before sending
@@ -545,7 +279,7 @@ func (a *Client) PostPublicCostEstimating(params *PostPublicCostEstimatingParams
 	op := &runtime.ClientOperation{
 		ID:                 "postPublicCostEstimating",
 		Method:             "POST",
-		PathPattern:        "/public/cost/estimating",
+		PathPattern:        "/api-key/public/cost/estimating",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},

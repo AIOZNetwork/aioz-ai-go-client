@@ -79,9 +79,9 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 type ClientService interface {
 	DeleteTaskByIDCancel(params *DeleteTaskByIDCancelParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*DeleteTaskByIDCancelOK, error)
 
-	GetBalance(params *GetBalanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBalanceOK, error)
+	GetModelTaskByIDReviews(params *GetModelTaskByIDReviewsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelTaskByIDReviewsOK, error)
 
-	GetPermission(params *GetPermissionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPermissionOK, error)
+	GetPlatformTaskByID(params *GetPlatformTaskByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPlatformTaskByIDOK, error)
 
 	GetTaskByIDDetail(params *GetTaskByIDDetailParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetTaskByIDDetailOK, error)
 
@@ -89,7 +89,7 @@ type ClientService interface {
 
 	PostModelByIDTask(params *PostModelByIDTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostModelByIDTaskOK, error)
 
-	PostStatistics(params *PostStatisticsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostStatisticsOK, error)
+	PostModelByIDTaskReviews(params *PostModelByIDTaskReviewsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostModelByIDTaskReviewsOK, error)
 
 	PostTask(params *PostTaskParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostTaskOK, error)
 
@@ -141,22 +141,22 @@ func (a *Client) DeleteTaskByIDCancel(params *DeleteTaskByIDCancelParams, authIn
 }
 
 /*
-GetBalance gets Api key balance
+GetModelTaskByIDReviews gets task review by task Id
 */
-func (a *Client) GetBalance(params *GetBalanceParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetBalanceOK, error) {
+func (a *Client) GetModelTaskByIDReviews(params *GetModelTaskByIDReviewsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetModelTaskByIDReviewsOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetBalanceParams()
+		params = NewGetModelTaskByIDReviewsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getBalance",
+		ID:                 "getModelTaskByIdReviews",
 		Method:             "GET",
-		PathPattern:        "/api-key/balance",
+		PathPattern:        "/api-key/model/task/{id}/reviews",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetBalanceReader{formats: a.formats},
+		Reader:             &GetModelTaskByIDReviewsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -170,7 +170,7 @@ func (a *Client) GetBalance(params *GetBalanceParams, authInfo runtime.ClientAut
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetBalanceOK)
+	success, ok := result.(*GetModelTaskByIDReviewsOK)
 	if ok {
 		return success, nil
 	}
@@ -180,27 +180,27 @@ func (a *Client) GetBalance(params *GetBalanceParams, authInfo runtime.ClientAut
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getBalance: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getModelTaskByIdReviews: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
 /*
-GetPermission gets Api key permission
+GetPlatformTaskByID gets platform task by Id
 */
-func (a *Client) GetPermission(params *GetPermissionParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPermissionOK, error) {
+func (a *Client) GetPlatformTaskByID(params *GetPlatformTaskByIDParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetPlatformTaskByIDOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewGetPermissionParams()
+		params = NewGetPlatformTaskByIDParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "getPermission",
+		ID:                 "getPlatformTaskById",
 		Method:             "GET",
-		PathPattern:        "/api-key/permission",
+		PathPattern:        "/api-key/platform/task/{id}",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetPermissionReader{formats: a.formats},
+		Reader:             &GetPlatformTaskByIDReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -214,7 +214,7 @@ func (a *Client) GetPermission(params *GetPermissionParams, authInfo runtime.Cli
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*GetPermissionOK)
+	success, ok := result.(*GetPlatformTaskByIDOK)
 	if ok {
 		return success, nil
 	}
@@ -224,7 +224,7 @@ func (a *Client) GetPermission(params *GetPermissionParams, authInfo runtime.Cli
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for getPermission: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for getPlatformTaskById: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 
@@ -361,22 +361,22 @@ func (a *Client) PostModelByIDTask(params *PostModelByIDTaskParams, authInfo run
 }
 
 /*
-PostStatistics gets Api key statistics
+PostModelByIDTaskReviews creates task reviews
 */
-func (a *Client) PostStatistics(params *PostStatisticsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostStatisticsOK, error) {
+func (a *Client) PostModelByIDTaskReviews(params *PostModelByIDTaskReviewsParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*PostModelByIDTaskReviewsOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
-		params = NewPostStatisticsParams()
+		params = NewPostModelByIDTaskReviewsParams()
 	}
 	op := &runtime.ClientOperation{
-		ID:                 "postStatistics",
+		ID:                 "postModelByIdTaskReviews",
 		Method:             "POST",
-		PathPattern:        "/api-key/statistics",
+		PathPattern:        "/api-key/model/{id}/task/reviews",
 		ProducesMediaTypes: []string{"application/json"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &PostStatisticsReader{formats: a.formats},
+		Reader:             &PostModelByIDTaskReviewsReader{formats: a.formats},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,
@@ -390,7 +390,7 @@ func (a *Client) PostStatistics(params *PostStatisticsParams, authInfo runtime.C
 	}
 
 	// only one success response has to be checked
-	success, ok := result.(*PostStatisticsOK)
+	success, ok := result.(*PostModelByIDTaskReviewsOK)
 	if ok {
 		return success, nil
 	}
@@ -400,7 +400,7 @@ func (a *Client) PostStatistics(params *PostStatisticsParams, authInfo runtime.C
 	// no default response is defined.
 	//
 	// safeguard: normally, in the absence of a default response, unknown success responses return an error above: so this is a codegen issue
-	msg := fmt.Sprintf("unexpected success response for postStatistics: API contract not enforced by server. Client expected to get an error, but got: %T", result)
+	msg := fmt.Sprintf("unexpected success response for postModelByIdTaskReviews: API contract not enforced by server. Client expected to get an error, but got: %T", result)
 	panic(msg)
 }
 

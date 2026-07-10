@@ -10,39 +10,9 @@ import (
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
 	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization"
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization_wallet"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/organization_payment"
 	"github.com/stretchr/testify/assert"
 )
-
-func TestGen_Organizations_PostApiKeyOrganization(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	_, _ = client.Organizations().Organization.PostOrganization(
-		organization.NewPostOrganizationParams().WithContext(t.Context()),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
-	assert.Equal(t, "test-key", capturedAPIKey)
-}
 
 func TestGen_Organizations_GetApiKeyOrganizationList(t *testing.T) {
 	var capturedMethod, capturedPath string
@@ -71,38 +41,6 @@ func TestGen_Organizations_GetApiKeyOrganizationList(t *testing.T) {
 
 	assert.Equal(t, "GET", capturedMethod)
 	assert.Contains(t, capturedPath, "/api-key/organization/list")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Organizations_DeleteApiKeyOrganizationOrg(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Organizations().Organization.DeleteOrganizationByOrg(
-		organization.NewDeleteOrganizationByOrgParams().WithContext(t.Context()).WithOrg("testorg"),
-		nil,
-	)
-
-	assert.Equal(t, "DELETE", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
 	assert.Equal(t, "test-key", capturedAPIKey)
 	assert.NoError(t, err)
 	assert.NotNil(t, result)
@@ -172,70 +110,6 @@ func TestGen_Organizations_PatchApiKeyOrganizationOrgInfo(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Organizations_GetApiKeyOrganizationOrgIsMember(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Organizations().Organization.GetOrganizationByOrgIsMember(
-		organization.NewGetOrganizationByOrgIsMemberParams().WithContext(t.Context()).WithOrg("testorg"),
-		nil,
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Organizations_DeleteApiKeyOrganizationOrgLeave(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Organizations().Organization.DeleteOrganizationByOrgLeave(
-		organization.NewDeleteOrganizationByOrgLeaveParams().WithContext(t.Context()).WithOrg("testorg"),
-		nil,
-	)
-
-	assert.Equal(t, "DELETE", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
 func TestGen_Organizations_GetApiKeyOrganizationOrgMembers(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
@@ -258,38 +132,6 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgMembers(t *testing.T) {
 
 	result, err := client.Organizations().Organization.GetOrganizationByOrgMembers(
 		organization.NewGetOrganizationByOrgMembersParams().WithContext(t.Context()).WithOrg("testorg"),
-		nil,
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Organizations_GetApiKeyOrganizationOrgOffers(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Organizations().Organization.GetOrganizationByOrgOffers(
-		organization.NewGetOrganizationByOrgOffersParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -332,70 +174,6 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgPermission(t *testing.T) {
 	assert.NotNil(t, result)
 }
 
-func TestGen_Organizations_GetApiKeyOrganizationOrgSetting(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Organizations().Organization.GetOrganizationByOrgSetting(
-		organization.NewGetOrganizationByOrgSettingParams().WithContext(t.Context()).WithOrg("testorg"),
-		nil,
-	)
-
-	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Organizations_PatchApiKeyOrganizationOrgSetting(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Organizations().Organization.PatchOrganizationByOrgSetting(
-		organization.NewPatchOrganizationByOrgSettingParams().WithContext(t.Context()).WithOrg("testorg"),
-		nil,
-	)
-
-	assert.Equal(t, "PATCH", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
 func TestGen_Organizations_PostApiKeyOrganizationOrgStatisticsEarnings(t *testing.T) {
 	var capturedMethod, capturedPath string
 	var capturedAPIKey string
@@ -416,8 +194,8 @@ func TestGen_Organizations_PostApiKeyOrganizationOrgStatisticsEarnings(t *testin
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.PostOrganizationByOrgStatisticsEarnings(
-		organization_wallet.NewPostOrganizationByOrgStatisticsEarningsParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Payment.PostOrganizationByOrgStatisticsEarnings(
+		organization_payment.NewPostOrganizationByOrgStatisticsEarningsParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -448,8 +226,8 @@ func TestGen_Organizations_PostApiKeyOrganizationOrgStatisticsSpendingCost(t *te
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.PostOrganizationByOrgStatisticsSpendingCost(
-		organization_wallet.NewPostOrganizationByOrgStatisticsSpendingCostParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Payment.PostOrganizationByOrgStatisticsSpendingCost(
+		organization_payment.NewPostOrganizationByOrgStatisticsSpendingCostParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -480,8 +258,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgWalletDepositHistory(t *testi
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.GetOrganizationByOrgWalletDepositHistory(
-		organization_wallet.NewGetOrganizationByOrgWalletDepositHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Payment.GetOrganizationByOrgWalletDepositHistory(
+		organization_payment.NewGetOrganizationByOrgWalletDepositHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -512,8 +290,8 @@ func TestGen_Organizations_PostApiKeyOrganizationOrgWalletTransactionAnalytics(t
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.PostOrganizationByOrgWalletTransactionAnalytics(
-		organization_wallet.NewPostOrganizationByOrgWalletTransactionAnalyticsParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Payment.PostOrganizationByOrgWalletTransactionAnalytics(
+		organization_payment.NewPostOrganizationByOrgWalletTransactionAnalyticsParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -544,8 +322,8 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgWalletTransactionHistory(t *t
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.GetOrganizationByOrgWalletTransactionHistory(
-		organization_wallet.NewGetOrganizationByOrgWalletTransactionHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Payment.GetOrganizationByOrgWalletTransactionHistory(
+		organization_payment.NewGetOrganizationByOrgWalletTransactionHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -576,40 +354,8 @@ func TestGen_Organizations_PostApiKeyOrganizationOrgWalletTransactionRecent(t *t
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.PostOrganizationByOrgWalletTransactionRecent(
-		organization_wallet.NewPostOrganizationByOrgWalletTransactionRecentParams().WithContext(t.Context()).WithOrg("testorg"),
-		nil,
-	)
-
-	assert.Equal(t, "POST", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Organizations_PostApiKeyOrganizationOrgWalletWithdrawEarnings(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Organizations().Wallet.PostOrganizationByOrgWalletWithdrawEarnings(
-		organization_wallet.NewPostOrganizationByOrgWalletWithdrawEarningsParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Payment.PostOrganizationByOrgWalletTransactionRecent(
+		organization_payment.NewPostOrganizationByOrgWalletTransactionRecentParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
@@ -640,76 +386,12 @@ func TestGen_Organizations_GetApiKeyOrganizationOrgWalletWithdrawHistory(t *test
 		t.Fatal(err)
 	}
 
-	result, err := client.Organizations().Wallet.GetOrganizationByOrgWalletWithdrawHistory(
-		organization_wallet.NewGetOrganizationByOrgWalletWithdrawHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
+	result, err := client.Organizations().Payment.GetOrganizationByOrgWalletWithdrawHistory(
+		organization_payment.NewGetOrganizationByOrgWalletWithdrawHistoryParams().WithContext(t.Context()).WithOrg("testorg"),
 		nil,
 	)
 
 	assert.Equal(t, "GET", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Organizations_DeleteApiKeyOrganizationOrgMember(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Organizations().Organization.DeleteOrganizationByOrgByMember(
-		organization.NewDeleteOrganizationByOrgByMemberParams().WithContext(t.Context()).WithOrg("testorg").WithMember("testuser"),
-		nil,
-	)
-
-	assert.Equal(t, "DELETE", capturedMethod)
-	assert.Contains(t, capturedPath, "/api-key/organization")
-	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
-}
-
-func TestGen_Organizations_PatchApiKeyOrganizationOrgMember(t *testing.T) {
-	var capturedMethod, capturedPath string
-	var capturedAPIKey string
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		capturedMethod = r.Method
-		capturedPath = r.URL.Path
-		capturedAPIKey = r.Header.Get("x-api-key")
-		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
-	}))
-	defer server.Close()
-
-	client, err := aiozai.NewClient(
-		aiozai.WithAPIKey("test-key"),
-		aiozai.WithBaseURL(server.URL+"/api/v1"),
-	)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := client.Organizations().Organization.PatchOrganizationByOrgByMember(
-		organization.NewPatchOrganizationByOrgByMemberParams().WithContext(t.Context()).WithOrg("testorg"),
-		nil,
-	)
-
-	assert.Equal(t, "PATCH", capturedMethod)
 	assert.Contains(t, capturedPath, "/api-key/organization")
 	assert.Equal(t, "test-key", capturedAPIKey)
 	assert.NoError(t, err)

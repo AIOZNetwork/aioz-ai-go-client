@@ -1,7 +1,7 @@
 // Package aiozai provides a Go client SDK for the AIOZ AI API.
 //
 // The SDK is auto-generated from the OpenAPI specification and provides
-// typed access to all 218+ API endpoints with 578+ model definitions.
+// typed access to all endpoints with all model definitions.
 //
 // # Quick Start
 //
