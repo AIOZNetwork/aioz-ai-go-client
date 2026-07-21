@@ -11,6 +11,7 @@ import (
 	"github.com/stretchr/testify/require"
 
 	aiozai "github.com/AIOZNetwork/aioz-ai-go-client"
+	"github.com/AIOZNetwork/aioz-ai-go-client/generated/client/public"
 )
 
 func TestAuthFlow_APIKeyConfigured(t *testing.T) {
@@ -30,6 +31,31 @@ func TestAuthFlow_NoAPIKeyConfigured(t *testing.T) {
 
 	cfg := client.Config()
 	assert.Empty(t, cfg.APIKey)
+}
+
+// Endpoints under /api-key/public/ are served anonymously by the API, so the
+// client must reach them without an API key configured.
+func TestAuthFlow_PublicEndpointWithoutAPIKey(t *testing.T) {
+	var served bool
+	var capturedAPIKey string
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		served = true
+		capturedAPIKey = r.Header.Get("x-api-key")
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
+	}))
+	defer server.Close()
+
+	client, err := aiozai.NewClient(aiozai.WithBaseURL(server.URL + "/api/v1"))
+	require.NoError(t, err)
+
+	_, err = client.Public().Public.GetPublicMetadata(
+		public.NewGetPublicMetadataParams().WithContext(t.Context()),
+	)
+
+	assert.NoError(t, err)
+	assert.True(t, served, "request should reach the server without an API key")
+	assert.Empty(t, capturedAPIKey)
 }
 
 func TestClientCreation_WithCustomBaseURL(t *testing.T) {

@@ -26,6 +26,7 @@ type RequestCreateDatasetRequest struct {
 
 	// description
 	// Required: true
+	// Max Length: 1000
 	Description *string `json:"description"`
 
 	// language
@@ -33,14 +34,16 @@ type RequestCreateDatasetRequest struct {
 	Language []string `json:"language"`
 
 	// license
+	// Example: cc
 	// Required: true
 	License *string `json:"license"`
 
 	// name
-	// Required: true
-	Name *string `json:"name"`
+	// Max Length: 100
+	Name *string `json:"name,omitempty"`
 
 	// pretty name
+	// Max Length: 100
 	PrettyName string `json:"pretty_name,omitempty"`
 
 	// price
@@ -87,6 +90,10 @@ func (m *RequestCreateDatasetRequest) Validate(formats strfmt.Registry) error {
 		res = append(res, err)
 	}
 
+	if err := m.validatePrettyName(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateThumbnail(formats); err != nil {
 		res = append(res, err)
 	}
@@ -116,6 +123,10 @@ func (m *RequestCreateDatasetRequest) validateDescription(formats strfmt.Registr
 		return err
 	}
 
+	if err := validate.MaxLength("description", "body", *m.Description, 1000); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -129,8 +140,23 @@ func (m *RequestCreateDatasetRequest) validateLicense(formats strfmt.Registry) e
 }
 
 func (m *RequestCreateDatasetRequest) validateName(formats strfmt.Registry) error {
+	if swag.IsZero(m.Name) { // not required
+		return nil
+	}
 
-	if err := validate.Required("name", "body", m.Name); err != nil {
+	if err := validate.MaxLength("name", "body", *m.Name, 100); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateDatasetRequest) validatePrettyName(formats strfmt.Registry) error {
+	if swag.IsZero(m.PrettyName) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("pretty_name", "body", m.PrettyName, 100); err != nil {
 		return err
 	}
 

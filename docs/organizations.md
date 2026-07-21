@@ -27,34 +27,59 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 **Responses**
 
-**200 OK** — `response.OrganizationListResponse`
+**200 OK** — `response.GetLiteOrganizationsResponse`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `response.OrganizationListData` |  |
+| `data` | `response.GetLiteOrganizationsData` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
 
-**`response.OrganizationListData`**
+**`response.GetLiteOrganizationsData`**
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `records` | `array[models.OrganizationInfo]` |  |
+| `organizations` | `array[models.LiteOrganization]` |  |
 | `total` | `integer` |  |
 
-**`models.OrganizationInfo`**
+**`models.LiteOrganization`**
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `avatar` | `string` |  |
+| `bio` | `string` |  |
+| `created_at` | `string` |  |
+| `created_by` | `string` |  |
+| `datasets_count` | `integer` |  |
 | `full_name` | `string` |  |
+| `github_link` | `string` |  |
+| `github_name` | `string` |  |
+| `home_page` | `string` |  |
 | `id` | `string` |  |
-| `org_type` | `string` |  |
-| `permission` | `map[string]any` |  |
+| `interests` | `string` |  |
+| `join_id` | `string` |  |
+| `models_count` | `integer` |  |
+| `org_team` | `string` |  |
+| `total_repos_size` | `integer` |  |
+| `twitter_link` | `string` |  |
+| `twitter_name` | `string` |  |
 | `type` | `string` |  |
+| `updated_at` | `string` |  |
+| `updated_by` | `string` |  |
 | `username` | `string` |  |
 | `verified` | `boolean` |  |
 | `visibility` | `string` |  |
+| `wallet` | `models.Wallet` |  |
+| `wallet_address` | `string` |  |
+
+**`models.Wallet`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -67,7 +92,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations().Organization.GetOrganizationList(ctx)
+resp, err := client.Organizations().Organization.GetOrganizationList(organization.NewGetOrganizationListParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -94,27 +119,52 @@ fmt.Printf("%+v\n", resp)
 
 **Responses**
 
-**200 OK** — `response.OrganizationResponse`
+**200 OK** — `response.LiteOrganizationResponse`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `models.OrganizationInfo` |  |
+| `data` | `models.LiteOrganization` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
 
-**`models.OrganizationInfo`**
+**`models.LiteOrganization`**
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `avatar` | `string` |  |
+| `bio` | `string` |  |
+| `created_at` | `string` |  |
+| `created_by` | `string` |  |
+| `datasets_count` | `integer` |  |
 | `full_name` | `string` |  |
+| `github_link` | `string` |  |
+| `github_name` | `string` |  |
+| `home_page` | `string` |  |
 | `id` | `string` |  |
-| `org_type` | `string` |  |
-| `permission` | `map[string]any` |  |
+| `interests` | `string` |  |
+| `join_id` | `string` |  |
+| `models_count` | `integer` |  |
+| `org_team` | `string` |  |
+| `total_repos_size` | `integer` |  |
+| `twitter_link` | `string` |  |
+| `twitter_name` | `string` |  |
 | `type` | `string` |  |
+| `updated_at` | `string` |  |
+| `updated_by` | `string` |  |
 | `username` | `string` |  |
 | `verified` | `boolean` |  |
 | `visibility` | `string` |  |
+| `wallet` | `models.Wallet` |  |
+| `wallet_address` | `string` |  |
+
+**`models.Wallet`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `balance` | `string` |  |
+| `debt` | `string` |  |
+| `earnings` | `string` |  |
+| `free_balance` | `string` |  |
 
 **Error Responses**
 
@@ -127,7 +177,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations().Organization.GetOrganizationByOrg(ctx, "<org>")
+resp, err := client.Organizations().Organization.GetOrganizationByOrg(organization.NewGetOrganizationByOrgParams().WithContext(ctx).WithOrg("<org>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -170,27 +220,12 @@ fmt.Printf("%+v\n", resp)
 
 **Responses**
 
-**200 OK** — `response.OrganizationResponse`
+**200 OK** — `response.SuccessResponse`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `models.OrganizationInfo` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
-
-**`models.OrganizationInfo`**
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `avatar` | `string` |  |
-| `full_name` | `string` |  |
-| `id` | `string` |  |
-| `org_type` | `string` |  |
-| `permission` | `map[string]any` |  |
-| `type` | `string` |  |
-| `username` | `string` |  |
-| `verified` | `boolean` |  |
-| `visibility` | `string` |  |
 
 **Error Responses**
 
@@ -203,14 +238,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.UpdateOrganizationInfoRequest{
+req := &models.RequestUpdateOrganizationInfoRequest{
     Avatar: "...",  // string
     Bio: "...",  // string
     FullName: "...",  // string
     GithubLink: "...",  // string
     GithubName: "...",  // string
 }
-resp, err := client.Organizations().Organization.PatchOrganizationByOrgInfo(ctx, req)
+resp, err := client.Organizations().Organization.PatchOrganizationByOrgInfo(organization.NewPatchOrganizationByOrgInfoParams().WithContext(ctx).WithOrg("<org>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -353,7 +388,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations().Organization.GetOrganizationByOrgMembers(ctx, "<org>")
+resp, err := client.Organizations().Organization.GetOrganizationByOrgMembers(organization.NewGetOrganizationByOrgMembersParams().WithContext(ctx).WithOrg("<org>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -418,10 +453,8 @@ _No fields defined._
 
 ```go
 ctx := context.Background()
-req := &models.GetUserOrganizationPermissionRequest{
-    
-}
-resp, err := client.Organizations().Organization.GetOrganizationByOrgPermission(ctx, req)
+req := map[string]any{}
+resp, err := client.Organizations().Organization.GetOrganizationByOrgPermission(organization.NewGetOrganizationByOrgPermissionParams().WithContext(ctx).WithOrg("<org>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -488,11 +521,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetTransactionAnalyticsRequest{
+req := &models.RequestGetTransactionAnalyticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Organizations().Payment.PostOrganizationByOrgStatisticsEarnings(ctx, req)
+resp, err := client.Organizations().Payment.PostOrganizationByOrgStatisticsEarnings(organization_payment.NewPostOrganizationByOrgStatisticsEarningsParams().WithContext(ctx).WithOrg("<org>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -563,11 +596,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetOrganizationSpendingCostStatisticsRequest{
+req := &models.RequestGetOrganizationSpendingCostStatisticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Organizations().Payment.PostOrganizationByOrgStatisticsSpendingCost(ctx, req)
+resp, err := client.Organizations().Payment.PostOrganizationByOrgStatisticsSpendingCost(organization_payment.NewPostOrganizationByOrgStatisticsSpendingCostParams().WithContext(ctx).WithOrg("<org>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -591,13 +624,8 @@ fmt.Printf("%+v\n", resp)
 | Name | Location | Type | Required | Description |
 | --- | --- | --- | --- | --- |
 | `org` | path | `string` | Yes | organization's username |
-
-**Request Body** — `request.GetListOrgDepositHistoryByOwnerRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `limit` | `integer` | No |  |
-| `offset` | `integer` | No |  |
+| `limit` | query | `integer` | No |  |
+| `offset` | query | `integer` | No |  |
 
 **Responses**
 
@@ -642,11 +670,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetListOrgDepositHistoryByOwnerRequest{
-    Limit: "...",  // integer
-    Offset: "...",  // integer
-}
-resp, err := client.Organizations().Payment.GetOrganizationByOrgWalletDepositHistory(ctx, req)
+resp, err := client.Organizations().Payment.GetOrganizationByOrgWalletDepositHistory(organization_payment.NewGetOrganizationByOrgWalletDepositHistoryParams().WithContext(ctx).WithOrg("<org>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -730,11 +754,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetOrgTransactionAnalyticsByOwnerRequest{
+req := &models.RequestGetOrgTransactionAnalyticsByOwnerRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Organizations().Payment.PostOrganizationByOrgWalletTransactionAnalytics(ctx, req)
+resp, err := client.Organizations().Payment.PostOrganizationByOrgWalletTransactionAnalytics(organization_payment.NewPostOrganizationByOrgWalletTransactionAnalyticsParams().WithContext(ctx).WithOrg("<org>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -809,7 +833,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Organizations().Payment.GetOrganizationByOrgWalletTransactionHistory(ctx, "<org>")
+resp, err := client.Organizations().Payment.GetOrganizationByOrgWalletTransactionHistory(organization_payment.NewGetOrganizationByOrgWalletTransactionHistoryParams().WithContext(ctx).WithOrg("<org>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -891,14 +915,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetListOrgRecentTransactionByOwnerRequest{
+req := &models.RequestGetListOrgRecentTransactionByOwnerRequest{
     From: "...",  // string
     Limit: "...",  // integer
     Offset: "...",  // integer
     To: "...",  // string
     Type: "...",  // string
 }
-resp, err := client.Organizations().Payment.PostOrganizationByOrgWalletTransactionRecent(ctx, req)
+resp, err := client.Organizations().Payment.PostOrganizationByOrgWalletTransactionRecent(organization_payment.NewPostOrganizationByOrgWalletTransactionRecentParams().WithContext(ctx).WithOrg("<org>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -922,13 +946,8 @@ fmt.Printf("%+v\n", resp)
 | Name | Location | Type | Required | Description |
 | --- | --- | --- | --- | --- |
 | `org` | path | `string` | Yes | organization's username |
-
-**Request Body** — `request.GetListOrgWithdrawalHistoryByOwnerRequest`
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `limit` | `integer` | No |  |
-| `offset` | `integer` | No |  |
+| `limit` | query | `integer` | No |  |
+| `offset` | query | `integer` | No |  |
 
 **Responses**
 
@@ -971,11 +990,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetListOrgWithdrawalHistoryByOwnerRequest{
-    Limit: "...",  // integer
-    Offset: "...",  // integer
-}
-resp, err := client.Organizations().Payment.GetOrganizationByOrgWalletWithdrawHistory(ctx, req)
+resp, err := client.Organizations().Payment.GetOrganizationByOrgWalletWithdrawHistory(organization_payment.NewGetOrganizationByOrgWalletWithdrawHistoryParams().WithContext(ctx).WithOrg("<org>"), nil)
 if err != nil {
     log.Fatal(err)
 }

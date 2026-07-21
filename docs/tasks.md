@@ -22,10 +22,6 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 | --- | --- | --- | --- | --- |
 | `id` | path | `string` | Yes | Task's id |
 
-**Request Body** — `request.GetTaskReviewByTaskIdRequest`
-
-_No fields defined._
-
 **Responses**
 
 **200 OK** — `response.TaskReviewsResponse`
@@ -69,10 +65,7 @@ _No fields defined._
 
 ```go
 ctx := context.Background()
-req := &models.GetTaskReviewByTaskIdRequest{
-    
-}
-resp, err := client.Tasks().Task.GetModelTaskByIDReviews(ctx, req)
+resp, err := client.Tasks().Task.GetModelTaskByIDReviews(task.NewGetModelTaskByIDReviewsParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -122,10 +115,8 @@ _No fields defined._
 
 ```go
 ctx := context.Background()
-req := &models.DistributeTaskWithApiKeyRequest{
-    
-}
-resp, err := client.Tasks().Task.PostModelByIDTask(ctx, req)
+req := map[string]any{}
+resp, err := client.Tasks().Task.PostModelByIDTask(task.NewPostModelByIDTaskParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -155,8 +146,8 @@ fmt.Printf("%+v\n", resp)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `description` | `string` | No |  |
-| `point` | `integer` | No |  |
-| `task_id` | `string` | No |  |
+| `point` | `integer` | Yes |  |
+| `task_id` | `string` | Yes |  |
 
 **Responses**
 
@@ -201,12 +192,12 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.CreateTaskReviewsRequest{
+req := &models.RequestCreateTaskReviewsRequest{
     Description: "...",  // string
-    Point: "...",  // integer
-    TaskID: "...",  // string
+    Point: "...",  // integer  // required
+    TaskID: "...",  // string  // required
 }
-resp, err := client.Tasks().Task.PostModelByIDTaskReviews(ctx, req)
+resp, err := client.Tasks().Task.PostModelByIDTaskReviews(task.NewPostModelByIDTaskReviewsParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -266,7 +257,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Tasks().Task.GetPlatformTaskByID(ctx, "<id>")
+resp, err := client.Tasks().Task.GetPlatformTaskByID(task.NewGetPlatformTaskByIDParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -314,12 +305,12 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.DistributeTaskRequest{
+req := &models.RequestDistributeTaskRequest{
     Files: "...",  // array[object]
     InputParams: "...",  // map[string]any
     ModelID: "...",  // string
 }
-resp, err := client.Tasks().Task.PostTask(ctx, req)
+resp, err := client.Tasks().Task.PostTask(task.NewPostTaskParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -396,7 +387,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Tasks().Task.GetTaskHistories(ctx)
+resp, err := client.Tasks().Task.GetTaskHistories(task.NewGetTaskHistoriesParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -441,7 +432,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Tasks().Task.DeleteTaskByIDCancel(ctx, "<id>")
+resp, err := client.Tasks().Task.DeleteTaskByIDCancel(task.NewDeleteTaskByIDCancelParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -510,7 +501,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Tasks().Task.GetTaskByIDDetail(ctx, "<id>")
+resp, err := client.Tasks().Task.GetTaskByIDDetail(task.NewGetTaskByIDDetailParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }

@@ -11,13 +11,13 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResponseOrganizationListResponse response organization list response
+// ResponseLikeResponse response like response
 //
-// swagger:model response.OrganizationListResponse
-type ResponseOrganizationListResponse struct {
+// swagger:model response.LikeResponse
+type ResponseLikeResponse struct {
 
 	// data
-	Data *ResponseOrganizationListData `json:"data,omitempty"`
+	Data *ResponseIsLikedByUser `json:"data,omitempty"`
 
 	// message
 	Message string `json:"message,omitempty"`
@@ -26,8 +26,8 @@ type ResponseOrganizationListResponse struct {
 	Status *string `json:"status,omitempty"`
 }
 
-// Validate validates this response organization list response
-func (m *ResponseOrganizationListResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this response like response
+func (m *ResponseLikeResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -40,7 +40,7 @@ func (m *ResponseOrganizationListResponse) Validate(formats strfmt.Registry) err
 	return nil
 }
 
-func (m *ResponseOrganizationListResponse) validateData(formats strfmt.Registry) error {
+func (m *ResponseLikeResponse) validateData(formats strfmt.Registry) error {
 	if swag.IsZero(m.Data) { // not required
 		return nil
 	}
@@ -63,8 +63,8 @@ func (m *ResponseOrganizationListResponse) validateData(formats strfmt.Registry)
 	return nil
 }
 
-// ContextValidate validate this response organization list response based on the context it is used
-func (m *ResponseOrganizationListResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this response like response based on the context it is used
+func (m *ResponseLikeResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateData(ctx, formats); err != nil {
@@ -77,7 +77,7 @@ func (m *ResponseOrganizationListResponse) ContextValidate(ctx context.Context, 
 	return nil
 }
 
-func (m *ResponseOrganizationListResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
+func (m *ResponseLikeResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
 
@@ -103,7 +103,7 @@ func (m *ResponseOrganizationListResponse) contextValidateData(ctx context.Conte
 }
 
 // MarshalBinary interface implementation
-func (m *ResponseOrganizationListResponse) MarshalBinary() ([]byte, error) {
+func (m *ResponseLikeResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -111,8 +111,8 @@ func (m *ResponseOrganizationListResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ResponseOrganizationListResponse) UnmarshalBinary(b []byte) error {
-	var res ResponseOrganizationListResponse
+func (m *ResponseLikeResponse) UnmarshalBinary(b []byte) error {
+	var res ResponseLikeResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

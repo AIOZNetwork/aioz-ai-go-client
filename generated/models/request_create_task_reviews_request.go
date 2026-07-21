@@ -5,8 +5,10 @@ package models
 import (
 	"context"
 
+	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 )
 
 // RequestCreateTaskReviewsRequest request create task reviews request
@@ -15,17 +17,77 @@ import (
 type RequestCreateTaskReviewsRequest struct {
 
 	// description
+	// Max Length: 500
 	Description string `json:"description,omitempty"`
 
 	// point
-	Point int64 `json:"point,omitempty"`
+	// Required: true
+	// Maximum: 5
+	// Minimum: 1
+	Point *int64 `json:"point"`
 
 	// task id
-	TaskID string `json:"task_id,omitempty"`
+	// Required: true
+	TaskID *string `json:"task_id"`
 }
 
 // Validate validates this request create task reviews request
 func (m *RequestCreateTaskReviewsRequest) Validate(formats strfmt.Registry) error {
+	var res []error
+
+	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePoint(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateTaskID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if len(res) > 0 {
+		return errors.CompositeValidationError(res...)
+	}
+	return nil
+}
+
+func (m *RequestCreateTaskReviewsRequest) validateDescription(formats strfmt.Registry) error {
+	if swag.IsZero(m.Description) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("description", "body", m.Description, 500); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateTaskReviewsRequest) validatePoint(formats strfmt.Registry) error {
+
+	if err := validate.Required("point", "body", m.Point); err != nil {
+		return err
+	}
+
+	if err := validate.MinimumInt("point", "body", *m.Point, 1, false); err != nil {
+		return err
+	}
+
+	if err := validate.MaximumInt("point", "body", *m.Point, 5, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateTaskReviewsRequest) validateTaskID(formats strfmt.Registry) error {
+
+	if err := validate.Required("task_id", "body", m.TaskID); err != nil {
+		return err
+	}
+
 	return nil
 }
 

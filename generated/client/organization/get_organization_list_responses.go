@@ -56,7 +56,7 @@ GetOrganizationListOK describes a response with status code 200, with default he
 OK
 */
 type GetOrganizationListOK struct {
-	Payload *models.ResponseOrganizationListResponse
+	Payload *models.ResponseGetLiteOrganizationsResponse
 }
 
 // IsSuccess returns true when this get organization list o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *GetOrganizationListOK) String() string {
 	return fmt.Sprintf("[GET /api-key/organization/list][%d] getOrganizationListOK %s", 200, payload)
 }
 
-func (o *GetOrganizationListOK) GetPayload() *models.ResponseOrganizationListResponse {
+func (o *GetOrganizationListOK) GetPayload() *models.ResponseGetLiteOrganizationsResponse {
 	return o.Payload
 }
 
 func (o *GetOrganizationListOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseOrganizationListResponse)
+	o.Payload = new(models.ResponseGetLiteOrganizationsResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

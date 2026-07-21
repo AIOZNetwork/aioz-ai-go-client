@@ -47,7 +47,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-resp, err := client.Core().Core.GetBalance(ctx)
+resp, err := client.Core().Core.GetBalance(core.NewGetBalanceParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -101,7 +101,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Core().Core.GetInfo(ctx)
+resp, err := client.Core().Core.GetInfo(core.NewGetInfoParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -141,7 +141,7 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `total_cost` | `integer` |  |
+| `total_cost` | `number` |  |
 | `total_failed` | `integer` |  |
 | `total_request` | `integer` |  |
 | `total_success` | `integer` |  |
@@ -157,11 +157,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetApiKeyStatisticsByModelIdRequest{
+req := &models.RequestGetAPIKeyStatisticsByModelIDRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Core().Core.PostStatistics(ctx, req)
+resp, err := client.Core().Core.PostStatistics(core.NewPostStatisticsParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }

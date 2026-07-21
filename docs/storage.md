@@ -6,7 +6,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ---
 
-### `PostStorageUploadCreatePresignedUrl`
+### `PostStorageUploadCreatePresignedURL`
 
 **`POST /api-key/storage/upload/create-presigned-url`** — Create Presigned Url
 
@@ -56,14 +56,14 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-req := &models.CreatePresignedUrlRequest{
+req := &models.RequestCreatePresignedURLRequest{
     Folder: "...",  // string  // required
     Mime: "...",  // string  // required
     Name: "...",  // string  // required
     OrgUsername: "...",  // string
     Size: "...",  // integer  // required
 }
-resp, err := client.Storage().Storage.PostStorageUploadCreatePresignedUrl(ctx, req)
+resp, err := client.Storage().Storage.PostStorageUploadCreatePresignedURL(storage.NewPostStorageUploadCreatePresignedURLParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -118,7 +118,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Storage().Storage.GetStorageUploadStatistics(ctx)
+resp, err := client.Storage().Storage.GetStorageUploadStatistics(storage.NewGetStorageUploadStatisticsParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -190,7 +190,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Storage().Storage.GetStorageUploadByFolder(ctx, "<folder>")
+resp, err := client.Storage().Storage.GetStorageUploadByFolder(storage.NewGetStorageUploadByFolderParams().WithContext(ctx).WithFolder("<folder>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -199,7 +199,7 @@ fmt.Printf("%+v\n", resp)
 
 ---
 
-### `DeleteStorageW3sUrl`
+### `DeleteStorageW3sURL`
 
 **`DELETE /api-key/storage/w3s/url`** — Delete Url
 
@@ -235,10 +235,10 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.DeleteUrlRequest{
+req := &models.RequestDeleteURLRequest{
     URL: "...",  // string  // required
 }
-resp, err := client.Storage().Storage.DeleteStorageW3sUrl(ctx, req)
+resp, err := client.Storage().Storage.DeleteStorageW3sURL(storage.NewDeleteStorageW3sURLParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }

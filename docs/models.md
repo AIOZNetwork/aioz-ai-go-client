@@ -21,9 +21,9 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `author_id` | `string` | No |  |
-| `cover` | `string` | No |  |
-| `dependency_id` | `string` | No |  |
-| `description` | `string` | No |  |
+| `cover` | `string` | Yes |  |
+| `dependency_id` | `string` | Yes |  |
+| `description` | `string` | Yes |  |
 | `language` | `array[string]` | No | en, vi |
 | `library` | `array[string]` | No | tf |
 | `license` | `string` | Yes |  |
@@ -31,7 +31,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 | `pretty_name` | `string` | No |  |
 | `price` | `number` | No |  |
 | `task` | `string` | No |  |
-| `thumbnail` | `string` | No |  |
+| `thumbnail` | `string` | Yes |  |
 | `visibility` | `string` | Yes | One of: `public`, `private` |
 
 **Responses**
@@ -40,23 +40,76 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `response.ModelData` |  |
+| `data` | `models.Model` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
 
-**`response.ModelData`**
+**`models.Model`**
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | `string` |  |
+| `author_avatar` | `string` |  |
+| `author_id` | `string` |  |
+| `commit_hash` | `string` |  |
+| `cover` | `string` |  |
+| `create_by` | `string` |  |
 | `created_at` | `string` |  |
+| `dependency_id` | `string` |  |
 | `description` | `string` |  |
-| `downloads` | `integer` |  |
+| `discussions_count` | `integer` |  |
+| `downloads_count` | `integer` |  |
 | `id` | `string` |  |
 | `is_liked_by_user` | `boolean` |  |
-| `likes` | `integer` |  |
+| `is_official` | `boolean` |  |
+| `is_released` | `boolean` |  |
+| `is_verified` | `boolean` |  |
+| `likes_count` | `integer` |  |
+| `model_metadata` | `models.ModelMetadata` |  |
 | `name` | `string` |  |
+| `playground_count` | `integer` |  |
+| `price` | `number` |  |
+| `reacted` | `models.Reaction` |  |
+| `reactions_statistics` | `array[models.ReactionStats]` |  |
+| `task_reviews_count` | `integer` |  |
+| `task_reviews_point` | `number` |  |
+| `thumbnail` | `string` |  |
 | `updated_at` | `string` |  |
+| `username` | `string` |  |
+| `visibility` | `string` |  |
+
+**`models.ModelMetadata`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+| `license` | `string` |  |
+| `model_id` | `string` |  |
+| `pretty_name` | `string` |  |
+| `task` | `string` |  |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.ReactionStats`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `count` | `integer` |  |
+| `name` | `string` |  |
 
 **Error Responses**
 
@@ -69,14 +122,14 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-req := &models.CreateModelRequest{
+req := &models.RequestCreateModelRequest{
     AuthorID: "...",  // string
-    Cover: "...",  // string
-    DependencyID: "...",  // string
-    Description: "...",  // string
+    Cover: "...",  // string  // required
+    DependencyID: "...",  // string  // required
+    Description: "...",  // string  // required
     Language: "...",  // array[string]
 }
-resp, err := client.Models().Model.PostModel(ctx, req)
+resp, err := client.Models().Model.PostModel(model.NewPostModelParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -206,14 +259,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetModelListRequest{
+req := &models.RequestGetModelListRequest{
     FilterBy: "...",  // string
     Language: "...",  // array[string]
     Library: "...",  // array[string]
     License: "...",  // string
     Limit: "...",  // integer
 }
-resp, err := client.Models().Model.PostModelList(ctx, req)
+resp, err := client.Models().Model.PostModelList(model.NewPostModelListParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -348,14 +401,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetModelListByAuthorRequest{
+req := &models.RequestGetModelListByAuthorRequest{
     Language: "...",  // array[string]
     Library: "...",  // array[string]
     License: "...",  // string
     Limit: "...",  // integer
     Offset: "...",  // integer
 }
-resp, err := client.Models().Model.PostModelListByAuthorByUsername(ctx, req)
+resp, err := client.Models().Model.PostModelListByAuthorByUsername(model.NewPostModelListByAuthorByUsernameParams().WithContext(ctx).WithUsername("<username>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -386,13 +439,22 @@ fmt.Printf("%+v\n", resp)
 
 **Responses**
 
-**200 OK** — `response.ListDataResponse`
+**200 OK** — `response.MatchingModelsTagsResponse`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `array[string]` |  |
+| `data` | `response.MatchingModelsTagsData` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
+
+**`response.MatchingModelsTagsData`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `languages` | `array[string]` |  |
+| `libraries` | `array[string]` |  |
+| `licenses` | `array[string]` |  |
+| `tasks` | `array[string]` |  |
 
 **Error Responses**
 
@@ -405,14 +467,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.MatchingModelsTagsRequest{
+req := &models.RequestMatchingModelsTagsRequest{
     Language: "...",  // array[string]
     Library: "...",  // array[string]
     License: "...",  // string
     TagType: "...",  // string
     Task: "...",  // string
 }
-resp, err := client.Models().Model.PostModelMatchingTags(ctx, req)
+resp, err := client.Models().Model.PostModelMatchingTags(model.NewPostModelMatchingTagsParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -535,7 +597,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models().Model.GetModelOrganizationByOrg(ctx, "<org>")
+resp, err := client.Models().Model.GetModelOrganizationByOrg(model.NewGetModelOrganizationByOrgParams().WithContext(ctx).WithOrg("<org>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -566,23 +628,76 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `response.ModelData` |  |
+| `data` | `models.Model` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
 
-**`response.ModelData`**
+**`models.Model`**
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | `string` |  |
+| `author_avatar` | `string` |  |
+| `author_id` | `string` |  |
+| `commit_hash` | `string` |  |
+| `cover` | `string` |  |
+| `create_by` | `string` |  |
 | `created_at` | `string` |  |
+| `dependency_id` | `string` |  |
 | `description` | `string` |  |
-| `downloads` | `integer` |  |
+| `discussions_count` | `integer` |  |
+| `downloads_count` | `integer` |  |
 | `id` | `string` |  |
 | `is_liked_by_user` | `boolean` |  |
-| `likes` | `integer` |  |
+| `is_official` | `boolean` |  |
+| `is_released` | `boolean` |  |
+| `is_verified` | `boolean` |  |
+| `likes_count` | `integer` |  |
+| `model_metadata` | `models.ModelMetadata` |  |
 | `name` | `string` |  |
+| `playground_count` | `integer` |  |
+| `price` | `number` |  |
+| `reacted` | `models.Reaction` |  |
+| `reactions_statistics` | `array[models.ReactionStats]` |  |
+| `task_reviews_count` | `integer` |  |
+| `task_reviews_point` | `number` |  |
+| `thumbnail` | `string` |  |
 | `updated_at` | `string` |  |
+| `username` | `string` |  |
+| `visibility` | `string` |  |
+
+**`models.ModelMetadata`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+| `license` | `string` |  |
+| `model_id` | `string` |  |
+| `pretty_name` | `string` |  |
+| `task` | `string` |  |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.ReactionStats`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `count` | `integer` |  |
+| `name` | `string` |  |
 
 **Error Responses**
 
@@ -595,7 +710,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models().Model.GetModelByID(ctx, "<id>")
+resp, err := client.Models().Model.GetModelByID(model.NewGetModelByIDParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -637,23 +752,76 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `response.ModelData` |  |
+| `data` | `models.Model` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
 
-**`response.ModelData`**
+**`models.Model`**
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | `string` |  |
+| `author_avatar` | `string` |  |
+| `author_id` | `string` |  |
+| `commit_hash` | `string` |  |
+| `cover` | `string` |  |
+| `create_by` | `string` |  |
 | `created_at` | `string` |  |
+| `dependency_id` | `string` |  |
 | `description` | `string` |  |
-| `downloads` | `integer` |  |
+| `discussions_count` | `integer` |  |
+| `downloads_count` | `integer` |  |
 | `id` | `string` |  |
 | `is_liked_by_user` | `boolean` |  |
-| `likes` | `integer` |  |
+| `is_official` | `boolean` |  |
+| `is_released` | `boolean` |  |
+| `is_verified` | `boolean` |  |
+| `likes_count` | `integer` |  |
+| `model_metadata` | `models.ModelMetadata` |  |
 | `name` | `string` |  |
+| `playground_count` | `integer` |  |
+| `price` | `number` |  |
+| `reacted` | `models.Reaction` |  |
+| `reactions_statistics` | `array[models.ReactionStats]` |  |
+| `task_reviews_count` | `integer` |  |
+| `task_reviews_point` | `number` |  |
+| `thumbnail` | `string` |  |
 | `updated_at` | `string` |  |
+| `username` | `string` |  |
+| `visibility` | `string` |  |
+
+**`models.ModelMetadata`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+| `license` | `string` |  |
+| `model_id` | `string` |  |
+| `pretty_name` | `string` |  |
+| `task` | `string` |  |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.ReactionStats`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `count` | `integer` |  |
+| `name` | `string` |  |
 
 **Error Responses**
 
@@ -666,14 +834,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.UpdateModelRequest{
+req := &models.RequestUpdateModelRequest{
     Cover: "...",  // string
     DependencyID: "...",  // string
     Description: "...",  // string
     Price: "...",  // number
     Thumbnail: "...",  // string
 }
-resp, err := client.Models().Model.PutModelByID(ctx, req)
+resp, err := client.Models().Model.PutModelByID(model.NewPutModelByIDParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -730,7 +898,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models().Model.GetModelByIDInfo(ctx, "<id>")
+resp, err := client.Models().Model.GetModelByIDInfo(model.NewGetModelByIDInfoParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -771,23 +939,76 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `response.ModelData` |  |
+| `data` | `models.Model` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
 
-**`response.ModelData`**
+**`models.Model`**
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | `string` |  |
+| `author_avatar` | `string` |  |
+| `author_id` | `string` |  |
+| `commit_hash` | `string` |  |
+| `cover` | `string` |  |
+| `create_by` | `string` |  |
 | `created_at` | `string` |  |
+| `dependency_id` | `string` |  |
 | `description` | `string` |  |
-| `downloads` | `integer` |  |
+| `discussions_count` | `integer` |  |
+| `downloads_count` | `integer` |  |
 | `id` | `string` |  |
 | `is_liked_by_user` | `boolean` |  |
-| `likes` | `integer` |  |
+| `is_official` | `boolean` |  |
+| `is_released` | `boolean` |  |
+| `is_verified` | `boolean` |  |
+| `likes_count` | `integer` |  |
+| `model_metadata` | `models.ModelMetadata` |  |
 | `name` | `string` |  |
+| `playground_count` | `integer` |  |
+| `price` | `number` |  |
+| `reacted` | `models.Reaction` |  |
+| `reactions_statistics` | `array[models.ReactionStats]` |  |
+| `task_reviews_count` | `integer` |  |
+| `task_reviews_point` | `number` |  |
+| `thumbnail` | `string` |  |
 | `updated_at` | `string` |  |
+| `username` | `string` |  |
+| `visibility` | `string` |  |
+
+**`models.ModelMetadata`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+| `license` | `string` |  |
+| `model_id` | `string` |  |
+| `pretty_name` | `string` |  |
+| `task` | `string` |  |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.ReactionStats`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `count` | `integer` |  |
+| `name` | `string` |  |
 
 **Error Responses**
 
@@ -800,14 +1021,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.UpdateModelMetadataRequest{
+req := &models.RequestUpdateModelMetadataRequest{
     Language: "...",  // array[string]
     Library: "...",  // array[string]
     License: "...",  // string
     PrettyName: "...",  // string
     Task: "...",  // string
 }
-resp, err := client.Models().Model.PutModelByIDMetadata(ctx, req)
+resp, err := client.Models().Model.PutModelByIDMetadata(model.NewPutModelByIDMetadataParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -860,7 +1081,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models().Model.GetModelByIDServing(ctx, "<id>")
+resp, err := client.Models().Model.GetModelByIDServing(model.NewGetModelByIDServingParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -906,7 +1127,7 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `total_cost` | `integer` |  |
+| `total_cost` | `number` |  |
 | `total_failed` | `integer` |  |
 | `total_request` | `integer` |  |
 | `total_success` | `integer` |  |
@@ -922,11 +1143,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetApiKeyStatisticsByModelIdRequest{
+req := &models.RequestGetAPIKeyStatisticsByModelIDRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Models().Model.PostModelByIDStatistics(ctx, req)
+resp, err := client.Models().Model.PostModelByIDStatistics(model.NewPostModelByIDStatisticsParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -980,7 +1201,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models().Model.GetModelByIDTaskCost(ctx, "<id>")
+resp, err := client.Models().Model.GetModelByIDTaskCost(model.NewGetModelByIDTaskCostParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -1070,7 +1291,7 @@ SysRequired       map[string]interface{} `json:"sys_require"` |
 
 ```go
 ctx := context.Background()
-resp, err := client.Models().Model.GetModelByIDVersioning(ctx, "<id>")
+resp, err := client.Models().Model.GetModelByIDVersioning(model.NewGetModelByIDVersioningParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -1102,23 +1323,76 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `response.ModelData` |  |
+| `data` | `models.Model` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
 
-**`response.ModelData`**
+**`models.Model`**
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `author` | `string` |  |
+| `author_avatar` | `string` |  |
+| `author_id` | `string` |  |
+| `commit_hash` | `string` |  |
+| `cover` | `string` |  |
+| `create_by` | `string` |  |
 | `created_at` | `string` |  |
+| `dependency_id` | `string` |  |
 | `description` | `string` |  |
-| `downloads` | `integer` |  |
+| `discussions_count` | `integer` |  |
+| `downloads_count` | `integer` |  |
 | `id` | `string` |  |
 | `is_liked_by_user` | `boolean` |  |
-| `likes` | `integer` |  |
+| `is_official` | `boolean` |  |
+| `is_released` | `boolean` |  |
+| `is_verified` | `boolean` |  |
+| `likes_count` | `integer` |  |
+| `model_metadata` | `models.ModelMetadata` |  |
 | `name` | `string` |  |
+| `playground_count` | `integer` |  |
+| `price` | `number` |  |
+| `reacted` | `models.Reaction` |  |
+| `reactions_statistics` | `array[models.ReactionStats]` |  |
+| `task_reviews_count` | `integer` |  |
+| `task_reviews_point` | `number` |  |
+| `thumbnail` | `string` |  |
 | `updated_at` | `string` |  |
+| `username` | `string` |  |
+| `visibility` | `string` |  |
+
+**`models.ModelMetadata`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `id` | `string` |  |
+| `license` | `string` |  |
+| `model_id` | `string` |  |
+| `pretty_name` | `string` |  |
+| `task` | `string` |  |
+
+**`models.Reaction`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `created_at` | `string` |  |
+| `name` | `string` |  |
+| `owner` | `models.Owner` |  |
+| `updated_at` | `string` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
+
+**`models.ReactionStats`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `count` | `integer` |  |
+| `name` | `string` |  |
 
 **Error Responses**
 
@@ -1131,7 +1405,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Models().Model.GetModelByUsernameByName(ctx, "<username>", "<name>")
+resp, err := client.Models().Model.GetModelByUsernameByName(model.NewGetModelByUsernameByNameParams().WithContext(ctx).WithUsername("<username>").WithName("<name>"), nil)
 if err != nil {
     log.Fatal(err)
 }

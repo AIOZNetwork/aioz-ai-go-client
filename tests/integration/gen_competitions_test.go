@@ -322,7 +322,7 @@ func TestGen_Competitions_GetApiKeyCompetitionIdPublicLeaderboard(t *testing.T) 
 	}
 
 	result, err := client.Competitions().Competition.GetCompetitionByIDPublicLeaderboard(
-		competition.NewGetCompetitionByIDPublicLeaderboardParams().WithContext(t.Context()).WithID("test-id").WithPhase("test-id"),
+		competition.NewGetCompetitionByIDPublicLeaderboardParams().WithContext(t.Context()).WithID("test-id"),
 		nil,
 	)
 

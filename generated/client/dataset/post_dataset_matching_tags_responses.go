@@ -56,7 +56,7 @@ PostDatasetMatchingTagsOK describes a response with status code 200, with defaul
 OK
 */
 type PostDatasetMatchingTagsOK struct {
-	Payload *models.ResponseListDataResponse
+	Payload *models.ResponseMatchingDatasetsTagsResponse
 }
 
 // IsSuccess returns true when this post dataset matching tags o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *PostDatasetMatchingTagsOK) String() string {
 	return fmt.Sprintf("[POST /api-key/dataset/matching-tags][%d] postDatasetMatchingTagsOK %s", 200, payload)
 }
 
-func (o *PostDatasetMatchingTagsOK) GetPayload() *models.ResponseListDataResponse {
+func (o *PostDatasetMatchingTagsOK) GetPayload() *models.ResponseMatchingDatasetsTagsResponse {
 	return o.Payload
 }
 
 func (o *PostDatasetMatchingTagsOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseListDataResponse)
+	o.Payload = new(models.ResponseMatchingDatasetsTagsResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

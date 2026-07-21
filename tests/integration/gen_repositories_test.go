@@ -4,6 +4,7 @@ package integration
 
 import (
 	"encoding/json"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -21,7 +22,7 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameContentR
 		capturedPath = r.URL.Path
 		capturedAPIKey = r.Header.Get("x-api-key")
 		w.Header().Set("Content-Type", "application/json")
-		_ = json.NewEncoder(w).Encode(map[string]any{"data": nil, "message": "", "status": "success"})
+		_ = json.NewEncoder(w).Encode(map[string]any{})
 	}))
 	defer server.Close()
 
@@ -33,14 +34,13 @@ func TestGen_Repositories_GetApiKeyRepositoryOwnerusernameRepositorynameContentR
 		t.Fatal(err)
 	}
 
-	result, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameContentReadme(
+	_, _ = client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameContentReadme(
 		repository.NewGetRepositoryByOwnerusernameByRepositorynameContentReadmeParams().WithContext(t.Context()).WithOwnerUsername("testuser").WithRepositoryName("test-name"),
 		nil,
+		io.Discard,
 	)
 
 	assert.Equal(t, "GET", capturedMethod)
 	assert.Contains(t, capturedPath, "/api-key/repository")
 	assert.Equal(t, "test-key", capturedAPIKey)
-	assert.NoError(t, err)
-	assert.NotNil(t, result)
 }

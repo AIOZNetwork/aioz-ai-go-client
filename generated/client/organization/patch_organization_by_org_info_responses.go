@@ -56,7 +56,7 @@ PatchOrganizationByOrgInfoOK describes a response with status code 200, with def
 OK
 */
 type PatchOrganizationByOrgInfoOK struct {
-	Payload *models.ResponseOrganizationResponse
+	Payload *models.ResponseSuccessResponse
 }
 
 // IsSuccess returns true when this patch organization by org info o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *PatchOrganizationByOrgInfoOK) String() string {
 	return fmt.Sprintf("[PATCH /api-key/organization/{org}/info][%d] patchOrganizationByOrgInfoOK %s", 200, payload)
 }
 
-func (o *PatchOrganizationByOrgInfoOK) GetPayload() *models.ResponseOrganizationResponse {
+func (o *PatchOrganizationByOrgInfoOK) GetPayload() *models.ResponseSuccessResponse {
 	return o.Payload
 }
 
 func (o *PatchOrganizationByOrgInfoOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseOrganizationResponse)
+	o.Payload = new(models.ResponseSuccessResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

@@ -4,6 +4,7 @@ package repository
 
 import (
 	"fmt"
+	"io"
 
 	"github.com/go-openapi/runtime"
 	httptransport "github.com/go-openapi/runtime/client"
@@ -75,9 +76,29 @@ func WithContentTypeApplicationxWwwFormUrlencoded(r *runtime.ClientOperation) {
 	r.ConsumesMediaTypes = []string{"application/x-www-form-urlencoded"}
 }
 
+// WithAccept allows the client to force the Accept header
+// to negotiate a specific Producer from the server.
+//
+// You may use this option to set arbitrary extensions to your MIME media type.
+func WithAccept(mime string) ClientOption {
+	return func(r *runtime.ClientOperation) {
+		r.ProducesMediaTypes = []string{mime}
+	}
+}
+
+// WithAcceptApplicationJSON sets the Accept header to "application/json".
+func WithAcceptApplicationJSON(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/json"}
+}
+
+// WithAcceptApplicationOctetStream sets the Accept header to "application/octet-stream".
+func WithAcceptApplicationOctetStream(r *runtime.ClientOperation) {
+	r.ProducesMediaTypes = []string{"application/octet-stream"}
+}
+
 // ClientService is the interface for Client methods
 type ClientService interface {
-	GetRepositoryByOwnerusernameByRepositorynameContentReadme(params *GetRepositoryByOwnerusernameByRepositorynameContentReadmeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK, error)
+	GetRepositoryByOwnerusernameByRepositorynameContentReadme(params *GetRepositoryByOwnerusernameByRepositorynameContentReadmeParams, authInfo runtime.ClientAuthInfoWriter, writer io.Writer, opts ...ClientOption) (*GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK, error)
 
 	SetTransport(transport runtime.ClientTransport)
 }
@@ -85,7 +106,7 @@ type ClientService interface {
 /*
 GetRepositoryByOwnerusernameByRepositorynameContentReadme gets readme file content
 */
-func (a *Client) GetRepositoryByOwnerusernameByRepositorynameContentReadme(params *GetRepositoryByOwnerusernameByRepositorynameContentReadmeParams, authInfo runtime.ClientAuthInfoWriter, opts ...ClientOption) (*GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK, error) {
+func (a *Client) GetRepositoryByOwnerusernameByRepositorynameContentReadme(params *GetRepositoryByOwnerusernameByRepositorynameContentReadmeParams, authInfo runtime.ClientAuthInfoWriter, writer io.Writer, opts ...ClientOption) (*GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK, error) {
 	// NOTE: parameters are not validated before sending
 	if params == nil {
 		params = NewGetRepositoryByOwnerusernameByRepositorynameContentReadmeParams()
@@ -94,11 +115,11 @@ func (a *Client) GetRepositoryByOwnerusernameByRepositorynameContentReadme(param
 		ID:                 "getRepositoryByOwnerusernameByRepositorynameContentReadme",
 		Method:             "GET",
 		PathPattern:        "/api-key/repository/{ownerUsername}/{repositoryName}/content/readme",
-		ProducesMediaTypes: []string{"application/json"},
+		ProducesMediaTypes: []string{"application/octet-stream"},
 		ConsumesMediaTypes: []string{"application/json", "application/x-www-form-urlencoded"},
 		Schemes:            []string{"https"},
 		Params:             params,
-		Reader:             &GetRepositoryByOwnerusernameByRepositorynameContentReadmeReader{formats: a.formats},
+		Reader:             &GetRepositoryByOwnerusernameByRepositorynameContentReadmeReader{formats: a.formats, writer: writer},
 		AuthInfo:           authInfo,
 		Context:            params.Context,
 		Client:             params.HTTPClient,

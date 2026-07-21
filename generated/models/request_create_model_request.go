@@ -21,13 +21,17 @@ type RequestCreateModelRequest struct {
 	AuthorID string `json:"author_id,omitempty"`
 
 	// cover
-	Cover string `json:"cover,omitempty"`
+	// Required: true
+	Cover *string `json:"cover"`
 
 	// dependency id
-	DependencyID string `json:"dependency_id,omitempty"`
+	// Required: true
+	DependencyID *string `json:"dependency_id"`
 
 	// description
-	Description string `json:"description,omitempty"`
+	// Required: true
+	// Max Length: 1000
+	Description *string `json:"description"`
 
 	// language
 	// Example: ["en","vi"]
@@ -43,9 +47,11 @@ type RequestCreateModelRequest struct {
 
 	// name
 	// Required: true
+	// Max Length: 100
 	Name *string `json:"name"`
 
 	// pretty name
+	// Max Length: 100
 	PrettyName string `json:"pretty_name,omitempty"`
 
 	// price
@@ -55,7 +61,8 @@ type RequestCreateModelRequest struct {
 	Task string `json:"task,omitempty"`
 
 	// thumbnail
-	Thumbnail string `json:"thumbnail,omitempty"`
+	// Required: true
+	Thumbnail *string `json:"thumbnail"`
 
 	// visibility
 	// Required: true
@@ -67,11 +74,31 @@ type RequestCreateModelRequest struct {
 func (m *RequestCreateModelRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateCover(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDependencyID(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateDescription(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateLicense(formats); err != nil {
 		res = append(res, err)
 	}
 
 	if err := m.validateName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validatePrettyName(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateThumbnail(formats); err != nil {
 		res = append(res, err)
 	}
 
@@ -82,6 +109,37 @@ func (m *RequestCreateModelRequest) Validate(formats strfmt.Registry) error {
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *RequestCreateModelRequest) validateCover(formats strfmt.Registry) error {
+
+	if err := validate.Required("cover", "body", m.Cover); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateModelRequest) validateDependencyID(formats strfmt.Registry) error {
+
+	if err := validate.Required("dependency_id", "body", m.DependencyID); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateModelRequest) validateDescription(formats strfmt.Registry) error {
+
+	if err := validate.Required("description", "body", m.Description); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("description", "body", *m.Description, 1000); err != nil {
+		return err
+	}
+
 	return nil
 }
 
@@ -97,6 +155,31 @@ func (m *RequestCreateModelRequest) validateLicense(formats strfmt.Registry) err
 func (m *RequestCreateModelRequest) validateName(formats strfmt.Registry) error {
 
 	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
+	}
+
+	if err := validate.MaxLength("name", "body", *m.Name, 100); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateModelRequest) validatePrettyName(formats strfmt.Registry) error {
+	if swag.IsZero(m.PrettyName) { // not required
+		return nil
+	}
+
+	if err := validate.MaxLength("pretty_name", "body", m.PrettyName, 100); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestCreateModelRequest) validateThumbnail(formats strfmt.Registry) error {
+
+	if err := validate.Required("thumbnail", "body", m.Thumbnail); err != nil {
 		return err
 	}
 

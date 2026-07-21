@@ -15,7 +15,7 @@ import (
 type ResponseGetTaskStatisticsData struct {
 
 	// total cost
-	TotalCost int64 `json:"total_cost,omitempty"`
+	TotalCost float64 `json:"total_cost,omitempty"`
 
 	// total failed
 	TotalFailed int64 `json:"total_failed,omitempty"`

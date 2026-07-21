@@ -47,10 +47,10 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-req := &models.EstimateCostRequest{
+req := &models.RequestEstimateCostRequest{
     TotalSize: "...",  // number  // required
 }
-resp, err := client.Public().Public.PostPublicCostEstimating(ctx, req)
+resp, err := client.Public().Public.PostPublicCostEstimating(public.NewPostPublicCostEstimatingParams().WithContext(ctx).WithData(req))
 if err != nil {
     log.Fatal(err)
 }
@@ -105,7 +105,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Public().Public.GetPublicMetadata(ctx)
+resp, err := client.Public().Public.GetPublicMetadata(public.NewGetPublicMetadataParams().WithContext(ctx))
 if err != nil {
     log.Fatal(err)
 }
@@ -155,7 +155,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Public().Public.GetPublicTokenPrice(ctx)
+resp, err := client.Public().Public.GetPublicTokenPrice(public.NewGetPublicTokenPriceParams().WithContext(ctx))
 if err != nil {
     log.Fatal(err)
 }
@@ -265,7 +265,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Public().Public.GetPublicUserByUsernameMedals(ctx, "<username>")
+resp, err := client.Public().Public.GetPublicUserByUsernameMedals(public.NewGetPublicUserByUsernameMedalsParams().WithContext(ctx).WithUsername("<username>"))
 if err != nil {
     log.Fatal(err)
 }
@@ -312,7 +312,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Public().Public.GetPublicUserByUsernameMedalsStatistics(ctx, "<username>")
+resp, err := client.Public().Public.GetPublicUserByUsernameMedalsStatistics(public.NewGetPublicUserByUsernameMedalsStatisticsParams().WithContext(ctx).WithUsername("<username>"))
 if err != nil {
     log.Fatal(err)
 }

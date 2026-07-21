@@ -56,7 +56,7 @@ PostCompetitionSubmitOK describes a response with status code 200, with default 
 OK
 */
 type PostCompetitionSubmitOK struct {
-	Payload *models.ResponseSubmitHistoryResponse
+	Payload *models.ResponseEvaluateModelResponse
 }
 
 // IsSuccess returns true when this post competition submit o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *PostCompetitionSubmitOK) String() string {
 	return fmt.Sprintf("[POST /api-key/competition/submit][%d] postCompetitionSubmitOK %s", 200, payload)
 }
 
-func (o *PostCompetitionSubmitOK) GetPayload() *models.ResponseSubmitHistoryResponse {
+func (o *PostCompetitionSubmitOK) GetPayload() *models.ResponseEvaluateModelResponse {
 	return o.Payload
 }
 
 func (o *PostCompetitionSubmitOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseSubmitHistoryResponse)
+	o.Payload = new(models.ResponseEvaluateModelResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

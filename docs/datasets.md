@@ -24,8 +24,8 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 | `cover` | `string` | Yes |  |
 | `description` | `string` | Yes |  |
 | `language` | `array[string]` | No | en, vi |
-| `license` | `string` | Yes |  |
-| `name` | `string` | Yes |  |
+| `license` | `string` | Yes | cc |
+| `name` | `string` | No |  |
 | `pretty_name` | `string` | No |  |
 | `price` | `number` | No |  |
 | `size_category` | `string` | No |  |
@@ -79,7 +79,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 | `dataset_id` | `string` |  |
 | `id` | `string` |  |
 | `language` | `array[string]` | en, vi |
-| `license` | `string` |  |
+| `license` | `string` | mit |
 | `pretty_name` | `string` |  |
 | `size_category` | `string` |  |
 | `tags` | `array[string]` | art |
@@ -120,14 +120,14 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-req := &models.CreateDatasetRequest{
+req := &models.RequestCreateDatasetRequest{
     AuthorID: "...",  // string
     Cover: "...",  // string  // required
     Description: "...",  // string  // required
     Language: "...",  // array[string]
     License: "...",  // string  // required
 }
-resp, err := client.Datasets().Dataset.PostDataset(ctx, req)
+resp, err := client.Datasets().Dataset.PostDataset(dataset.NewPostDatasetParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -215,7 +215,7 @@ fmt.Printf("%+v\n", resp)
 | `dataset_id` | `string` |  |
 | `id` | `string` |  |
 | `language` | `array[string]` | en, vi |
-| `license` | `string` |  |
+| `license` | `string` | mit |
 | `pretty_name` | `string` |  |
 | `size_category` | `string` |  |
 | `tags` | `array[string]` | art |
@@ -256,14 +256,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetDatasetListRequest{
+req := &models.RequestGetDatasetListRequest{
     FilterBy: "...",  // string
     Language: "...",  // array[string]
     License: "...",  // string
     Limit: "...",  // integer
     Offset: "...",  // integer
 }
-resp, err := client.Datasets().Dataset.PostDatasetList(ctx, req)
+resp, err := client.Datasets().Dataset.PostDatasetList(dataset.NewPostDatasetListParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -356,7 +356,7 @@ fmt.Printf("%+v\n", resp)
 | `dataset_id` | `string` |  |
 | `id` | `string` |  |
 | `language` | `array[string]` | en, vi |
-| `license` | `string` |  |
+| `license` | `string` | mit |
 | `pretty_name` | `string` |  |
 | `size_category` | `string` |  |
 | `tags` | `array[string]` | art |
@@ -397,14 +397,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetDatasetListByAuthorRequest{
+req := &models.RequestGetDatasetListByAuthorRequest{
     Language: "...",  // array[string]
     License: "...",  // string
     Limit: "...",  // integer
     Offset: "...",  // integer
     Order: "...",  // string
 }
-resp, err := client.Datasets().Dataset.PostDatasetListByAuthorByUsername(ctx, req)
+resp, err := client.Datasets().Dataset.PostDatasetListByAuthorByUsername(dataset.NewPostDatasetListByAuthorByUsernameParams().WithContext(ctx).WithUsername("<username>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -436,13 +436,23 @@ fmt.Printf("%+v\n", resp)
 
 **Responses**
 
-**200 OK** — `response.ListDataResponse`
+**200 OK** — `response.MatchingDatasetsTagsResponse`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `array[string]` |  |
+| `data` | `response.MatchingDatasetsTagsData` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
+
+**`response.MatchingDatasetsTagsData`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `languages` | `array[string]` |  |
+| `licenses` | `array[string]` |  |
+| `sizes` | `array[string]` |  |
+| `tags` | `array[string]` |  |
+| `tasks` | `array[string]` |  |
 
 **Error Responses**
 
@@ -455,14 +465,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.MatchingDatasetsTagsRequest{
+req := &models.RequestMatchingDatasetsTagsRequest{
     Language: "...",  // array[string]
     License: "...",  // string
     SizeCategory: "...",  // string
     TagType: "...",  // string
     Tags: "...",  // array[string]
 }
-resp, err := client.Datasets().Dataset.PostDatasetMatchingTags(ctx, req)
+resp, err := client.Datasets().Dataset.PostDatasetMatchingTags(dataset.NewPostDatasetMatchingTagsParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -543,7 +553,7 @@ fmt.Printf("%+v\n", resp)
 | `dataset_id` | `string` |  |
 | `id` | `string` |  |
 | `language` | `array[string]` | en, vi |
-| `license` | `string` |  |
+| `license` | `string` | mit |
 | `pretty_name` | `string` |  |
 | `size_category` | `string` |  |
 | `tags` | `array[string]` | art |
@@ -584,7 +594,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets().Dataset.GetDatasetOrganizationByOrg(ctx, "<org>")
+resp, err := client.Datasets().Dataset.GetDatasetOrganizationByOrg(dataset.NewGetDatasetOrganizationByOrgParams().WithContext(ctx).WithOrg("<org>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -654,7 +664,7 @@ fmt.Printf("%+v\n", resp)
 | `dataset_id` | `string` |  |
 | `id` | `string` |  |
 | `language` | `array[string]` | en, vi |
-| `license` | `string` |  |
+| `license` | `string` | mit |
 | `pretty_name` | `string` |  |
 | `size_category` | `string` |  |
 | `tags` | `array[string]` | art |
@@ -695,7 +705,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets().Dataset.GetDatasetByID(ctx, "<id>")
+resp, err := client.Datasets().Dataset.GetDatasetByID(dataset.NewGetDatasetByIDParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -775,7 +785,7 @@ fmt.Printf("%+v\n", resp)
 | `dataset_id` | `string` |  |
 | `id` | `string` |  |
 | `language` | `array[string]` | en, vi |
-| `license` | `string` |  |
+| `license` | `string` | mit |
 | `pretty_name` | `string` |  |
 | `size_category` | `string` |  |
 | `tags` | `array[string]` | art |
@@ -816,14 +826,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.UpdateDatasetRequest{
+req := &models.RequestUpdateDatasetRequest{
     Cover: "...",  // string
     Description: "...",  // string
     Price: "...",  // number
     Thumbnail: "...",  // string
     Visibility: "...",  // string
 }
-resp, err := client.Datasets().Dataset.PutDatasetByID(ctx, req)
+resp, err := client.Datasets().Dataset.PutDatasetByID(dataset.NewPutDatasetByIDParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -876,7 +886,7 @@ fmt.Printf("%+v\n", resp)
 | `dataset_id` | `string` |  |
 | `id` | `string` |  |
 | `language` | `array[string]` | en, vi |
-| `license` | `string` |  |
+| `license` | `string` | mit |
 | `pretty_name` | `string` |  |
 | `size_category` | `string` |  |
 | `tags` | `array[string]` | art |
@@ -893,14 +903,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.UpdateDatasetMetadataRequest{
+req := &models.RequestUpdateDatasetMetadataRequest{
     Language: "...",  // array[string]
     License: "...",  // string
     PrettyName: "...",  // string
     SizeCategory: "...",  // string
     Tags: "...",  // array[string]
 }
-resp, err := client.Datasets().Dataset.PutDatasetByIDMetadata(ctx, req)
+resp, err := client.Datasets().Dataset.PutDatasetByIDMetadata(dataset.NewPutDatasetByIDMetadataParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -971,7 +981,7 @@ fmt.Printf("%+v\n", resp)
 | `dataset_id` | `string` |  |
 | `id` | `string` |  |
 | `language` | `array[string]` | en, vi |
-| `license` | `string` |  |
+| `license` | `string` | mit |
 | `pretty_name` | `string` |  |
 | `size_category` | `string` |  |
 | `tags` | `array[string]` | art |
@@ -1012,7 +1022,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Datasets().Dataset.GetDatasetByUsernameByName(ctx, "<username>", "<name>")
+resp, err := client.Datasets().Dataset.GetDatasetByUsernameByName(dataset.NewGetDatasetByUsernameByNameParams().WithContext(ctx).WithUsername("<username>").WithName("<name>"), nil)
 if err != nil {
     log.Fatal(err)
 }

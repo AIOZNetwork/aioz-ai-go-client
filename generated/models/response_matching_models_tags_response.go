@@ -11,23 +11,23 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResponseModelResponse response model response
+// ResponseMatchingModelsTagsResponse response matching models tags response
 //
-// swagger:model response.ModelResponse
-type ResponseModelResponse struct {
+// swagger:model response.MatchingModelsTagsResponse
+type ResponseMatchingModelsTagsResponse struct {
 
 	// data
-	Data *ModelsModel `json:"data,omitempty"`
+	Data *ResponseMatchingModelsTagsData `json:"data,omitempty"`
 
 	// message
 	Message string `json:"message,omitempty"`
 
 	// status
-	Status *string `json:"status,omitempty"`
+	Status string `json:"status,omitempty"`
 }
 
-// Validate validates this response model response
-func (m *ResponseModelResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this response matching models tags response
+func (m *ResponseMatchingModelsTagsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -40,7 +40,7 @@ func (m *ResponseModelResponse) Validate(formats strfmt.Registry) error {
 	return nil
 }
 
-func (m *ResponseModelResponse) validateData(formats strfmt.Registry) error {
+func (m *ResponseMatchingModelsTagsResponse) validateData(formats strfmt.Registry) error {
 	if swag.IsZero(m.Data) { // not required
 		return nil
 	}
@@ -63,8 +63,8 @@ func (m *ResponseModelResponse) validateData(formats strfmt.Registry) error {
 	return nil
 }
 
-// ContextValidate validate this response model response based on the context it is used
-func (m *ResponseModelResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this response matching models tags response based on the context it is used
+func (m *ResponseMatchingModelsTagsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateData(ctx, formats); err != nil {
@@ -77,7 +77,7 @@ func (m *ResponseModelResponse) ContextValidate(ctx context.Context, formats str
 	return nil
 }
 
-func (m *ResponseModelResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
+func (m *ResponseMatchingModelsTagsResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
 
@@ -103,7 +103,7 @@ func (m *ResponseModelResponse) contextValidateData(ctx context.Context, formats
 }
 
 // MarshalBinary interface implementation
-func (m *ResponseModelResponse) MarshalBinary() ([]byte, error) {
+func (m *ResponseMatchingModelsTagsResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -111,8 +111,8 @@ func (m *ResponseModelResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ResponseModelResponse) UnmarshalBinary(b []byte) error {
-	var res ResponseModelResponse
+func (m *ResponseMatchingModelsTagsResponse) UnmarshalBinary(b []byte) error {
+	var res ResponseMatchingModelsTagsResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

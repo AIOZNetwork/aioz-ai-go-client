@@ -64,11 +64,11 @@ type GetCompetitionByIDPublicLeaderboardParams struct {
 	*/
 	ID string
 
-	/* Phase.
+	/* PhaseName.
 
 	   Competition Phase
 	*/
-	Phase string
+	PhaseName string
 
 	timeout    time.Duration
 	Context    context.Context
@@ -134,15 +134,15 @@ func (o *GetCompetitionByIDPublicLeaderboardParams) SetID(id string) {
 	o.ID = id
 }
 
-// WithPhase adds the phase to the get competition by Id public leaderboard params
-func (o *GetCompetitionByIDPublicLeaderboardParams) WithPhase(phase string) *GetCompetitionByIDPublicLeaderboardParams {
-	o.SetPhase(phase)
+// WithPhaseName adds the phaseName to the get competition by Id public leaderboard params
+func (o *GetCompetitionByIDPublicLeaderboardParams) WithPhaseName(phaseName string) *GetCompetitionByIDPublicLeaderboardParams {
+	o.SetPhaseName(phaseName)
 	return o
 }
 
-// SetPhase adds the phase to the get competition by Id public leaderboard params
-func (o *GetCompetitionByIDPublicLeaderboardParams) SetPhase(phase string) {
-	o.Phase = phase
+// SetPhaseName adds the phaseName to the get competition by Id public leaderboard params
+func (o *GetCompetitionByIDPublicLeaderboardParams) SetPhaseName(phaseName string) {
+	o.PhaseName = phaseName
 }
 
 // WriteToRequest writes these params to a swagger request
@@ -158,9 +158,14 @@ func (o *GetCompetitionByIDPublicLeaderboardParams) WriteToRequest(r runtime.Cli
 		return err
 	}
 
-	// path param phase
-	if err := r.SetPathParam("phase", o.Phase); err != nil {
-		return err
+	// query param phaseName
+	qrPhaseName := o.PhaseName
+	qPhaseName := qrPhaseName
+	if qPhaseName != "" {
+
+		if err := r.SetQueryParam("phaseName", qPhaseName); err != nil {
+			return err
+		}
 	}
 
 	if len(res) > 0 {

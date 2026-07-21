@@ -11,23 +11,23 @@ import (
 	"github.com/go-openapi/swag"
 )
 
-// ResponseSubmitHistoryResponse response submit history response
+// ResponseMatchingDatasetsTagsResponse response matching datasets tags response
 //
-// swagger:model response.SubmitHistoryResponse
-type ResponseSubmitHistoryResponse struct {
+// swagger:model response.MatchingDatasetsTagsResponse
+type ResponseMatchingDatasetsTagsResponse struct {
 
 	// data
-	Data *ModelsSubmitHistory `json:"data,omitempty"`
+	Data *ResponseMatchingDatasetsTagsData `json:"data,omitempty"`
 
 	// message
 	Message string `json:"message,omitempty"`
 
 	// status
-	Status *string `json:"status,omitempty"`
+	Status string `json:"status,omitempty"`
 }
 
-// Validate validates this response submit history response
-func (m *ResponseSubmitHistoryResponse) Validate(formats strfmt.Registry) error {
+// Validate validates this response matching datasets tags response
+func (m *ResponseMatchingDatasetsTagsResponse) Validate(formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.validateData(formats); err != nil {
@@ -40,7 +40,7 @@ func (m *ResponseSubmitHistoryResponse) Validate(formats strfmt.Registry) error 
 	return nil
 }
 
-func (m *ResponseSubmitHistoryResponse) validateData(formats strfmt.Registry) error {
+func (m *ResponseMatchingDatasetsTagsResponse) validateData(formats strfmt.Registry) error {
 	if swag.IsZero(m.Data) { // not required
 		return nil
 	}
@@ -63,8 +63,8 @@ func (m *ResponseSubmitHistoryResponse) validateData(formats strfmt.Registry) er
 	return nil
 }
 
-// ContextValidate validate this response submit history response based on the context it is used
-func (m *ResponseSubmitHistoryResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
+// ContextValidate validate this response matching datasets tags response based on the context it is used
+func (m *ResponseMatchingDatasetsTagsResponse) ContextValidate(ctx context.Context, formats strfmt.Registry) error {
 	var res []error
 
 	if err := m.contextValidateData(ctx, formats); err != nil {
@@ -77,7 +77,7 @@ func (m *ResponseSubmitHistoryResponse) ContextValidate(ctx context.Context, for
 	return nil
 }
 
-func (m *ResponseSubmitHistoryResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
+func (m *ResponseMatchingDatasetsTagsResponse) contextValidateData(ctx context.Context, formats strfmt.Registry) error {
 
 	if m.Data != nil {
 
@@ -103,7 +103,7 @@ func (m *ResponseSubmitHistoryResponse) contextValidateData(ctx context.Context,
 }
 
 // MarshalBinary interface implementation
-func (m *ResponseSubmitHistoryResponse) MarshalBinary() ([]byte, error) {
+func (m *ResponseMatchingDatasetsTagsResponse) MarshalBinary() ([]byte, error) {
 	if m == nil {
 		return nil, nil
 	}
@@ -111,8 +111,8 @@ func (m *ResponseSubmitHistoryResponse) MarshalBinary() ([]byte, error) {
 }
 
 // UnmarshalBinary interface implementation
-func (m *ResponseSubmitHistoryResponse) UnmarshalBinary(b []byte) error {
-	var res ResponseSubmitHistoryResponse
+func (m *ResponseMatchingDatasetsTagsResponse) UnmarshalBinary(b []byte) error {
+	var res ResponseMatchingDatasetsTagsResponse
 	if err := swag.ReadJSON(b, &res); err != nil {
 		return err
 	}

@@ -28,13 +28,6 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 **Responses**
 
-**200 OK** — `response.SuccessResponse`
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `message` | `string` |  |
-| `status` | `string` |  |
-
 **Error Responses**
 
 | Status | Description |
@@ -46,7 +39,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-resp, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameContentReadme(ctx, "<ownerUsername>", "<repositoryName>")
+resp, err := client.Repositories().Repository.GetRepositoryByOwnerusernameByRepositorynameContentReadme(repository.NewGetRepositoryByOwnerusernameByRepositorynameContentReadmeParams().WithContext(ctx).WithOwnerUsername("<ownerUsername>").WithRepositoryName("<repositoryName>"), nil, io.Discard)
 if err != nil {
     log.Fatal(err)
 }

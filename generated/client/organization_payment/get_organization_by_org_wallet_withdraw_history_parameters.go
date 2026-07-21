@@ -11,8 +11,7 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/models"
+	"github.com/go-openapi/swag"
 )
 
 // NewGetOrganizationByOrgWalletWithdrawHistoryParams creates a new GetOrganizationByOrgWalletWithdrawHistoryParams object,
@@ -60,11 +59,13 @@ GetOrganizationByOrgWalletWithdrawHistoryParams contains all the parameters to s
 */
 type GetOrganizationByOrgWalletWithdrawHistoryParams struct {
 
-	/* Input.
+	// Limit.
+	//
+	// Default: 10
+	Limit *int64
 
-	   Get List Org Withdrawal History By Owner Request
-	*/
-	Input *models.RequestGetListOrgWithdrawalHistoryByOwnerRequest
+	// Offset.
+	Offset *int64
 
 	/* Org.
 
@@ -89,7 +90,21 @@ func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) WithDefaults() *GetOrg
 //
 // All values with no default are reset to their zero value.
 func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) SetDefaults() {
-	// no default values defined for this parameter
+	var (
+		limitDefault = int64(10)
+
+		offsetDefault = int64(0)
+	)
+
+	val := GetOrganizationByOrgWalletWithdrawHistoryParams{
+		Limit:  &limitDefault,
+		Offset: &offsetDefault,
+	}
+
+	val.timeout = o.timeout
+	val.Context = o.Context
+	val.HTTPClient = o.HTTPClient
+	*o = val
 }
 
 // WithTimeout adds the timeout to the get organization by org wallet withdraw history params
@@ -125,15 +140,26 @@ func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) SetHTTPClient(client *
 	o.HTTPClient = client
 }
 
-// WithInput adds the input to the get organization by org wallet withdraw history params
-func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) WithInput(input *models.RequestGetListOrgWithdrawalHistoryByOwnerRequest) *GetOrganizationByOrgWalletWithdrawHistoryParams {
-	o.SetInput(input)
+// WithLimit adds the limit to the get organization by org wallet withdraw history params
+func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) WithLimit(limit *int64) *GetOrganizationByOrgWalletWithdrawHistoryParams {
+	o.SetLimit(limit)
 	return o
 }
 
-// SetInput adds the input to the get organization by org wallet withdraw history params
-func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) SetInput(input *models.RequestGetListOrgWithdrawalHistoryByOwnerRequest) {
-	o.Input = input
+// SetLimit adds the limit to the get organization by org wallet withdraw history params
+func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) SetLimit(limit *int64) {
+	o.Limit = limit
+}
+
+// WithOffset adds the offset to the get organization by org wallet withdraw history params
+func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) WithOffset(offset *int64) *GetOrganizationByOrgWalletWithdrawHistoryParams {
+	o.SetOffset(offset)
+	return o
+}
+
+// SetOffset adds the offset to the get organization by org wallet withdraw history params
+func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) SetOffset(offset *int64) {
+	o.Offset = offset
 }
 
 // WithOrg adds the org to the get organization by org wallet withdraw history params
@@ -154,9 +180,38 @@ func (o *GetOrganizationByOrgWalletWithdrawHistoryParams) WriteToRequest(r runti
 		return err
 	}
 	var res []error
-	if o.Input != nil {
-		if err := r.SetBodyParam(o.Input); err != nil {
-			return err
+
+	if o.Limit != nil {
+
+		// query param limit
+		var qrLimit int64
+
+		if o.Limit != nil {
+			qrLimit = *o.Limit
+		}
+		qLimit := swag.FormatInt64(qrLimit)
+		if qLimit != "" {
+
+			if err := r.SetQueryParam("limit", qLimit); err != nil {
+				return err
+			}
+		}
+	}
+
+	if o.Offset != nil {
+
+		// query param offset
+		var qrOffset int64
+
+		if o.Offset != nil {
+			qrOffset = *o.Offset
+		}
+		qOffset := swag.FormatInt64(qrOffset)
+		if qOffset != "" {
+
+			if err := r.SetQueryParam("offset", qOffset); err != nil {
+				return err
+			}
 		}
 	}
 

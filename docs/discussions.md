@@ -115,11 +115,11 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-req := &models.UpdateCommentRequest{
+req := &models.RequestUpdateCommentRequest{
     Content: "...",  // string
     TagUsernames: "...",  // array[string]
 }
-resp, err := client.Discussions().Comment.PutCommentsByID(ctx, req)
+resp, err := client.Discussions().Comment.PutCommentsByID(comment.NewPutCommentsByIDParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -146,12 +146,19 @@ fmt.Printf("%+v\n", resp)
 
 **Responses**
 
-**200 OK** — `response.SuccessResponse`
+**200 OK** — `response.LikeResponse`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `data` | `response.IsLikedByUser` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
+
+**`response.IsLikedByUser`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `is_liked_by_user` | `boolean` |  |
 
 **Error Responses**
 
@@ -164,7 +171,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions().Reaction.PutDatasetByIDLike(ctx, "<id>")
+resp, err := client.Discussions().Reaction.PutDatasetByIDLike(reaction.NewPutDatasetByIDLikeParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -271,7 +278,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions().Discussion.GetDiscussionCompetitionByID(ctx, "<id>")
+resp, err := client.Discussions().Discussion.GetDiscussionCompetitionByID(discussion.NewGetDiscussionCompetitionByIDParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -373,11 +380,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.CreateCompetitionDiscussionRequest{
+req := &models.RequestCreateCompetitionDiscussionRequest{
     Content: "...",  // string  // required
     Title: "...",  // string  // required
 }
-resp, err := client.Discussions().Discussion.PostDiscussionCompetitionByID(ctx, req)
+resp, err := client.Discussions().Discussion.PostDiscussionCompetitionByID(discussion.NewPostDiscussionCompetitionByIDParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -482,7 +489,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions().Discussion.GetDiscussionDatasetByID(ctx, "<id>")
+resp, err := client.Discussions().Discussion.GetDiscussionDatasetByID(discussion.NewGetDiscussionDatasetByIDParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -584,11 +591,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.CreateDatasetDiscussionRequest{
+req := &models.RequestCreateDatasetDiscussionRequest{
     Content: "...",  // string  // required
     Title: "...",  // string  // required
 }
-resp, err := client.Discussions().Discussion.PostDiscussionDatasetByID(ctx, req)
+resp, err := client.Discussions().Discussion.PostDiscussionDatasetByID(discussion.NewPostDiscussionDatasetByIDParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -693,7 +700,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions().Discussion.GetDiscussionModelByID(ctx, "<id>")
+resp, err := client.Discussions().Discussion.GetDiscussionModelByID(discussion.NewGetDiscussionModelByIDParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -795,11 +802,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.CreateModelDiscussionRequest{
+req := &models.RequestCreateModelDiscussionRequest{
     Content: "...",  // string  // required
     Title: "...",  // string  // required
 }
-resp, err := client.Discussions().Discussion.PostDiscussionModelByID(ctx, req)
+resp, err := client.Discussions().Discussion.PostDiscussionModelByID(discussion.NewPostDiscussionModelByIDParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -902,12 +909,12 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.UpdateDiscussionRequest{
+req := &models.RequestUpdateDiscussionRequest{
     Content: "...",  // string
     IsClosed: "...",  // boolean
     Title: "...",  // string
 }
-resp, err := client.Discussions().Discussion.PutDiscussionByID(ctx, req)
+resp, err := client.Discussions().Discussion.PutDiscussionByID(discussion.NewPutDiscussionByIDParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -1028,7 +1035,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions().Comment.GetDiscussionByIDComments(ctx, "<id>")
+resp, err := client.Discussions().Comment.GetDiscussionByIDComments(comment.NewGetDiscussionByIDCommentsParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -1146,11 +1153,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.CreateCommentRequest{
+req := &models.RequestCreateCommentRequest{
     Content: "...",  // string
     TagUsernames: "...",  // array[string]
 }
-resp, err := client.Discussions().Comment.PostDiscussionByIDComments(ctx, req)
+resp, err := client.Discussions().Comment.PostDiscussionByIDComments(comment.NewPostDiscussionByIDCommentsParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -1202,11 +1209,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.ReactItemRequest{
+req := &models.RequestReactItemRequest{
     Itemname: "...",  // string
     Reactname: "...",  // string
 }
-resp, err := client.Discussions().Reaction.PutItemsByIDReact(ctx, req)
+resp, err := client.Discussions().Reaction.PutItemsByIDReact(reaction.NewPutItemsByIDReactParams().WithContext(ctx).WithID("<id>").WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -1233,12 +1240,19 @@ fmt.Printf("%+v\n", resp)
 
 **Responses**
 
-**200 OK** — `response.SuccessResponse`
+**200 OK** — `response.LikeResponse`
 
 | Field | Type | Description |
 | --- | --- | --- |
+| `data` | `response.IsLikedByUser` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
+
+**`response.IsLikedByUser`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `is_liked_by_user` | `boolean` |  |
 
 **Error Responses**
 
@@ -1251,7 +1265,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Discussions().Reaction.PutModelByIDLike(ctx, "<id>")
+resp, err := client.Discussions().Reaction.PutModelByIDLike(reaction.NewPutModelByIDLikeParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }

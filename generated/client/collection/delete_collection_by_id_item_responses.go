@@ -56,7 +56,7 @@ DeleteCollectionByIDItemOK describes a response with status code 200, with defau
 OK
 */
 type DeleteCollectionByIDItemOK struct {
-	Payload *models.ResponseCollectionReponse
+	Payload *models.ResponseSuccessResponse
 }
 
 // IsSuccess returns true when this delete collection by Id item o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *DeleteCollectionByIDItemOK) String() string {
 	return fmt.Sprintf("[DELETE /api-key/collection/{id}/item][%d] deleteCollectionByIdItemOK %s", 200, payload)
 }
 
-func (o *DeleteCollectionByIDItemOK) GetPayload() *models.ResponseCollectionReponse {
+func (o *DeleteCollectionByIDItemOK) GetPayload() *models.ResponseSuccessResponse {
 	return o.Payload
 }
 
 func (o *DeleteCollectionByIDItemOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseCollectionReponse)
+	o.Payload = new(models.ResponseSuccessResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

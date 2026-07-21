@@ -145,7 +145,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-resp, err := client.Users().User.GetUserMe(ctx)
+resp, err := client.Users().User.GetUserMe(user.NewGetUserMeParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -207,7 +207,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users().User.GetUserOrgUsernames(ctx)
+resp, err := client.Users().User.GetUserOrgUsernames(user.NewGetUserOrgUsernamesParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -260,14 +260,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.UpdateUserProfileRequest{
+req := &models.RequestUpdateUserProfileRequest{
     Avatar: "...",  // string
     Bio: "...",  // string
     FullName: "...",  // string
     GithubLink: "...",  // string
     GithubName: "...",  // string
 }
-resp, err := client.Users().User.PatchUserProfile(ctx, req)
+resp, err := client.Users().User.PatchUserProfile(user.NewPatchUserProfileParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -328,11 +328,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetTransactionAnalyticsRequest{
+req := &models.RequestGetTransactionAnalyticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Users().Payment.PostUserStatisticsEarnings(ctx, req)
+resp, err := client.Users().Payment.PostUserStatisticsEarnings(user_payment.NewPostUserStatisticsEarningsParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -397,11 +397,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetUserSpendingCostStatisticsRequest{
+req := &models.RequestGetUserSpendingCostStatisticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Users().Payment.PostUserStatisticsSpendingCost(ctx, req)
+resp, err := client.Users().Payment.PostUserStatisticsSpendingCost(user_payment.NewPostUserStatisticsSpendingCostParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -470,7 +470,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users().Payment.GetUserWalletDepositHistory(ctx)
+resp, err := client.Users().Payment.GetUserWalletDepositHistory(user_payment.NewGetUserWalletDepositHistoryParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -548,11 +548,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetUserTransactionAnalyticsRequest{
+req := &models.RequestGetUserTransactionAnalyticsRequest{
     From: "...",  // string
     To: "...",  // string
 }
-resp, err := client.Users().Payment.PostUserWalletTransactionAnalytics(ctx, req)
+resp, err := client.Users().Payment.PostUserWalletTransactionAnalytics(user_payment.NewPostUserWalletTransactionAnalyticsParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -626,7 +626,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users().Payment.GetUserWalletTransactionHistory(ctx)
+resp, err := client.Users().Payment.GetUserWalletTransactionHistory(user_payment.NewGetUserWalletTransactionHistoryParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -702,14 +702,14 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.GetListRecentTransactionByUserRequest{
+req := &models.RequestGetListRecentTransactionByUserRequest{
     From: "...",  // string
     Limit: "...",  // integer
     Offset: "...",  // integer
     To: "...",  // string
     Type: "...",  // string
 }
-resp, err := client.Users().Payment.PostUserWalletTransactionRecent(ctx, req)
+resp, err := client.Users().Payment.PostUserWalletTransactionRecent(user_payment.NewPostUserWalletTransactionRecentParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -776,7 +776,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users().Payment.GetUserWalletWithdrawHistory(ctx)
+resp, err := client.Users().Payment.GetUserWalletWithdrawHistory(user_payment.NewGetUserWalletWithdrawHistoryParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -916,7 +916,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Users().User.GetUserByUsername(ctx, "<username>")
+resp, err := client.Users().User.GetUserByUsername(user.NewGetUserByUsernameParams().WithContext(ctx).WithUsername("<username>"), nil)
 if err != nil {
     log.Fatal(err)
 }

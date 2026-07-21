@@ -56,7 +56,7 @@ PutModelByIDLikeOK describes a response with status code 200, with default heade
 OK
 */
 type PutModelByIDLikeOK struct {
-	Payload *models.ResponseSuccessResponse
+	Payload *models.ResponseLikeResponse
 }
 
 // IsSuccess returns true when this put model by Id like o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *PutModelByIDLikeOK) String() string {
 	return fmt.Sprintf("[PUT /api-key/model/{id}/like][%d] putModelByIdLikeOK %s", 200, payload)
 }
 
-func (o *PutModelByIDLikeOK) GetPayload() *models.ResponseSuccessResponse {
+func (o *PutModelByIDLikeOK) GetPayload() *models.ResponseLikeResponse {
 	return o.Payload
 }
 
 func (o *PutModelByIDLikeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseSuccessResponse)
+	o.Payload = new(models.ResponseLikeResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

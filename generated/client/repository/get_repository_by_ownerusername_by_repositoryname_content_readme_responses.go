@@ -17,13 +17,14 @@ import (
 // GetRepositoryByOwnerusernameByRepositorynameContentReadmeReader is a Reader for the GetRepositoryByOwnerusernameByRepositorynameContentReadme structure.
 type GetRepositoryByOwnerusernameByRepositorynameContentReadmeReader struct {
 	formats strfmt.Registry
+	writer  io.Writer
 }
 
 // ReadResponse reads a server response into the received o.
 func (o *GetRepositoryByOwnerusernameByRepositorynameContentReadmeReader) ReadResponse(response runtime.ClientResponse, consumer runtime.Consumer) (any, error) {
 	switch response.Code() {
 	case 200:
-		result := NewGetRepositoryByOwnerusernameByRepositorynameContentReadmeOK()
+		result := NewGetRepositoryByOwnerusernameByRepositorynameContentReadmeOK(o.writer)
 		if err := result.readResponse(response, consumer, o.formats); err != nil {
 			return nil, err
 		}
@@ -46,17 +47,20 @@ func (o *GetRepositoryByOwnerusernameByRepositorynameContentReadmeReader) ReadRe
 }
 
 // NewGetRepositoryByOwnerusernameByRepositorynameContentReadmeOK creates a GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK with default headers values
-func NewGetRepositoryByOwnerusernameByRepositorynameContentReadmeOK() *GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK {
-	return &GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK{}
+func NewGetRepositoryByOwnerusernameByRepositorynameContentReadmeOK(writer io.Writer) *GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK {
+	return &GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK{
+
+		Payload: writer,
+	}
 }
 
 /*
 GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK describes a response with status code 200, with default header values.
 
-OK
+Raw file
 */
 type GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK struct {
-	Payload *models.ResponseSuccessResponse
+	Payload io.Writer
 }
 
 // IsSuccess returns true when this get repository by ownerusername by repositoryname content readme o k response has a 2xx status code
@@ -90,22 +94,18 @@ func (o *GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK) Code() int
 }
 
 func (o *GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK) Error() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api-key/repository/{ownerUsername}/{repositoryName}/content/readme][%d] getRepositoryByOwnerusernameByRepositorynameContentReadmeOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api-key/repository/{ownerUsername}/{repositoryName}/content/readme][%d] getRepositoryByOwnerusernameByRepositorynameContentReadmeOK", 200)
 }
 
 func (o *GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK) String() string {
-	payload, _ := json.Marshal(o.Payload)
-	return fmt.Sprintf("[GET /api-key/repository/{ownerUsername}/{repositoryName}/content/readme][%d] getRepositoryByOwnerusernameByRepositorynameContentReadmeOK %s", 200, payload)
+	return fmt.Sprintf("[GET /api-key/repository/{ownerUsername}/{repositoryName}/content/readme][%d] getRepositoryByOwnerusernameByRepositorynameContentReadmeOK", 200)
 }
 
-func (o *GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK) GetPayload() *models.ResponseSuccessResponse {
+func (o *GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK) GetPayload() io.Writer {
 	return o.Payload
 }
 
 func (o *GetRepositoryByOwnerusernameByRepositorynameContentReadmeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
-
-	o.Payload = new(models.ResponseSuccessResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {

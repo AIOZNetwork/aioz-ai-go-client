@@ -11,8 +11,6 @@ import (
 	"github.com/go-openapi/runtime"
 	cr "github.com/go-openapi/runtime/client"
 	"github.com/go-openapi/strfmt"
-
-	"github.com/AIOZNetwork/aioz-ai-go-client/generated/models"
 )
 
 // NewGetModelTaskByIDReviewsParams creates a new GetModelTaskByIDReviewsParams object,
@@ -65,12 +63,6 @@ type GetModelTaskByIDReviewsParams struct {
 	   Task's id
 	*/
 	ID string
-
-	/* Input.
-
-	   Get Task Review By Task Id Request
-	*/
-	Input models.RequestGetTaskReviewByTaskIDRequest
 
 	timeout    time.Duration
 	Context    context.Context
@@ -136,17 +128,6 @@ func (o *GetModelTaskByIDReviewsParams) SetID(id string) {
 	o.ID = id
 }
 
-// WithInput adds the input to the get model task by Id reviews params
-func (o *GetModelTaskByIDReviewsParams) WithInput(input models.RequestGetTaskReviewByTaskIDRequest) *GetModelTaskByIDReviewsParams {
-	o.SetInput(input)
-	return o
-}
-
-// SetInput adds the input to the get model task by Id reviews params
-func (o *GetModelTaskByIDReviewsParams) SetInput(input models.RequestGetTaskReviewByTaskIDRequest) {
-	o.Input = input
-}
-
 // WriteToRequest writes these params to a swagger request
 func (o *GetModelTaskByIDReviewsParams) WriteToRequest(r runtime.ClientRequest, reg strfmt.Registry) error {
 
@@ -158,11 +139,6 @@ func (o *GetModelTaskByIDReviewsParams) WriteToRequest(r runtime.ClientRequest, 
 	// path param id
 	if err := r.SetPathParam("id", o.ID); err != nil {
 		return err
-	}
-	if o.Input != nil {
-		if err := r.SetBodyParam(o.Input); err != nil {
-			return err
-		}
 	}
 
 	if len(res) > 0 {

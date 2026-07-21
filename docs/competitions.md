@@ -108,14 +108,14 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 
 ```go
 ctx := context.Background()
-req := &models.GetCompetitionListRequest{
+req := &models.RequestGetCompetitionListRequest{
     Category: "...",  // string
     Following: "...",  // boolean
     Limit: "...",  // integer
     Offset: "...",  // integer
     Order: "...",  // string
 }
-resp, err := client.Competitions().Competition.PostCompetitionList(ctx, req)
+resp, err := client.Competitions().Competition.PostCompetitionList(competition.NewPostCompetitionListParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -209,7 +209,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions().Competition.GetCompetitionPathByPath(ctx, "<path>")
+resp, err := client.Competitions().Competition.GetCompetitionPathByPath(competition.NewGetCompetitionPathByPathParams().WithContext(ctx).WithPath("<path>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -255,11 +255,11 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.CheckValidRepoToEvaluateModelRequest{
+req := &models.RequestCheckValidRepoToEvaluateModelRequest{
     CommitHash: "...",  // string
     ModelID: "...",  // string  // required
 }
-resp, err := client.Competitions().Competition.PostCompetitionPreSubmit(ctx, req)
+resp, err := client.Competitions().Competition.PostCompetitionPreSubmit(competition.NewPostCompetitionPreSubmitParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -291,36 +291,19 @@ fmt.Printf("%+v\n", resp)
 
 **Responses**
 
-**200 OK** — `response.SubmitHistoryResponse`
+**200 OK** — `response.EvaluateModelResponse`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `data` | `models.SubmitHistory` |  |
+| `data` | `response.EvaluateModelData` |  |
 | `message` | `string` |  |
 | `status` | `string` |  |
 
-**`models.SubmitHistory`**
+**`response.EvaluateModelData`**
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `code_size` | `number` |  |
-| `commit_hash` | `string` |  |
-| `created_at` | `string` |  |
-| `description` | `string` | CompetitionId uuid.UUID `json:"competition_id"`
-UserId      uuid.UUID `json:"user_id"` |
-| `file_name` | `string` |  |
-| `file_size` | `number` |  |
-| `id` | `string` |  |
-| `logs` | `map[string]any` |  |
-| `model_id` | `string` | FileUrl        string    `json:"file_url"`
-ModelWeightUrl string    `json:"model_weight_url"`
-SourceCodeUrl  string    `json:"source_code_url"` |
-| `model_size` | `number` |  |
-| `score` | `number` |  |
-| `status` | `string` |  |
-| `submission_type` | `string` |  |
-| `time` | `number` |  |
-| `updated_at` | `string` |  |
+| `task_id` | `string` |  |
 
 **Error Responses**
 
@@ -333,7 +316,7 @@ SourceCodeUrl  string    `json:"source_code_url"` |
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions().Competition.PostCompetitionSubmit(ctx)
+resp, err := client.Competitions().Competition.PostCompetitionSubmit(competition.NewPostCompetitionSubmitParams().WithContext(ctx), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -389,12 +372,12 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-req := &models.EstimateCostToEvaluateModelRequest{
+req := &models.RequestEstimateCostToEvaluateModelRequest{
     CommitHash: "...",  // string
     CompetitionID: "...",  // string  // required
     ModelID: "...",  // string  // required
 }
-resp, err := client.Competitions().Competition.PostCompetitionSubmitCost(ctx, req)
+resp, err := client.Competitions().Competition.PostCompetitionSubmitCost(competition.NewPostCompetitionSubmitCostParams().WithContext(ctx).WithInput(req), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -470,7 +453,7 @@ SourceCodeUrl  string    `json:"source_code_url"` |
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions().Competition.GetCompetitionSubmitHistoryByID(ctx, "<id>")
+resp, err := client.Competitions().Competition.GetCompetitionSubmitHistoryByID(competition.NewGetCompetitionSubmitHistoryByIDParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -564,7 +547,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions().Competition.GetCompetitionByID(ctx, "<id>")
+resp, err := client.Competitions().Competition.GetCompetitionByID(competition.NewGetCompetitionByIDParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -609,7 +592,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions().Competition.PostCompetitionByIDJoin(ctx, "<id>")
+resp, err := client.Competitions().Competition.PostCompetitionByIDJoin(competition.NewPostCompetitionByIDJoinParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -693,7 +676,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions().Competition.GetCompetitionByIDLeaderboard(ctx, "<id>")
+resp, err := client.Competitions().Competition.GetCompetitionByIDLeaderboard(competition.NewGetCompetitionByIDLeaderboardParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }
@@ -717,7 +700,7 @@ fmt.Printf("%+v\n", resp)
 | Name | Location | Type | Required | Description |
 | --- | --- | --- | --- | --- |
 | `id` | path | `string` | Yes | Competition Id |
-| `phase` | path | `string` | Yes | Competition Phase |
+| `phaseName` | query | `string` | Yes | Competition Phase |
 
 **Responses**
 
@@ -773,7 +756,7 @@ fmt.Printf("%+v\n", resp)
 
 ```go
 ctx := context.Background()
-resp, err := client.Competitions().Competition.GetCompetitionByIDPublicLeaderboard(ctx, "<id>", "<phase>")
+resp, err := client.Competitions().Competition.GetCompetitionByIDPublicLeaderboard(competition.NewGetCompetitionByIDPublicLeaderboardParams().WithContext(ctx).WithID("<id>"), nil)
 if err != nil {
     log.Fatal(err)
 }

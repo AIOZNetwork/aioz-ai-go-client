@@ -25,7 +25,8 @@ type ModelsDatasetMetadata struct {
 	Language []string `json:"language"`
 
 	// license
-	License *string `json:"license,omitempty"`
+	// Example: mit
+	License string `json:"license,omitempty"`
 
 	// pretty name
 	PrettyName *string `json:"pretty_name,omitempty"`

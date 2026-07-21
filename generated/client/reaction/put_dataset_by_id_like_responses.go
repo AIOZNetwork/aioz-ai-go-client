@@ -56,7 +56,7 @@ PutDatasetByIDLikeOK describes a response with status code 200, with default hea
 OK
 */
 type PutDatasetByIDLikeOK struct {
-	Payload *models.ResponseSuccessResponse
+	Payload *models.ResponseLikeResponse
 }
 
 // IsSuccess returns true when this put dataset by Id like o k response has a 2xx status code
@@ -99,13 +99,13 @@ func (o *PutDatasetByIDLikeOK) String() string {
 	return fmt.Sprintf("[PUT /api-key/dataset/{id}/like][%d] putDatasetByIdLikeOK %s", 200, payload)
 }
 
-func (o *PutDatasetByIDLikeOK) GetPayload() *models.ResponseSuccessResponse {
+func (o *PutDatasetByIDLikeOK) GetPayload() *models.ResponseLikeResponse {
 	return o.Payload
 }
 
 func (o *PutDatasetByIDLikeOK) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
 
-	o.Payload = new(models.ResponseSuccessResponse)
+	o.Payload = new(models.ResponseLikeResponse)
 
 	// response payload
 	if err := consumer.Consume(response.Body(), o.Payload); err != nil && !stderrors.Is(err, io.EOF) {
