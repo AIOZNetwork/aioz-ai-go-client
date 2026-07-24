@@ -25,6 +25,7 @@ type RequestGetDatasetListByAuthorRequest struct {
 
 	// limit
 	// Maximum: 100
+	// Minimum: 1
 	Limit int64 `json:"limit,omitempty"`
 
 	// offset
@@ -84,6 +85,10 @@ func (m *RequestGetDatasetListByAuthorRequest) Validate(formats strfmt.Registry)
 func (m *RequestGetDatasetListByAuthorRequest) validateLimit(formats strfmt.Registry) error {
 	if swag.IsZero(m.Limit) { // not required
 		return nil
+	}
+
+	if err := validate.MinimumInt("limit", "body", m.Limit, 1, false); err != nil {
+		return err
 	}
 
 	if err := validate.MaximumInt("limit", "body", m.Limit, 100, false); err != nil {

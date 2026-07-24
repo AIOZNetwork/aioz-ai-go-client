@@ -52,6 +52,7 @@ type RequestCreateModelRequest struct {
 
 	// pretty name
 	// Max Length: 100
+	// Min Length: 1
 	PrettyName string `json:"pretty_name,omitempty"`
 
 	// price
@@ -168,6 +169,10 @@ func (m *RequestCreateModelRequest) validateName(formats strfmt.Registry) error 
 func (m *RequestCreateModelRequest) validatePrettyName(formats strfmt.Registry) error {
 	if swag.IsZero(m.PrettyName) { // not required
 		return nil
+	}
+
+	if err := validate.MinLength("pretty_name", "body", m.PrettyName, 1); err != nil {
+		return err
 	}
 
 	if err := validate.MaxLength("pretty_name", "body", m.PrettyName, 100); err != nil {

@@ -25,8 +25,9 @@ type RequestGetCompetitionListRequest struct {
 	Following *bool `json:"following,omitempty"`
 
 	// limit
-	// Minimum: 0
-	Limit *int64 `json:"limit,omitempty"`
+	// Maximum: 100
+	// Minimum: 1
+	Limit int64 `json:"limit,omitempty"`
 
 	// offset
 	// Minimum: 0
@@ -91,7 +92,11 @@ func (m *RequestGetCompetitionListRequest) validateLimit(formats strfmt.Registry
 		return nil
 	}
 
-	if err := validate.MinimumInt("limit", "body", *m.Limit, 0, false); err != nil {
+	if err := validate.MinimumInt("limit", "body", m.Limit, 1, false); err != nil {
+		return err
+	}
+
+	if err := validate.MaximumInt("limit", "body", m.Limit, 100, false); err != nil {
 		return err
 	}
 

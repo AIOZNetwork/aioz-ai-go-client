@@ -27,10 +27,13 @@ type RequestGetModelListByAuthorRequest struct {
 	License string `json:"license,omitempty"`
 
 	// limit
-	Limit *int64 `json:"limit,omitempty"`
+	// Maximum: 100
+	// Minimum: 1
+	Limit int64 `json:"limit,omitempty"`
 
 	// offset
-	Offset int64 `json:"offset,omitempty"`
+	// Minimum: 0
+	Offset *int64 `json:"offset,omitempty"`
 
 	// order
 	// Enum: ["asc","desc"]
@@ -54,6 +57,14 @@ type RequestGetModelListByAuthorRequest struct {
 func (m *RequestGetModelListByAuthorRequest) Validate(formats strfmt.Registry) error {
 	var res []error
 
+	if err := m.validateLimit(formats); err != nil {
+		res = append(res, err)
+	}
+
+	if err := m.validateOffset(formats); err != nil {
+		res = append(res, err)
+	}
+
 	if err := m.validateOrder(formats); err != nil {
 		res = append(res, err)
 	}
@@ -65,6 +76,34 @@ func (m *RequestGetModelListByAuthorRequest) Validate(formats strfmt.Registry) e
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
+	return nil
+}
+
+func (m *RequestGetModelListByAuthorRequest) validateLimit(formats strfmt.Registry) error {
+	if swag.IsZero(m.Limit) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("limit", "body", m.Limit, 1, false); err != nil {
+		return err
+	}
+
+	if err := validate.MaximumInt("limit", "body", m.Limit, 100, false); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (m *RequestGetModelListByAuthorRequest) validateOffset(formats strfmt.Registry) error {
+	if swag.IsZero(m.Offset) { // not required
+		return nil
+	}
+
+	if err := validate.MinimumInt("offset", "body", *m.Offset, 0, false); err != nil {
+		return err
+	}
+
 	return nil
 }
 

@@ -25,7 +25,7 @@ Reference: [SDK Usage Guide](../README.md#sdk-usage-guide) | [Package README](..
 | `description` | `string` | Yes |  |
 | `language` | `array[string]` | No | en, vi |
 | `license` | `string` | Yes | cc |
-| `name` | `string` | No |  |
+| `name` | `string` | Yes |  |
 | `pretty_name` | `string` | No |  |
 | `price` | `number` | No |  |
 | `size_category` | `string` | No |  |

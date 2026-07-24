@@ -39,11 +39,13 @@ type RequestCreateDatasetRequest struct {
 	License *string `json:"license"`
 
 	// name
+	// Required: true
 	// Max Length: 100
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name"`
 
 	// pretty name
 	// Max Length: 100
+	// Min Length: 1
 	PrettyName string `json:"pretty_name,omitempty"`
 
 	// price
@@ -140,8 +142,9 @@ func (m *RequestCreateDatasetRequest) validateLicense(formats strfmt.Registry) e
 }
 
 func (m *RequestCreateDatasetRequest) validateName(formats strfmt.Registry) error {
-	if swag.IsZero(m.Name) { // not required
-		return nil
+
+	if err := validate.Required("name", "body", m.Name); err != nil {
+		return err
 	}
 
 	if err := validate.MaxLength("name", "body", *m.Name, 100); err != nil {
@@ -154,6 +157,10 @@ func (m *RequestCreateDatasetRequest) validateName(formats strfmt.Registry) erro
 func (m *RequestCreateDatasetRequest) validatePrettyName(formats strfmt.Registry) error {
 	if swag.IsZero(m.PrettyName) { // not required
 		return nil
+	}
+
+	if err := validate.MinLength("pretty_name", "body", m.PrettyName, 1); err != nil {
+		return err
 	}
 
 	if err := validate.MaxLength("pretty_name", "body", m.PrettyName, 100); err != nil {

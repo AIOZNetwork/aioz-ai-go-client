@@ -17,11 +17,12 @@ import (
 type RequestGetListOrgRecentTransactionByOwnerRequest struct {
 
 	// from
-	// Example: 2023-05-07 15:04:05
+	// Example: 2026-05-07 15:04:05
 	From string `json:"from,omitempty"`
 
 	// limit
 	// Maximum: 100
+	// Minimum: 1
 	Limit int64 `json:"limit,omitempty"`
 
 	// offset
@@ -29,7 +30,7 @@ type RequestGetListOrgRecentTransactionByOwnerRequest struct {
 	Offset *int64 `json:"offset,omitempty"`
 
 	// to
-	// Example: 2023-05-07 15:04:05
+	// Example: 2026-05-07 15:04:05
 	To string `json:"to,omitempty"`
 
 	// type
@@ -57,6 +58,10 @@ func (m *RequestGetListOrgRecentTransactionByOwnerRequest) Validate(formats strf
 func (m *RequestGetListOrgRecentTransactionByOwnerRequest) validateLimit(formats strfmt.Registry) error {
 	if swag.IsZero(m.Limit) { // not required
 		return nil
+	}
+
+	if err := validate.MinimumInt("limit", "body", m.Limit, 1, false); err != nil {
+		return err
 	}
 
 	if err := validate.MaximumInt("limit", "body", m.Limit, 100, false); err != nil {

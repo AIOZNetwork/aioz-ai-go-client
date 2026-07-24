@@ -15,11 +15,11 @@ import (
 type RequestGetUserTransactionAnalyticsRequest struct {
 
 	// from
-	// Example: 2023-05-07 15:04:05
+	// Example: 2026-05-07 15:04:05
 	From string `json:"from,omitempty"`
 
 	// to
-	// Example: 2023-05-07 15:04:05
+	// Example: 2026-05-07 15:04:05
 	To string `json:"to,omitempty"`
 }
 

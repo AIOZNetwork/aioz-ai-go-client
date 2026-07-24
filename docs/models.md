@@ -1110,8 +1110,8 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `from` | `string` | No | 2023-05-07 15:04:05 |
-| `to` | `string` | No | 2023-05-07 15:04:05 |
+| `from` | `string` | No | 2026-05-07 15:04:05 |
+| `to` | `string` | No | 2026-05-07 15:04:05 |
 
 **Responses**
 
