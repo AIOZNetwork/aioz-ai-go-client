@@ -4,7 +4,7 @@ import "time"
 
 const (
 	// Version is the current SDK version.
-	Version = "1.0.4"
+	Version = "1.1.0"
 
 	// DefaultBaseURL is the default base URL for the AIOZ AI API.
 	DefaultBaseURL = "https://api.aiozai.network/api/v1"

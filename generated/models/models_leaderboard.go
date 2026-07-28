@@ -34,10 +34,8 @@ type ModelsLeaderboard struct {
 	// medal name
 	MedalName string `json:"medal_name,omitempty"`
 
-	// CompetitionId uuid.UUID `json:"competition_id"`
-	Owner struct {
-		ModelsOwner
-	} `json:"owner,omitempty"`
+	// owner
+	Owner *ModelsOwner `json:"owner,omitempty"`
 
 	// prize amount
 	PrizeAmount float64 `json:"prize_amount,omitempty"`
@@ -76,6 +74,21 @@ func (m *ModelsLeaderboard) Validate(formats strfmt.Registry) error {
 func (m *ModelsLeaderboard) validateOwner(formats strfmt.Registry) error {
 	if swag.IsZero(m.Owner) { // not required
 		return nil
+	}
+
+	if m.Owner != nil {
+		if err := m.Owner.Validate(formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("owner")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("owner")
+			}
+
+			return err
+		}
 	}
 
 	return nil
@@ -123,6 +136,26 @@ func (m *ModelsLeaderboard) ContextValidate(ctx context.Context, formats strfmt.
 }
 
 func (m *ModelsLeaderboard) contextValidateOwner(ctx context.Context, formats strfmt.Registry) error {
+
+	if m.Owner != nil {
+
+		if swag.IsZero(m.Owner) { // not required
+			return nil
+		}
+
+		if err := m.Owner.ContextValidate(ctx, formats); err != nil {
+			ve := new(errors.Validation)
+			if stderrors.As(err, &ve) {
+				return ve.ValidateName("owner")
+			}
+			ce := new(errors.CompositeError)
+			if stderrors.As(err, &ce) {
+				return ce.ValidateName("owner")
+			}
+
+			return err
+		}
+	}
 
 	return nil
 }

@@ -426,15 +426,12 @@ fmt.Printf("%+v\n", resp)
 | `code_size` | `number` |  |
 | `commit_hash` | `string` |  |
 | `created_at` | `string` |  |
-| `description` | `string` | CompetitionId uuid.UUID `json:"competition_id"`
-UserId      uuid.UUID `json:"user_id"` |
+| `description` | `string` |  |
 | `file_name` | `string` |  |
 | `file_size` | `number` |  |
 | `id` | `string` |  |
 | `logs` | `map[string]any` |  |
-| `model_id` | `string` | FileUrl        string    `json:"file_url"`
-ModelWeightUrl string    `json:"model_weight_url"`
-SourceCodeUrl  string    `json:"source_code_url"` |
+| `model_id` | `string` |  |
 | `model_size` | `number` |  |
 | `score` | `number` |  |
 | `status` | `string` |  |
@@ -649,12 +646,20 @@ fmt.Printf("%+v\n", resp)
 | `id` | `string` |  |
 | `is_violated` | `boolean` |  |
 | `medal_name` | `string` |  |
-| `owner` | `object` | CompetitionId uuid.UUID `json:"competition_id"` |
+| `owner` | `models.Owner` |  |
 | `prize_amount` | `number` |  |
 | `rank_change` | `integer` |  |
 | `score` | `number` |  |
 | `updated_at` | `string` |  |
 | `user_info` | `models.UserInfoData` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
 
 **`models.UserInfoData`**
 
@@ -729,12 +734,20 @@ fmt.Printf("%+v\n", resp)
 | `id` | `string` |  |
 | `is_violated` | `boolean` |  |
 | `medal_name` | `string` |  |
-| `owner` | `object` | CompetitionId uuid.UUID `json:"competition_id"` |
+| `owner` | `models.Owner` |  |
 | `prize_amount` | `number` |  |
 | `rank_change` | `integer` |  |
 | `score` | `number` |  |
 | `updated_at` | `string` |  |
 | `user_info` | `models.UserInfoData` |  |
+
+**`models.Owner`**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `avatar` | `string` |  |
+| `id` | `string` |  |
+| `username` | `string` |  |
 
 **`models.UserInfoData`**
 

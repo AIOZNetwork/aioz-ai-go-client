@@ -17,14 +17,14 @@ import (
 // swagger:model models.ModelVersioningGroupLite
 type ModelsModelVersioningGroupLite struct {
 
-	// Dependency        map[string]interface{} `json:"dependency"`
+	// commit hash
 	CommitHash string `json:"commit_hash,omitempty"`
 
-	// TestResult        map[string]interface{} `json:"test_result"`
-	// InputFormat       map[string]interface{} `json:"input_format"`
-	// OutputFormat      map[string]interface{} `json:"output_format"`
-	// SysRequired       map[string]interface{} `json:"sys_require"`
+	// commit message
 	CommitMessage string `json:"commit_message,omitempty"`
+
+	// input format
+	InputFormat any `json:"input_format,omitempty"`
 
 	// is active
 	IsActive bool `json:"is_active,omitempty"`
@@ -35,11 +35,20 @@ type ModelsModelVersioningGroupLite struct {
 	// model id
 	ModelID string `json:"model_id,omitempty"`
 
+	// output format
+	OutputFormat any `json:"output_format,omitempty"`
+
 	// pending platforms
 	PendingPlatforms []*ModelsPlatformTask `json:"pending_platforms"`
 
 	// rejected platforms
 	RejectedPlatforms []*ModelsPlatformTask `json:"rejected_platforms"`
+
+	// sys require
+	SysRequire any `json:"sys_require,omitempty"`
+
+	// test result
+	TestResult any `json:"test_result,omitempty"`
 
 	// verified platforms
 	VerifiedPlatforms []*ModelsPlatformTask `json:"verified_platforms"`

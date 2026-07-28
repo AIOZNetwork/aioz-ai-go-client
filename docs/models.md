@@ -1240,16 +1240,17 @@ fmt.Printf("%+v\n", resp)
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `commit_hash` | `string` | Dependency        map[string]interface{} `json:"dependency"` |
-| `commit_message` | `string` | TestResult        map[string]interface{} `json:"test_result"`
-InputFormat       map[string]interface{} `json:"input_format"`
-OutputFormat      map[string]interface{} `json:"output_format"`
-SysRequired       map[string]interface{} `json:"sys_require"` |
+| `commit_hash` | `string` |  |
+| `commit_message` | `string` |  |
+| `input_format` | `map[string]any` |  |
 | `is_active` | `boolean` |  |
 | `last_checked_at` | `string` |  |
 | `model_id` | `string` |  |
+| `output_format` | `map[string]any` |  |
 | `pending_platforms` | `array[models.PlatformTask]` |  |
 | `rejected_platforms` | `array[models.PlatformTask]` |  |
+| `sys_require` | `map[string]any` |  |
+| `test_result` | `map[string]any` |  |
 | `verified_platforms` | `array[models.PlatformTask]` |  |
 | `verify_status` | `string` |  |
 

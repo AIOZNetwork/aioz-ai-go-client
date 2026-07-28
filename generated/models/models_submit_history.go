@@ -23,8 +23,7 @@ type ModelsSubmitHistory struct {
 	// created at
 	CreatedAt string `json:"created_at,omitempty"`
 
-	// CompetitionId uuid.UUID `json:"competition_id"`
-	// UserId      uuid.UUID `json:"user_id"`
+	// description
 	Description string `json:"description,omitempty"`
 
 	// file name
@@ -39,9 +38,7 @@ type ModelsSubmitHistory struct {
 	// logs
 	Logs any `json:"logs,omitempty"`
 
-	// FileUrl        string    `json:"file_url"`
-	// ModelWeightUrl string    `json:"model_weight_url"`
-	// SourceCodeUrl  string    `json:"source_code_url"`
+	// model id
 	ModelID string `json:"model_id,omitempty"`
 
 	// model size
